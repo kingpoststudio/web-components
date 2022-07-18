@@ -40,10 +40,11 @@ class Button extends LitElement {
     }
 
     .wrap[rounded=true] > a {
-      border-radius: 50%;
+      border-radius: 0.5rem;
     }
 
     .wrap[color="secondary"] > a {
+      color: var(--color-font);
       background: var(--color-secondary);
     }
 
