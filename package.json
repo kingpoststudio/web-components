@@ -1,17 +1,10 @@
 {
-  "name": "vite-lit-ts-starter",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@kps/web-components",
+  "version": "0.1.0",
   "type": "module",
-  "main": "dist/my-element.es.js",
-  "exports": {
-    ".": "./dist/my-element.es.js"
-  },
-  "types": "types/my-element.d.ts",
-  "files": [
-    "dist",
-    "types"
-  ],
+  "main": "dist/kps.cjs.js",
+  "module": "dist/kps.es.js",
+  "typings": "dist/kps.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build"

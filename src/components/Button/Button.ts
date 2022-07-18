@@ -7,10 +7,10 @@ class Button extends LitElement {
     variant: 'fill' | 'outline' = 'fill';
 
   @property({ type: String })
-    color: 'primary' | 'secondary' | 'warning' | 'error' = 'primary';
+    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' = 'primary';
 
-  @property({ type: String })
-    round = 'false';
+  @property({ type: Boolean })
+    rounded = false;
 
   @property({ type: String })
     href = '';
@@ -38,6 +38,42 @@ class Button extends LitElement {
     .wrap > a:hover {
       background: var(--color-primary-dark);
     }
+
+    .wrap[rounded=true] > a {
+      border-radius: 50%;
+    }
+
+    .wrap[color="secondary"] > a {
+      background: var(--color-secondary);
+    }
+
+    .wrap[color="secondary"] > a:hover {
+      background: var(--color-secondary-dark);
+    }
+
+    .wrap[color="success"] > a {
+      background: var(--color-success);
+    }
+
+    .wrap[color="success"] > a:hover {
+      background: var(--color-success-dark);
+    }
+
+    .wrap[color="warning"] > a {
+      background: var(--color-warning);
+    }
+
+    .wrap[color="warning"] > a:hover {
+      background: var(--color-warning-dark);
+    }
+
+    .wrap[color="error"] > a {
+      background: var(--color-error);
+    }
+
+    .wrap[color="error"] > a:hover {
+      background: var(--color-error-dark);
+    }
   `;
 
   renderMarkup() {
@@ -53,7 +89,7 @@ class Button extends LitElement {
       <div class="wrap"
         variant=${this.variant}
         color=${this.color}
-        round=${this.round}
+        rounded=${this.rounded}
       >
         ${this.renderMarkup()}
       </div>
