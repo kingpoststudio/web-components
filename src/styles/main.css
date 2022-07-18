@@ -1,0 +1,52 @@
+:root {
+  /* Spacings */
+  --scale: min(16px, 4.3vw);
+  --page-max-width: 1200px;
+  --page-max-width-wide: 1440px;
+
+  --space-0: 0;
+  --space-2xs: calc(var(--scale) * 0.25);
+  --space-xs: calc(var(--scale) * 0.5);
+  --space-sm: var(--scale);
+  --space-md: calc(var(--scale) * 1.25);
+  --space-lg: calc(var(--scale) * 2);
+  --space-xl: calc(var(--scale) * 3);
+  --space-2xl: calc(var(--scale) * 4);
+
+  /* Colors */
+  --color-primary: #00bcd4;
+  --color-secondary: #fafafa;
+  --color-warning: #ff9800;
+  --color-error: #f44336;
+  --color-success: #4caf50;
+
+  --color-bg: #fafafa;
+  --color-text: #212121;
+  --color-text-highlight: blue;
+
+  /* Fonts */
+  --font-family: 'Roboto', sans-serif;
+  --font-size: var(--scale);
+
+  /* Animations/Easings/Transitions */
+  --ease-time: 0.3s;
+  --ease-type: cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+
+  color: var(--color-text);
+  font-size: var(--font-size);
+  accent-color: var(--color-primary);
+
+  min-height: 100vh;
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
