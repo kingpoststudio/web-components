@@ -20,32 +20,31 @@ class Button extends LitElement {
 
   static styles = css`
     .wrap {
-      display: inline-block;
+      display: inline-flex;
       position: relative;
-      cursor: pointer;
+      margin: 0.25rem;
       z-index: 1;
     }
 
-    .wrap > a,
-    .wrap > button {
-      margin: 0.25rem 0.5rem;
+    .wrap > a {
       padding: 0.5rem 1rem;
+      color: white;
+      background: var(--color-primary);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--ease-time) var(--ease-type);
+    }
+
+    .wrap > a:hover {
+      background: var(--color-primary-dark);
     }
   `;
 
   renderMarkup() {
-    if (this.href) {
-      return html`
-        <a href=${this.href} target=${this.target}>
-          <slot></slot>
-        </a>
-      `;
-    }
-
     return html`
-      <button>
+      <a href=${this.href} target=${this.target}>
         <slot></slot>
-      </button>
+      </a>
     `;
   }
 
