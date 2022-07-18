@@ -19,16 +19,17 @@ class Button extends LitElement {
     target = '';
 
   static styles = css`
-    :host {
-    }
-
     .wrap {
       display: inline-block;
       position: relative;
-      border-radius: inherit;
-      box-shadow: 0px 0px 0px 1px transparent;
       cursor: pointer;
       z-index: 1;
+    }
+
+    .wrap > a,
+    .wrap > button {
+      margin: 0.25rem 0.5rem;
+      padding: 0.5rem 1rem;
     }
   `;
 
