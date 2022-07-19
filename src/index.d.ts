@@ -1,5 +1,6 @@
 import Button from './components/Button/Button';
-declare const _default: {
+
+declare const components: {
     Button: typeof Button;
 };
-export default _default;
+export default components;

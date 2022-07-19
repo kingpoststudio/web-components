@@ -1,5 +1,7 @@
 import Button from './components/Button/Button';
 
-export default {
+const components = {
   Button,
 };
+
+export default components;
