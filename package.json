@@ -1,6 +1,6 @@
 {
   "name": "@kingpoststudio/web-components",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "main": "dist/kps.cjs.js",
   "module": "dist/kps.es.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vite",
     "build": "rm -rf dist && tsc && vite build",
-    "publish": "yarn build && npm publish"
+    "deploy": "yarn build && npm publish"
   },
   "dependencies": {
     "lit": "^2.2.7"

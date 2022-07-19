@@ -1,9 +1,6 @@
-<h1 align="center">
- <p>KPS Web Component Library</p>
-</h1>
-<p align="center" style="font-size:1.25rem;border-top:1px solid #ccc;padding:2rem 0;">
-  A collection of web components, created by King Post Studio, built with TypeScript, Lit and Vite.
-</p>
+# KPS Web Component Library
+
+A collection of web components, created by King Post Studio, built with TypeScript, Lit and Vite.
 
 ## How to Install
 
