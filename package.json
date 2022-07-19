@@ -4,7 +4,6 @@
   "type": "module",
   "main": "dist/kps.cjs.js",
   "module": "dist/kps.es.js",
-  "typings": "dist/kps.d.ts",
   "scripts": {
     "dev": "vite",
     "lint": "eslint ./**/*.{js,jsx,ts,tsx} --fix",
