@@ -1,5 +1,5 @@
 {
-  "name": "@kps/web-components",
+  "name": "@kingpoststudio/web-components",
   "version": "0.1.0",
   "type": "module",
   "main": "dist/kps.cjs.js",

@@ -28,7 +28,7 @@ class Button extends LitElement {
 
     .wrap > a {
       padding: 0.5rem 1rem;
-      color: white;
+      color: var(--color-white);
       background: var(--color-primary);
       text-decoration: none;
       cursor: pointer;

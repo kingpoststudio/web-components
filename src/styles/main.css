@@ -14,10 +14,11 @@
   --space-2xl: calc(var(--scale) * 4);
 
   /* Colors */
+  --color-white: #fff;
   --color-primary: #00bcd4;
   --color-primary-dark: #0097a7;
-  --color-secondary: #fafafa;
-  --color-secondary-dark: #e0e0e0;
+  --color-secondary: #e2e2e2;
+  --color-secondary-dark: #c3c3c3;
   --color-warning: #ff9800;
   --color-warning-dark: #f57c00;
   --color-error: #f44336;
