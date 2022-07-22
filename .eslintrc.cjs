@@ -10,9 +10,6 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['@typescript-eslint'],
-  rules: {
-    'import/extensions': 0,
-  },
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
@@ -20,5 +17,8 @@ module.exports = {
     'import/resolver': {
       typescript: {},
     },
+  },
+  rules: {
+    'import/extensions': 0,
   },
 };
