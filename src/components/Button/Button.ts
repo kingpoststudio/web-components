@@ -2,7 +2,7 @@ import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 @customElement('kps-button')
-class Button extends LitElement {
+export default class Button extends LitElement {
   @property({ type: String })
     variant: 'fill' | 'outline' = 'fill';
 
@@ -97,5 +97,3 @@ class Button extends LitElement {
     `;
   }
 }
-
-export default Button;

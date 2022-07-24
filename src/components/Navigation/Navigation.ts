@@ -12,9 +12,8 @@ const styles = css`
     right: 0;
     z-index: 80;
     height: 5rem;
+    background: white;
     box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
-    transition: box-shadow calc(var(--ease-time) * 2) var(--ease-type);
-    transition-property: box-shadow, background-color;
   }
 
 
@@ -48,7 +47,7 @@ const styles = css`
 `;
 
 @customElement('kps-nav')
-export class Navigation extends LitElement {
+export default class Navigation extends LitElement {
   static styles = styles;
 
   button: Button | undefined = undefined;
@@ -73,6 +72,10 @@ export class Navigation extends LitElement {
     </svg>
   `;
 
+  firstUpdated() {
+    console.log('Updated.');
+  }
+
   static render() {
     return html`
       <div class="center">
@@ -88,5 +91,3 @@ export class Navigation extends LitElement {
     `;
   }
 }
-
-export default Navigation;
