@@ -40,3 +40,12 @@ yarn dev # Starts HubSpot development
 ```
 
 You can then navigate into the HubSpot project and run the standard development process. Please note, because you are not consuming a distributed version of the library, you will need to directly import the modules from the source into your HubSpot's JS file. Whenever an update is made to the library, your HubSpot project will recognize the change, rebundle and deploy. I'm sure there is a better way to manage this, but it works for now.
+
+Example:
+```typescript
+/* Normally, you would import the library from the library's namespace. */
+import '@kingpoststudio/web-components';
+
+/* However, you can directly import the modules from the source. */
+import '@kingpoststudio/web-components/src/index.ts';
+
