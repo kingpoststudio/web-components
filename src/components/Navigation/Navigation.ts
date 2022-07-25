@@ -18,13 +18,14 @@ const styles = css`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 4rem;
-    padding: 1rem 2rem;
+    height: 6rem;
+    padding: 0 2rem;
   }
 
   img.logo {
     position: relative;
     height: 100%;
+    max-height: 4rem;
   }
 `;
 
