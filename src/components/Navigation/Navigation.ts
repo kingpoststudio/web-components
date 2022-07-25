@@ -1,6 +1,5 @@
 import { html, css, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import Button from '../Button/Button';
 
 const styles = css`
   :host {
@@ -16,33 +15,108 @@ const styles = css`
     box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
   }
 
+   ul {
+    display: flex;
+    margin: 0;
+  }
+
+   ul > li.hs-menu-depth-1 {
+    position: relative;
+    display: flex;
+    align-items: items-end;
+    margin: 1rem 0.5rem;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s ease-in-out;
+  }
+
+   ul > li.hs-menu-depth-1:hover {
+    border-bottom: 2px solid #DDD;
+  }
+
+   ul > li.hs-menu-depth-1 > a,
+   ul > li.hs-menu-depth-1 > span {
+    font-weight: medium;
+    text-transform: uppercase;
+  }
+
+   ul > li.hs-menu-depth-1 > ul {
+    position: absolute;
+    top: calc(100% + 1rem);
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 2rem;
+    min-width: 10rem;
+    background: white;
+    opacity: 0;
+    box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
+    list-style: none;
+    overflow-y: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
+  }
+    
+                            /*
+                             a {
+                                @apply text-black hover:text-gbo-blue;
+                                @apply transition-colors;
+                            }
+    
+                            li.hs-menu-depth-2 {
+                                @apply relative;
+                                @apply w-max;
+    
+                                &.hs-item-has-children {
+                                    > ul.hs-menu-children-wrapper {
+                                        @apply flex;
+                                        @apply flex-col;
+                                        @apply mt-2;
+                                        @apply space-y-1;
+            
+                                        > li.hs-menu-depth-3 {
+                                            > a {
+                                                @apply pl-4;
+                                            }
+                                        }
+                                    }
+                                }
+    
+                                &:last-child {
+                                    &:before {
+                                    }
+    
+                                    &.hs-item-has-children > ul.hs-menu-children-wrapper > li.hs-menu-depth-3 {
+                                        &:before {
+                                            content: "";
+                                            @apply bg-none;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+    
+                        &:hover {
+                            > ul.hs-menu-children-wrapper {
+                                @apply !flex;
+                                @apply visible;
+                                @apply top-[calc(100%+2px)];
+                                @apply opacity-100;
+                                @apply pointer-events-auto;
+    
+                                li.hs-menu-depth-2 {
+                                    @apply flex;
+                                    @apply flex-col;
+                                }
+                            }
+                        }
+                    }
+                } */
 `;
 
 @customElement('kps-nav')
 export default class Navigation extends LitElement {
   static styles = styles;
-
-  button: Button | undefined = undefined;
-
-  svgBurger = html`
-    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M20.48 11.5H3.52v1h16.96v-1ZM20.48 16.16H3.52v1h16.96v-1ZM20.48 6.84H3.52v1h16.96v-1Z"
-        fill="currentColor"
-      />
-    </svg>
-  `;
-
-  svgClose = html`
-    <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="m12.5 12.5 4.4 4.4.85-.85-4.4-4.4L17.9 7.1l-.85-.85-4.55 4.55-4.65-4.65L7 7l4.65 4.65-4.5 4.5L8 17l4.5-4.5Z"
-        fill="currentColor"
-      />
-    </svg>
-  `;
 
   render() {
     return html`
