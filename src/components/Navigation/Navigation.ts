@@ -16,34 +16,6 @@ const styles = css`
     box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
   }
 
-
-  .center {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    max-width: var(--page-max-width-wide);
-    margin: 0 auto;
-    box-sizing: border-box;
-    padding: 0 var(--space-md);
-  }
-
-  .actions {
-    flex: 1;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .logo {
-    color: var(--color-charcoal);
-    position: relative;
-    z-index: 1;
-  }
-
-  .logo svg {
-    width: calc(var(--scale) * 8.4);
-    height: auto;
-  }
 `;
 
 @customElement('kps-nav')
@@ -72,22 +44,11 @@ export default class Navigation extends LitElement {
     </svg>
   `;
 
-  firstUpdated() {
-    console.log('Updated.');
-  }
-
-  static render() {
+  render() {
     return html`
-      <div class="center">
-        <nav class="nav">
-          <slot name="main-menu"></slot>
-        </nav>
-        <a href="/" class="logo as-link">
-        </a>
-        <div class="actions">
-          <slot name="actions"></slot>
-        </div>
-      </div>
+      <nav>
+        <slot name="main-menu"></slot>
+      </nav>
     `;
   }
 }
