@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import './Button.css';
 
 @customElement('kps-button')
 export default class Button extends LitElement {

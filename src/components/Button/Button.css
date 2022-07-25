@@ -1,0 +1,8 @@
+kps-button a.cta_button {
+  color: var(--color-white);
+  text-decoration: none;
+}
+
+kps-button[color="secondary"] a.cta_button {
+  color: var(--color-font);
+}
