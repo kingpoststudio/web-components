@@ -1,0 +1,41 @@
+kps-nav ul {
+  display: flex;
+  margin: 0;
+}
+
+kps-nav ul>li.hs-menu-depth-1 {
+  position: relative;
+  display: flex;
+  align-items: items-end;
+  margin: 1rem 0.5rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s ease-in-out;
+}
+
+kps-nav ul>li.hs-menu-depth-1:hover {
+  border-bottom: 2px solid #DDD;
+}
+
+kps-nav ul>li.hs-menu-depth-1>a,
+kps-nav ul>li.hs-menu-depth-1>span {
+  font-weight: medium;
+  text-transform: uppercase;
+}
+
+kps-nav ul>li.hs-menu-depth-1>ul {
+  position: absolute;
+  top: calc(100% + 1rem);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 2rem;
+  min-width: 10rem;
+  background: white;
+  opacity: 0;
+  box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
+  list-style: none;
+  overflow-y: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
+}
