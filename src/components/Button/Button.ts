@@ -16,7 +16,10 @@ export default class Button extends LitElement {
     href = '';
 
   @property({ type: String })
-    target = '';
+    target = '_self';
+
+  @property({ type: Boolean })
+    isCta = false;
 
   static styles = css`
     .wrap {
@@ -77,9 +80,13 @@ export default class Button extends LitElement {
     }
   `;
 
-  renderMarkup() {
+  private renderMarkup() {
+    if (this.isCta) {
+      return html`<slot></slot>`;
+    }
+
     return html`
-      <a href=${this.href} target=${this.target}>
+      <a href="${this.href}" target="${this.target}">
         <slot></slot>
       </a>
     `;
