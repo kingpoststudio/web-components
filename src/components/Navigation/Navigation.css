@@ -19,7 +19,9 @@ kps-nav ul>li.hs-menu-depth-1:hover {
 
 kps-nav ul>li.hs-menu-depth-1>a,
 kps-nav ul>li.hs-menu-depth-1>span {
-  font-weight: medium;
+  color: var(--color-font);
+  font-weight: bold;
+  text-decoration: none;
   text-transform: uppercase;
 }
 
