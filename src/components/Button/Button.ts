@@ -80,16 +80,17 @@ export default class Button extends LitElement {
     }
   `;
 
-  private renderMarkup() {
-    if (this.isCta) {
-      return html`<slot></slot>`;
-    }
+  onSlotChange(e: { target: HTMLSlotElement }) {
+    if (!this.isCta) return;
+    const ctaLink = e.target.assignedElements()[0].querySelector('a');
 
-    return html`
-      <a href="${this.href}" target="${this.target}">
-        <slot></slot>
-      </a>
-    `;
+    if (ctaLink) {
+      const href = ctaLink.getAttribute('href');
+      const target = ctaLink.getAttribute('target');
+
+      if (href) this.href = href;
+      if (target) this.target = target;
+    }
   }
 
   render() {
@@ -99,7 +100,9 @@ export default class Button extends LitElement {
         color=${this.color}
         rounded=${this.rounded}
       >
-        ${this.renderMarkup()}
+        <a href="${this.href}" target="${this.target}">
+          <slot @slotchange=${this.onSlotChange}></slot>
+        </a>
       </div>
     `;
   }
