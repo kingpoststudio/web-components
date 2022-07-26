@@ -6,6 +6,7 @@
   "module": "dist/kps.es.js",
   "scripts": {
     "dev": "yarn storybook",
+    "dev:hs": "vite build --watch",
     "lint": "eslint ./**/*.{js,jsx,ts,tsx} --fix",
     "build": "rm -rf dist && tsc && yarn lint && vite build",
     "storybook": "start-storybook -p 6006",
