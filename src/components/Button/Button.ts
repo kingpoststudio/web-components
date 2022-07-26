@@ -31,6 +31,7 @@ export default class Button extends LitElement {
     }
 
     .wrap > a {
+      min-width: 6rem;
       padding: 0.5rem 1rem;
       color: var(--color-white);
       background: var(--color-primary);
