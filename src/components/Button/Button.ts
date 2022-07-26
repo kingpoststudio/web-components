@@ -10,9 +10,6 @@ export default class Button extends LitElement {
   @property({ type: String })
     color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' = 'primary';
 
-  @property({ type: Boolean })
-    rounded = false;
-
   @property({ type: String })
     href = '';
 
@@ -20,7 +17,10 @@ export default class Button extends LitElement {
     target = '_self';
 
   @property({ type: Boolean })
-    isCta = false;
+    cta = false;
+
+  @property({ type: Boolean })
+    round = false;
 
   static styles = css`
     .wrap {
@@ -44,7 +44,7 @@ export default class Button extends LitElement {
       background: var(--color-primary-dark);
     }
 
-    .wrap[rounded=true] > a {
+    .wrap[round=true] > a {
       border-radius: 0.5rem;
     }
 
@@ -91,7 +91,7 @@ export default class Button extends LitElement {
    * and set them on the <a> tag.
    */
   onSlotChange(e: { target: HTMLSlotElement }) {
-    if (!this.isCta) return;
+    if (!this.cta) return;
     const ctaLink = e.target.assignedElements()[0].querySelector('a');
 
     if (ctaLink) {
@@ -108,7 +108,7 @@ export default class Button extends LitElement {
       <div class="wrap"
         variant=${this.variant}
         color=${this.color}
-        rounded=${this.rounded}
+        round=${this.round}
       >
         <a href="${this.href}" target="${this.target}">
           <slot @slotchange=${this.onSlotChange}></slot>

@@ -24,6 +24,7 @@ kps-nav {
         height: 100%;
         margin: 0;
         padding: 0;
+        gap: 1.25rem;
         list-style: none;
 
         > li.hs-menu-depth-1 {
@@ -37,7 +38,6 @@ kps-nav {
             display: flex;
             align-items: center;
             height: 100%;
-            padding: 0 0.5rem;
           }
 
           &:hover {
