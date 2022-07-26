@@ -10,7 +10,7 @@ const styles = css`
     right: 0;
     z-index: 80;
     background: white;
-    box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
+    box-shadow: 0 0.25rem 1rem #DDD;
   }
 
   nav {
@@ -19,7 +19,9 @@ const styles = css`
     justify-content: space-between;
     align-items: center;
     height: 6rem;
+    max-width: var(--page-max-width);
     padding: 0 2rem;
+    margin: 0 auto;
   }
 
   img.logo {

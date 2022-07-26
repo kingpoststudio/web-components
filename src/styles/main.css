@@ -1,28 +1,10 @@
 @import '../components/Button/Button.css';
 @import '../components/Navigation/Navigation.css';
 
-body,
-html {
-  margin: 0;
-  padding: 0;
-
-  color: var(--color-text);
-  font-size: var(--font-size);
-  accent-color: var(--color-primary);
-
-  min-height: 100vh;
-  font-family: var(--font-family);
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.4;
-  overflow-x: hidden;
-}
-
 :root {
   /* Spacings */
   --scale: min(16px, 4.3vw);
-  --page-max-width: 1200px;
-  --page-max-width-wide: 1440px;
+  --page-max-width: 1440px;
 
   --space-0: 0;
   --space-2xs: calc(var(--scale) * 0.25);
@@ -57,4 +39,21 @@ html {
   /* Animations/Easings/Transitions */
   --ease-time: 0.3s;
   --ease-type: cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+
+  color: var(--color-text);
+  font-size: var(--font-size);
+  accent-color: var(--color-primary);
+
+  min-height: 100vh;
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  overflow-x: hidden;
 }
