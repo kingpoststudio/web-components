@@ -1,6 +1,3 @@
-@import '../components/Button/Button.css';
-@import '../components/Navigation/Navigation.css';
-
 :root {
   /* Spacings */
   --scale: min(16px, 4.3vw);
