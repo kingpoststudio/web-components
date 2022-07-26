@@ -6,6 +6,19 @@ kps-nav {
 
   .main-menu {
     .hs-menu-wrapper {
+      a {
+        color: var(--color-font);
+        font-size: var(--font-size-lg);
+        font-weight: bold;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+
       > ul {
         display: flex;
         height: 100%;
@@ -25,40 +38,86 @@ kps-nav {
             align-items: center;
             height: 100%;
             padding: 0 0.5rem;
-            color: var(--color-font);
-            font-weight: bold;
-            text-decoration: none;
-            text-transform: uppercase;
-            transition: color 0.2s ease-in-out;
-
-            &:hover {
-              color: var(--color-primary);
-            }
           }
 
           &:hover {
             border-color: var(--color-primary);
+
+            > a,
+            > span {
+              color: var(--color-primary);
+            }
           }
 
           &.hs-item-has-children {
-            > ul {
+            > ul.hs-menu-children-wrapper {
               position: absolute;
               top: calc(100% + 0.75rem);
               left: 50%;
               transform: translate(-50%);
-              display: flex;
-              flex-direction: column;
+              display: flex !important; /* !important to override forced HS styling */
+              flex-direction: row;
+              justify-content: center;
               width: calc(100% - 8rem);
               max-width: var(--page-max-width);
               margin: 0 auto;
               padding: 2rem;
-              background: white;
+              gap: 1rem;
+              background: var(--color-white);
               opacity: 0;
-              border: 1px solid #DDD;
+              border: 1px solid var(--color-light-gray);
               list-style: none;
               overflow-y: hidden;
               pointer-events: none;
               transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
+
+              > li.hs-menu-depth-2 {
+                border-right: 1px solid var(--color-light-gray);
+
+                &:first-child:nth-last-child(1) {
+                  width: 100%;
+                }
+
+                &:first-child:nth-last-child(2),
+                &:first-child:nth-last-child(2) ~ li {
+                  width: 50%;
+                }
+
+                &:first-child:nth-last-child(3),
+                &:first-child:nth-last-child(3) ~ li {
+                  width: 33%;
+                }
+
+                &:first-child:nth-last-child(4),
+                &:first-child:nth-last-child(4) ~ li {
+                  width: 25%;
+                }
+
+                &:first-child:nth-last-child(5),
+                &:first-child:nth-last-child(5) ~ li {
+                  width: 20%;
+                }
+
+                &:last-child {
+                  border-right: none;
+                }
+
+                &.hs-item-has-children {
+                  > ul.hs-menu-children-wrapper {
+                    margin: 0.75rem 0 0;
+                    padding: 0;
+                    list-style: none;
+
+                    > li.hs-menu-depth-3 {
+                      > a,
+                      > span {
+                        font-weight: normal;
+                        text-transform: none;
+                      }
+                    }
+                  }
+                }
+              }
             }
 
             &:hover > ul {

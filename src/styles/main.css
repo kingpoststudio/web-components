@@ -1,6 +1,6 @@
 :root {
   /* Spacings */
-  --scale: min(16px, 4.3vw);
+  --scale: min(16px);
   --page-max-width: 1440px;
 
   --space-0: 0;
@@ -14,6 +14,7 @@
 
   /* Colors */
   --color-white: #fff;
+  --color-light-gray: #ddd;
   --color-primary: #00bcd4;
   --color-primary-dark: #0097a7;
   --color-secondary: #e2e2e2;
@@ -31,7 +32,15 @@
 
   /* Fonts */
   --font-family: 'Roboto', sans-serif;
+  --font-size-sm: var(--scale * 0.8);
   --font-size: var(--scale);
+  --font-size-lg: var(--scale * 1.25);
+  --font-size-xl: var(--scale * 1.5);
+  --font-size-2xl: var(--scale * 2);
+  --font-size-3xl: var(--scale * 2.5);
+  --font-size-4xl: var(--scale * 3);
+  --font-size-5xl: var(--scale * 4);
+  --font-size-6xl: var(--scale * 5);
 
   /* Animations/Easings/Transitions */
   --ease-time: 0.3s;
