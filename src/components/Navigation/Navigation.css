@@ -3,7 +3,7 @@ kps-nav .main-menu .hs-menu-wrapper {
   height: 100%;
 }
 
-kps-nav .main-menu ul {
+kps-nav .main-menu .hs-menu-wrapper>ul {
   display: flex;
   margin: 0;
   padding: 0;
@@ -11,20 +11,19 @@ kps-nav .main-menu ul {
   list-style: none;
 }
 
-kps-nav .main-menu ul>li.hs-menu-depth-1 {
-  position: relative;
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1 {
   display: flex;
   align-items: center;
   border-bottom: 4px solid transparent;
   transition: border-color 0.2s ease-in-out;
 }
 
-kps-nav .main-menu ul>li.hs-menu-depth-1:hover {
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1:hover {
   border-color: var(--color-primary);
 }
 
-kps-nav .main-menu ul>li.hs-menu-depth-1>a,
-kps-nav .main-menu ul>li.hs-menu-depth-1>span {
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1>a,
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1>span {
   display: flex;
   align-items: center;
   height: 100%;
@@ -36,20 +35,20 @@ kps-nav .main-menu ul>li.hs-menu-depth-1>span {
   transition: color 0.2s ease-in-out;
 }
 
-kps-nav .main-menu ul>li.hs-menu-depth-1>a:hover,
-kps-nav .main-menu ul>li.hs-menu-depth-1>span:hover {
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1>a:hover,
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1>span:hover {
   color: var(--color-primary);
 }
 
-kps-nav .main-menu ul>li.hs-menu-depth-1>ul {
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1.hs-item-has-children>ul {
   position: absolute;
   top: calc(100% + 1rem);
-  right: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   margin: 0;
   padding: 2rem;
-  min-width: 10rem;
+  width: 100%;
   background: white;
   opacity: 0;
   box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
@@ -59,22 +58,11 @@ kps-nav .main-menu ul>li.hs-menu-depth-1>ul {
   transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
 }
 
-
-@media screen and (min-width: 768px) {
-  kps-nav .main-menu ul>li.hs-menu-depth-1>ul {
-    top: calc(100% + 1rem);
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    padding: 2rem;
-    min-width: 10rem;
-    background: white;
-    opacity: 0;
-    box-shadow: 0 0.25rem 1rem #DDD, 0 0.5rem 1rem #EEE, 0 0.75rem 1rem #FFF;
-    list-style: none;
-    overflow-y: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
-  }
+kps-nav .main-menu .hs-menu-wrapper>ul>li.hs-menu-depth-1.hs-item-has-children:hover>ul {
+  opacity: 1;
+  pointer-events: auto;
+  top: 100%;
 }
+
+
+@media screen and (min-width: 768px) {}
