@@ -1,15 +1,10 @@
 import { LitElement } from 'lit';
-import Button from '../Button/Button';
+import './Navigation.css';
 
-export declare class Navigation extends LitElement {
+export default class Navigation extends LitElement {
   static styles: import('lit').CSSResult;
 
-  button: Button | undefined;
+  logoSrc: string;
 
-  svgBurger: import('lit-html').TemplateResult<1>;
-
-  svgClose: import('lit-html').TemplateResult<1>;
-
-  static render(): import('lit-html').TemplateResult<1>;
+  protected render(): import('lit-html').TemplateResult<1>;
 }
-export default Navigation;
