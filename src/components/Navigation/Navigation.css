@@ -1,11 +1,14 @@
 kps-nav {
-  .main-menu,
-  .hs-menu-wrapper {
-    height: 100%;
-  }
-
   .main-menu {
+    height: 100%;
+
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+
     .hs-menu-wrapper {
+      height: 100%;
+
       a {
         color: var(--color-font);
         font-size: var(--font-size-lg);
