@@ -1,12 +1,19 @@
 kps-button {
   a.cta_button {
     color: var(--color-white);
+    font-weight: 500;
     text-decoration: none;
   }
 
   &[color="secondary"] {
     a.cta_button {
       color: var(--color-font);
+    }
+  }
+
+  &[uppercase] {
+    a.cta_button {
+      text-transform: uppercase;
     }
   }
 }

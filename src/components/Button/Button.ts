@@ -22,6 +22,9 @@ export default class Button extends LitElement {
   @property({ type: Boolean })
     round = false;
 
+  @property({ type: Boolean })
+    uppercase = false;
+
   static styles = css`
     .wrap {
       display: inline-flex;
@@ -35,6 +38,7 @@ export default class Button extends LitElement {
       padding: 0.5rem 1rem;
       color: var(--color-white);
       background: var(--color-primary);
+      font-weight: 500;
       text-decoration: none;
       cursor: pointer;
       transition: all var(--ease-time) var(--ease-type);
@@ -79,6 +83,10 @@ export default class Button extends LitElement {
 
     .wrap[color="error"] > a:hover {
       background: var(--color-error-dark);
+    }
+
+    .wrap[uppercase=true] > a {
+      text-transform: uppercase;
     }
   `;
 
