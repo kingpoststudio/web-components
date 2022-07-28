@@ -5,10 +5,10 @@ import './Button.css';
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-    variant: 'fill' | 'outline' = 'fill';
+  color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' = 'primary';
 
   @property({ type: String })
-    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' = 'primary';
+    variant: 'fill' | 'outline' = 'fill';
 
   @property({ type: String })
     href = '';
@@ -48,11 +48,6 @@ export default class Button extends LitElement {
       background: var(--color-primary-dark);
     }
 
-    .wrap[variant="outline"] > a {
-      border: 1px solid var(--color-white);
-      background: transparent;
-    }
-
     .wrap[color="secondary"] > a {
       color: var(--color-font);
       background: var(--color-secondary);
@@ -86,11 +81,21 @@ export default class Button extends LitElement {
       background: var(--color-error-dark);
     }
 
-    .wrap[round=true] > a {
+    .wrap[variant="outline"] > a {
+      border: 1px solid var(--color-white);
+      background: transparent;
+    }
+
+    .wrap[variant="outline"][color="primary"] > a:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .wrap[round] > a {
       border-radius: 0.5rem;
     }
 
-    .wrap[uppercase=true] > a {
+    .wrap[uppercase] > a {
       text-transform: uppercase;
     }
   `;

@@ -13,19 +13,26 @@ class HeroBanner extends LitElement {
       background: var(--color-black);
     }
 
-    .kps-hero__content {
+    .content {
+      display: flex;
+      flex-direction: column;
       width: 100%;
       max-width: var(--page-max-width);
       padding: 0 2rem;
       margin: 0 auto;
     }
 
+    .ctas {
+      margin-top: 2rem;
+    }
+
     h1 {
+      display: flex;
+      margin: 0;
       font-size: var(--font-size-7xl);
       font-weight: var(--font-weight-light);
       line-height: 1;
       color: var(--color-secondary-lighter);
-      margin: 0;
     }
 
     h2 {
@@ -49,12 +56,13 @@ class HeroBanner extends LitElement {
   render() {
     return html`
       <div class="wrap">
-        <div class="kps-hero__content">
+        <div class="content">
           <img src="${this.iconSrc}" />
           <h1><slot name="title"></slot></h1>
           <h2><slot name="subtitle"></slot></h2>
           <p><slot name="tagline"></slot></p>
-          <div>
+
+          <div class="ctas">
             <slot name="primary-cta"></slot>
             <slot name="secondary-cta"></slot>
           </div>
