@@ -119,3 +119,22 @@ html {
   line-height: 1.4;
   overflow-x: hidden;
 }
+
+/* Helpers */
+.hidden {
+  display: none;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+/* Positioning */
+.-ml-sm {
+  margin-left: calc(-1 * var(--space-sm));
+}
