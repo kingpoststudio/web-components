@@ -86,7 +86,7 @@ export default class Button extends LitElement {
       background: transparent;
     }
 
-    .wrap[variant="outline"][color="primary"] > a:hover {
+    .wrap[variant="outline"] > a:hover {
       background: var(--color-primary);
       border-color: var(--color-primary);
     }
