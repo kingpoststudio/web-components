@@ -10,6 +10,12 @@ class HeroBanner extends LitElement {
       min-height: 40rem;
       background: var(--color-primary);
     }
+
+    h1 {
+      font-size: var(--font-size-7xl);
+      font-weight: var(--font-weight-light);
+      margin: 0;
+    }
   `;
 
   @property({ type: String })
