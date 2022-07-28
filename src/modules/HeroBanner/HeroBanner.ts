@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
 @customElement('kps-hero')
 class HeroBanner extends LitElement {
@@ -12,12 +12,21 @@ class HeroBanner extends LitElement {
     }
   `;
 
-  text = html`text`;
+  @property({ type: String })
+  public iconSrc = '';
+
+  @property({ type: String })
+  public imgSrc = '';
 
   render() {
     return html`
       <div class="wrap">
-        ${this.text}
+        <div class="kps-hero__content">
+          <img src="${this.iconSrc}" />
+          <h1><slot name="title"></slot></h1>
+          <h2><slot name="subtitle"></slot></h2>
+          <p><slot name="tagline"></slot></p>
+        </div>
       </div>
     `;
   }
