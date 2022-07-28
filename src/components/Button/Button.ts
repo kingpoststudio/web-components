@@ -48,8 +48,9 @@ export default class Button extends LitElement {
       background: var(--color-primary-dark);
     }
 
-    .wrap[round=true] > a {
-      border-radius: 0.5rem;
+    .wrap[variant="outline"] > a {
+      border: 1px solid var(--color-white);
+      background: transparent;
     }
 
     .wrap[color="secondary"] > a {
@@ -83,6 +84,10 @@ export default class Button extends LitElement {
 
     .wrap[color="error"] > a:hover {
       background: var(--color-error-dark);
+    }
+
+    .wrap[round=true] > a {
+      border-radius: 0.5rem;
     }
 
     .wrap[uppercase=true] > a {

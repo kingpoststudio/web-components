@@ -54,6 +54,10 @@ class HeroBanner extends LitElement {
           <h1><slot name="title"></slot></h1>
           <h2><slot name="subtitle"></slot></h2>
           <p><slot name="tagline"></slot></p>
+          <div>
+            <slot name="primary-cta"></slot>
+            <slot name="secondary-cta"></slot>
+          </div>
         </div>
       </div>
     `;
