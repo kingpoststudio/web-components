@@ -1,5 +1,7 @@
 import { html } from 'lit';
 import './Navigation';
+import './Navigation.css';
+import logo from '../../assets/images/logo.svg';
 import '../../styles/main.css';
 
 export default {
@@ -7,8 +9,18 @@ export default {
   component: 'kps-nav',
 };
 
-export const Main = () => html`
-  <kps-nav>
+const logoImg = {
+  src: logo,
+  alt: 'Logo',
+};
 
-  </kps-nav>
+export const Main = () => html`
+  <header>
+    <kps-nav .logoImg='${logoImg}'>
+      <span slot="main-menu" class="main-menu">
+      </span>
+      <span slot="main-cta" color="primary" cta round uppercase>
+      </span>
+    </kps-nav>
+  </header>
 `;

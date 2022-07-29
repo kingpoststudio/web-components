@@ -76,7 +76,7 @@
   --color-text-highlight: blue;
 
   /* Fonts */
-  --font-family: inherit;
+  --font-family: 'Open Sans', sans-serif;
   --font-size-sm: calc(var(--scale) * 0.8);
   --font-size: var(--scale);
   --font-size-lg: calc(var(--scale) * 1.25);

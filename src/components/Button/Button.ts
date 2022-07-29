@@ -39,6 +39,7 @@ export default class Button extends LitElement {
       color: var(--color-white);
       background: var(--color-primary);
       font-weight: 500;
+      text-align: center;
       text-decoration: none;
       cursor: pointer;
       transition: all var(--ease-time) var(--ease-type);
