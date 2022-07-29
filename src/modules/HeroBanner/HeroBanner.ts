@@ -3,15 +3,17 @@ import { customElement, property } from 'lit/decorators.js';
 
 const styles = css`
   .wrap {
+    position: relative;
     display: flex;
     align-items: center;
     width: 100%;
     height: auto;
-    min-height: 40rem;
+    min-height: 45rem;
     background: var(--color-black);
   }
 
   .content {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -48,6 +50,15 @@ const styles = css`
     width: 14rem;
     margin-bottom: 4rem;
   }
+
+  img.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: none;
+  }
 `;
 
 @customElement('kps-hero')
@@ -63,6 +74,8 @@ class HeroBanner extends LitElement {
   render() {
     return html`
       <div class="wrap">
+        <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
+
         <div class="content">
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
           <h1><slot name="title"></slot></h1>
