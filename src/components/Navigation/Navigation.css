@@ -51,8 +51,9 @@ header {
                 bottom: 0;
                 width: 0;
                 height: 0.4rem;
+                opacity: 0;
                 background-color: var(--color-primary);
-                transition: width .4s cubic-bezier(0, 0.75, 0.25, 1);
+                transition: width .4s cubic-bezier(0,.75,.25,1),opacity .25s cubic-bezier(0.2, 0.4, 0.4, 0.8);
               }
             }
 
@@ -65,6 +66,7 @@ header {
                 color: var(--color-primary);
 
                 &:after {
+                  opacity: 1;
                   width: 100%;
                 }
               }
