@@ -35,16 +35,13 @@ const styles = css`
 export default class Navigation extends LitElement {
   static styles = styles;
 
-  @property({ type: String })
-  public logoSrc = '';
-
-  @property({ type: String })
-  public logoAlt = '';
+  @property({ type: Object })
+  public logoImg = { src: '', alt: '' };
 
   protected render() {
     return html`
       <nav>
-        <img class="logo" src="${this.logoSrc}" alt="{{ this.logoAlt }}" />
+        <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
         <slot name="main-menu"></slot>
         <slot name="main-cta"></slot>
       </nav>
