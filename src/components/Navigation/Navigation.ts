@@ -18,7 +18,7 @@ const styles = css`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 6rem;
+    height: 6.5rem;
     max-width: var(--page-max-width);
     padding: 0 2rem;
     margin: 0 auto;
