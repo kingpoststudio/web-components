@@ -9,6 +9,9 @@ export default class Card extends LitElement {
   @property({ type: Boolean })
     round = false;
 
+  @property({ type: Object })
+    img = { src: 'https://picsum.photos/390/200', alt: 'Card image' };
+
   @property({ type: String })
     title: string = 'Card';
 
@@ -92,7 +95,7 @@ export default class Card extends LitElement {
         variant=${this.variant}
         round=${this.round}
       >
-        <img src="https://picsum.photos/390/190" alt="">
+        <img src="${this.img.src}" alt="${this.img.alt}">
         <div class="content">
           <h2>${this.title}</h2>
           <p>${this.description}</p>
