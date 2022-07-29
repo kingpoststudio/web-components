@@ -38,10 +38,13 @@ export default class Navigation extends LitElement {
   @property({ type: String })
   public logoSrc = '';
 
+  @property({ type: String })
+  public logoAlt = '';
+
   protected render() {
     return html`
       <nav>
-        <img class="logo" src="${this.logoSrc}" />
+        <img class="logo" src="${this.logoSrc}" alt="{{ this.logoAlt }}" />
         <slot name="main-menu"></slot>
         <slot name="main-cta"></slot>
       </nav>
