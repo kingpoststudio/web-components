@@ -1,9 +1,11 @@
 import Button from './components/Button/Button';
 import Navigation from './components/Navigation/Navigation';
+import HeroBanner from './modules/HeroBanner/HeroBanner';
 import './styles/main.css';
 
-declare const components: {
+declare const lib: {
     Button: typeof Button;
     Navigation: typeof Navigation;
+    HeroBanner: typeof HeroBanner;
 };
-export default components;
+export default lib;

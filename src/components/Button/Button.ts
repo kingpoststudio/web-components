@@ -5,7 +5,7 @@ import './Button.css';
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-  color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' = 'primary';
+    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' = 'primary';
 
   @property({ type: String })
     variant: 'fill' | 'outline' = 'fill';

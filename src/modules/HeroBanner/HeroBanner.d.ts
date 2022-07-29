@@ -3,7 +3,15 @@ import { LitElement } from 'lit';
 declare class HeroBanner extends LitElement {
   static styles: import('lit').CSSResult;
 
-  text: import('lit-html').TemplateResult<1>;
+  logoImg: {
+        src: string;
+        alt: string;
+    };
+
+  bgImg: {
+        src: string;
+        alt: string;
+    };
 
   render(): import('lit-html').TemplateResult<1>;
 }

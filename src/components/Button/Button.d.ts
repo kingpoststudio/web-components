@@ -2,9 +2,9 @@ import { LitElement } from 'lit';
 import './Button.css';
 
 export default class Button extends LitElement {
-  variant: 'fill' | 'outline';
-
   color: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+
+  variant: 'fill' | 'outline';
 
   href: string;
 
@@ -13,6 +13,8 @@ export default class Button extends LitElement {
   cta: boolean;
 
   round: boolean;
+
+  uppercase: boolean;
 
   static styles: import('lit').CSSResult;
 
