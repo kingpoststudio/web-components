@@ -6,11 +6,11 @@
   --space-0: 0;
   --space-2xs: calc(var(--scale) * 0.25);
   --space-xs: calc(var(--scale) * 0.5);
-  --space-sm: var(--scale);
-  --space-md: calc(var(--scale) * 1.25);
-  --space-lg: calc(var(--scale) * 2);
-  --space-xl: calc(var(--scale) * 3);
-  --space-2xl: calc(var(--scale) * 4);
+  --space-sm: calc(var(--scale) * 0.75);
+  --space: var(--scale);
+  --space-lg: calc(var(--scale) * 1.25);
+  --space-xl: calc(var(--scale) * 1.5);
+  --space-2xl: calc(var(--scale) * 2);
 
   --color-black: #000;
   --color-white: #fff;
@@ -77,6 +77,7 @@
 
   /* Fonts */
   --font-family: 'Open Sans', sans-serif;
+  --font-heading: 'Open Sans', sans-serif;
   --font-size-sm: calc(var(--scale) * 0.8);
   --font-size: var(--scale);
   --font-size-lg: calc(var(--scale) * 1.25);
@@ -117,44 +118,42 @@ html {
   font-family: var(--font-family);
   font-style: normal;
   font-weight: 400;
-  line-height: 1.4;
   overflow-x: hidden;
-}
 
-h1 {
-  font-size: var(--font-size-4xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-bold);
+  }
 
-h2 {
-  font-size: var(--font-size-3xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-}
-
-h3 {
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-}
-
-h4 {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-}
-
-h5 {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
-}
-
-h6 {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
+  h1 {
+    font-size: var(--font-size-4xl);
+    line-height: 1.2;
+  }
+  
+  h2 {
+    font-size: var(--font-size-3xl);
+    line-height: 1.2;
+  }
+  
+  h3 {
+    font-size: var(--font-size-2xl);
+    line-height: 1.2;
+  }
+  
+  h4 {
+    font-size: var(--font-size-xl);
+    line-height: 1.2;
+  }
+  
+  h5 {
+    font-size: var(--font-size-lg);
+    line-height: 1.2;
+  }
+  
+  h6 {
+    font-size: var(--font-size-sm);
+    line-height: 1.2;
+  }
 }
 
 /* Helpers */

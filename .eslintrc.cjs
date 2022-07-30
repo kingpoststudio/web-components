@@ -21,5 +21,6 @@ module.exports = {
   rules: {
     'import/extensions': 0,
     'no-unused-vars': 1,
+    'class-methods-use-this': 1,
   },
 };

@@ -53,6 +53,7 @@ export default class Card extends LitElement {
     }
 
     .wrap > .content > h2 {
+      font-family: var(--font-heading);
       font-size: var(--font-size-2xl);
       margin-top: 0;
     }
