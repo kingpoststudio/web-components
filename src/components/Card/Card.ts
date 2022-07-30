@@ -7,13 +7,10 @@ export default class Card extends LitElement {
     variant: 'default' = 'default';
 
   @property({ type: String })
-    fontColor: 'primary' | 'secondary' = 'primary';
+    theme: 'primary' | 'secondary' = 'primary';
 
   @property({ type: Boolean })
     round = false;
-
-  @property({ type: Object })
-    img = { src: 'https://picsum.photos/390/200', alt: 'Card image' };
 
   @property({ type: String })
     title: string = 'Card';
@@ -21,11 +18,11 @@ export default class Card extends LitElement {
   @property({ type: String })
     description: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 
-  @property({ type: String })
-    link: string = '#';
+  @property({ type: Object })
+    link = { label: 'Read more', href: '#', target: '_blank' };
 
-  @property({ type: String })
-    linkText: string = 'Read more';
+  @property({ type: Object })
+    img = { src: 'https://picsum.photos/id/1000/390/200', alt: 'Card image' };
 
   static styles = css`
     .wrap {
@@ -47,11 +44,11 @@ export default class Card extends LitElement {
       padding: 1rem 0;
     }
 
-    .wrap[fontColor="primary"] > .content {
+    .wrap[theme="primary"] > .content {
       color: var(--color-primary-darker);
     }
 
-    .wrap[fontColor="secondary"] > .content {
+    .wrap[theme="secondary"] > .content {
       color: var(--color-secondary-darker);
     }
 
@@ -107,13 +104,13 @@ export default class Card extends LitElement {
       <div class="wrap"
         variant=${this.variant}
         round=${this.round}
-        fontColor=${this.fontColor}
+        theme=${this.theme}
       >
         <img src="${this.img.src}" alt="${this.img.alt}">
         <div class="content">
           <h2>${this.title}</h2>
           <p>${this.description}</p>
-          ${this.link ? html`<a href=${this.link}>${this.linkText}</a>` : ''}
+          ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : ''}
         </div>
       </div>
     `;

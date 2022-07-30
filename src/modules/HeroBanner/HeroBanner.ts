@@ -14,19 +14,22 @@ const styles = css`
 
   .content {
     position: relative;
-    display: flex;
-    flex-direction: column;
     width: 100%;
     max-width: var(--page-max-width);
-    padding: 0 var(--space-lg);
     margin: 0 auto;
   }
+  
+  .content > .container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 var(--space-lg);
+  }
 
-  .ctas {
+  .content > .container .ctas {
     margin-top: 2rem;
   }
 
-  h1 {
+  .content > .container > .title ::slotted(h1) {
     display: flex;
     margin: 0;
     font-size: var(--font-size-7xl);
@@ -35,18 +38,18 @@ const styles = css`
     color: var(--color-secondary-lighter);
   }
 
-  h2 {
+  .content > .container > .subtitle ::slotted(h2) {
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-light);
     color: var(--color-secondary-lighter);
     margin: 0;
   }
 
-  p {
+  .content > .container > .tagline ::slotted(p) {
     color: var(--color-white);
   }
 
-  img.logo {
+  .content > .container img.logo {
     width: 14rem;
     margin-bottom: 4rem;
   }
@@ -77,14 +80,16 @@ class HeroBanner extends LitElement {
         <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
 
         <div class="content">
-          <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
-          <h1><slot name="title"></slot></h1>
-          <h2><slot name="subtitle"></slot></h2>
-          <p><slot name="tagline"></slot></p>
-
-          <div class="ctas">
-            <slot name="primary-cta"></slot>
-            <slot name="secondary-cta"></slot>
+          <div class="container">
+            <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
+            <div class="title"><slot name="title"></slot></div>
+            <div class="subtitle"><slot name="subtitle"></slot></div>
+            <div class="tagline"><slot name="tagline"></slot></div>
+  
+            <div class="ctas">
+              <slot name="primary-cta"></slot>
+              <slot name="secondary-cta"></slot>
+            </div>
           </div>
         </div>
       </div>

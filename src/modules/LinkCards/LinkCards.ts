@@ -7,12 +7,14 @@ export default class LinkCards extends LitElement {
     :host {
       position: relative;
       display: flex;
-      justify-content: center;
-      align-items: center;
       max-width: var(--page-max-width);
       margin: 0 auto;
       padding: var(--space-2xl) var(--space-lg);
       box-sizing: border-box;
+    }
+
+    .link-cards {
+      width: 100%;
     }
   `;
 
