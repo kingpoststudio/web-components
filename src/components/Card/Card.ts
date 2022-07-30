@@ -81,7 +81,7 @@ export default class Card extends LitElement {
     .wrap > .content > a::after {
       content: '';
       position: absolute;
-      bottom: -1px;
+      bottom: -2px;
       left: 0;
       display: inline-block;
       width: 0;

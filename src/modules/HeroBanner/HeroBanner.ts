@@ -20,25 +20,35 @@ const styles = css`
   }
   
   .content > .container {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     padding: 0 var(--space-lg);
   }
 
-  .content > .container .ctas {
-    margin-top: 2rem;
+  .content > .container > * {
+    margin-bottom: 0.75rem;
+  }
+
+  .content > .container > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .content > .container > .ctas {
+    margin-top: 3rem;
   }
 
   .content > .container > .title ::slotted(h1) {
     display: flex;
     margin: 0;
-    font-size: var(--font-size-7xl);
+    font-family: var(--font-heading);
+    font-size: var(--font-size-8xl);
     font-weight: var(--font-weight-light);
     line-height: 1;
     color: var(--color-secondary-lighter);
   }
 
   .content > .container > .subtitle ::slotted(h2) {
+    font-family: var(--font-heading);
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-light);
     color: var(--color-secondary-lighter);
@@ -91,6 +101,7 @@ class HeroBanner extends LitElement {
               <slot name="secondary-cta"></slot>
             </div>
           </div>
+
         </div>
       </div>
     `;
