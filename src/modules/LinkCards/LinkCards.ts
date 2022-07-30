@@ -1,39 +1,26 @@
-import { html, css, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-const styles = css`
-  .wrap {
-    position: relative;
-    width: 100%;
-    max-width: var(--page-max-width);
-    height: auto;
-    padding: var(--space-2xl);
-    margin: 0 auto;
-  }
-
-  ::slotted(*) {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: var(--space-2xl);
-  }
-
-  ::slotted(*):nth-child(1) {
-    background: red;
-  }
-`;
-
 @customElement('kps-link-cards')
-class LinkCards extends LitElement {
-  static styles = styles;
+export default class LinkCards extends LitElement {
+  static styles = css`
+    :host {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      max-width: var(--page-max-width);
+      margin: 0 auto;
+      padding: var(--space-2xl) var(--space-lg);
+      box-sizing: border-box;
+    }
+  `;
 
   render() {
     return html`
-      <div class="wrap">
+      <div class="link-cards">
         <slot name="cards"></slot>
       </div>
     `;
   }
 }
-
-export default LinkCards;

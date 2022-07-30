@@ -1,17 +1,4 @@
 :root {
-  /* Spacings */
-  --scale: 15px;
-  --page-max-width: 1440px;
-
-  --space-0: 0;
-  --space-2xs: calc(var(--scale) * 0.25);
-  --space-xs: calc(var(--scale) * 0.5);
-  --space-sm: calc(var(--scale) * 0.75);
-  --space: var(--scale);
-  --space-lg: calc(var(--scale) * 1.25);
-  --space-xl: calc(var(--scale) * 1.5);
-  --space-2xl: calc(var(--scale) * 2);
-
   --color-black: #000;
   --color-white: #fff;
 
@@ -78,17 +65,17 @@
   /* Fonts */
   --font-family: 'Open Sans', sans-serif;
   --font-heading: 'Open Sans', sans-serif;
-  --font-size-sm: calc(var(--scale) * 0.8);
+  --font-size-sm: 0.8rem;
   --font-size: var(--scale);
-  --font-size-lg: calc(var(--scale) * 1.25);
-  --font-size-xl: calc(var(--scale) * 1.5);
-  --font-size-2xl: calc(var(--scale) * 2);
-  --font-size-3xl: calc(var(--scale) * 3);
-  --font-size-4xl: calc(var(--scale) * 4);
-  --font-size-5xl: calc(var(--scale) * 5);
-  --font-size-6xl: calc(var(--scale) * 6);
-  --font-size-7xl: calc(var(--scale) * 7);
-  --font-size-7xl: calc(var(--scale) * 8);
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 3rem;
+  --font-size-4xl: 4rem;
+  --font-size-5xl: 5rem;
+  --font-size-6xl: 6rem;
+  --font-size-7xl: 7rem;
+  --font-size-7xl: 8rem;
 
   --font-weight-lightest: 100;
   --font-weight-lighter: 200;
@@ -99,6 +86,20 @@
   --font-weight-bold: 700;
   --font-weight-bolder: 800;
   --font-weight-black: 900;
+
+  /* Spacings */
+  --scale: 15px;
+  --page-max-width: 1440px;
+
+  --space-0: 0;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
 
   /* Animations/Easings/Transitions */
   --ease-time: 0.3s;

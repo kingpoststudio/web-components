@@ -18,7 +18,7 @@ const styles = css`
     flex-direction: column;
     width: 100%;
     max-width: var(--page-max-width);
-    padding: 0 var(--space-2xl);
+    padding: 0 var(--space-lg);
     margin: 0 auto;
   }
 
