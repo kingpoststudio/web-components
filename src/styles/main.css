@@ -119,44 +119,55 @@ html {
   font-style: normal;
   font-weight: 400;
   overflow-x: hidden;
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-heading);
-    font-weight: var(--font-weight-bold);
-  }
-
-  h1 {
-    font-size: var(--font-size-4xl);
-    line-height: 1.2;
-  }
-  
-  h2 {
-    font-size: var(--font-size-3xl);
-    line-height: 1.2;
-  }
-  
-  h3 {
-    font-size: var(--font-size-2xl);
-    line-height: 1.2;
-  }
-  
-  h4 {
-    font-size: var(--font-size-xl);
-    line-height: 1.2;
-  }
-  
-  h5 {
-    font-size: var(--font-size-lg);
-    line-height: 1.2;
-  }
-  
-  h6 {
-    font-size: var(--font-size-sm);
-    line-height: 1.2;
-  }
 }
 
-/* Helpers */
+h1, h2, h3, h4, h5, h6,
+.as-h1, .as-h2, .as-h3, .as-h4, .as-h5, .as-h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+}
+
+h1, .as-h1 {
+  font-size: var(--font-size-4xl);
+  line-height: 1.2;
+}
+
+h2, .as-h2 {
+  font-size: var(--font-size-3xl);
+  line-height: 1.2;
+}
+
+h3, .as-h3 {
+  font-size: var(--font-size-2xl);
+  line-height: 1.2;
+}
+
+h4, .as-h4 {
+  font-size: var(--font-size-xl);
+  line-height: 1.2;
+}
+
+h5, .as-h5 {
+  font-size: var(--font-size-lg);
+  line-height: 1.2;
+}
+
+h6, .as-h6 {
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
+}
+
+.as-body {
+  font-size: var(--font-size);
+  line-height: 1.5;
+}
+
+.as-tag {
+  font-size: var(--font-size-sm);
+  line-height: 1.2;
+}
+
+/* General Helpers */
 .hidden {
   display: none;
 }
@@ -166,6 +177,7 @@ html {
 }
 
 .flex-center {
+  display: flex;
   align-items: center;
   justify-content: center;
 }

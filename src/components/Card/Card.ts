@@ -6,6 +6,9 @@ export default class Card extends LitElement {
   @property({ type: String })
     variant: 'default' = 'default';
 
+  @property({ type: String })
+    fontColor: 'primary' | 'secondary' = 'primary';
+
   @property({ type: Boolean })
     round = false;
 
@@ -44,6 +47,14 @@ export default class Card extends LitElement {
       padding: 1rem 0;
     }
 
+    .wrap[fontColor="primary"] > .content {
+      color: var(--color-primary-darker);
+    }
+
+    .wrap[fontColor="secondary"] > .content {
+      color: var(--color-secondary-darker);
+    }
+
     .wrap > .content > * {
       margin-bottom: 1rem;
     }
@@ -67,18 +78,19 @@ export default class Card extends LitElement {
       display: inline-block;
       color: var(--color-primary);
       text-decoration: none;
+      transition: color var(--ease-time) var(--ease-type);
     }
 
     .wrap > .content > a::after {
       content: '';
       position: absolute;
-      bottom: 0;
+      bottom: -1px;
       left: 0;
       display: inline-block;
       width: 0;
       height: 1px;
-      background: var(--color-primary);
-      transition: width 0.3s ease-in-out;
+      background: var(--color-primary-light);
+      transition: width var(--ease-time) var(--ease-type);
     }
 
     .wrap > .content > a:hover {
@@ -95,6 +107,7 @@ export default class Card extends LitElement {
       <div class="wrap"
         variant=${this.variant}
         round=${this.round}
+        fontColor=${this.fontColor}
       >
         <img src="${this.img.src}" alt="${this.img.alt}">
         <div class="content">

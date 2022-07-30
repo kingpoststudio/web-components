@@ -17,6 +17,10 @@ const styles = css`
     justify-content: center;
     gap: var(--space-2xl);
   }
+
+  ::slotted(*):nth-child(1) {
+    background: red;
+  }
 `;
 
 @customElement('kps-link-cards')
