@@ -2,11 +2,11 @@ import Button from './components/Button/Button';
 import Card from './components/Card/Card';
 import CardGrid from './components/CardGrid/CardGrid';
 import Carousel from './components/Carousel/Carousel';
+import Container from './components/Container/Container';
 import Navigation from './components/Navigation/Navigation';
 
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import LinkCards from './modules/LinkCards/LinkCards';
-import QuoteCarousel from './modules/QuoteCarousel/QuoteCarousel';
 
 import './styles/main.css';
 
@@ -15,11 +15,11 @@ const lib = {
   Card,
   CardGrid,
   Carousel,
+  Container,
   Navigation,
 
   HeroBanner,
   LinkCards,
-  QuoteCarousel,
 };
 
 export default lib;

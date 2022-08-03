@@ -19,25 +19,24 @@ const styles = css`
     margin: 0 auto;
   }
   
-  .content > .container {
+  .content > kps-container {
     display: inline-flex;
     flex-direction: column;
-    padding: 0 var(--space-lg);
   }
 
-  .content > .container > * {
+  .content > kps-container > * {
     margin-bottom: 0.75rem;
   }
 
-  .content > .container > *:last-child {
+  .content > kps-container > *:last-child {
     margin-bottom: 0;
   }
 
-  .content > .container > .ctas {
+  .content > kps-container > .ctas {
     margin-top: 3rem;
   }
 
-  .content > .container > .title ::slotted(h1) {
+  .content > kps-container > .title ::slotted(h1) {
     display: flex;
     margin: 0;
     font-family: var(--font-heading);
@@ -47,7 +46,7 @@ const styles = css`
     color: var(--color-secondary-lighter);
   }
 
-  .content > .container > .subtitle ::slotted(h2) {
+  .content > kps-container > .subtitle ::slotted(h2) {
     font-family: var(--font-heading);
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-light);
@@ -55,11 +54,11 @@ const styles = css`
     margin: 0;
   }
 
-  .content > .container > .tagline ::slotted(p) {
+  .content > kps-container > .tagline ::slotted(p) {
     color: var(--color-white);
   }
 
-  .content > .container img.logo {
+  .content > kps-container img.logo {
     width: 14rem;
     margin-bottom: 4rem;
   }
@@ -90,7 +89,7 @@ class HeroBanner extends LitElement {
         <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
 
         <div class="content">
-          <div class="container">
+          <kps-container x-padding>
             <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
             <div class="title"><slot name="title"></slot></div>
             <div class="subtitle"><slot name="subtitle"></slot></div>
@@ -100,8 +99,7 @@ class HeroBanner extends LitElement {
               <slot name="primary-cta"></slot>
               <slot name="secondary-cta"></slot>
             </div>
-          </div>
-
+          </kps-container>
         </div>
       </div>
     `;

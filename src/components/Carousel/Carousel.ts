@@ -61,10 +61,11 @@ export default class Carousel extends LitElement {
   itemsRef = createRef<HTMLSlotElement>();
 
   firstUpdated() {
-    setImmediate(() => {
+    setTimeout(() => {
       try {
         this.itemsEl = this.renderRoot?.querySelector('.items') as HTMLElement;
         const slot = this.itemsRef.value;
+        console.log(slot);
 
         if (!slot) {
           console.error('scrolling could not find slot');
@@ -94,7 +95,7 @@ export default class Carousel extends LitElement {
       } catch (error) {
         console.error(error);
       }
-    });
+    }, 0);
   }
 
   disconnectedCallback() {
