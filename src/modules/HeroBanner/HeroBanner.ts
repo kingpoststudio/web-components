@@ -12,31 +12,25 @@ const styles = css`
     background: var(--color-black);
   }
 
-  .content {
+  kps-container {
     position: relative;
-    width: 100%;
-    max-width: var(--page-max-width);
-    margin: 0 auto;
-  }
-  
-  .content > kps-container {
     display: inline-flex;
     flex-direction: column;
   }
 
-  .content > kps-container > * {
+  kps-container > * {
     margin-bottom: 0.75rem;
   }
 
-  .content > kps-container > *:last-child {
+  kps-container > *:last-child {
     margin-bottom: 0;
   }
 
-  .content > kps-container > .ctas {
+  kps-container > .ctas {
     margin-top: 3rem;
   }
 
-  .content > kps-container > .title ::slotted(h1) {
+  kps-container > .title ::slotted(h1) {
     display: flex;
     margin: 0;
     font-family: var(--font-heading);
@@ -46,7 +40,7 @@ const styles = css`
     color: var(--color-secondary-lighter);
   }
 
-  .content > kps-container > .subtitle ::slotted(h2) {
+  kps-container > .subtitle ::slotted(h2) {
     font-family: var(--font-heading);
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-light);
@@ -54,11 +48,11 @@ const styles = css`
     margin: 0;
   }
 
-  .content > kps-container > .tagline ::slotted(p) {
+  kps-container > .tagline ::slotted(p) {
     color: var(--color-white);
   }
 
-  .content > kps-container img.logo {
+  kps-container img.logo {
     width: 14rem;
     margin-bottom: 4rem;
   }
@@ -88,19 +82,17 @@ class HeroBanner extends LitElement {
       <div class="wrap">
         <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
 
-        <div class="content">
-          <kps-container x-padding>
-            <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
-            <div class="title"><slot name="title"></slot></div>
-            <div class="subtitle"><slot name="subtitle"></slot></div>
-            <div class="tagline"><slot name="tagline"></slot></div>
-  
-            <div class="ctas">
-              <slot name="primary-cta"></slot>
-              <slot name="secondary-cta"></slot>
-            </div>
-          </kps-container>
-        </div>
+        <kps-container padding-x full-width>
+          <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
+          <div class="title"><slot name="title"></slot></div>
+          <div class="subtitle"><slot name="subtitle"></slot></div>
+          <div class="tagline"><slot name="tagline"></slot></div>
+
+          <div class="ctas">
+            <slot name="primary-cta"></slot>
+            <slot name="secondary-cta"></slot>
+          </div>
+        </kps-container>
       </div>
     `;
   }
