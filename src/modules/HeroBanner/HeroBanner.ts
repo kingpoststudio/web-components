@@ -19,7 +19,7 @@ const styles = css`
   }
 
   kps-container > * {
-    margin-bottom: 0.75rem;
+    margin-bottom: var(--space);
   }
 
   kps-container > *:last-child {
@@ -27,10 +27,10 @@ const styles = css`
   }
 
   kps-container > .ctas {
-    margin-top: 3rem;
+    margin-top: var(--space-xl);
   }
 
-  kps-container > .title ::slotted(h1) {
+  kps-container > .title ::slotted(*) {
     display: flex;
     margin: 0;
     font-family: var(--font-heading);
@@ -40,7 +40,7 @@ const styles = css`
     color: var(--color-secondary-lighter);
   }
 
-  kps-container > .subtitle ::slotted(h2) {
+  kps-container > .subtitle ::slotted(*) {
     font-family: var(--font-heading);
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-light);
@@ -48,13 +48,13 @@ const styles = css`
     margin: 0;
   }
 
-  kps-container > .tagline ::slotted(p) {
+  kps-container > .tagline ::slotted(*) {
     color: var(--color-white);
   }
 
   kps-container img.logo {
     width: 14rem;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
   }
 
   img.bg {
