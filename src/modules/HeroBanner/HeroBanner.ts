@@ -14,7 +14,7 @@ const styles = css`
 
   kps-container {
     position: relative;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
   }
 

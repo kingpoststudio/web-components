@@ -29,13 +29,13 @@ export default class Container extends LitElement {
   static styles = styles;
 
   @property({ type: Boolean, reflect: true, attribute: 'padding-x' })
-  paddingX = false;
+    paddingX = false;
 
   @property({ type: Boolean, reflect: true, attribute: 'padding-y' })
-  paddingY = false;
+    paddingY = false;
 
   @property({ type: Boolean, reflect: true, attribute: 'full-width' })
-  fullWidth = false;
+    fullWidth = false;
 
   protected render() {
     return html`<slot></slot>`;

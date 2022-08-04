@@ -27,7 +27,6 @@ export default class Card extends LitElement {
   static styles = css`
     .wrap {
       display: block;
-      max-width: 30rem;
     }
 
     .wrap[round] {
