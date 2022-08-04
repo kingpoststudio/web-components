@@ -13,6 +13,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "flickity": "^3.0.0",
     "lit": "^2.2.7"
   },
   "devDependencies": {
@@ -23,6 +24,7 @@
     "@storybook/builder-vite": "^0.2.0",
     "@storybook/html": "^6.5.9",
     "@storybook/web-components": "^6.5.9",
+    "@types/flickity": "^2.2.6",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "autoprefixer": "^10.4.7",
