@@ -30,7 +30,7 @@ const styles = css`
     margin-top: var(--space-xl);
   }
 
-  kps-container > .title ::slotted(*) {
+  kps-container > .title ::slotted(h1) {
     display: flex;
     margin: 0;
     font-family: var(--font-heading);
@@ -40,7 +40,7 @@ const styles = css`
     color: var(--color-secondary-lighter);
   }
 
-  kps-container > .subtitle ::slotted(*) {
+  kps-container > .subtitle ::slotted(h2) {
     font-family: var(--font-heading);
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-light);
@@ -48,7 +48,7 @@ const styles = css`
     margin: 0;
   }
 
-  kps-container > .tagline ::slotted(*) {
+  kps-container > .tagline ::slotted(p) {
     color: var(--color-white);
   }
 

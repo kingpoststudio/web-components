@@ -60,13 +60,14 @@ export default class Card extends LitElement {
       margin-bottom: 0;
     }
 
-    .wrap > .content > h2 {
+    .wrap > .content > .title > ::slotted(h3) {
       font-family: var(--font-heading);
       font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-semibold);
       margin-top: 0;
     }
 
-    .wrap > .content > p {
+    .wrap > .content > .description > ::slotted(p) {
       line-height: 1.5;
     }
 
@@ -108,9 +109,9 @@ export default class Card extends LitElement {
       >
         <img src="${this.img.src}" alt="${this.img.alt}">
         <div class="content">
-          <h2>${this.title}</h2>
-          <p>${this.description}</p>
-          ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : ''}
+          <div class="title"><slot name="title">${this.title}</slot></div>
+          <div class="description"><slot name="description">${this.description}</slot></div>
+          ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : html`<slot name="link"></slot>`}
         </div>
       </div>
     `;

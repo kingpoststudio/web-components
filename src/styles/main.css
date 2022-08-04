@@ -147,14 +147,6 @@ body {
 }
 
 /* General Helpers */
-.hidden {
-  display: none;
-}
-
-.flex {
-  display: flex;
-}
-
 .flex-center {
   display: flex;
   align-items: center;
