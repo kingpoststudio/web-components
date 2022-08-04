@@ -42,7 +42,7 @@ export default class Button extends LitElement {
       text-align: center;
       text-decoration: none;
       cursor: pointer;
-      transition: all var(--ease-time) var(--ease-type);
+      transition: background-color var(--ease-time) var(--ease-type);
     }
 
     .wrap > a:hover {

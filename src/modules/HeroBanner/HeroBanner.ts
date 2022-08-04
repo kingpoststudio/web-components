@@ -63,7 +63,13 @@ const styles = css`
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: none;
+    object-fit: cover;
+  }
+
+  @media (min-width: 1440px) {
+    img.bg {
+      object-fit: none;
+    }
   }
 `;
 
