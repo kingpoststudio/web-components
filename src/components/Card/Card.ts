@@ -27,14 +27,14 @@ export default class Card extends LitElement {
   static styles = css`
     .wrap {
       display: block;
-      max-width: 28rem;
+      max-width: 30rem;
     }
 
     .wrap[round] {
       border-radius: 0.5rem;
     }
 
-    .wrap > img {
+    .wrap > ::slotted(img) {
       width: 100%;
       height: 12rem;
       object-fit: cover;
@@ -107,7 +107,7 @@ export default class Card extends LitElement {
         round=${this.round}
         theme=${this.theme}
       >
-        <img src="${this.img.src}" alt="${this.img.alt}">
+        <slot name="img"></slot>
         <div class="content">
           <div class="title"><slot name="title">${this.title}</slot></div>
           <div class="description"><slot name="description">${this.description}</slot></div>

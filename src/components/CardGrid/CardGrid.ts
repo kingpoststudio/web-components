@@ -6,7 +6,7 @@ export default class CardGrid extends LitElement {
   static styles = css`
     .columns {
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
       gap: var(--space-md);
     }
   `;

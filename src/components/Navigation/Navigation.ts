@@ -19,9 +19,6 @@ const styles = css`
     justify-content: space-between;
     align-items: center;
     height: 6.5rem;
-    max-width: var(--page-max-width);
-    padding: 0 var(--space-lg);
-    margin: 0 auto;
   }
 
   img.logo {
@@ -40,11 +37,13 @@ export default class Navigation extends LitElement {
 
   protected render() {
     return html`
-      <nav>
-        <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
-        <slot name="main-menu"></slot>
-        <slot name="main-cta"></slot>
-      </nav>
+      <kps-container padding-x full-width>
+        <nav>
+          <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
+          <slot name="main-menu"></slot>
+          <slot name="main-cta"></slot>
+        </nav>
+      </kps-container>
     `;
   }
 }

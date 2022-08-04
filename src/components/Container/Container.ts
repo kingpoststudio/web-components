@@ -6,6 +6,7 @@ const styles = css`
     display: block;
     margin: 0 auto;
     max-width: var(--page-max-width);
+    box-sizing: border-box;
   }
 
   :host([padding-x]) {
