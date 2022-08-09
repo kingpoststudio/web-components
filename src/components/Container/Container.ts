@@ -72,8 +72,8 @@ export default class Container extends LitElement {
   @property({ type: String, attribute: 'padding-y' })
     paddingY = '';
 
-  @property({ type: String, attribute: 'full-width' })
-    fullWidth = '';
+  @property({ type: Boolean, attribute: 'full-width' })
+    fullWidth = false;
 
   protected render() {
     return html`<slot></slot>`;

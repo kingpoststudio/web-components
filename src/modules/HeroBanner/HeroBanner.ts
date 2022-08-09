@@ -88,7 +88,7 @@ class HeroBanner extends LitElement {
       <div class="wrap">
         <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
 
-        <kps-container padding-x full-width>
+        <kps-container padding-x="lg">
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
           <div class="title"><slot name="title"></slot></div>
           <div class="subtitle"><slot name="subtitle"></slot></div>
