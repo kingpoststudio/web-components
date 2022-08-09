@@ -12,6 +12,10 @@ const styles = css`
     background: transparent;
   }
 
+  .wrap[condensed=true] {
+    min-height: 32rem;
+  }
+
   kps-container {
     position: relative;
     display: flex;
@@ -24,10 +28,6 @@ const styles = css`
 
   kps-container > *:last-child {
     margin-bottom: 0;
-  }
-
-  kps-container > .ctas {
-    margin-top: var(--space-xl);
   }
 
   kps-container > .title ::slotted(h1) {
@@ -52,6 +52,11 @@ const styles = css`
     color: var(--color-white);
   }
 
+  kps-container > .ctas ::slotted(kps-button) {
+    display: inline-flex;
+    margin-top: var(--space-xl);
+  }
+
   kps-container img.logo {
     width: 14rem;
     margin-bottom: 3rem;
@@ -68,7 +73,7 @@ const styles = css`
 
   @media (min-width: 1440px) {
     img.bg {
-      object-fit: none;
+      object-fit: contain;
     }
   }
 `;
@@ -78,14 +83,17 @@ class HeroBanner extends LitElement {
   static styles = styles;
 
   @property({ type: Object })
-  public logoImg = { src: '', alt: '' };
+    logoImg = { src: '', alt: '' };
 
   @property({ type: Object })
-  public bgImg = { src: '', alt: '' };
+    bgImg = { src: '', alt: '' };
+
+  @property({ type: Boolean })
+    condensed = false;
 
   render() {
     return html`
-      <div class="wrap">
+      <div class="wrap" condensed="${this.condensed}">
         <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
 
         <kps-container padding-x="lg">
