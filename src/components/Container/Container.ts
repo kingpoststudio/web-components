@@ -7,6 +7,7 @@ export default class Container extends LitElement {
   :host {
     display: block;
     margin: 0 auto;
+    width: 100%;
     max-width: var(--page-max-width);
     box-sizing: border-box;
   }
@@ -62,7 +63,7 @@ export default class Container extends LitElement {
   }
 
   :host([full-width]) {
-    width: 100%;
+    max-width: 100%;
   }
 `;
 
