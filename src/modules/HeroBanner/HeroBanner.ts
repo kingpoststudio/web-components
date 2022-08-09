@@ -9,7 +9,7 @@ const styles = css`
     width: 100%;
     height: auto;
     min-height: 45rem;
-    background: var(--color-black);
+    background: transparent;
   }
 
   kps-container {

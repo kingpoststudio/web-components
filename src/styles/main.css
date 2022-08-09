@@ -76,10 +76,10 @@
   --space-xs: 0.5rem;
   --space-sm: 0.75rem;
   --space: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-2xl: 4rem;
+  --space-md: 2rem;
+  --space-lg: 3rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
 
   /* Fonts */
   --font-family: 'Open Sans', sans-serif;
