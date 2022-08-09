@@ -37,7 +37,7 @@ export default class Navigation extends LitElement {
 
   protected render() {
     return html`
-      <kps-container padding-x full-width>
+      <kps-container padding-x='lg'>
         <nav>
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
           <slot name="main-menu"></slot>

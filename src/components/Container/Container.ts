@@ -66,13 +66,13 @@ export default class Container extends LitElement {
   }
 `;
 
-  @property({ type: String, reflect: true, attribute: 'padding-x' })
+  @property({ type: String, attribute: 'padding-x' })
     paddingX = '';
 
-  @property({ type: String, reflect: true, attribute: 'padding-y' })
+  @property({ type: String, attribute: 'padding-y' })
     paddingY = '';
 
-  @property({ type: String, reflect: true, attribute: 'full-width' })
+  @property({ type: String, attribute: 'full-width' })
     fullWidth = '';
 
   protected render() {
