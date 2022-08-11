@@ -22,7 +22,7 @@ export default class Card extends LitElement {
     link = { label: 'Read more', href: '#', target: '_blank' };
 
   @property({ type: Object })
-    img = { src: 'https://picsum.photos/id/1000/390/200', alt: 'Card image' };
+    img = { src: 'https://picsum.photos/id/1053/390/200', alt: 'Card image' };
 
   static styles = css`
     .wrap {

@@ -63,7 +63,7 @@
   --color-text-highlight: blue;
 
   /* Spacings */
-  --scale: 10px;
+  --scale: min(15px, 3vw);
 
   @media (min-width: 768px) {
     --scale: min(15px, 1.3vw);
