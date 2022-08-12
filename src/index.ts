@@ -2,6 +2,7 @@ import Button from './components/Button/Button';
 import Card from './components/Card/Card';
 import Container from './components/Container/Container';
 import Dialog from './components/Dialog/Dialog';
+import Link from './components/Link/Link';
 import Navigation from './components/Navigation/Navigation';
 
 import HeroBanner from './modules/HeroBanner/HeroBanner';
@@ -13,6 +14,7 @@ const lib = {
   Card,
   Container,
   Dialog,
+  Link,
   Navigation,
 
   HeroBanner,
