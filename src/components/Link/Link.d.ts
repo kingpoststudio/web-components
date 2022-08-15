@@ -1,14 +1,9 @@
 import { LitElement } from 'lit';
-import './Button.css';
-export default class Button extends LitElement {
-    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
-    variant: 'fill' | 'outline';
+export default class Link extends LitElement {
     href: string;
     target: string;
     cta: boolean;
-    round: boolean;
     uppercase: boolean;
-    static styles: import("lit").CSSResult;
     /**
      * onSlotChange
      * @param e
