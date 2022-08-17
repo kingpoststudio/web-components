@@ -16,6 +16,26 @@ const styles = css`
     min-height: 32rem;
   }
 
+  .wrap > .image {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 95%;
+  }
+
+  .wrap > .image > img.bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (min-width: 768px) {
+    img.bg {
+      object-fit: contain;
+    }
+  }
+
   kps-container {
     position: relative;
     display: flex;
@@ -61,21 +81,6 @@ const styles = css`
     width: 14rem;
     margin-bottom: 3rem;
   }
-
-  img.bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media (min-width: 1440px) {
-    img.bg {
-      object-fit: contain;
-    }
-  }
 `;
 
 @customElement('kps-hero')
@@ -94,7 +99,9 @@ class HeroBanner extends LitElement {
   render() {
     return html`
       <div class="wrap" condensed="${this.condensed}">
+      <div class="image">
         <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
+      </div>
 
         <kps-container padding-x="lg">
           ${this.logoImg.src && html`<img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />`}
