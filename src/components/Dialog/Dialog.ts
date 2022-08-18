@@ -1,97 +1,70 @@
-import { html, css, LitElement } from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+import { createRef, ref } from 'lit/directives/ref.js';
 
 @customElement('kps-dialog')
 export default class Dialog extends LitElement {
+  dialogRef = createRef<HTMLDialogElement>();
+
+  @state()
+  private isOpen = false;
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+  }
+
+  open = (e: Event) => {
+    if (this.isOpen) return;
+    e.preventDefault();
+
+    this.dialogRef.value?.setAttribute('open', '');
+    this.isOpen = true;
+  };
+
+  close = () => {
+    if (!this.isOpen) return;
+
+    this.dialogRef.value?.removeAttribute('open');
+    this.isOpen = false;
+  };
+
   static styles = css`
-    :host {
+    dialog > .overlay {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
       display: flex;
-      padding: 25px;
-      color: var(--lit-modal-text-color, #000);
-    }
-    .backdrop {
       justify-content: center;
       align-items: center;
-      position: fixed;
-      z-index: 1;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: var(--lit-modal-backdrop-color, #00000040) !important;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-    .modal {
-      background-color: var(--lit-modal-background-color, #fefefe);
-      margin: auto;
-      padding: 20px;
-      border: 1px solid var(--lit-modal-border-color, #888);
-      border-radius: var(--lit-modal-border-radius, '5px');
-      width: 80%;
-    }
-    .btn-close {
-      color: var(--lit-modal-btn-color, #aaaaaa);
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .btn-close:hover,
-    .btn-close:focus {
-      color: var(--lit-modal-text-color, #000);
-      text-decoration: none;
-      cursor: pointer;
+      z-index: 60;
     }
   `;
 
-  @state()
-    isOpen = false;
-
-  open() {
-    this.isOpen = true;
+  get trigger() {
+    return html`
+      <kps-button @click="${this.open}"><slot name="trigger"></slot></kps-button>
+    `;
   }
 
-  close() {
-    this.isOpen = false;
-  }
-
-  onKeyup(e: KeyboardEvent) {
-    if (e.code in [13, 27, 32]) {
-      this.close();
-    }
-  }
-
-  onBackdropClick(e: MouseEvent) {
-    const target = e.target as HTMLElement;
-    if (target?.nodeName === 'DIV' && target?.className === 'backdrop') {
-      this.close();
-    }
-    return null;
+  get content() {
+    return html`
+      <dialog ${ref(this.dialogRef)}>
+        <div class="overlay">
+          <div>
+            <slot name="content"></slot>
+          </div>
+        </div>
+      </dialog>
+    `;
   }
 
   render() {
     return html`
-      <slot
-        name="modal-open"
-        @click="${() => this.open()}"
-        @keyup="${this.onKeyup}"
-      ></slot>
-      <div
-        class="backdrop"
-        @click="${this.onBackdropClick}"
-        @keyup="${this.onKeyup}"
-        style="${this.isOpen ? 'display: flex' : 'display: none'}"
-      >
-        <div class="modal">
-          <slot
-            name="modal-close"
-            class=".btn-close"
-            @click="${() => this.close()}"
-            @keyup="${this.onKeyup}"
-          ></slot>
-          <slot></slot>
-        </div>
-      </div>
+      <div class="trigger">${this.trigger}</div>
+      <div class="content">${this.content}</div>
     `;
   }
 }

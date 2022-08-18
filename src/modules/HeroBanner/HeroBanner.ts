@@ -31,7 +31,9 @@ const styles = css`
   }
 
   @media (min-width: 768px) {
-    img.bg {
+    .wrap > .image > img.bg {
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
   }
