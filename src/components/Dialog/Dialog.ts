@@ -115,7 +115,9 @@ export default class Dialog extends LitElement {
 
   get trigger() {
     return html`
-      <kps-button @click="${this.open}"><slot name="trigger"></slot></kps-button>
+      <div @click="${this.open}">
+        <slot name="trigger"></slot>
+      </div>
     `;
   }
 

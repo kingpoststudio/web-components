@@ -128,6 +128,7 @@ export default class Button extends LitElement {
         variant=${this.variant}
         color=${this.color}
         round=${this.round}
+        uppercase=${this.uppercase}
       >
         <a href="${this.href}" target="${this.target}">
           <slot @slotchange=${this.onSlotChange}></slot>
