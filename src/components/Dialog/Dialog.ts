@@ -6,6 +6,8 @@ import { createRef, ref } from 'lit/directives/ref.js';
 export default class Dialog extends LitElement {
   dialogRef = createRef<HTMLDialogElement>();
 
+  overlayRef = createRef<HTMLDivElement>();
+
   @state()
   private isOpen = false;
 
@@ -18,7 +20,11 @@ export default class Dialog extends LitElement {
     e.preventDefault();
 
     this.dialogRef.value?.setAttribute('open', '');
-    this.isOpen = true;
+
+    setTimeout(() => {
+      this.overlayRef.value?.setAttribute('visible', '');
+      this.isOpen = true;
+    }, 0);
   };
 
   close = () => {
@@ -29,17 +35,41 @@ export default class Dialog extends LitElement {
   };
 
   static styles = css`
-    dialog > .overlay {
+    #dialog {
+      display: none;
+    }
+
+    #dialog[open] {
+      display: block;
+    }
+
+    #dialog .overlay {
       width: 100vw;
       height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
+      opacity: 0%;
       background: rgba(0, 0, 0, 0.5);
+      transition: opacity 250ms ease-in-out;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 60;
+    }
+
+    #dialog[open] .overlay[visible] {
+      opacity: 1;
+    }
+
+    #dialog > .container {
+      width: 12rem;
+      height: 12rem;
+      background: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
     }
   `;
 
@@ -51,13 +81,13 @@ export default class Dialog extends LitElement {
 
   get content() {
     return html`
-      <dialog ${ref(this.dialogRef)}>
-        <div class="overlay">
-          <div>
+      <div id="dialog" ${ref(this.dialogRef)}>
+        <div class="overlay" ${ref(this.overlayRef)}>
+          <div class="container">
             <slot name="content"></slot>
           </div>
         </div>
-      </dialog>
+      </div>
     `;
   }
 

@@ -12,6 +12,7 @@ export const Dialog = () => html`
   <div>
     <kps-dialog>
       <span slot="trigger">Open Dialog</span>
+      <span slot="content">Dialog Content</span>
     </kps-dialog>
   </div>
 `;
