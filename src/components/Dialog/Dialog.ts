@@ -58,10 +58,6 @@ export default class Dialog extends LitElement {
   }
 `;
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
-
   open = (e: Event) => {
     e.preventDefault();
     if (this.isOpen) return;

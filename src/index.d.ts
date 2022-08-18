@@ -16,4 +16,5 @@ declare const lib: {
     Navigation: typeof Navigation;
     HeroBanner: typeof HeroBanner;
 };
+
 export default lib;
