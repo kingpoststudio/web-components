@@ -10,10 +10,9 @@ export default {
 
 export const Dialog = () => html`
   <div>
-    <kps-dialog>
-      <kps-button slot="trigger">
-        Open Dialog
-      </kps-button>
+    <kps-dialog variant="dropdown" theme="dark">
+      <kps-button slot="trigger">Open Dialog</kps-button>
+      <h3 slot="title" style="margin:0;">Dialog Title</h3>
       <span slot="content">Dialog Content</span>
     </kps-dialog>
   </div>

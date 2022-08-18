@@ -13,10 +13,17 @@ export default class Dialog extends LitElement {
   @property({ type: String })
   private variant: 'modal' | 'dropdown' = 'modal';
 
+  @property({ type: String })
+  private theme: 'light' | 'dark' = 'light';
+
   @state()
   private isOpen = false;
 
   static styles = css`
+  .trigger {
+    display: inline-block;
+  }
+
   dialog {
     display: none;
     padding: 0;
@@ -28,7 +35,7 @@ export default class Dialog extends LitElement {
     display: block;
   }
 
-  dialog .overlay {
+  dialog[variant='modal'] .overlay {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -43,13 +50,21 @@ export default class Dialog extends LitElement {
     z-index: 60;
   }
 
-  dialog .overlay[visible] {
+  dialog[variant='modal'] .overlay[visible] {
     opacity: 1;
   }
 
-  dialog .overlay .container {
+  dialog[theme="dark"] .overlay {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  dialog .container {
     display: flex;
     flex-direction: column;
+  }
+
+  dialog[variant='modal'] .container {
     min-width: 16rem;
     max-width: 90%;
     min-height: 16rem;
@@ -61,31 +76,47 @@ export default class Dialog extends LitElement {
     transition: transform ${ANIMATION_DURATION_MS}ms ease-in-out;
   }
 
-  dialog .overlay[visible] .container {
+  dialog[variant='modal'] .overlay[visible] .container {
     transform: scale(1);
   }
 
-  dialog .overlay .container .header {
+  dialog .container .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: var(--space-sm);
   }
 
-  dialog .overlay .container .header kps-icon {
+  dialog .container .header kps-icon {
     color: var(--color-gray-light);
     cursor: pointer;
     transition: color ${ANIMATION_DURATION_MS}ms ease-in-out;
   }
 
-  dialog .overlay .container .header kps-icon:hover {
+  dialog .container .header kps-icon:hover {
     color: var(--color-black);
   }
 
-  dialog .overlay .container .body {
+  dialog .container .body {
     flex: 1;
     padding: var(--space-sm);
     overflow: auto;
+  }
+
+  dialog[variant="dropdown"] {
+    left: auto;
+    right: auto;
+  }
+
+  dialog[variant="dropdown"][open] {
+    display: inline;
+    position: relative;
+    left: 0.25rem;
+    top: -0.25rem;
+  }
+
+  dialog[variant="dropdown"] .container {
+    padding: var(--space-sm);
   }
 `;
 
@@ -129,10 +160,11 @@ export default class Dialog extends LitElement {
 
   get content() {
     return html`
-      <dialog ${ref(this.dialogRef)} variant="${this.variant}">
+      <dialog ${ref(this.dialogRef)} variant="${this.variant}" theme="${this.theme}">
         <div class="overlay" ${ref(this.overlayRef)}>
           <div class="container">
             <div class="header">
+              <slot name="title"></slot>
               <kps-icon icon="cross" @click="${this.close}"></kps-icon>
             </div>
             <div class="body">
