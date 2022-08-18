@@ -10,7 +10,6 @@
     "emitDeclarationOnly": true,
     "downlevelIteration": true,
     "strict": true,
-    "target": "ES5",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,

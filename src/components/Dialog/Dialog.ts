@@ -66,18 +66,24 @@ export default class Dialog extends LitElement {
 
     setTimeout(() => {
       this.overlayRef.value?.setAttribute('visible', '');
+      document.addEventListener('keyup', (ke: KeyboardEvent) => {
+        if (ke.key === 'Escape') this.close(e);
+      });
       this.isOpen = true;
     }, 0);
   };
 
   close = (e: Event) => {
-    e.preventDefault();
     if (!this.isOpen) return;
+    e.preventDefault();
 
     this.overlayRef.value?.removeAttribute('visible');
 
     setTimeout(() => {
       this.dialogRef.value?.removeAttribute('open');
+      document.removeEventListener('keyup', (ke: KeyboardEvent) => {
+        if (ke.key === 'Escape') this.close(e);
+      });
       this.isOpen = false;
     }, ANIMATION_DURATION_MS);
   };
