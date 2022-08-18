@@ -10,30 +10,43 @@ declare global {
 @customElement('kps-form')
 export default class Form extends LitElement {
   @property({ type: Boolean })
-    isHsForm = true;
+    hubspot = true;
 
-  @property({ type: String })
+  @property({ type: String, attribute: 'form-id' })
     formId = '';
 
-  @property({ type: String })
+  @property({ type: String, attribute: 'portal-id' })
     portalId = '';
+
+  @property({ type: String })
+    target = '';
 
   static styles = css`
 `;
 
-  firstUpdated() {
-    if (this.isHsForm && this.formId && this.portalId) {
+  private initHsFormScript() {
+    const script = document.createElement('script');
+    script.src = 'https://js.hsforms.net/forms/v2.js';
+    document.body.appendChild(script);
+
+    script.addEventListener('load', () => {
       window.hbspt.forms.create({
         portalId: this.portalId,
         formId: this.formId,
-        target: '.form-container',
+        target: this.target,
       });
+    });
+  }
+
+  firstUpdated() {
+    if (this.hubspot && this.formId && this.portalId) {
+      this.initHsFormScript();
     }
   }
 
   render() {
     return html`
-      <div class="form-container"></div>
+      <slot></slot>
     `;
   }
 }

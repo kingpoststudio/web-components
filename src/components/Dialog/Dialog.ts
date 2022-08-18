@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 
-const ANIMATION_DURATION_MS = 250;
+const ANIMATION_DURATION_MS = 200;
 
 @customElement('kps-dialog')
 export default class Dialog extends LitElement {
@@ -42,6 +42,8 @@ export default class Dialog extends LitElement {
   }
 
   #dialog .overlay .container {
+    display: flex;
+    flex-direction: column;
     min-width: 16rem;
     max-width: 90%;
     min-height: 16rem;
@@ -49,8 +51,6 @@ export default class Dialog extends LitElement {
     background: var(--color-white);
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
-    display: flex;
-    flex-direction: column;
     transform: scale(0.5);
     transition: transform ${ANIMATION_DURATION_MS}ms ease-in-out;
   }
@@ -63,7 +63,7 @@ export default class Dialog extends LitElement {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 0.5rem;
+    padding: var(--space-sm);
   }
 
   #dialog .overlay .container .header kps-icon {
@@ -78,7 +78,8 @@ export default class Dialog extends LitElement {
 
   #dialog .overlay .container .body {
     flex: 1;
-    padding: 0.5rem;
+    padding: var(--space-sm);
+    overflow: auto;
   }
 `;
 
