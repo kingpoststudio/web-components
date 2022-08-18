@@ -2,6 +2,8 @@ import { css, html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 
+const ANIMATION_DURATION_MS = 250;
+
 @customElement('kps-dialog')
 export default class Dialog extends LitElement {
   dialogRef = createRef<HTMLDialogElement>();
@@ -11,13 +13,52 @@ export default class Dialog extends LitElement {
   @state()
   private isOpen = false;
 
+  static styles = css`
+  #dialog {
+    display: none;
+  }
+
+  #dialog[open] {
+    display: block;
+  }
+
+  #dialog .overlay {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.5);
+    transition: opacity ${ANIMATION_DURATION_MS}ms ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 60;
+  }
+
+  #dialog .overlay[visible] {
+    opacity: 1;
+  }
+
+  #dialog > .container {
+    width: 12rem;
+    height: 12rem;
+    background: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
   disconnectedCallback() {
     super.disconnectedCallback();
   }
 
   open = (e: Event) => {
-    if (this.isOpen) return;
     e.preventDefault();
+    if (this.isOpen) return;
 
     this.dialogRef.value?.setAttribute('open', '');
 
@@ -27,51 +68,17 @@ export default class Dialog extends LitElement {
     }, 0);
   };
 
-  close = () => {
+  close = (e: Event) => {
+    e.preventDefault();
     if (!this.isOpen) return;
 
-    this.dialogRef.value?.removeAttribute('open');
-    this.isOpen = false;
+    this.overlayRef.value?.removeAttribute('visible');
+
+    setTimeout(() => {
+      this.dialogRef.value?.removeAttribute('open');
+      this.isOpen = false;
+    }, ANIMATION_DURATION_MS);
   };
-
-  static styles = css`
-    #dialog {
-      display: none;
-    }
-
-    #dialog[open] {
-      display: block;
-    }
-
-    #dialog .overlay {
-      width: 100vw;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      opacity: 0%;
-      background: rgba(0, 0, 0, 0.5);
-      transition: opacity 250ms ease-in-out;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 60;
-    }
-
-    #dialog[open] .overlay[visible] {
-      opacity: 1;
-    }
-
-    #dialog > .container {
-      width: 12rem;
-      height: 12rem;
-      background: #fff;
-      border-radius: 0.5rem;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
-      display: flex;
-      flex-direction: column;
-    }
-  `;
 
   get trigger() {
     return html`
@@ -84,7 +91,15 @@ export default class Dialog extends LitElement {
       <div id="dialog" ${ref(this.dialogRef)}>
         <div class="overlay" ${ref(this.overlayRef)}>
           <div class="container">
-            <slot name="content"></slot>
+            <div class="header">
+              <!-- Close Button -->
+              <kps-button @click="${this.close}">
+                Close
+              </kps-button>
+            </div>
+            <div class="body">
+              <slot name="content"></slot>
+            </div>
           </div>
         </div>
       </div>
