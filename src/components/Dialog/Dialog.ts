@@ -42,9 +42,11 @@ export default class Dialog extends LitElement {
   }
 
   #dialog .overlay .container {
-    width: 12rem;
-    height: 12rem;
-    background: #fff;
+    min-width: 12rem;
+    max-width: 90%;
+    min-height: 12rem;
+    max-height: 90%;
+    background: var(--color-white);
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
     display: flex;
@@ -55,6 +57,28 @@ export default class Dialog extends LitElement {
 
   #dialog .overlay[visible] .container {
     transform: scale(1);
+  }
+
+  #dialog .overlay .container .header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0.5rem;
+  }
+
+  #dialog .overlay .container .header kps-icon {
+    color: var(--color-gray-light);
+    cursor: pointer;
+    transition: color ${ANIMATION_DURATION_MS}ms ease-in-out;
+  }
+
+  #dialog .overlay .container .header kps-icon:hover {
+    color: var(--color-black);
+  }
+
+  #dialog .overlay .container .body {
+    flex: 1;
+    padding: 0.5rem;
   }
 `;
 
@@ -100,10 +124,7 @@ export default class Dialog extends LitElement {
         <div class="overlay" ${ref(this.overlayRef)}>
           <div class="container">
             <div class="header">
-              <!-- Close Button -->
-              <kps-button @click="${this.close}">
-                Close
-              </kps-button>
+              <kps-icon icon="cross" @click="${this.close}"></kps-icon>
             </div>
             <div class="body">
               <slot name="content"></slot>

@@ -1,17 +1,21 @@
 import { LitElement } from 'lit';
 
 export default class Dialog extends LitElement {
+  dialogRef: import('lit-html/directives/ref').Ref<HTMLDialogElement>;
+
+  overlayRef: import('lit-html/directives/ref').Ref<HTMLDivElement>;
+
+  private isOpen;
+
   static styles: import('lit').CSSResult;
 
-  isOpen: boolean;
+  open: (e: Event) => void;
 
-  open(): void;
+  close: (e: Event) => void;
 
-  close(): void;
+  get trigger(): import('lit-html').TemplateResult<1>;
 
-  onKeyup(e: KeyboardEvent): void;
-
-  onBackdropClick(e: MouseEvent): null;
+  get content(): import('lit-html').TemplateResult<1>;
 
   render(): import('lit-html').TemplateResult<1>;
 }

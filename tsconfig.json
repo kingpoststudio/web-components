@@ -10,6 +10,7 @@
     "emitDeclarationOnly": true,
     "downlevelIteration": true,
     "strict": true,
+    "target": "ES2020",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,

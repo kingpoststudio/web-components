@@ -3,6 +3,7 @@ import Card from './components/Card/Card';
 import Container from './components/Container/Container';
 import Dialog from './components/Dialog/Dialog';
 import Form from './components/Form/Form';
+import Icon from './components/Icon/Icon';
 import Link from './components/Link/Link';
 import Navigation from './components/Navigation/Navigation';
 
@@ -16,6 +17,7 @@ const lib = {
   Container,
   Dialog,
   Form,
+  Icon,
   Link,
   Navigation,
 
