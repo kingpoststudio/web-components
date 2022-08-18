@@ -41,7 +41,7 @@ export default class Dialog extends LitElement {
     opacity: 1;
   }
 
-  #dialog > .container {
+  #dialog .overlay .container {
     width: 12rem;
     height: 12rem;
     background: #fff;
@@ -49,6 +49,12 @@ export default class Dialog extends LitElement {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
+    transform: scale(0.5);
+    transition: transform ${ANIMATION_DURATION_MS}ms ease-in-out;
+  }
+
+  #dialog .overlay[visible] .container {
+    transform: scale(1);
   }
 `;
 
