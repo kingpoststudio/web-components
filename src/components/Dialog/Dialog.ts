@@ -42,9 +42,9 @@ export default class Dialog extends LitElement {
   }
 
   #dialog .overlay .container {
-    min-width: 12rem;
+    min-width: 16rem;
     max-width: 90%;
-    min-height: 12rem;
+    min-height: 16rem;
     max-height: 90%;
     background: var(--color-white);
     border-radius: 0.5rem;
