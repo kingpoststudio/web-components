@@ -1,7 +1,7 @@
 import { html } from 'lit';
-import './Dialog';
 import '../../styles/main.css';
 import '../../styles/fonts.css';
+import '../../index';
 
 export default {
   title: 'Dialog',
@@ -11,7 +11,9 @@ export default {
 export const Dialog = () => html`
   <div>
     <kps-dialog>
-      <span slot="trigger">Open Dialog</span>
+      <kps-button slot="trigger">
+        Open Dialog
+      </kps-button>
       <span slot="content">Dialog Content</span>
     </kps-dialog>
   </div>

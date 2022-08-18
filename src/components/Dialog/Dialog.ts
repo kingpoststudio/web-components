@@ -1,5 +1,5 @@
 import { css, html, LitElement } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 
 const ANIMATION_DURATION_MS = 200;
@@ -10,26 +10,32 @@ export default class Dialog extends LitElement {
 
   overlayRef = createRef<HTMLDivElement>();
 
+  @property({ type: String })
+  private variant: 'modal' | 'dropdown' = 'modal';
+
   @state()
   private isOpen = false;
 
   static styles = css`
-  #dialog {
+  dialog {
     display: none;
+    padding: 0;
+    background: none;
+    border: none;
   }
 
-  #dialog[open] {
+  dialog[open] {
     display: block;
   }
 
-  #dialog .overlay {
+  dialog .overlay {
     width: 100vw;
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.25);
     transition: opacity ${ANIMATION_DURATION_MS}ms ease-in-out;
     display: flex;
     justify-content: center;
@@ -37,11 +43,11 @@ export default class Dialog extends LitElement {
     z-index: 60;
   }
 
-  #dialog .overlay[visible] {
+  dialog .overlay[visible] {
     opacity: 1;
   }
 
-  #dialog .overlay .container {
+  dialog .overlay .container {
     display: flex;
     flex-direction: column;
     min-width: 16rem;
@@ -55,28 +61,28 @@ export default class Dialog extends LitElement {
     transition: transform ${ANIMATION_DURATION_MS}ms ease-in-out;
   }
 
-  #dialog .overlay[visible] .container {
+  dialog .overlay[visible] .container {
     transform: scale(1);
   }
 
-  #dialog .overlay .container .header {
+  dialog .overlay .container .header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: var(--space-sm);
   }
 
-  #dialog .overlay .container .header kps-icon {
+  dialog .overlay .container .header kps-icon {
     color: var(--color-gray-light);
     cursor: pointer;
     transition: color ${ANIMATION_DURATION_MS}ms ease-in-out;
   }
 
-  #dialog .overlay .container .header kps-icon:hover {
+  dialog .overlay .container .header kps-icon:hover {
     color: var(--color-black);
   }
 
-  #dialog .overlay .container .body {
+  dialog .overlay .container .body {
     flex: 1;
     padding: var(--space-sm);
     overflow: auto;
@@ -123,7 +129,7 @@ export default class Dialog extends LitElement {
 
   get content() {
     return html`
-      <div id="dialog" ${ref(this.dialogRef)}>
+      <dialog ${ref(this.dialogRef)} variant="${this.variant}">
         <div class="overlay" ${ref(this.overlayRef)}>
           <div class="container">
             <div class="header">
@@ -134,7 +140,7 @@ export default class Dialog extends LitElement {
             </div>
           </div>
         </div>
-      </div>
+      </dialog>
     `;
   }
 
