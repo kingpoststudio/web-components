@@ -40,8 +40,8 @@ export default class Dialog extends LitElement {
   }
 
   .trigger[variant=dropdown].triggered:after {
-    height: calc(100% + 31px);
-    max-height: calc(100% + 31px);
+    height: calc(100% + 2.08rem);
+    max-height: calc(100% + 2.08rem);
     opacity: 1;
   }
 
@@ -147,7 +147,7 @@ export default class Dialog extends LitElement {
   }
   
   dialog[variant=dropdown][open] {
-    top: calc(100% + 31px);
+    top: calc(100% + 2.08rem);
   }
 
   dialog[variant=dropdown] .overlay {
@@ -161,7 +161,7 @@ export default class Dialog extends LitElement {
     position: absolute;
     top: 0;
     left: 100%;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     opacity: 0;
     background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
@@ -222,7 +222,9 @@ export default class Dialog extends LitElement {
         <div class="overlay" ${ref(this.overlayRef)}>
           <div class="container">
             <div class="header">
-              <slot name="title"></slot>
+              <div class="title">
+                <slot name="title"></slot>
+              </div>
               <kps-icon icon="cross" @click="${this.close}"></kps-icon>
             </div>
             <div class="body">

@@ -34,6 +34,7 @@ export default class Form extends LitElement {
         portalId: this.portalId,
         formId: this.formId,
         target: this.target,
+        cssClass: 'kps-form',
       });
     });
   }
