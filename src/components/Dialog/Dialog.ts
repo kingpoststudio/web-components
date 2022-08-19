@@ -31,16 +31,17 @@ export default class Dialog extends LitElement {
     top: 0;
     left: 0;
     width: 100%;
-    height: 0;
+    max-height: calc(100% + 15px);
     opacity: 0;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     background: var(--color-secondary-darkest);
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
+    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type), max-height ${ANIMATION_DURATION_MS}ms var(--ease-type);
   }
 
   .trigger[variant=dropdown].triggered:after {
     height: calc(100% + 31px);
+    max-height: calc(100% + 31px);
     opacity: 1;
   }
 
