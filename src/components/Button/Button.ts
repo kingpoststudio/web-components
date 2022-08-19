@@ -5,7 +5,7 @@ import './Button.css';
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' = 'primary';
+    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
 
   @property({ type: String })
     variant: 'fill' | 'outline' = 'fill';
@@ -29,7 +29,6 @@ export default class Button extends LitElement {
     .wrap {
       display: inline-flex;
       position: relative;
-      margin: 0.25rem;
       z-index: 1;
     }
 
@@ -49,45 +48,49 @@ export default class Button extends LitElement {
       background: var(--color-primary-dark);
     }
 
-    .wrap[color="secondary"] > a {
+    .wrap[color=secondary] > a {
       color: var(--color-font);
       background: var(--color-secondary);
     }
 
-    .wrap[color="secondary"] > a:hover {
+    .wrap[color=secondary] > a:hover {
       background: var(--color-secondary-dark);
     }
 
-    .wrap[color="success"] > a {
+    .wrap[color=transparent] > a {
+      background: var(--color-transparent);
+    }
+
+    .wrap[color=success] > a {
       background: var(--color-success);
     }
 
-    .wrap[color="success"] > a:hover {
+    .wrap[color=success] > a:hover {
       background: var(--color-success-dark);
     }
 
-    .wrap[color="warning"] > a {
+    .wrap[color=warning] > a {
       background: var(--color-warning);
     }
 
-    .wrap[color="warning"] > a:hover {
+    .wrap[color=warning] > a:hover {
       background: var(--color-warning-dark);
     }
 
-    .wrap[color="error"] > a {
+    .wrap[color=error] > a {
       background: var(--color-error);
     }
 
-    .wrap[color="error"] > a:hover {
+    .wrap[color=error] > a:hover {
       background: var(--color-error-dark);
     }
 
-    .wrap[variant="outline"] > a {
+    .wrap[variant=outline] > a {
       border: 1px solid var(--color-white);
       background: transparent;
     }
 
-    .wrap[variant="outline"] > a:hover {
+    .wrap[variant=outline] > a:hover {
       background: var(--color-primary);
       border-color: var(--color-primary);
     }

@@ -21,10 +21,34 @@ export default class Dialog extends LitElement {
 
   static styles = css`
   .trigger {
+    position: relative;
     display: inline-block;
   }
 
+  .trigger[variant=dropdown]:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4.5rem;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    opacity: 0;
+    background: var(--color-secondary-darkest);
+    transition: opacity var(--ease-time) var(--ease-type);
+  }
+
+  .trigger[variant=dropdown].triggered:after {
+    opacity: 1;
+  }
+
+  .content {
+    position: relative;
+  }
+
   dialog {
+    position: relative;
     display: none;
     padding: 0;
     background: none;
@@ -38,14 +62,14 @@ export default class Dialog extends LitElement {
   dialog .overlay {
     z-index: 60;
     opacity: 0;
-    transition: opacity ${ANIMATION_DURATION_MS}ms ease-in-out;
+    transition: opacity var(--ease-time) var(--ease-type);
   }
 
   dialog .overlay[visible] {
     opacity: 1;
   }
 
-  dialog[variant='modal'] .overlay {
+  dialog[variant=modal] .overlay {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -53,13 +77,13 @@ export default class Dialog extends LitElement {
     left: 0;
     opacity: 0;
     background: rgba(0, 0, 0, 0.25);
-    transition: opacity ${ANIMATION_DURATION_MS}ms ease-in-out;
+    transition: opacity var(--ease-time) var(--ease-type);
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  dialog[theme="dark"] .overlay {
+  dialog[theme=dark] .overlay {
     background: var(--color-black);
     color: var(--color-white);
   }
@@ -69,7 +93,7 @@ export default class Dialog extends LitElement {
     flex-direction: column;
   }
 
-  dialog[variant='modal'] .container {
+  dialog[variant=modal] .container {
     min-width: 16rem;
     max-width: 90%;
     min-height: 16rem;
@@ -78,10 +102,10 @@ export default class Dialog extends LitElement {
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
     transform: scale(0.5);
-    transition: transform ${ANIMATION_DURATION_MS}ms ease-in-out;
+    transition: transform var(--ease-time) var(--ease-type);
   }
 
-  dialog[variant='modal'] .overlay[visible] .container {
+  dialog[variant=modal] .overlay[visible] .container {
     transform: scale(1);
   }
 
@@ -108,20 +132,43 @@ export default class Dialog extends LitElement {
     overflow: auto;
   }
 
-  dialog[variant="dropdown"] {
+  dialog[variant=dropdown] {
     left: auto;
     right: auto;
+    min-width: 36rem;
   }
 
-  dialog[variant="dropdown"][open] {
-    display: inline;
-    position: relative;
-    left: 0.25rem;
-    top: -0.75rem;
+  dialog[variant=dropdown][open] {
+    position: absolute;
+    top: 2rem;
+    right: 0;
+    display: flex;
+    width: 100%;
   }
 
-  dialog[variant="dropdown"] .container {
+  dialog[variant=dropdown] .overlay:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
+    transition: opacity var(--ease-time) var(--ease-type);
+  }
+
+  dialog[variant=dropdown][open] .overlay:after {
+    opacity: 1;
+  }
+
+  dialog[variant=dropdown][open] .overlay {
+    width: 100%;
+  }
+
+  dialog[variant=dropdown] .container {
     padding: var(--space-sm);
+    background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
   }
 `;
 
@@ -145,21 +192,21 @@ export default class Dialog extends LitElement {
     e.preventDefault();
 
     this.overlayRef.value?.removeAttribute('visible');
+    this.isOpen = false;
 
     setTimeout(() => {
       this.dialogRef.value?.removeAttribute('open');
       document.removeEventListener('keyup', (ke: KeyboardEvent) => {
         if (ke.key === 'Escape') this.close(e);
       });
-      this.isOpen = false;
     }, ANIMATION_DURATION_MS);
   };
 
   get trigger() {
     return html`
-      <div @click="${this.open}">
+      <kps-button color="${this.isOpen ? 'transparent' : 'primary'}" uppercase @click="${this.open}">
         <slot name="trigger"></slot>
-      </div>
+      </kps-button>
     `;
   }
 
@@ -183,7 +230,7 @@ export default class Dialog extends LitElement {
 
   render() {
     return html`
-      <div class="trigger">${this.trigger}</div>
+      <div class="trigger${this.isOpen ? ' triggered' : ''}" variant="${this.variant}">${this.trigger}</div>
       <div class="content">${this.content}</div>
     `;
   }
