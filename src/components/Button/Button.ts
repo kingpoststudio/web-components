@@ -5,29 +5,36 @@ import './Button.css';
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
+  private color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
 
   @property({ type: String })
-    variant: 'fill' | 'outline' = 'fill';
+  private theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest' = 'base';
 
   @property({ type: String })
-    href = '';
+  private variant: 'fill' | 'outline' = 'fill';
 
   @property({ type: String })
-    target = '_self';
+  private href = '';
+
+  @property({ type: String })
+  private target = '_self';
 
   @property({ type: Boolean })
-    cta = false;
+  private cta = false;
 
   @property({ type: Boolean })
-    round = false;
+  private round = false;
 
   @property({ type: Boolean })
-    uppercase = false;
+  private uppercase = false;
 
   static styles = css`
-    .wrap {
+    :host {
       display: inline-flex;
+    }
+
+    .wrap {
+      display: flex;
       position: relative;
       z-index: 1;
     }
@@ -45,7 +52,7 @@ export default class Button extends LitElement {
     }
 
     .wrap > a:hover {
-      background: var(--color-primary-dark);
+      background: var(--color-secondary-darkest);
     }
 
     .wrap[color=secondary] > a {
@@ -53,8 +60,21 @@ export default class Button extends LitElement {
       background: var(--color-secondary);
     }
 
-    .wrap[color=secondary] > a:hover {
+    .wrap[color=secondary][theme=dark] > a {
       background: var(--color-secondary-dark);
+    }
+
+    .wrap[color=secondary][theme=darker] > a {
+      background: var(--color-secondary-darker);
+    }
+
+    .wrap[color=secondary][theme=darkest] > a {
+      color: var(--color-white);
+      background: var(--color-secondary-darkest);
+    }
+
+    .wrap[color=secondary] > a:hover {
+      background: var(--color-secondary-darkest);
     }
 
     .wrap[color=transparent] > a {
@@ -130,6 +150,7 @@ export default class Button extends LitElement {
       <div class="wrap"
         variant=${this.variant}
         color=${this.color}
+        theme=${this.theme}
         round=${this.round}
         uppercase=${this.uppercase}
       >

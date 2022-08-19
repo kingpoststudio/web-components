@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 
-const ANIMATION_DURATION_MS = 200;
+const ANIMATION_DURATION_MS = 150;
 
 @customElement('kps-dialog')
 export default class Dialog extends LitElement {
@@ -31,7 +31,7 @@ export default class Dialog extends LitElement {
     top: 0;
     left: 0;
     width: 100%;
-    height: 4.5rem;
+    height: calc(100% + 31px);
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     opacity: 0;
@@ -62,7 +62,7 @@ export default class Dialog extends LitElement {
   dialog .overlay {
     z-index: 60;
     opacity: 0;
-    transition: opacity var(--ease-time) var(--ease-type);
+    transition: opacity 150ms var(--ease-type);
   }
 
   dialog .overlay[visible] {
@@ -133,17 +133,18 @@ export default class Dialog extends LitElement {
   }
 
   dialog[variant=dropdown] {
-    left: auto;
-    right: auto;
-    min-width: 36rem;
-  }
-
-  dialog[variant=dropdown][open] {
     position: absolute;
-    top: 2rem;
-    right: 0;
+    top: calc(100% + 31px);
+    right: -50vw;
+    left: auto;
     display: flex;
+    min-width: 36rem;
     width: 100%;
+    transition: right 300ms cubic-bezier(0.5, 1.125, 1, 1);
+  }
+  
+  dialog[variant=dropdown][open] {
+    right: 0;
   }
 
   dialog[variant=dropdown] .overlay:after {
@@ -155,7 +156,7 @@ export default class Dialog extends LitElement {
     height: 100%;
     opacity: 0;
     background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
-    transition: opacity var(--ease-time) var(--ease-type);
+    transition: opacity 150ms var(--ease-type);
   }
 
   dialog[variant=dropdown][open] .overlay:after {
@@ -204,7 +205,7 @@ export default class Dialog extends LitElement {
 
   get trigger() {
     return html`
-      <kps-button color="${this.isOpen ? 'transparent' : 'primary'}" uppercase @click="${this.open}">
+      <kps-button color="${this.isOpen ? 'secondary' : 'primary'}" theme="${this.isOpen ? 'darkest' : 'base'}" uppercase @click="${this.open}">
         <slot name="trigger"></slot>
       </kps-button>
     `;
