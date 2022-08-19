@@ -35,6 +35,16 @@ export default class Dialog extends LitElement {
     display: block;
   }
 
+  dialog .overlay {
+    z-index: 60;
+    opacity: 0;
+    transition: opacity ${ANIMATION_DURATION_MS}ms ease-in-out;
+  }
+
+  dialog .overlay[visible] {
+    opacity: 1;
+  }
+
   dialog[variant='modal'] .overlay {
     width: 100vw;
     height: 100vh;
@@ -47,11 +57,6 @@ export default class Dialog extends LitElement {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 60;
-  }
-
-  dialog[variant='modal'] .overlay[visible] {
-    opacity: 1;
   }
 
   dialog[theme="dark"] .overlay {
@@ -112,7 +117,7 @@ export default class Dialog extends LitElement {
     display: inline;
     position: relative;
     left: 0.25rem;
-    top: -0.25rem;
+    top: -0.75rem;
   }
 
   dialog[variant="dropdown"] .container {
