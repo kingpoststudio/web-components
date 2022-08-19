@@ -31,17 +31,15 @@ export default class Dialog extends LitElement {
     top: 0;
     left: 0;
     width: 100%;
-    max-height: calc(100% + 15px);
+    height: calc(100% + 2.08rem);
     opacity: 0;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     background: var(--color-secondary-darkest);
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type), max-height ${ANIMATION_DURATION_MS}ms var(--ease-type);
+    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
   }
 
   .trigger[variant=dropdown].triggered:after {
-    height: calc(100% + 2.08rem);
-    max-height: calc(100% + 2.08rem);
     opacity: 1;
   }
 
@@ -136,7 +134,7 @@ export default class Dialog extends LitElement {
 
   dialog[variant=dropdown] {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 1.08rem);
     right: 0;
     left: auto;
     display: flex;
