@@ -2,7 +2,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 
-const ANIMATION_DURATION_MS = 150;
+const ANIMATION_DURATION_MS = 200;
 
 @customElement('kps-dialog')
 export default class Dialog extends LitElement {
@@ -36,7 +36,7 @@ export default class Dialog extends LitElement {
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
     background: var(--color-secondary-darkest);
-    transition: opacity var(--ease-time) var(--ease-type);
+    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
   }
 
   .trigger[variant=dropdown].triggered:after {
@@ -63,7 +63,7 @@ export default class Dialog extends LitElement {
   dialog .overlay {
     z-index: 60;
     opacity: 0;
-    transition: opacity 150ms var(--ease-type);
+    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
   }
 
   dialog .overlay[visible] {
@@ -78,7 +78,7 @@ export default class Dialog extends LitElement {
     left: 0;
     opacity: 0;
     background: rgba(0, 0, 0, 0.25);
-    transition: opacity var(--ease-time) var(--ease-type);
+    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,7 +103,7 @@ export default class Dialog extends LitElement {
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
     transform: scale(0.5);
-    transition: transform var(--ease-time) var(--ease-type);
+    transition: transform ${ANIMATION_DURATION_MS}ms var(--ease-type);
   }
 
   dialog[variant=modal] .overlay[visible] .container {
@@ -135,17 +135,24 @@ export default class Dialog extends LitElement {
 
   dialog[variant=dropdown] {
     position: absolute;
-    top: calc(100% + 31px);
-    right: -50vw;
+    top: 100%;
+    right: 0;
     left: auto;
     display: flex;
     min-width: 36rem;
     width: 100%;
-    transition: right 300ms var(--ease-type);
+    border-bottom-left-radius: 0.5rem;
+    transition: top 300ms var(--ease-type);
   }
   
   dialog[variant=dropdown][open] {
-    right: 0;
+    top: calc(100% + 31px);
+  }
+
+  dialog[variant=dropdown] .overlay {
+    width: 100%;
+    border-bottom-left-radius: 1rem;
+    overflow: hidden;
   }
 
   dialog[variant=dropdown] .overlay:after {
@@ -162,10 +169,6 @@ export default class Dialog extends LitElement {
 
   dialog[variant=dropdown][open] .overlay:after {
     opacity: 1;
-  }
-
-  dialog[variant=dropdown][open] .overlay {
-    width: 100%;
   }
 
   dialog[variant=dropdown] .container {
