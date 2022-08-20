@@ -2,19 +2,21 @@ import { LitElement } from 'lit';
 import './Button.css';
 
 export default class Button extends LitElement {
-  color: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+  private color;
 
-  variant: 'fill' | 'outline';
+  private theme;
 
-  href: string;
+  private variant;
 
-  target: string;
+  private href;
 
-  cta: boolean;
+  private target;
 
-  round: boolean;
+  private cta;
 
-  uppercase: boolean;
+  private round;
+
+  private uppercase;
 
   static styles: import('lit').CSSResult;
 

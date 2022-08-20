@@ -6,13 +6,17 @@ declare global {
     }
 }
 export default class Form extends LitElement {
-  isHsForm: boolean;
+  hubspot: boolean;
 
   formId: string;
 
   portalId: string;
 
+  target: string;
+
   static styles: import('lit').CSSResult;
+
+  private initHsFormScript;
 
   firstUpdated(): void;
 

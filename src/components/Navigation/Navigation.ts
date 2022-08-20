@@ -41,7 +41,7 @@ export default class Navigation extends LitElement {
         <nav>
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
           <slot name="main-menu"></slot>
-          <slot name="main-cta"></slot>
+          <slot name="cta"></slot>
         </nav>
       </kps-container>
     `;
