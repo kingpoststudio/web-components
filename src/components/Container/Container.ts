@@ -22,42 +22,42 @@ export default class Container extends LitElement {
     padding-bottom: var(--space);
   }
 
-  :host([padding-x="md"]) {
+  :host([padding-x=md]) {
     padding-left: var(--space-md);
     padding-right: var(--space-md);
   }
 
-  :host([padding-y="md"]) {
+  :host([padding-y=md]) {
     padding-top: var(--space-md);
     padding-bottom: var(--space-md);
   }
 
-  :host([padding-x="lg"]) {
+  :host([padding-x=lg]) {
     padding-left: var(--space-lg);
     padding-right: var(--space-lg);
   }
 
-  :host([padding-y="lg"]) {
+  :host([padding-y=lg]) {
     padding-top: var(--space-lg);
     padding-bottom: var(--space-lg);
   }
 
-  :host([padding-x="xl"]) {
+  :host([padding-x=xl]) {
     padding-left: var(--space-xl);
     padding-right: var(--space-xl);
   }
 
-  :host([padding-y="xl"]) {
+  :host([padding-y=xl]) {
     padding-top: var(--space-xl);
     padding-bottom: var(--space-xl);
   }
 
-  :host([padding-x="2xl"]) {
+  :host([padding-x=2xl]) {
     padding-left: var(--space-2xl);
     padding-right: var(--space-2xl);
   }
 
-  :host([padding-y="2xl"]) {
+  :host([padding-y=2xl]) {
     padding-top: var(--space-2xl);
     padding-bottom: var(--space-2xl);
   }

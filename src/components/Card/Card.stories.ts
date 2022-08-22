@@ -9,9 +9,11 @@ export default {
 };
 
 export const Card = () => html`
-  <div>
-    <kps-card>
-
-    </kps-card>
-  </div>
+  <kps-container>
+    <kps-grid flex cols="2">
+      <kps-card></kps-card>
+      <kps-card></kps-card>
+      <kps-card></kps-card>
+    </kps-grid>
+  </kps-container>
 `;
