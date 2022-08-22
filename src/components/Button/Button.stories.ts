@@ -8,7 +8,7 @@ export default {
 };
 
 export const Colors = () => html`
-  <kps-button-group direction="row">
+  <kps-button-group direction="column">
     <kps-button color="primary">Primary</kps-button>
     <kps-button color="secondary">Secondary</kps-button>
     <kps-button color="success">Success</kps-button>
