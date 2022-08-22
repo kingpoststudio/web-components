@@ -30,6 +30,12 @@ const styles = css`
     object-fit: cover;
   }
 
+  .wrap > .extra {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
   @media (min-width: 768px) {
     .wrap > .image > img.bg {
       width: 100%;
@@ -111,11 +117,15 @@ class HeroBanner extends LitElement {
           <div class="subtitle"><slot name="subtitle"></slot></div>
           <div class="tagline"><slot name="tagline"></slot></div>
 
-          <div class="ctas">
+          <kps-button-group class="ctas">
             <slot name="primary-cta"></slot>
             <slot name="secondary-cta"></slot>
-          </div>
+          </kps-button-group>
         </kps-container>
+
+        <div class="extra">
+          <slot name="extra"></slot>
+        </div>
       </div>
     `;
   }

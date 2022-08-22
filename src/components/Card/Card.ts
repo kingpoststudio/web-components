@@ -9,6 +9,9 @@ export default class Card extends LitElement {
   @property({ type: String })
     color: 'primary' | 'secondary' = 'primary';
 
+  @property({ type: String })
+    theme: 'light' | 'dark' = 'light';
+
   @property({ type: Boolean })
     round = false;
 
@@ -22,14 +25,14 @@ export default class Card extends LitElement {
     link = { label: 'Read more', href: '#', target: '_blank' };
 
   @property({ type: Object })
-    img = { src: 'https://picsum.photos/id/1053/390/200', alt: 'Card image' };
+    img = { src: '', alt: '' };
 
   static styles = css`
     .wrap {
       display: block;
     }
 
-    .wrap[round] {
+    .wrap[round=true] {
       border-radius: 0.5rem;
     }
 
@@ -43,12 +46,22 @@ export default class Card extends LitElement {
       padding: 1rem 0;
     }
 
-    .wrap[color=primary] > .content {
+    .wrap[color=primary] {
       color: var(--color-primary-darker);
     }
 
-    .wrap[color=secondary] > .content {
+    .wrap[color=primary][theme=dark] {
+      color: var(--color-white);
+      background: var(--color-primary-darkest);
+    }
+
+    .wrap[color=secondary] {
       color: var(--color-secondary-darker);
+    }
+
+    .wrap[color=secondary][theme=dark] {
+      color: var(--color-white);
+      background: var(--color-secondary-darkest);
     }
 
     .wrap > .content > * {
@@ -59,14 +72,14 @@ export default class Card extends LitElement {
       margin-bottom: 0;
     }
 
-    .wrap > .content > .title > ::slotted(h3) {
+    .wrap > .content > .title > ::slotted(*) {
       font-family: var(--font-heading);
       font-size: var(--font-size-2xl);
       font-weight: var(--font-weight-semibold);
       margin-top: 0;
     }
 
-    .wrap > .content > .description > ::slotted(p) {
+    .wrap > .content > .description > ::slotted(*) {
       line-height: 1.5;
     }
 
@@ -97,7 +110,55 @@ export default class Card extends LitElement {
     .wrap > .content > a:hover::after {
       width: 100%;
     }
+
+    .wrap[variant=quote] > .content {
+      padding: 1.5rem 2rem;
+      max-width: 20rem;
+    }
+
+    .wrap[variant=quote] > .content > .quote {
+      margin: 0;
+    }
+
+    .wrap[variant=quote] > .content > .quote > ::slotted(*) {
+      margin: 0;
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-normal);
+      font-style: italic;
+    }
+
+    .wrap[variant=quote] > .content > .author {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0.5rem 0 0;
+    }
+
+    .wrap[variant=quote] > .content > .author > ::slotted(*) {
+      margin: 0;
+      font-size: var(--font-size);
+      font-weight: var(--font-weight-normal);
+    }
   `;
+
+  get baseContent() {
+    return html`
+      ${this.img.src && html`<img src=${this.img.src} alt=${this.img.alt} />`}
+      <div class="content">
+        <div class="title"><slot name="title">${this.title}</slot></div>
+        <div class="description"><slot name="description">${this.description}</slot></div>
+        ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : html`<slot name="link"></slot>`}
+      </div>
+    `;
+  }
+
+  get quoteContent() {
+    return html`
+      <div class="content">
+        <div class="quote"><slot name="quote">${this.title}</slot></div>
+        <div class="author"><slot name="author">– ${this.description}</slot></div>
+      </div>
+    `;
+  }
 
   render() {
     return html`
@@ -105,13 +166,10 @@ export default class Card extends LitElement {
         variant=${this.variant}
         round=${this.round}
         color=${this.color}
+        theme=${this.theme}
       >
-        <img src=${this.img.src} alt=${this.img.alt} />
-        <div class="content">
-          <div class="title"><slot name="title">${this.title}</slot></div>
-          <div class="description"><slot name="description">${this.description}</slot></div>
-          ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : html`<slot name="link"></slot>`}
-        </div>
+        ${this.variant === 'base' ? this.baseContent : null}
+        ${this.variant === 'quote' ? this.quoteContent : null}
       </div>
     `;
   }

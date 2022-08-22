@@ -137,10 +137,14 @@ export default class Dialog extends LitElement {
     top: calc(100% + 2.08rem);
     right: 0;
     left: auto;
-    display: flex;
+    display: none;
     min-width: 36rem;
     width: 100%;
     border-bottom-left-radius: 0.5rem;
+  }
+
+  dialog[variant=dropdown][open] {
+    display: flex;
   }
 
   dialog[variant=dropdown] .overlay {
