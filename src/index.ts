@@ -1,4 +1,5 @@
 import Button from './components/Button/Button';
+import ButtonGroup from './components/ButtonGroup/ButtonGroup';
 import Card from './components/Card/Card';
 import Container from './components/Container/Container';
 import Dialog from './components/Dialog/Dialog';
@@ -13,6 +14,7 @@ import './styles/main.css';
 
 const lib = {
   Button,
+  ButtonGroup,
   Card,
   Container,
   Dialog,

@@ -4,10 +4,10 @@ import { customElement, property } from 'lit/decorators.js';
 @customElement('kps-card')
 export default class Card extends LitElement {
   @property({ type: String })
-    variant: 'default' | 'quote' = 'default';
+    variant: 'base' | 'article' | 'quote' = 'base';
 
   @property({ type: String })
-    theme: 'primary' | 'secondary' = 'primary';
+    color: 'primary' | 'secondary' = 'primary';
 
   @property({ type: Boolean })
     round = false;
@@ -26,7 +26,7 @@ export default class Card extends LitElement {
 
   static styles = css`
     .wrap {
-      display: block; 
+      display: block;
     }
 
     .wrap[round] {
@@ -43,11 +43,11 @@ export default class Card extends LitElement {
       padding: 1rem 0;
     }
 
-    .wrap[theme="primary"] > .content {
+    .wrap[color=primary] > .content {
       color: var(--color-primary-darker);
     }
 
-    .wrap[theme="secondary"] > .content {
+    .wrap[color=secondary] > .content {
       color: var(--color-secondary-darker);
     }
 
@@ -104,7 +104,7 @@ export default class Card extends LitElement {
       <div class="wrap"
         variant=${this.variant}
         round=${this.round}
-        theme=${this.theme}
+        color=${this.color}
       >
         <img src=${this.img.src} alt=${this.img.alt} />
         <div class="content">
