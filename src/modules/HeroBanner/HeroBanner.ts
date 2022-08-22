@@ -8,12 +8,7 @@ const styles = css`
     align-items: center;
     width: 100%;
     height: auto;
-    min-height: 45rem;
     background: transparent;
-  }
-
-  .wrap[condensed=true] {
-    min-height: 32rem;
   }
 
   .wrap > .image {
@@ -30,12 +25,6 @@ const styles = css`
     object-fit: cover;
   }
 
-  .wrap > .extra {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-
   @media (min-width: 768px) {
     .wrap > .image > img.bg {
       width: 100%;
@@ -44,10 +33,16 @@ const styles = css`
     }
   }
 
+  .wrap[condensed=true] kps-container {
+    min-height: 32rem;
+  }
+
   kps-container {
     position: relative;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    min-height: 45rem;
   }
 
   kps-container > * {
@@ -85,6 +80,13 @@ const styles = css`
     margin-top: var(--space-xl);
   }
 
+  kps-container > .extra {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+  }
+
+
   kps-container img.logo {
     width: 14rem;
     margin-bottom: 3rem;
@@ -107,9 +109,9 @@ class HeroBanner extends LitElement {
   render() {
     return html`
       <div class="wrap" condensed="${this.condensed}">
-      <div class="image">
-        <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
-      </div>
+        <div class="image">
+          <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
+        </div>
 
         <kps-container padding-x="lg">
           ${this.logoImg.src && html`<img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />`}
@@ -121,11 +123,11 @@ class HeroBanner extends LitElement {
             <slot name="primary-cta"></slot>
             <slot name="secondary-cta"></slot>
           </kps-button-group>
-        </kps-container>
 
-        <div class="extra">
-          <slot name="extra"></slot>
-        </div>
+          <div class="extra">
+            <slot name="extra"></slot>
+          </div>
+        </kps-container>
       </div>
     `;
   }

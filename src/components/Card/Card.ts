@@ -113,14 +113,14 @@ export default class Card extends LitElement {
 
     .wrap[variant=quote] > .content {
       padding: 1.5rem 2rem;
-      max-width: 20rem;
+      max-width: 16rem;
     }
 
     .wrap[variant=quote] > .content > .quote {
       margin: 0;
     }
 
-    .wrap[variant=quote] > .content > .quote > ::slotted(*) {
+    .wrap[variant=quote] > .content > .quote ::slotted(*) {
       margin: 0;
       font-size: var(--font-size-lg);
       font-weight: var(--font-weight-normal);
@@ -130,10 +130,10 @@ export default class Card extends LitElement {
     .wrap[variant=quote] > .content > .author {
       display: flex;
       justify-content: flex-end;
-      margin: 0.5rem 0 0;
+      margin: 1.5rem 0 0;
     }
 
-    .wrap[variant=quote] > .content > .author > ::slotted(*) {
+    .wrap[variant=quote] > .content > .author ::slotted(*) {
       margin: 0;
       font-size: var(--font-size);
       font-weight: var(--font-weight-normal);
@@ -144,8 +144,8 @@ export default class Card extends LitElement {
     return html`
       ${this.img.src && html`<img src=${this.img.src} alt=${this.img.alt} />`}
       <div class="content">
-        <div class="title"><slot name="title">${this.title}</slot></div>
-        <div class="description"><slot name="description">${this.description}</slot></div>
+        <div class="title"><slot name="title"></slot></div>
+        <div class="description"><slot name="description"></slot></div>
         ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : html`<slot name="link"></slot>`}
       </div>
     `;
@@ -154,8 +154,8 @@ export default class Card extends LitElement {
   get quoteContent() {
     return html`
       <div class="content">
-        <div class="quote"><slot name="quote">${this.title}</slot></div>
-        <div class="author"><slot name="author">– ${this.description}</slot></div>
+        <div class="quote"><slot name="quote"></slot></div>
+        <div class="author"><slot name="author"></slot></div>
       </div>
     `;
   }
