@@ -5,28 +5,28 @@ import './Button.css';
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-  private color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
+    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
 
   @property({ type: String })
-  private theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest' = 'base';
+    theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest' = 'base';
 
   @property({ type: String })
-  private variant: 'fill' | 'outline' = 'fill';
+    variant: 'fill' | 'outline' = 'fill';
 
   @property({ type: String })
-  private href = '';
+    href = '';
 
   @property({ type: String })
-  private target = '_self';
+    target = '_self';
 
   @property({ type: Boolean })
-  private cta = false;
+    cta = false;
 
   @property({ type: Boolean })
-  private round = false;
+    round = false;
 
   @property({ type: Boolean })
-  private uppercase = false;
+    uppercase = false;
 
   static styles = css`
     :host {
