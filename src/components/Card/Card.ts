@@ -142,7 +142,7 @@ export default class Card extends LitElement {
 
   get baseContent() {
     return html`
-      ${this.img.src && html`<img src=${this.img.src} alt=${this.img.alt} />`}
+      <div class="img"><slot name="img"></slot></div>
       <div class="content">
         <div class="title"><slot name="title"></slot></div>
         <div class="description"><slot name="description"></slot></div>

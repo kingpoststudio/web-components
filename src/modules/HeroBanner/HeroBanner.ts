@@ -26,10 +26,8 @@ const styles = css`
     object-position: center bottom;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1536px) {
     .wrap > .image > img.bg {
-      width: 100%;
-      height: 100%;
       object-fit: contain;
     }
   }
