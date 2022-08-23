@@ -32,6 +32,10 @@ const styles = css`
     }
   }
 
+  .wrap[contained=true] > .image > img.bg {
+    object-fit: contain;
+  }
+
   .wrap[condensed=true] kps-container {
     min-height: 32rem;
   }
@@ -105,9 +109,12 @@ class HeroBanner extends LitElement {
   @property({ type: Boolean })
     condensed = false;
 
+  @property({ type: Boolean })
+    contained = false;
+
   render() {
     return html`
-      <div class="wrap" condensed="${this.condensed}">
+      <div class="wrap" condensed="${this.condensed}" contained="${this.contained}">
         <div class="image">
           <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
         </div>
