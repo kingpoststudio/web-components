@@ -11,7 +11,13 @@ export default {
 export const Card = () => html`
   <kps-container>
     <kps-grid flex>
-      <kps-card></kps-card>
+      <kps-card>
+        <img slot="img" src="https://picsum.photos/200/300" alt="Card image" />
+        <h3 slot="title">Card title</h3>
+        <p slot="description">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </kps-card>
       <kps-card></kps-card>
       <kps-card></kps-card>
     </kps-grid>

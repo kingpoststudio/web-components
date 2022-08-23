@@ -24,9 +24,6 @@ export default class Card extends LitElement {
   @property({ type: Object })
     link = { label: 'Read more', href: '#', target: '_blank' };
 
-  @property({ type: Object })
-    img = { src: '', alt: '' };
-
   static styles = css`
     .wrap {
       display: block;
@@ -36,9 +33,15 @@ export default class Card extends LitElement {
       border-radius: 0.5rem;
     }
 
-    .wrap > img {
+    .wrap > .image {
+      display: flex;
       width: 100%;
-      height: 12rem;
+      max-height: 16rem;
+    }
+
+    .wrap > .image ::slotted(img) {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
@@ -142,7 +145,9 @@ export default class Card extends LitElement {
 
   get baseContent() {
     return html`
-      <div class="img"><slot name="img"></slot></div>
+      <div class="image">
+        <slot name="image"></slot>
+      </div>
       <div class="content">
         <div class="title"><slot name="title"></slot></div>
         <div class="description"><slot name="description"></slot></div>
