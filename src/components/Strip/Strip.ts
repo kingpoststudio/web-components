@@ -16,19 +16,25 @@ const styles = css`
 
   .wrap > .strip {
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: 40rem;
     padding: 2rem;
-    color: var(--color-white);
-    background-color: var(--color-primary-dark);
-    transition: background-color var(--ease-time) var(--ease-type);
+    color: var(--color-primary-dark);
+    background: var(--color-gray-lightest);
+    transition: background var(--ease-time) var(--ease-type);
   }
 
   .wrap[color=secondary] > .strip {
-    background-color: var(--color-secondary-dark);
+    color: var(--color-secondary-darker);
+  }
+
+  .wrap[color=secondary][theme=dark] > .strip {
+    color: var(--color-white);
+    background: var(--color-secondary-dark);
   }
 
   .wrap[position=left] > .strip {
@@ -51,11 +57,11 @@ const styles = css`
     top: 0;
     width: 3rem;
     height: 100%;
-    background-color: var(--color-primary-dark);
+    background: var(--color-gray-lightest);
   }
 
   .wrap[color=secondary] > .strip:after {
-    background-color: var(--color-secondary-dark);
+    background: var(--color-gray-lightest);
   }
 
   .wrap[position=left] > .strip:after {
@@ -77,9 +83,12 @@ export default class Strip extends LitElement {
   @property({ type: String })
     color: 'primary' | 'secondary' = 'primary';
 
+  @property({ type: String })
+    theme: 'light' | 'dark' = 'dark';
+
   render() {
     return html`
-      <div class="wrap" position="${this.position}" color="${this.color}">
+      <div class="wrap" position="${this.position}" theme="${this.theme}" color="${this.color}">
         <div class="strip">
           <slot name="content"></slot>
         </div>
