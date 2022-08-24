@@ -16,7 +16,7 @@ const styles = css`
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 95%;
+    height: 100%;
   }
 
   .wrap > .image > img.bg {
