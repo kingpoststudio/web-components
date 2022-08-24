@@ -22,7 +22,7 @@ export default class Card extends LitElement {
     description: string = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
 
   @property({ type: Object })
-    link = { label: 'Read more', href: '#', target: '_blank' };
+    link = { label: '', href: '', target: '_blank' };
 
   static styles = css`
     .wrap {

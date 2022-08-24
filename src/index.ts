@@ -8,6 +8,7 @@ import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
 import Link from './components/Link/Link';
 import Navigation from './components/Navigation/Navigation';
+import Strip from './components/Strip/Strip';
 
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 
@@ -24,6 +25,7 @@ const lib = {
   Icon,
   Link,
   Navigation,
+  Strip,
 
   HeroBanner,
 };

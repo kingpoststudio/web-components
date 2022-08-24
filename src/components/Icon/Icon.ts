@@ -11,17 +11,19 @@ const icons = {
   cross,
 };
 
+const styles = css`
+  .icon {
+    display: flex;
+  }
+
+  .icon svg > path.fill-current {
+    fill: currentColor;
+  }
+`;
+
 @customElement('kps-icon')
 export default class Icon extends LitElement {
-  static styles = css`
-    .icon {
-      display: flex;
-    }
-
-    .icon svg > path.fill-current {
-      fill: currentColor;
-    }
-  `;
+  static styles = styles;
 
   @property({ type: String })
     icon: string = '';
