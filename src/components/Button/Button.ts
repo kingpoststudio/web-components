@@ -115,6 +115,18 @@ export default class Button extends LitElement {
       border-color: var(--color-primary);
     }
 
+    .wrap[variant=outline][color=primary][theme=darkest] > a {
+      background: var(--color-white);
+      border-color: var(--color-primary-darkest);
+      color: var(--color-primary-darkest);
+    }
+
+    .wrap[variant=outline][color=primary][theme=darkest] > a:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-white);
+    }
+
     .wrap[round] > a {
       border-radius: 0.5rem;
     }
