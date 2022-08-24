@@ -2,6 +2,11 @@ import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
 const styles = css`
+  :host {
+    width: 100%;
+    height: 100%;
+  }
+
   .wrap {
     position: relative;
     display: block;
@@ -16,15 +21,14 @@ const styles = css`
     justify-content: center;
     align-items: center;
     max-width: 40rem;
-    min-height: 8rem;
     padding: 2rem;
     color: var(--color-white);
-    background-color: var(--color-primary-darker);
+    background-color: var(--color-primary-dark);
     transition: background-color var(--ease-time) var(--ease-type);
   }
 
   .wrap[color=secondary] > .strip {
-    background-color: var(--color-secondary-darker);
+    background-color: var(--color-secondary-dark);
   }
 
   .wrap[position=left] > .strip {
