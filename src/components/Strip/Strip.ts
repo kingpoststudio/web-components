@@ -33,14 +33,37 @@ const styles = css`
 
   .wrap[position=left] > .strip {
     left: 0;
+    padding-left: 25%;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
   }
 
   .wrap[position=right] > .strip {
     right: 0;
+    padding-right: 25%;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
+  }
+
+  .wrap > .strip:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 3rem;
+    height: 100%;
+    background-color: var(--color-primary-dark);
+  }
+
+  .wrap[color=secondary] > .strip:after {
+    background-color: var(--color-secondary-dark);
+  }
+
+  .wrap[position=left] > .strip:after {
+    right: 100%;
+  }
+
+  .wrap[position=right] > .strip:after {
+    left: 100%;
   }
 `;
 
