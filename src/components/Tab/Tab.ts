@@ -1,70 +1,55 @@
 // create a new lit-element called "kps-tab" with imports.
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
-@customElement('kps-tab')
-export default class Tab extends LitElement {
-  static get styles() {
-    return css`
+const styles = css`
       :host {
-        display: block;
         position: relative;
-        overflow: hidden;
-        height: 100%;
-        width: 100%;
-        background-color: var(--kps-tab-background-color, #f5f5f5);
-        color: var(--kps-tab-color, #000);
-        font-size: var(--kps-tab-font-size, 14px);
-        font-weight: var(--kps-tab-font-weight, normal);
-        font-style: var(--kps-tab-font-style, normal);
-        font-family: var(--kps-tab-font-family, sans-serif);
-        border-radius: var(--kps-tab-border-radius, 0);
-        border: var(--kps-tab-border, none);
-        box-shadow: var(--kps-tab-box-shadow, none);
-        transition
-          : var(--kps-tab-transition, all 0.2s ease-in-out);
-      }
-      :host([hidden]) {
-        display: none;
-      }
-      :host([disabled]) {
-        pointer-events: none;
-        opacity: 0.5;
-      }
-      :host([active]) {
-        background-color: var(--kps-tab-active-background-color, #fff);
-        color: var(--kps-tab-active-color, #000);
-      }
-      :host([active]) ::slotted(*) {
-        color: var(--kps-tab-active-color, #000);
+        display: inline-block;
       }
 
-      ::slotted(*) {
+      a.tab-link {
+        color: var(--color-gray-dark);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color var(--ease-time) var(--ease-type);
+      }
+
+      a.tab-link:after {
+        content: '';
+        position: absolute;
+        bottom: -0.25rem;
         display: block;
         width: 100%;
-        height: 100%;
-        text-align: center;
-        line-height: var(--kps-tab-line-height, 1.5);
-        font-size: var(--kps-tab-font-size, 14px);
-        font-weight: var(--kps-tab-font-weight, normal);
-        font-style: var(--kps-tab-font-style, normal);
-        font-family: var(--kps-tab-font-family, sans-serif);
-        color: var(--kps-tab-color, #000);
-        transition
-          : var(--kps-tab-transition, all 0.2s ease-in-out);
+        height: 2px;
+        background-color: var(--color-transparent);
+        transition: background-color var(--ease-time) var(--ease-type);
       }
-      ::slotted(:hover) {
-        color: var(--kps-tab-active-color, #000);
+
+      a.tab-link:hover,
+      a.tab-link[active=true] {
+        color: var(--color-black);
       }
-      ::slotted(:focus) {
-        outline: none;
+
+      a.tab-link[active=true]:after {
+        background-color: var(--color-primary-dark);
       }
     `;
-  }
+@customElement('kps-tab')
+export default class Tab extends LitElement {
+  static styles = styles;
+
+  @property({ type: Boolean })
+    active = false;
+
+  @property({ type: String })
+    href = '';
 
   render() {
     return html`
-      <slot></slot>
+      <a class="tab-link" href="${this.href}" active="${this.active}">
+        <slot></slot>
+      </a>
     `;
   }
 }

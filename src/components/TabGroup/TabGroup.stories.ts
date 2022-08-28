@@ -9,7 +9,7 @@ export default {
 
 export const TabGroup = () => html`
   <kps-tab-group>
-    <kps-tab>Test</kps-tab>
+    <kps-tab href="#" active>Test</kps-tab>
     <kps-tab>Test</kps-tab>
     <kps-tab>Test</kps-tab>
   </kps-tab-group>
