@@ -1,9 +1,9 @@
-// create a new lit-element called "kps-tab" with imports.
+// Create a lit element that contains multiple <kps-tab> elements.
 import { LitElement, html, css } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-@customElement('kps-tab')
-export default class Tab extends LitElement {
+@customElement('kps-tab-group')
+export default class TabGroup extends LitElement {
   static get styles() {
     return css`
       :host {
@@ -38,7 +38,6 @@ export default class Tab extends LitElement {
       :host([active]) ::slotted(*) {
         color: var(--kps-tab-active-color, #000);
       }
-
       ::slotted(*) {
         display: block;
         width: 100%;

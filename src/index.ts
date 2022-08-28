@@ -9,6 +9,8 @@ import Icon from './components/Icon/Icon';
 import Link from './components/Link/Link';
 import Navigation from './components/Navigation/Navigation';
 import Strip from './components/Strip/Strip';
+import Tab from './components/Tab/Tab';
+import TabGroup from './components/TabGroup/TabGroup';
 
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 
@@ -26,6 +28,8 @@ const lib = {
   Link,
   Navigation,
   Strip,
+  Tab,
+  TabGroup,
 
   HeroBanner,
 };
