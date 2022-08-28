@@ -9,7 +9,8 @@ const styles = css`
       }
 
       a.tab-link {
-        color: var(--color-gray-dark);
+        padding-bottom: 0.25rem;
+        color: var(--color-gray-light);
         font-weight: 500;
         text-decoration: none;
         transition: color var(--ease-time) var(--ease-type);

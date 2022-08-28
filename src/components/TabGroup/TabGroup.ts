@@ -11,7 +11,15 @@ const styles = css`
 
   :host ::slotted(kps-tab) {
     flex-grow: 1;
-    margin: 0 var(--space-sm);
+    margin: 0 var(--space);
+  }
+
+  ::slotted(:first-child) {
+    margin-left: 0;
+  }
+
+  ::slotted(:last-child) {
+    margin-right: 0;
   }
 `;
 
