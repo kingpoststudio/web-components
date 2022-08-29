@@ -24,7 +24,7 @@ export const Card = () => html`
         <p slot="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.</p>
         <p slot="author">Lorem Ipsum</p>
         <p slot="handle">@loremipsum</p>
-        <time slot="date" datetime="${formattedDate}"></time>
+        <kps-datetime slot="date" datetime="${formattedDate}" variant="days-ago"></kps-datetime>
       </kps-card>
     </kps-grid>
   </kps-container>

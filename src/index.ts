@@ -2,6 +2,7 @@ import Button from './components/Button/Button';
 import ButtonGroup from './components/ButtonGroup/ButtonGroup';
 import Card from './components/Card/Card';
 import Container from './components/Container/Container';
+import DateTime from './components/DateTime/DateTime';
 import Dialog from './components/Dialog/Dialog';
 import Form from './components/Form/Form';
 import Grid from './components/Grid/Grid';
@@ -21,6 +22,7 @@ const lib = {
   ButtonGroup,
   Card,
   Container,
+  DateTime,
   Dialog,
   Form,
   Grid,
