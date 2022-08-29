@@ -126,8 +126,8 @@ const styles = css`
   }
 
   .wrap[variant=post] {
-    padding: 2rem;
-    min-height: 12rem;
+    padding: 1rem 1.5rem;
+    min-height: 10rem;
     background: var(--color-gray-lightest);
   }
 
