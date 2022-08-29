@@ -131,6 +131,15 @@ const styles = css`
     padding: 0;
   }
 
+  .wrap[variant=post] > .content .image ::slotted(img) {
+    width: 100%;
+    height: auto;
+    max-height: 20rem;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+  }
+
   .wrap[variant=post] > .content > .below {
     display: flex;
     align-items: center;
@@ -258,7 +267,6 @@ export default class Card extends LitElement {
             <slot name="icon"></slot>
           </div>
         </div>
-
       </div>
     `;
   }

@@ -21,6 +21,7 @@ export const Card = () => html`
   <kps-container>
     <kps-grid flex>
       <kps-card variant="post" color="secondary" rounded>
+        <img slot="image" src="https://picsum.photos/200/300">
         <p slot="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo.</p>
         <p slot="author">Lorem Ipsum</p>
         <p slot="handle">@loremipsum</p>
