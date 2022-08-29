@@ -135,15 +135,32 @@ const styles = css`
     padding: 0;
   }
 
-  .wrap[variant=post] > .content > .below .author ::slotted(*) {
-    display: inline-block;
-    margin: 0 0 0.5rem;
-    font-weight: semibold;
+  .wrap[variant=post] > .content > .below {
+    display: flex;
+    align-items: center;
   }
 
-  .wrap[variant=post] > .content > .below .date ::slotted(*),
-  .wrap[variant=post] > .content > .below .handle ::slotted(*) {
-    margin: 0 0.5rem 0 0;
+  .wrap[variant=post] > .content .author ::slotted(*) {
+    font-weight: semibold;
+    font-size: var(--font-size);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .wrap[variant=post] > .content .author-image {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+    background: var(--color-primary-darker);
+  }
+
+  .wrap[variant=post][color=secondary] > .content .author-image {
+    background: var(--color-secondary-darker);
+  }
+
+  .wrap[variant=post] > .content .date,
+  .wrap[variant=post] > .content .handle {
+    margin-right: 0.5rem;
     color: var(--color-primary);
   }
 
@@ -212,13 +229,19 @@ export default class Card extends LitElement {
         </div>
         
         <div class="below">
-          <div class="author"><slot name="author"></slot></div>
-          <div class="inline">
-            <div class="handle"><slot name="handle"></slot></div>
-            <div class="date"><slot name="date"></slot></div>
+          <div class="author-image">
+            <slot name="author-image"></slot>
           </div>
-          <kps-icon></kps-icon>
+          <div>
+            <div class="author"><slot name="author"></slot></div>
+            <div class="inline">
+              <div class="handle"><slot name="handle"></slot></div>
+              <div class="date"><slot name="date"></slot></div>
+            </div>
+          </div>
         </div>
+
+        <kps-icon></kps-icon>
       </div>
     `;
   }

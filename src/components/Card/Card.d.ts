@@ -1,11 +1,16 @@
 import { LitElement } from 'lit';
 
+declare type CardVariant = 'base' | 'article' | 'quote' | 'post';
 export default class Card extends LitElement {
-  variant: 'default' | 'quote';
+  static styles: import('lit').CSSResult;
 
-  theme: 'primary' | 'secondary';
+  variant: CardVariant;
 
-  round: boolean;
+  color: 'primary' | 'secondary';
+
+  theme: 'light' | 'dark';
+
+  rounded: boolean;
 
   title: string;
 
@@ -17,12 +22,14 @@ export default class Card extends LitElement {
         target: string;
     };
 
-  img: {
-        src: string;
-        alt: string;
-    };
+  get baseContent(): import('lit-html').TemplateResult<1>;
 
-  static styles: import('lit').CSSResult;
+  get quoteContent(): import('lit-html').TemplateResult<1>;
+
+  get postContent(): import('lit-html').TemplateResult<1>;
+
+  getContent(variant: CardVariant): import('lit-html').TemplateResult<1>;
 
   render(): import('lit-html').TemplateResult<1>;
 }
+export {};

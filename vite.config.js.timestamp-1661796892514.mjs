@@ -1,0 +1,30 @@
+// vite.config.js
+import { dirname, resolve } from "path";
+import { defineConfig } from "vite";
+import autoprefixer from "autoprefixer";
+import postcssNested from "postcss-nested";
+function generateFileName(format) {
+  return `kps.${format}.js`;
+}
+var vite_config_default = defineConfig({
+  css: {
+    postcss: {
+      plugins: [
+        autoprefixer,
+        postcssNested
+      ]
+    }
+  },
+  build: {
+    lib: {
+      name: "kps-wc",
+      entry: resolve(dirname("src/index.ts")),
+      formats: ["es", "umd", "cjs"],
+      fileName: generateFileName
+    }
+  }
+});
+export {
+  vite_config_default as default
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsidml0ZS5jb25maWcuanMiXSwKICAic291cmNlc0NvbnRlbnQiOiBbImNvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9kaXJuYW1lID0gXCIvaG9tZS90bGhmY2tvY3RiY3IvY29kZS93ZWItY29tcG9uZW50c1wiO2NvbnN0IF9fdml0ZV9pbmplY3RlZF9vcmlnaW5hbF9maWxlbmFtZSA9IFwiL2hvbWUvdGxoZmNrb2N0YmNyL2NvZGUvd2ViLWNvbXBvbmVudHMvdml0ZS5jb25maWcuanNcIjtjb25zdCBfX3ZpdGVfaW5qZWN0ZWRfb3JpZ2luYWxfaW1wb3J0X21ldGFfdXJsID0gXCJmaWxlOi8vL2hvbWUvdGxoZmNrb2N0YmNyL2NvZGUvd2ViLWNvbXBvbmVudHMvdml0ZS5jb25maWcuanNcIjsvKiBlc2xpbnQtZGlzYWJsZSBpbXBvcnQvbm8tZXh0cmFuZW91cy1kZXBlbmRlbmNpZXMgKi9cbmltcG9ydCB7IGRpcm5hbWUsIHJlc29sdmUgfSBmcm9tICdwYXRoJztcbmltcG9ydCB7IGRlZmluZUNvbmZpZyB9IGZyb20gJ3ZpdGUnO1xuaW1wb3J0IGF1dG9wcmVmaXhlciBmcm9tICdhdXRvcHJlZml4ZXInO1xuaW1wb3J0IHBvc3Rjc3NOZXN0ZWQgZnJvbSAncG9zdGNzcy1uZXN0ZWQnO1xuXG5mdW5jdGlvbiBnZW5lcmF0ZUZpbGVOYW1lKGZvcm1hdCkge1xuICByZXR1cm4gYGtwcy4ke2Zvcm1hdH0uanNgO1xufVxuXG5leHBvcnQgZGVmYXVsdCBkZWZpbmVDb25maWcoe1xuICBjc3M6IHtcbiAgICBwb3N0Y3NzOiB7XG4gICAgICBwbHVnaW5zOiBbXG4gICAgICAgIGF1dG9wcmVmaXhlcixcbiAgICAgICAgcG9zdGNzc05lc3RlZCxcbiAgICAgIF0sXG4gICAgfSxcbiAgfSxcbiAgYnVpbGQ6IHtcbiAgICBsaWI6IHtcbiAgICAgIG5hbWU6ICdrcHMtd2MnLFxuICAgICAgZW50cnk6IHJlc29sdmUoZGlybmFtZSgnc3JjL2luZGV4LnRzJykpLFxuICAgICAgZm9ybWF0czogWydlcycsICd1bWQnLCAnY2pzJ10sXG4gICAgICBmaWxlTmFtZTogZ2VuZXJhdGVGaWxlTmFtZSxcbiAgICB9LFxuICB9LFxufSk7XG4iXSwKICAibWFwcGluZ3MiOiAiO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQSwwQkFBMEIsUUFBUTtBQUNoQyxTQUFPLE9BQU87QUFDaEI7QUFFQSxJQUFPLHNCQUFRLGFBQWE7QUFBQSxFQUMxQixLQUFLO0FBQUEsSUFDSCxTQUFTO0FBQUEsTUFDUCxTQUFTO0FBQUEsUUFDUDtBQUFBLFFBQ0E7QUFBQSxNQUNGO0FBQUEsSUFDRjtBQUFBLEVBQ0Y7QUFBQSxFQUNBLE9BQU87QUFBQSxJQUNMLEtBQUs7QUFBQSxNQUNILE1BQU07QUFBQSxNQUNOLE9BQU8sUUFBUSxRQUFRLGNBQWMsQ0FBQztBQUFBLE1BQ3RDLFNBQVMsQ0FBQyxNQUFNLE9BQU8sS0FBSztBQUFBLE1BQzVCLFVBQVU7QUFBQSxJQUNaO0FBQUEsRUFDRjtBQUNGLENBQUM7IiwKICAibmFtZXMiOiBbXQp9Cg==
