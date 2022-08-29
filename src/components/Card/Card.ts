@@ -26,6 +26,7 @@ const styles = css`
     width: 100%;
     height: 100%;
     object-fit: cover;
+    margin-bottom: 1rem;
   }
 
   .wrap > .content {
@@ -50,12 +51,8 @@ const styles = css`
     background: var(--color-secondary-darkest);
   }
 
-  .wrap > .content > * {
+  .wrap > .content > *:not(:last-child):not(.image) {
     margin-bottom: 1rem;
-  }
-
-  .wrap > .content > *:last-child {
-    margin-bottom: 0;
   }
 
   .wrap > .content > .title > ::slotted(*) {
@@ -126,8 +123,7 @@ const styles = css`
   }
 
   .wrap[variant=post] {
-    padding: 1rem 1.5rem;
-    min-height: 10rem;
+    padding: 1.5rem;
     background: var(--color-gray-lightest);
   }
 
@@ -168,7 +164,6 @@ const styles = css`
 
   .wrap[variant=post] > .content .date,
   .wrap[variant=post] > .content .handle {
-    margin-top: 0.25rem;
     margin-right: 0.5rem;
     color: var(--color-primary);
   }
@@ -176,6 +171,10 @@ const styles = css`
   .wrap[variant=post] > .content .date ::slotted(*),
   .wrap[variant=post] > .content .handle ::slotted(*) {
     margin: 0;
+  }
+
+  .wrap[variant=post] > .content .icon {
+    color: var(--color-gray-light);
   }
 
   .inline {
@@ -255,7 +254,9 @@ export default class Card extends LitElement {
               </div>
             </div>
           </div>
-          <kps-icon icon="twitter"></kps-icon>
+          <div class="icon">
+            <slot name="icon"></slot>
+          </div>
         </div>
 
       </div>
