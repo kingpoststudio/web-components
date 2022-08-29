@@ -24,7 +24,15 @@ const styles = css`
   img.logo {
     position: relative;
     height: 100%;
+    max-width: 12rem;
     max-height: 4rem;
+    object-fit: contain;  
+  }
+  
+  @media (min-width: 768px) {
+    img.logo {
+      max-width: auto;
+    }
   }
 `;
 

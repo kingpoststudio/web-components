@@ -13,53 +13,55 @@ export default class Container extends LitElement {
   }
 
   :host([padding-x]) {
-    padding-left: var(--space);
-    padding-right: var(--space);
-  }
-
-  :host([padding-y]) {
-    padding-top: var(--space);
-    padding-bottom: var(--space);
-  }
-
-  :host([padding-x=md]) {
     padding-left: var(--space-md);
     padding-right: var(--space-md);
   }
 
-  :host([padding-y=md]) {
+  :host([padding-y]) {
     padding-top: var(--space-md);
     padding-bottom: var(--space-md);
   }
 
-  :host([padding-x=lg]) {
-    padding-left: var(--space-lg);
-    padding-right: var(--space-lg);
-  }
+  @media (min-width: 768px) {
+    :host([padding-x=md]) {
+      padding-left: var(--space-md);
+      padding-right: var(--space-md);
+    }
 
-  :host([padding-y=lg]) {
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-lg);
-  }
+    :host([padding-y=md]) {
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-md);
+    }
 
-  :host([padding-x=xl]) {
-    padding-left: var(--space-xl);
-    padding-right: var(--space-xl);
-  }
+    :host([padding-x=lg]) {
+      padding-left: var(--space-lg);
+      padding-right: var(--space-lg);
+    }
 
-  :host([padding-y=xl]) {
-    padding-top: var(--space-xl);
-    padding-bottom: var(--space-xl);
-  }
+    :host([padding-y=lg]) {
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-lg);
+    }
 
-  :host([padding-x=2xl]) {
-    padding-left: var(--space-2xl);
-    padding-right: var(--space-2xl);
-  }
+    :host([padding-x=xl]) {
+      padding-left: var(--space-xl);
+      padding-right: var(--space-xl);
+    }
 
-  :host([padding-y=2xl]) {
-    padding-top: var(--space-2xl);
-    padding-bottom: var(--space-2xl);
+    :host([padding-y=xl]) {
+      padding-top: var(--space-xl);
+      padding-bottom: var(--space-xl);
+    }
+
+    :host([padding-x=2xl]) {
+      padding-left: var(--space-2xl);
+      padding-right: var(--space-2xl);
+    }
+
+    :host([padding-y=2xl]) {
+      padding-top: var(--space-2xl);
+      padding-bottom: var(--space-2xl);
+    }
   }
 
   :host([full-width]) {
