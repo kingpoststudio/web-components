@@ -41,11 +41,11 @@ const styles = css`
 export default class Tab extends LitElement {
   static styles = styles;
 
-  @property({ type: Boolean })
-    active = false;
-
   @property({ type: String })
     href = '';
+
+  @property({ type: Boolean })
+    active = false;
 
   render() {
     return html`

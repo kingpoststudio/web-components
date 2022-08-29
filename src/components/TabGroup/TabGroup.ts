@@ -1,6 +1,5 @@
-// Create a lit element that contains multiple <kps-tab> elements.
 import { LitElement, html, css } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 
 const styles = css`
   :host {
@@ -12,6 +11,10 @@ const styles = css`
   :host ::slotted(kps-tab) {
     flex-grow: 1;
     margin: 0 var(--space);
+  }
+
+  :host ::slotted(:not(kps-tab)) {
+    display: none;
   }
 
   ::slotted(:first-child) {
@@ -26,6 +29,9 @@ const styles = css`
 @customElement('kps-tab-group')
 export default class TabGroup extends LitElement {
   static styles = styles;
+
+  @property({ type: String, attribute: 'active-tab' })
+    activeTab = '';
 
   render() {
     return html`
