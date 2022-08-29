@@ -28,10 +28,23 @@ const styles = css`
     max-height: 4rem;
     object-fit: contain;  
   }
+
+  .right-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .right-menu > kps-icon.hamburger {
+      margin-left: 2rem;
+    }
   
   @media (min-width: 768px) {
     img.logo {
       max-width: auto;
+    }
+
+    .right-menu > kps-icon.hamburger {
+      display: none;
     }
   }
 `;
@@ -45,11 +58,14 @@ export default class Navigation extends LitElement {
 
   protected render() {
     return html`
-      <kps-container padding-x='lg'>
+      <kps-container padding-x="lg">
         <nav>
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
           <slot name="main-menu"></slot>
-          <slot name="cta"></slot>
+          <div class="right-menu">
+            <slot name="cta"></slot>
+            <kps-icon class="hamburger" icon="hamburger"></kps-icon>
+          </div>
         </nav>
       </kps-container>
     `;

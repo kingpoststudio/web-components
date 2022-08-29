@@ -25,13 +25,13 @@ export default class Dialog extends LitElement {
     display: inline-block;
   }
 
-  .trigger[variant=modal] {
+  .trigger[variant=dropdown] {
     max-width: 12rem;
     font-size: 0.75rem;
   }
 
   @media (min-width: 768px) {
-    .trigger[variant=modal] {
+    .trigger[variant=dropdown] {
       max-width: auto;
       font-size: 1rem;
     }
