@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import './Navigation.css';
 
 const styles = css`
@@ -53,18 +53,29 @@ const styles = css`
 export default class Navigation extends LitElement {
   static styles = styles;
 
+  @state()
+    isOpen = false;
+
   @property({ type: Object })
   public logoImg = { src: '', alt: '' };
+
+  private openMenu() {
+    console.log('test');
+  }
 
   protected render() {
     return html`
       <kps-container padding-x="lg">
-        <nav>
+        <nav isOpen="${this.isOpen}">
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
-          <slot name="main-menu"></slot>
+
+          <div class="main">
+            <slot name="main-menu"></slot>
+          </div>
+
           <div class="right-menu">
             <slot name="cta"></slot>
-            <kps-icon class="hamburger" icon="hamburger"></kps-icon>
+            <kps-icon class="hamburger" icon="hamburger" @click="${this.openMenu}"></kps-icon>
           </div>
         </nav>
       </kps-container>
