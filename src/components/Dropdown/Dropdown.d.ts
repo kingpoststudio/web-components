@@ -1,7 +1,8 @@
 import { LitElement } from 'lit';
-export default class Grid extends LitElement {
-    flex: boolean;
-    cols: number;
+export default class Dropdown extends LitElement {
     static styles: import("lit").CSSResult;
+    private isOpen;
+    open: (e: Event) => void;
+    close: (e: Event) => void;
     render(): import("lit-html").TemplateResult<1>;
 }

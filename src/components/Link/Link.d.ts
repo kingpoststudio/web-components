@@ -1,15 +1,10 @@
 import { LitElement } from 'lit';
-
 export default class Link extends LitElement {
-  href: string;
-
-  target: string;
-
-  cta: boolean;
-
-  uppercase: boolean;
-
-  /**
+    href: string;
+    target: string;
+    cta: boolean;
+    uppercase: boolean;
+    /**
      * onSlotChange
      * @param e
      * @returns void
@@ -17,9 +12,8 @@ export default class Link extends LitElement {
      * to the slot. Once the CTA is available, we take it's href and target attributes
      * and set them on the <a> tag.
      */
-  onSlotChange(e: {
+    onSlotChange(e: {
         target: HTMLSlotElement;
     }): void;
-
-  render(): import('lit-html').TemplateResult<1>;
+    render(): import("lit-html").TemplateResult<1>;
 }
