@@ -59,8 +59,8 @@ export default class Navigation extends LitElement {
   @property({ type: Object })
   public logoImg = { src: '', alt: '' };
 
-  private openMenu() {
-    console.log('test');
+  private toggleMenu() {
+    this.isOpen = !this.isOpen;
   }
 
   protected render() {
@@ -75,7 +75,7 @@ export default class Navigation extends LitElement {
 
           <div class="right-menu">
             <slot name="cta"></slot>
-            <kps-icon class="hamburger" icon="hamburger" @click="${this.openMenu}"></kps-icon>
+            <kps-icon class="hamburger" icon="hamburger" @click="${this.toggleMenu}"></kps-icon>
           </div>
         </nav>
       </kps-container>
