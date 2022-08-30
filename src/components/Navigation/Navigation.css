@@ -3,7 +3,7 @@ header {
   padding-bottom: 6.5rem;
 
   kps-nav {
-    .main-menu {
+    div[slot="main-menu"] {
       height: 100%;
 
       @media screen and (max-width: 768px) {

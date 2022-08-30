@@ -1,10 +1,14 @@
 import { html } from 'lit';
 import './Navigation';
+import '../../styles/main.css';
 import logo from '../../assets/images/logo.svg';
 
 export default {
   title: 'Navigation',
   component: 'kps-nav',
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
 const logoImg = {
@@ -15,7 +19,7 @@ const logoImg = {
 export const Main = () => html`
   <header>
     <kps-nav .logoImg='${logoImg}'>
-      <div slot="main-menu" class="main-menu">
+      <div slot="main-menu">
         <div id="hs_menu_wrapper_galaxy_header_" class="hs-menu-wrapper active-branch flyouts hs-menu-flow-horizontal" role="navigation" data-sitemap-name="default" data-menu-id="80537532068" aria-label="Navigation Menu">
           <ul role="menu">
             <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Galaxy</a>

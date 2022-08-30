@@ -21,6 +21,10 @@ const styles = css`
     height: 6.5rem;
   }
 
+  nav > .nav-menu {
+    height: 100%; 
+  }
+
   img.logo {
     position: relative;
     height: 100%;
@@ -69,7 +73,7 @@ export default class Navigation extends LitElement {
         <nav isOpen="${this.isOpen}">
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
-          <div class="main">
+          <div class="nav-menu">
             <slot name="main-menu"></slot>
           </div>
 
