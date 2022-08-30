@@ -4,6 +4,7 @@ import Card from './components/Card/Card';
 import Container from './components/Container/Container';
 import DateTime from './components/DateTime/DateTime';
 import Dialog from './components/Dialog/Dialog';
+import Dropdown from './components/Dropdown/Dropdown';
 import Form from './components/Form/Form';
 import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
@@ -24,6 +25,7 @@ const lib = {
   Container,
   DateTime,
   Dialog,
+  Dropdown,
   Form,
   Grid,
   Icon,

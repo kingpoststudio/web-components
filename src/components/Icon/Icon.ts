@@ -1,6 +1,12 @@
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+const chevron = html`
+  <svg xmlns="http://www.w3.org/2000/svg" width="13.488" height="7.673" viewBox="0 0 13.488 7.673">
+    <path class="fill-current stroke-current" d="M.614,6h0L0,5.442,6,0l6,5.442L11.386,6,6,1.116.615,6Z" transform="translate(0.744 0.675)" stroke-miterlimit="10" stroke-width="1" />
+  </svg>
+`;
+
 const cross = html`
   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
     <path class="fill-current" d="M14.5-25A12.515,12.515,0,0,0,2-12.5,12.515,12.515,0,0,0,14.5,0,12.515,12.515,0,0,0,27-12.5,12.515,12.515,0,0,0,14.5-25ZM19.456-9.185a.78.78,0,0,1,0,1.1l-.536.537a.78.78,0,0,1-1.1,0L14.5-10.8,11.185-7.544a.78.78,0,0,1-1.1,0L9.544-8.08a.78.78,0,0,1,0-1.1L12.8-12.5,9.544-15.815a.78.78,0,0,1,0-1.1l.537-.536a.78.78,0,0,1,1.1,0L14.5-14.2l3.315-3.251a.78.78,0,0,1,1.1,0l.536.536a.78.78,0,0,1,0,1.1L16.2-12.5Z" transform="translate(-2 25)" fill-rule="evenodd"/>
@@ -63,6 +69,7 @@ const youtube = html`
 `;
 
 const icons = {
+  chevron,
   cross,
   facebook,
   hamburger,

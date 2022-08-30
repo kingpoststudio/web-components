@@ -32,7 +32,7 @@ export default class Dialog extends LitElement {
 
   @media (min-width: 768px) {
     .trigger[variant=dropdown] {
-      max-width: auto;
+      max-width: 16rem;
       font-size: 1rem;
     }
   }
