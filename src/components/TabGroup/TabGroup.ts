@@ -3,22 +3,20 @@ import { customElement, property, state } from 'lit/decorators.js';
 
 const styles = css`
   .tabs {
+    position: absolute;
+    left: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
     max-height: 0;
     overflow: hidden;
-    transition: max-height var(--ease-time) var(--ease-type);
+    transition: max-height var(--ease-time) var(--ease-type), box-shadow var(--ease-time) var(--ease-type);
   }
 
   .tabs ::slotted(kps-tab) {
     display: inline-flex;
     width: fit-content;
-    padding-bottom: 0.125rem;
-  }
-
-  .tabs ::slotted(kps-tab) {
-    margin: var(--space);
+    margin: var(--space) calc(var(--space) * 2);
   }
 
   .tabs ::slotted(:first-child) {
@@ -44,6 +42,12 @@ const styles = css`
     border-bottom: 1px solid var(--color-gray-lightest);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: border-color var(--ease-time) var(--ease-type);
+  }
+
+  .trigger:hover {
+    border-color: var(--color-gray-light);
   }
 
   .wrap .trigger kps-icon {
@@ -102,7 +106,7 @@ export default class TabGroup extends LitElement {
       <div class="wrap" isOpen="${this.isOpen}">
 
         <div class="trigger" @click="${this.toggleOpen}">
-          <span>${this.triggerLabel}</span>
+          <span>${this.triggerLabel || 'Select'}</span>
           <kps-icon icon="chevron"></kps-icon>
         </div>
 
