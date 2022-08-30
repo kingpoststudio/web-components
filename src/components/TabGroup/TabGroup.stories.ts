@@ -9,8 +9,8 @@ export default {
 
 export const TabGroup = () => html`
   <kps-tab-group>
-    <kps-tab href="#" active>Test</kps-tab>
-    <kps-tab>Test</kps-tab>
-    <kps-tab>Test</kps-tab>
+    <kps-tab href="#" active>Articles</kps-tab>
+    <kps-tab>Social media</kps-tab>
+    <kps-tab>Press releases</kps-tab>
   </kps-tab-group>
 `;

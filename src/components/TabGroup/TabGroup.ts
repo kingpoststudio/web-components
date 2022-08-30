@@ -3,10 +3,12 @@ import { customElement, state } from 'lit/decorators.js';
 
 const styles = css`
   .tabs {
-    display: none;
+    display: flex;
     flex-direction: column;
     width: 100%;
-    padding-block: 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--ease-time) var(--ease-type);
   }
 
   .tabs ::slotted(:not(kps-tab)) {
@@ -21,6 +23,21 @@ const styles = css`
 
   .tabs ::slotted(kps-tab) {
     margin: var(--space);
+  }
+
+  .tabs ::slotted(:first-child) {
+    margin-top: var(--space-md);
+  }
+
+  .tabs ::slotted(:last-child) {
+    margin-bottom: var(--space-md);
+  }
+
+  .wrap[isOpen=true] .tabs {
+    height: fit-content;
+    max-height: 16rem;
+    overflow-y: scroll;
+    border-bottom: 1px solid var(--color-gray-lightest);
   }
 
   .trigger {
@@ -41,10 +58,6 @@ const styles = css`
 
   .wrap[isOpen=true] .trigger kps-icon {
     transform: rotate(0deg);
-  }
-
-  .wrap[isOpen=true] .tabs {
-    display: flex;
   }
 
   @media (min-width: 768px) {
