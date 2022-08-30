@@ -5,11 +5,15 @@ export default class TabGroup extends LitElement {
 
   isOpen: boolean;
 
-  activeTab: Element | null;
-
-  firstUpdated(): void;
+  triggerLabel: string;
 
   private toggleOpen;
+
+  private onResize;
+
+  connectedCallback(): void;
+
+  disconnectedCallback(): void;
 
   render(): import('lit-html').TemplateResult<1>;
 }

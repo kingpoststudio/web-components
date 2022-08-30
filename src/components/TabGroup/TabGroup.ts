@@ -2,6 +2,11 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 const styles = css`
+  .wrap {
+    position: relative;
+    z-index: 10;
+  }
+
   .tabs {
     position: absolute;
     left: 0;
@@ -9,8 +14,22 @@ const styles = css`
     flex-direction: column;
     width: 100%;
     max-height: 0;
+    background: white;
     overflow: hidden;
-    transition: max-height var(--ease-time) var(--ease-type), box-shadow var(--ease-time) var(--ease-type);
+    transition: max-height var(--ease-time) var(--ease-type);
+  }
+
+  .overlay {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: -1.5rem;
+    display: block;
+    width: 100vw;
+    height: 0;
+    background: linear-gradient(to bottom, var(--color-overlay), transparent);
+    opacity: 0;
+    transition: opacity var(--ease-time) var(--ease-type);
   }
 
   .tabs ::slotted(kps-tab) {
@@ -33,6 +52,11 @@ const styles = css`
     border-bottom: 1px solid var(--color-gray-lightest);
   }
 
+  .wrap[isOpen=true] .overlay {
+    height: 100vh;
+    opacity: 1;
+  }
+
   .trigger {
     display: flex;
     align-items: center;
@@ -43,6 +67,7 @@ const styles = css`
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-semibold);
     cursor: pointer;
+    user-select: none;
     transition: border-color var(--ease-time) var(--ease-type);
   }
 
@@ -81,6 +106,7 @@ const styles = css`
       margin-right: 0;
     }
 
+    .overlay,
     .trigger {
       display: none;
     }
@@ -101,6 +127,22 @@ export default class TabGroup extends LitElement {
     this.isOpen = !this.isOpen;
   }
 
+  private onResize() {
+    if (window.innerWidth > 768) {
+      this.isOpen = false;
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('resize', () => this.onResize());
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', () => this.onResize());
+  }
+
   render() {
     return html`
       <div class="wrap" isOpen="${this.isOpen}">
@@ -110,9 +152,12 @@ export default class TabGroup extends LitElement {
           <kps-icon icon="chevron"></kps-icon>
         </div>
 
+        <div class="overlay" @touchstart="${this.toggleOpen}" @click="${this.toggleOpen}"></div>
+
         <div class="tabs">
           <slot></slot>
         </div>
+
       </div>
     `;
   }

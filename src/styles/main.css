@@ -61,6 +61,7 @@
   --color-bg: #fafafa;
   --color-text: #212121;
   --color-text-highlight: blue;
+  --color-overlay: #000000b3;
 
   /* Spacings */
   --scale: min(15px, 3vw);
