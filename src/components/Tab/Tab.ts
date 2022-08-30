@@ -9,7 +9,7 @@ const styles = css`
       }
 
       a.tab-link {
-        padding-bottom: 0.25rem;
+        padding-bottom: 0.5rem;
         color: var(--color-gray-light);
         font-size: var(--font-size-lg);
         font-weight: 500;
@@ -20,7 +20,7 @@ const styles = css`
       a.tab-link:after {
         content: '';
         position: absolute;
-        bottom: -0.25rem;
+        bottom: 0;
         display: block;
         width: 100%;
         height: 2px;

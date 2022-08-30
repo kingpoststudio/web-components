@@ -15,6 +15,7 @@ import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import './styles/main.css';
+
 declare const lib: {
     Button: typeof Button;
     ButtonGroup: typeof ButtonGroup;

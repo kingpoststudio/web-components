@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 const styles = css`
   .tabs {
@@ -9,10 +9,6 @@ const styles = css`
     max-height: 0;
     overflow: hidden;
     transition: max-height var(--ease-time) var(--ease-type);
-  }
-
-  .tabs ::slotted(:not(kps-tab)) {
-    display: none;
   }
 
   .tabs ::slotted(kps-tab) {
@@ -36,7 +32,6 @@ const styles = css`
   .wrap[isOpen=true] .tabs {
     height: fit-content;
     max-height: 16rem;
-    overflow-y: scroll;
     border-bottom: 1px solid var(--color-gray-lightest);
   }
 
@@ -65,6 +60,7 @@ const styles = css`
       position: relative;
       display: inline-flex;
       flex-direction: row;
+      max-height: none;
     }
 
     .tabs ::slotted(kps-tab) {
@@ -72,10 +68,12 @@ const styles = css`
     }
 
     .tabs ::slotted(:first-child) {
+      margin-top: 0;
       margin-left: 0;
     }
 
     .tabs ::slotted(:last-child) {
+      margin-bottom: 0;
       margin-right: 0;
     }
 
@@ -92,12 +90,8 @@ export default class TabGroup extends LitElement {
   @state()
     isOpen = false;
 
-  @state()
-    activeTab: Element | null = null;
-
-  firstUpdated() {
-    this.activeTab = this.querySelector('kps-tab[active]');
-  }
+  @property({ type: String, attribute: 'trigger-label' })
+    triggerLabel = '';
 
   private toggleOpen() {
     this.isOpen = !this.isOpen;
@@ -106,10 +100,12 @@ export default class TabGroup extends LitElement {
   render() {
     return html`
       <div class="wrap" isOpen="${this.isOpen}">
+
         <div class="trigger" @click="${this.toggleOpen}">
-          <span>${this.activeTab?.innerHTML}</span>
+          <span>${this.triggerLabel}</span>
           <kps-icon icon="chevron"></kps-icon>
         </div>
+
         <div class="tabs">
           <slot></slot>
         </div>
