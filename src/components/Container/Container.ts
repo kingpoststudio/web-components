@@ -60,6 +60,14 @@ export default class Container extends LitElement {
     :host([padding-y='3xl']) {
       padding-block: var(--space-3xl);
     }
+
+    :host([padding-x='4xl']) {
+      padding-inline: var(--space-4xl);
+    }
+
+    :host([padding-y='4xl']) {
+      padding-block: var(--space-4xl);
+    }
   }
 
   :host([full-width]) {
