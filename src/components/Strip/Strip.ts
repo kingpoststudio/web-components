@@ -55,13 +55,9 @@ const styles = css`
     content: '';
     position: absolute;
     top: 0;
-    width: 3rem;
+    width: 6rem;
     height: 100%;
-    background: var(--color-gray-lightest);
-  }
-
-  .wrap[color=secondary] > .strip:after {
-    background: var(--color-gray-lightest);
+    background: inherit;
   }
 
   .wrap[position=left] > .strip:after {

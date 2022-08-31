@@ -40,6 +40,7 @@ const styles = css`
 
   .right-menu > kps-icon.hamburger {
       margin-left: 2rem;
+      cursor: pointer;
     }
   
   @media (min-width: 768px) {
