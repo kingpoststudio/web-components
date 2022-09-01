@@ -4,6 +4,176 @@ import { createRef, ref } from 'lit/directives/ref.js';
 
 const ANIMATION_DURATION_MS = 200;
 
+const styles = css`
+.trigger {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger[variant=dropdown] {
+  max-width: 12rem;
+  font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .trigger[variant=dropdown] {
+    max-width: 16rem;
+    font-size: 1rem;
+  }
+}
+
+.trigger[variant=dropdown]:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 2.08rem);
+  opacity: 0;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  background: var(--color-secondary-darkest);
+  transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
+}
+
+.trigger[variant=dropdown].triggered:after {
+  opacity: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 100;
+}
+
+dialog {
+  position: relative;
+  display: none;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+dialog[open] {
+  display: block;
+}
+
+dialog .overlay {
+  z-index: 60;
+  opacity: 0;
+  transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
+}
+
+dialog[variant=modal] .overlay {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background: rgba(0, 0, 0, 0.6);
+  transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+dialog[theme=dark] .overlay {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+dialog .overlay[visible] {
+  opacity: 1;
+}
+
+dialog .container {
+  display: flex;
+  flex-direction: column;
+}
+
+dialog[variant=modal] .container {
+  min-width: 16rem;
+  width: fit-content;
+  max-width: 48rem;
+  height: fit-content;
+  max-height: 40rem;
+  background: var(--color-white);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
+  transform: scale(0.5);
+  transition: transform ${ANIMATION_DURATION_MS}ms var(--ease-type);
+}
+
+dialog[variant=modal] .overlay[visible] .container {
+  transform: scale(1);
+}
+
+dialog .container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-lg) var(--space-lg) var(--space-sm);
+}
+
+dialog .container .header kps-icon {
+  color: var(--color-gray-light);
+  cursor: pointer;
+  transition: color ${ANIMATION_DURATION_MS}ms ease-in-out;
+}
+
+dialog .container .header kps-icon:hover {
+  color: var(--color-black);
+}
+
+dialog .container .body {
+  flex: 1;
+  padding: var(--space-lg);
+  overflow: auto;
+}
+
+dialog[variant=dropdown] {
+  position: absolute;
+  top: calc(100% + 2.08rem);
+  right: 0;
+  left: auto;
+  display: none;
+  min-width: 36rem;
+  width: 100%;
+  border-bottom-left-radius: 0.5rem;
+}
+
+dialog[variant=dropdown][open] {
+  display: flex;
+}
+
+dialog[variant=dropdown] .overlay {
+  width: 100%;
+  border-bottom-left-radius: 1rem;
+  overflow: hidden;
+}
+
+dialog[variant=dropdown] .overlay:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 100vw;
+  height: 100%;
+  opacity: 0;
+  background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
+  transition: opacity 150ms var(--ease-type);
+}
+
+dialog[variant=dropdown][open] .overlay:after {
+  opacity: 1;
+}
+
+dialog[variant=dropdown] .container {
+  padding: var(--space-sm);
+  background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
+}
+`;
+
 @customElement('kps-dialog')
 export default class Dialog extends LitElement {
   dialogRef = createRef<HTMLDialogElement>();
@@ -19,175 +189,7 @@ export default class Dialog extends LitElement {
   @state()
   private isOpen = false;
 
-  static styles = css`
-  .trigger {
-    position: relative;
-    display: inline-block;
-  }
-
-  .trigger[variant=dropdown] {
-    max-width: 12rem;
-    font-size: 0.75rem;
-  }
-
-  @media (min-width: 768px) {
-    .trigger[variant=dropdown] {
-      max-width: 16rem;
-      font-size: 1rem;
-    }
-  }
-
-  .trigger[variant=dropdown]:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: calc(100% + 2.08rem);
-    opacity: 0;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    background: var(--color-secondary-darkest);
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
-  }
-
-  .trigger[variant=dropdown].triggered:after {
-    opacity: 1;
-  }
-
-  .content {
-    position: relative;
-    z-index: 100;
-  }
-
-  dialog {
-    position: relative;
-    display: none;
-    padding: 0;
-    background: none;
-    border: none;
-  }
-
-  dialog[open] {
-    display: block;
-  }
-
-  dialog .overlay {
-    z-index: 60;
-    opacity: 0;
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
-  }
-
-  dialog[variant=modal] .overlay {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    background: rgba(0, 0, 0, 0.6);
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  dialog[theme=dark] .overlay {
-    background: var(--color-black);
-    color: var(--color-white);
-  }
-
-  dialog .overlay[visible] {
-    opacity: 1;
-  }
-
-  dialog .container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  dialog[variant=modal] .container {
-    min-width: 16rem;
-    width: fit-content;
-    max-width: 48rem;
-    height: 70%;
-    max-height: 40rem;
-    background: var(--color-white);
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
-    transform: scale(0.5);
-    transition: transform ${ANIMATION_DURATION_MS}ms var(--ease-type);
-  }
-
-  dialog[variant=modal] .overlay[visible] .container {
-    transform: scale(1);
-  }
-
-  dialog .container .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--space-md) var(--space-lg);
-  }
-
-  dialog .container .header kps-icon {
-    color: var(--color-gray-light);
-    cursor: pointer;
-    transition: color ${ANIMATION_DURATION_MS}ms ease-in-out;
-  }
-
-  dialog .container .header kps-icon:hover {
-    color: var(--color-black);
-  }
-
-  dialog .container .body {
-    flex: 1;
-    padding: var(--space-md) var(--space-lg);
-    overflow: auto;
-  }
-
-  dialog[variant=dropdown] {
-    position: absolute;
-    top: calc(100% + 2.08rem);
-    right: 0;
-    left: auto;
-    display: none;
-    min-width: 36rem;
-    width: 100%;
-    border-bottom-left-radius: 0.5rem;
-  }
-
-  dialog[variant=dropdown][open] {
-    display: flex;
-  }
-
-  dialog[variant=dropdown] .overlay {
-    width: 100%;
-    border-bottom-left-radius: 1rem;
-    overflow: hidden;
-  }
-
-  dialog[variant=dropdown] .overlay:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 100%;
-    width: 100vw;
-    height: 100%;
-    opacity: 0;
-    background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
-    transition: opacity 150ms var(--ease-type);
-  }
-
-  dialog[variant=dropdown][open] .overlay:after {
-    opacity: 1;
-  }
-
-  dialog[variant=dropdown] .container {
-    padding: var(--space-sm);
-    background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
-  }
-`;
+  static styles = styles;
 
   open = (e: Event) => {
     e.preventDefault();
