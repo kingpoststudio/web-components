@@ -127,7 +127,7 @@ export default class Dialog extends LitElement {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
   }
 
   dialog .container .header kps-icon {
@@ -142,7 +142,7 @@ export default class Dialog extends LitElement {
 
   dialog .container .body {
     flex: 1;
-    padding: var(--space-md);
+    padding: var(--space-md) var(--space-lg);
     overflow: auto;
   }
 
