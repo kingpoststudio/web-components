@@ -57,6 +57,7 @@ export default class Dialog extends LitElement {
 
   .content {
     position: relative;
+    z-index: 100;
   }
 
   dialog {
@@ -84,7 +85,7 @@ export default class Dialog extends LitElement {
     top: 0;
     left: 0;
     opacity: 0;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.6);
     transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
     display: flex;
     justify-content: center;
@@ -107,9 +108,10 @@ export default class Dialog extends LitElement {
 
   dialog[variant=modal] .container {
     min-width: 16rem;
-    max-width: 90%;
-    min-height: 16rem;
-    max-height: 90%;
+    width: fit-content;
+    max-width: 48rem;
+    height: 70%;
+    max-height: 40rem;
     background: var(--color-white);
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
@@ -125,7 +127,7 @@ export default class Dialog extends LitElement {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-sm);
+    padding: var(--space-md);
   }
 
   dialog .container .header kps-icon {
@@ -140,7 +142,7 @@ export default class Dialog extends LitElement {
 
   dialog .container .body {
     flex: 1;
-    padding: var(--space-sm);
+    padding: var(--space-md);
     overflow: auto;
   }
 
