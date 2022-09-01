@@ -77,10 +77,6 @@ export default class Dialog extends LitElement {
     transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
   }
 
-  dialog .overlay[visible] {
-    opacity: 1;
-  }
-
   dialog[variant=modal] .overlay {
     width: 100vw;
     height: 100vh;
@@ -98,6 +94,10 @@ export default class Dialog extends LitElement {
   dialog[theme=dark] .overlay {
     background: var(--color-black);
     color: var(--color-white);
+  }
+
+  dialog .overlay[visible] {
+    opacity: 1;
   }
 
   dialog .container {

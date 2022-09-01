@@ -10,7 +10,7 @@ export default {
 
 export const Dialog = () => html`
   <kps-nav>
-    <kps-dialog variant="dropdown" theme="dark" slot="cta">
+    <kps-dialog slot="cta">
       <span slot="trigger">Request Product Info</span>
       <div class="content" slot="content">
         Your content goes here.

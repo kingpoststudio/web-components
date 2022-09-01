@@ -94,6 +94,10 @@ const styles = css`
     width: 100%;
   }
 
+  .wrap[variant=quote] {
+    display: inline-block;
+  }
+
   .wrap[variant=quote] > .content {
     padding: 1.5rem 2rem;
     max-width: 16rem;
