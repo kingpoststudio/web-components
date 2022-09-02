@@ -31,10 +31,10 @@ const styles = css`
 
   .tag {
     opacity: 0;
-    transform: translateY(-50%);
     position: relative;
     top: 50%;
     left: 3rem;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +44,7 @@ const styles = css`
     background: var(--color-white);
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -4px rgba(0,0,0,.3);
     overflow: hidden;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     white-space: nowrap;
     pointer-events: none;
     transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -55,10 +55,11 @@ const styles = css`
     position: absolute;
     top: 50%;
     left: 2.5rem;
+    transform: translateY(-50%);
     border-top: 0.5rem solid transparent;
     border-bottom: 0.5rem solid transparent;
     border-right: 0.5rem solid var(--color-white);
-    transform: translateY(-50%);
+    pointer-events: none;
     transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   }
 
