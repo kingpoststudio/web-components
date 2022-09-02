@@ -40,28 +40,31 @@ const styles = css`
     opacity: 0;
     position: relative;
     top: 50%;
-    left: 3rem;
+    left: 3.5rem;
+    z-index: 1;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 0;
+    width: 15rem;
     height: auto;
     padding: 0.5rem;
+    overflow: hidden;
     background: var(--color-white);
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -4px rgba(0,0,0,.3);
-    overflow: hidden;
+    color: var(--color-text);
     font-size: 1.125rem;
-    white-space: nowrap;
+    text-align: center;
     pointer-events: none;
-    transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out;
+    transition: opacity 0.2s ease-in-out;
   }
 
   .arrow {
     opacity: 0;
     position: absolute;
     top: 50%;
-    left: 2.5rem;
+    left: 3rem;
+    z-index: 1;
     transform: translateY(-50%);
     border-top: 0.5rem solid transparent;
     border-bottom: 0.5rem solid transparent;
@@ -70,11 +73,7 @@ const styles = css`
     transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   }
 
-  .point:hover > .tag {
-    opacity: 1;
-    width: 12rem;
-  }
-
+  .point:hover > .tag,
   .point:hover > .arrow {
     opacity: 1;
   }

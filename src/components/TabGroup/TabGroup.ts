@@ -34,8 +34,16 @@ const styles = css`
     padding: 2rem;
   }
 
-  .nav > .links {
-    margin: 0;
+  .nav > * {
+    margin-bottom: 1.5rem;
+  }
+
+  .nav > *:last-child {
+    margin-bottom: 0;
+  }
+
+  .nav > ul.links {
+    padding: 0;
     list-style-type: none;
   }
 
@@ -49,14 +57,14 @@ const styles = css`
 
   .nav > ul.links > li > a {
     font-size: var(--font-size-xl);
-    font-weight: var(--font-semibold);
+    font-weight: var(--font-weight-semibold);
     color: var(--color-white);
     text-decoration: none;
     transition: color 0.2s ease-in-out;
   }
 
   .nav > ul.links > li > a:hover {
-    color: var(--color-tertiary);
+    color: var(--color-tertiary-light);
   }
   
   @media (min-width: 768px) {
@@ -99,6 +107,7 @@ export default class TabGroup extends LitElement {
 
   onSlotChange() {
     this.tabs = this.slottedTabs;
+    this.setActiveTab();
   }
 
   connectedCallback() {
@@ -109,10 +118,6 @@ export default class TabGroup extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     window.removeEventListener('hashchange', this.setActiveTab);
-  }
-
-  firstUpdated() {
-    this.setActiveTab();
   }
 
   render() {
