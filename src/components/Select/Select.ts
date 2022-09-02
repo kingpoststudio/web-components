@@ -35,6 +35,7 @@ const styles = css`
   .options ::slotted(option) {
     display: inline-flex;
     width: fit-content;
+    min-height: fit-content;
     margin: var(--space) calc(var(--space) * 2);
     position: relative;
     padding-bottom: 0.5rem;
@@ -149,9 +150,6 @@ export default class Select extends LitElement {
   @state()
   private isOpen = false;
 
-  @state()
-  private options: HTMLOptionElement[] = [];
-
   @property({ type: String })
   private variant: 'nav' | undefined;
 
@@ -182,14 +180,10 @@ export default class Select extends LitElement {
     }
   }
 
-  firstUpdated() {
-    this.options = Array.from(this.querySelectorAll('option'));
-  }
-
   onOptionClick(e: Event) {
     if (e.target instanceof HTMLOptionElement) {
       const { value } = e.target;
-      this.options.forEach((child) => child.removeAttribute('selected'));
+      Array.from(this.querySelectorAll('option')).forEach((child) => child.removeAttribute('selected'));
       e.target.setAttribute('selected', '');
 
       if (this.variant === 'nav' && value) {
