@@ -10,6 +10,7 @@ import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
 import Link from './components/Link/Link';
 import Navigation from './components/Navigation/Navigation';
+import Select from './components/Select/Select';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
@@ -32,6 +33,7 @@ const lib = {
   Icon,
   Link,
   Navigation,
+  Select,
   Strip,
   Tab,
   TabGroup,
