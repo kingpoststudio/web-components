@@ -29,7 +29,8 @@ const styles = css`
 
   .nav {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     padding: 2rem;
   }
 
@@ -125,7 +126,7 @@ export default class TabGroup extends LitElement {
             <slot name="title"></slot>
           </div>
           <div class="subtitle">
-            <slot name="title"></slot>
+            <slot name="subtitle"></slot>
           </div>
           <ul class="links">
             ${this.tabs.map((tab) => html`

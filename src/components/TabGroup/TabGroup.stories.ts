@@ -8,7 +8,10 @@ export default {
 };
 
 export const TabGroup = () => html`
-  <kps-tab-group title="Test Tab Group">
+  <kps-tab-group>
+    <h2 slot="title">The Galaxy Cart</h2>
+    <p slot="subtitle">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id</p>
+ 
     <kps-tab name="test-1" label="Test One">
       <kps-image-map
         image="//21683844.fs1.hubspotusercontent-na1.net/hubfs/21683844/raw_assets/public/NoahMedicalGalaxyTheme/assets/images/galaxy.png"
