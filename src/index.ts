@@ -8,6 +8,7 @@ import Dropdown from './components/Dropdown/Dropdown';
 import Form from './components/Form/Form';
 import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
+import ImageMap from './components/ImageMap/ImageMap';
 import Link from './components/Link/Link';
 import Navigation from './components/Navigation/Navigation';
 import Select from './components/Select/Select';
@@ -16,7 +17,6 @@ import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
 
 import HeroBanner from './modules/HeroBanner/HeroBanner';
-import ImageMap from './modules/ImageMap/ImageMap';
 
 import './styles/main.css';
 
@@ -31,6 +31,7 @@ const lib = {
   Form,
   Grid,
   Icon,
+  ImageMap,
   Link,
   Navigation,
   Select,
@@ -39,7 +40,6 @@ const lib = {
   TabGroup,
 
   HeroBanner,
-  ImageMap,
 };
 
 export default lib;

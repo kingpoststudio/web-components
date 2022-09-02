@@ -14,10 +14,15 @@ const styles = css`
     width: fit-content;
   }
 
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
   .point {
     position: absolute;
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;

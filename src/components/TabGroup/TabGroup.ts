@@ -1,114 +1,39 @@
 import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import Tab from '../Tab/Tab';
 
 const styles = css`
   .wrap {
-    position: relative;
-    z-index: 10;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    height: 36rem;
   }
 
   .tabs {
-    position: absolute;
-    left: 0;
+    position: relative;
     display: flex;
-    flex-direction: column;
     width: 100%;
-    max-height: 0;
-    background: white;
-    overflow: hidden;
-    transition: max-height var(--ease-time) var(--ease-type);
-  }
-
-  .overlay {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: -1.5rem;
-    display: block;
-    width: 100vw;
-    height: 0;
-    background: linear-gradient(to bottom, var(--color-overlay), transparent);
-    opacity: 0;
-    transition: opacity var(--ease-time) var(--ease-type);
   }
 
   .tabs ::slotted(kps-tab) {
-    display: inline-flex;
-    width: fit-content;
-    margin: var(--space) calc(var(--space) * 2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
   }
 
-  .tabs ::slotted(:first-child) {
-    margin-top: var(--space-md);
+  .tabs ::slotted(kps-tab[active]) {
+    display: block;
   }
 
-  .tabs ::slotted(:last-child) {
-    margin-bottom: var(--space-md);
-  }
+  .nav {
 
-  .wrap[isOpen=true] .tabs {
-    height: fit-content;
-    max-height: 16rem;
-    border-bottom: 1px solid var(--color-gray-lightest);
   }
-
-  .wrap[isOpen=true] .overlay {
-    height: 100vh;
-    opacity: 1;
-  }
-
-  .trigger {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--space);
-    border-top: 1px solid var(--color-gray-lightest);
-    border-bottom: 1px solid var(--color-gray-lightest);
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-semibold);
-    cursor: pointer;
-    user-select: none;
-    transition: border-color var(--ease-time) var(--ease-type);
-  }
-
-  .trigger:hover {
-    border-color: var(--color-gray-light);
-  }
-
-  .wrap .trigger kps-icon {
-    transform: rotate(180deg);
-    transition: transform var(--ease-time) var(--ease-type);
-  }
-
-  .wrap[isOpen=true] .trigger kps-icon {
-    transform: rotate(0deg);
-  }
-
+  
   @media (min-width: 768px) {
-    .tabs {
-      position: relative;
-      display: inline-flex;
-      flex-direction: row;
-      max-height: none;
-    }
-
-    .tabs ::slotted(kps-tab) {
-      margin: 0 var(--space);
-    }
-
-    .tabs ::slotted(:first-child) {
-      margin-top: 0;
-      margin-left: 0;
-    }
-
-    .tabs ::slotted(:last-child) {
-      margin-bottom: 0;
-      margin-right: 0;
-    }
-
-    .overlay,
-    .trigger {
-      display: none;
+    .wrap {
+      grid-template-columns: 1fr 1fr;
     }
   }
 `;
@@ -117,47 +42,60 @@ const styles = css`
 export default class TabGroup extends LitElement {
   static styles = styles;
 
+  @property({ type: String })
+    title: string = '';
+
   @state()
-    isOpen = false;
+    tabs: Tab[] = [];
 
-  @property({ type: String, attribute: 'trigger-label' })
-    triggerLabel = '';
-
-  private toggleOpen() {
-    this.isOpen = !this.isOpen;
-  }
-
-  private onResize() {
-    if (window.innerWidth > 768) {
-      this.isOpen = false;
-    }
+  constructor() {
+    super();
+    this.setActiveTab = this.setActiveTab.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('resize', () => this.onResize());
+    window.addEventListener('hashchange', this.setActiveTab);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('resize', () => this.onResize());
+    window.removeEventListener('hashchange', this.setActiveTab);
+  }
+
+  get slottedTabs() {
+    const slot = this.shadowRoot?.querySelector('slot');
+    return slot?.assignedElements({ flatten: true });
+  }
+
+  setActiveTab() {
+    const hash = window.location.hash.replace('#', '');
+
+    if (!hash) this.slottedTabs?.[0].setAttribute('active', '');
+    else {
+      this.slottedTabs?.forEach((tab) => {
+        if (tab.getAttribute('name') === hash) tab.setAttribute('active', '');
+        else tab.removeAttribute('active');
+      });
+    }
+  }
+
+  firstUpdated() {
+    this.setActiveTab();
   }
 
   render() {
     return html`
-      <div class="wrap" isOpen="${this.isOpen}">
-
-        <div class="trigger" @click="${this.toggleOpen}">
-          <span>${this.triggerLabel || 'Select'}</span>
-          <kps-icon icon="chevron"></kps-icon>
-        </div>
-
-        <div class="overlay" @touchstart="${this.toggleOpen}" @click="${this.toggleOpen}"></div>
-
+      <div class="wrap">
         <div class="tabs">
           <slot></slot>
         </div>
-
+        <div class="nav">
+          <h3 class="title">${this.title}</h3>
+          ${this.slottedTabs?.map(() => html`
+            <a href="" class="tab">Link</a>
+          `)}
+        </div>
       </div>
     `;
   }
