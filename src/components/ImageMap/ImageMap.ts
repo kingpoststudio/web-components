@@ -79,6 +79,10 @@ const styles = css`
   }
 `;
 
+function goToHref(href: string) {
+  window.location.href = href;
+}
+
 @customElement('kps-image-map')
 export default class ImageMap extends LitElement {
   static styles = styles;
@@ -94,7 +98,7 @@ export default class ImageMap extends LitElement {
       <div class="wrap">
         <img src="${this.image}" />
         ${this.points?.length && this.points.map((point) => html`
-        <div class="point" style="left:${point.x}%;top:${point.y}%;" href="${point.href}">
+        <div class="point" style="left:${point.x}%;top:${point.y}%;" @click="${() => goToHref(point.href)}">
           ${point.tag && html`<div class="tag">${point.tag}</div><div class="arrow"></div>`}
         </div>
         `)}
