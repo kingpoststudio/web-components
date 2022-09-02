@@ -7,19 +7,19 @@ const styles = css`
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
-    height: 36rem;
+    background: var(--color-secondary-darkest);
   }
 
   .tabs {
     position: relative;
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
+    padding: 2rem;
   }
 
   .tabs ::slotted(kps-tab) {
-    position: absolute;
-    top: 0;
-    left: 0;
     display: none;
   }
 
@@ -28,7 +28,34 @@ const styles = css`
   }
 
   .nav {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+  }
 
+  .nav > .links {
+    margin: 0;
+    list-style-type: none;
+  }
+
+  .nav > ul.links > li {
+    margin-bottom: 0.5rem;
+  }
+
+  .nav > ul.links > li:last-child {
+    margin-bottom: 0;
+  }
+
+  .nav > ul.links > li > a {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-semibold);
+    color: var(--color-white);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .nav > ul.links > li > a:hover {
+    color: var(--color-tertiary);
   }
   
   @media (min-width: 768px) {
@@ -53,16 +80,6 @@ export default class TabGroup extends LitElement {
     this.setActiveTab = this.setActiveTab.bind(this);
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-    window.addEventListener('hashchange', this.setActiveTab);
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    window.removeEventListener('hashchange', this.setActiveTab);
-  }
-
   get slottedTabs() {
     const slot = this.shadowRoot?.querySelector('slot');
     return slot?.assignedElements({ flatten: true }) as Tab[];
@@ -83,6 +100,16 @@ export default class TabGroup extends LitElement {
     this.tabs = this.slottedTabs;
   }
 
+  connectedCallback() {
+    super.connectedCallback();
+    window.addEventListener('hashchange', this.setActiveTab);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('hashchange', this.setActiveTab);
+  }
+
   firstUpdated() {
     this.setActiveTab();
   }
@@ -94,10 +121,17 @@ export default class TabGroup extends LitElement {
           <slot @slotchange="${this.onSlotChange}"></slot>
         </div>
         <div class="nav">
-          <h3 class="title">${this.title}</h3>
-          ${this.tabs.map((tab) => html`
-            <a href="#${tab.getAttribute('name')}" class="tab">${tab.getAttribute('name')}</a>
-          `)}
+          <div class="title">
+            <slot name="title"></slot>
+          </div>
+          <div class="subtitle">
+            <slot name="title"></slot>
+          </div>
+          <ul class="links">
+            ${this.tabs.map((tab) => html`
+              <li><a href="#${tab.getAttribute('name')}">${tab.getAttribute('label')}</a></li>
+            `)}
+          </ul>
         </div>
       </div>
     `;
