@@ -65,12 +65,11 @@ export default class TabGroup extends LitElement {
 
   get slottedTabs() {
     const slot = this.shadowRoot?.querySelector('slot');
-    return slot?.assignedElements({ flatten: true });
+    return slot?.assignedElements({ flatten: true }) as Tab[];
   }
 
   setActiveTab() {
     const hash = window.location.hash.replace('#', '');
-
     if (!hash) this.slottedTabs?.[0].setAttribute('active', '');
     else {
       this.slottedTabs?.forEach((tab) => {
@@ -78,6 +77,10 @@ export default class TabGroup extends LitElement {
         else tab.removeAttribute('active');
       });
     }
+  }
+
+  onSlotChange() {
+    this.tabs = this.slottedTabs;
   }
 
   firstUpdated() {
@@ -88,12 +91,12 @@ export default class TabGroup extends LitElement {
     return html`
       <div class="wrap">
         <div class="tabs">
-          <slot></slot>
+          <slot @slotchange="${this.onSlotChange}"></slot>
         </div>
         <div class="nav">
           <h3 class="title">${this.title}</h3>
-          ${this.slottedTabs?.map(() => html`
-            <a href="" class="tab">Link</a>
+          ${this.tabs.map((tab) => html`
+            <a href="#${tab.getAttribute('name')}" class="tab">${tab.getAttribute('name')}</a>
           `)}
         </div>
       </div>
