@@ -15,6 +15,7 @@ import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
 
 import HeroBanner from './modules/HeroBanner/HeroBanner';
+import ImageMap from './modules/ImageMap/ImageMap';
 
 import './styles/main.css';
 
@@ -36,6 +37,7 @@ const lib = {
   TabGroup,
 
   HeroBanner,
+  ImageMap,
 };
 
 export default lib;
