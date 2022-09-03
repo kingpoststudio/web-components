@@ -32,6 +32,8 @@ const styles = css`
     opacity: 0;
     display: none;
     position: absolute;
+    left: 0;
+    right: 0;
     transition: opacity var(--ease-time) var(--ease-type);
   }
 

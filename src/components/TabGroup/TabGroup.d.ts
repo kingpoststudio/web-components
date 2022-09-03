@@ -1,15 +1,31 @@
 import { LitElement } from 'lit';
+import Tab from '../Tab/Tab';
 
+interface Link {
+    label: string;
+    href: string;
+    isActive: boolean;
+}
 export default class TabGroup extends LitElement {
   static styles: import('lit').CSSResult;
 
-  isOpen: boolean;
+  title: string;
 
-  triggerLabel: string;
+  links: Link[];
 
-  private toggleOpen;
+  constructor();
 
-  private onResize;
+  get slottedTabs(): Tab[];
+
+  get tabLinks(): import('lit-html').TemplateResult<1>[];
+
+  static setTabStatus(tab: Tab, isActive: Boolean): void;
+
+  updateLinks(): void;
+
+  updateTabs(): void;
+
+  onSlotChange(): void;
 
   connectedCallback(): void;
 
@@ -17,3 +33,4 @@ export default class TabGroup extends LitElement {
 
   render(): import('lit-html').TemplateResult<1>;
 }
+export {};
