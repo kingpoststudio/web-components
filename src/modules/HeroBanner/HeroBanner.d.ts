@@ -13,6 +13,11 @@ declare class HeroBanner extends LitElement {
         alt: string;
     };
 
+  mobileImg: {
+        src: string;
+        alt: string;
+    };
+
   condensed: boolean;
 
   contained: boolean;

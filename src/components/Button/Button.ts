@@ -14,6 +14,9 @@ export default class Button extends LitElement {
     variant: 'fill' | 'outline' = 'fill';
 
   @property({ type: String })
+    size: 'sm' | 'md' | 'lg' = 'md';
+
+  @property({ type: String })
     href = '';
 
   @property({ type: String })
@@ -49,6 +52,12 @@ export default class Button extends LitElement {
       text-decoration: none;
       cursor: pointer;
       transition: background-color var(--ease-time) var(--ease-type);
+    }
+
+    .wrap[size="lg"] > a {
+      min-width: 9rem;
+      padding: 0.75rem 1.25rem;
+      font-size: var(--font-size-lg);
     }
 
     .wrap > a:hover {
@@ -163,6 +172,7 @@ export default class Button extends LitElement {
         variant=${this.variant}
         color=${this.color}
         theme=${this.theme}
+        size=${this.size}
         round=${this.round}
         uppercase=${this.uppercase}
       >

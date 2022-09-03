@@ -30,7 +30,8 @@ export const Default = () => html`
       <h1 slot="title" class="w-full md:w-1/2 text-[10rem] font-thin">Vision<span style="color:#B18FCF;">ary</span></h1>
       <h2 slot="subtitle" class="w-full md:w-1/2 text-4xl font-thin flex">TiLT+ Technology™ integration.<br>Real-time lesion updates.</h2>
       <p slot="tagline">THE <strong>GALAXY SYSTEM</strong> HAS ARRIVED</p>
-      <kps-button slot="primary-cta" variant="outline">Learn More</kps-button>
+      <kps-button slot="primary-cta" variant="outline" size="lg">Learn More</kps-button>
+      <kps-button slot="secondary-cta" variant="outline" size="lg">Sign Up</kps-button>
     </kps-hero>
   </div>
 `;

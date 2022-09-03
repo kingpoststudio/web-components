@@ -12,7 +12,8 @@ const styles = css`
     background: transparent;
   }
 
-  .wrap > .image {
+  .wrap .bg-img,
+  .wrap .mobile-img {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,13 +21,11 @@ const styles = css`
     height: 100%;
   }
 
-  .wrap > .image > img.bg {
+  .wrap .bg-img > img {
     display: none;
   }
 
-  .wrap > .image > img.bg-mobile {
-    width: 100%;
-    height: 100%;
+  .wrap .mobile-img > img {
     object-fit: cover;
   }
 
@@ -75,9 +74,15 @@ const styles = css`
     margin: 0;
   }
 
+  kps-container > .ctas {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--space-md);
+    margin-left: var(--space);
+  }
+
   kps-container > .ctas ::slotted(kps-button) {
-    display: inline-flex;
-    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
   }
 
   kps-container > .extra {
@@ -97,17 +102,17 @@ const styles = css`
       flex-direction: row;
     }
 
-    .wrap > .image {
+    .wrap .mobile-img {
+      display: none;
+    }
+
+    .wrap .bg-img {
       position: absolute;
       bottom: 0;
       left: 0;
     }
 
-    .wrap > .image > img.bg-mobile {
-      display: none;
-    }
-
-    .wrap > .image > img.bg {
+    .wrap .bg-img > img {
       display: block;
       width: 100%;
       height: 100%;
@@ -115,7 +120,7 @@ const styles = css`
       object-position: center bottom;
     }
 
-    .wrap[contained=true] > .image > img.bg {
+    .wrap[contained=true] .bg-img > img {
       object-fit: contain;
     }
 
@@ -135,10 +140,24 @@ const styles = css`
       color: var(--color-white);
       font-size: var(--font-size-xl);
     }
+
+    kps-container > .ctas {
+      flex-direction: row;
+      margin-top: var(--space-lg);
+      margin-left: 0;
+    }
+
+    kps-container > .ctas ::slotted(kps-button) {
+      margin-right: var(--space-md);
+    }
+
+    kps-container > .ctas ::slotted(kps-button:last-child) {
+      margin-right: 0;
+    }
   }
 
   @media (min-width: 1536px) {
-    .wrap > .image > img.bg {
+    .wrap > .bg-img > img {
       object-fit: contain;
     }
   }
@@ -167,16 +186,19 @@ class HeroBanner extends LitElement {
     return html`
       <div class="wrap" condensed="${this.condensed}" contained="${this.contained}">
       
-        <div class="image">
-          <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
-          <img class="bg-mobile" src="${this.mobileImg.src}" alt="${this.mobileImg.alt}" />
+        <div class="bg-img">
+          <img src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
         </div>
 
-        <kps-container padding-x="lg">
+        <kps-container padding-x="lg" padding-y="lg">
           ${this.logoImg.src && html`<img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />`}
           <div class="title"><slot name="title"></slot></div>
           <div class="subtitle"><slot name="subtitle"></slot></div>
           <div class="tagline"><slot name="tagline"></slot></div>
+
+          <div class="mobile-img">
+            <img src="${this.mobileImg.src}" alt="${this.mobileImg.alt}" />
+          </div>
 
           <kps-button-group class="ctas">
             <slot name="primary-cta"></slot>

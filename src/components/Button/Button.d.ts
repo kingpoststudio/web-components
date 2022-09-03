@@ -8,6 +8,8 @@ export default class Button extends LitElement {
 
   variant: 'fill' | 'outline';
 
+  size: 'sm' | 'md' | 'lg';
+
   href: string;
 
   target: string;
