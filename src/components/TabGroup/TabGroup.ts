@@ -9,7 +9,6 @@ const styles = css`
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
-    min-height: 32rem;
     background: var(--color-secondary-darkest);
   }
 
@@ -18,14 +17,14 @@ const styles = css`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding: 2rem;
+    min-height: 32rem;
   }
 
   .tabs ::slotted(kps-tab) {
     opacity: 0;
     display: none;
     position: absolute;
+    left: 0;
     transition: opacity var(--ease-time) var(--ease-type);
   }
 
@@ -104,7 +103,7 @@ export default class TabGroup extends LitElement {
     return slot?.assignedElements({ flatten: true }) as Tab[];
   }
 
-  setTabStatus(tab: Tab, isActive: Boolean) {
+  static setTabStatus(tab: Tab, isActive: Boolean) {
     if (isActive) {
       tab.setAttribute('active', '');
       setTimeout(() => { tab.classList.add('visible'); }, ANIMATION_DURATION_MS * 2);
@@ -116,11 +115,11 @@ export default class TabGroup extends LitElement {
 
   setActiveTab() {
     const hash = window.location.hash.replace('#', '');
-    if (!hash) this.setTabStatus(this.slottedTabs?.[0], true);
+    if (!hash) TabGroup.setTabStatus(this.slottedTabs?.[0], true);
     else {
       this.slottedTabs?.forEach((tab) => {
         const isActive = tab.getAttribute('name') === hash;
-        this.setTabStatus(tab, isActive);
+        TabGroup.setTabStatus(tab, isActive);
       });
     }
   }
