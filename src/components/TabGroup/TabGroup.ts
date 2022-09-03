@@ -101,10 +101,10 @@ export default class TabGroup extends LitElement {
   static styles = styles;
 
   @property({ type: String })
-  title: string = '';
+    title: string = '';
 
   @state()
-  links: Link[] = [];
+    links: Link[] = [];
 
   constructor() {
     super();
@@ -135,12 +135,12 @@ export default class TabGroup extends LitElement {
 
   updateLinks() {
     const { hash } = window.location;
-    this.links = this.slottedTabs?.map((tab) => {
+    this.links = this.slottedTabs?.map((tab, i) => {
       const href = tab.getAttribute('name') ? `#${tab.getAttribute('name')}` : '';
       return {
         href,
         label: tab.getAttribute('label') || '',
-        isActive: hash.includes(href),
+        isActive: !i && !hash ? true : hash.includes(href),
       };
     });
   }
