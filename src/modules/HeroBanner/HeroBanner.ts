@@ -5,6 +5,7 @@ const styles = css`
   .wrap {
     position: relative;
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
     width: 100%;
     height: auto;
@@ -12,28 +13,12 @@ const styles = css`
   }
 
   .wrap > .image {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     width: 100%;
     height: 100%;
   }
 
   .wrap > .image > img.bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center bottom;
-  }
-
-  @media (min-width: 1536px) {
-    .wrap > .image > img.bg {
-      object-fit: contain;
-    }
-  }
-
-  .wrap[contained=true] > .image > img.bg {
-    object-fit: contain;
+    display: none;
   }
 
   .wrap[condensed=true] kps-container {
@@ -94,6 +79,36 @@ const styles = css`
     width: 14rem;
     margin-bottom: 3rem;
   }
+
+  @media (min-width: 768px) {
+    .wrap > .image {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+
+    .wrap > .image > img.bg-mobile {
+      display: none;
+    }
+
+    .wrap > .image > img.bg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+    }
+
+    .wrap[contained=true] > .image > img.bg {
+      object-fit: contain;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .wrap > .image > img.bg {
+      object-fit: contain;
+    }
+  }
 `;
 
 @customElement('kps-hero')
@@ -106,6 +121,9 @@ class HeroBanner extends LitElement {
   @property({ type: Object })
     bgImg = { src: '', alt: '' };
 
+  @property({ type: Object })
+    mobileImg = { src: '', alt: '' };
+
   @property({ type: Boolean })
     condensed = false;
 
@@ -117,6 +135,7 @@ class HeroBanner extends LitElement {
       <div class="wrap" condensed="${this.condensed}" contained="${this.contained}">
         <div class="image">
           <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
+          <img class="bg-mobile" src="${this.mobileImg.src}" alt="${this.mobileImg.alt}" />
         </div>
 
         <kps-container padding-x="lg">
