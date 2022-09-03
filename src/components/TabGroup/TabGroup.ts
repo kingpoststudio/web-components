@@ -2,11 +2,14 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import Tab from '../Tab/Tab';
 
+const ANIMATION_DURATION_MS = 300;
+
 const styles = css`
   .wrap {
     display: grid;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
+    min-height: 32rem;
     background: var(--color-secondary-darkest);
   }
 
@@ -20,11 +23,18 @@ const styles = css`
   }
 
   .tabs ::slotted(kps-tab) {
+    opacity: 0;
     display: none;
+    position: absolute;
+    transition: opacity var(--ease-time) var(--ease-type);
   }
 
   .tabs ::slotted(kps-tab[active]) {
     display: block;
+  }
+
+  .tabs ::slotted(kps-tab[active].visible) {
+    opacity: 1;
   }
 
   .nav {
@@ -60,7 +70,7 @@ const styles = css`
     font-weight: var(--font-weight-semibold);
     color: var(--color-white);
     text-decoration: none;
-    transition: color 0.2s ease-in-out;
+    transition: color 0.3s ease-in-out;
   }
 
   .nav > ul.links > li > a:hover {
@@ -94,13 +104,23 @@ export default class TabGroup extends LitElement {
     return slot?.assignedElements({ flatten: true }) as Tab[];
   }
 
+  setTabStatus(tab: Tab, isActive: Boolean) {
+    if (isActive) {
+      tab.setAttribute('active', '');
+      setTimeout(() => { tab.classList.add('visible'); }, ANIMATION_DURATION_MS * 2);
+    } else {
+      tab.classList.remove('visible');
+      setTimeout(() => { tab.removeAttribute('active'); }, ANIMATION_DURATION_MS);
+    }
+  }
+
   setActiveTab() {
     const hash = window.location.hash.replace('#', '');
-    if (!hash) this.slottedTabs?.[0].setAttribute('active', '');
+    if (!hash) this.setTabStatus(this.slottedTabs?.[0], true);
     else {
       this.slottedTabs?.forEach((tab) => {
-        if (tab.getAttribute('name') === hash) tab.setAttribute('active', '');
-        else tab.removeAttribute('active');
+        const isActive = tab.getAttribute('name') === hash;
+        this.setTabStatus(tab, isActive);
       });
     }
   }
