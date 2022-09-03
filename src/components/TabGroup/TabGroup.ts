@@ -26,6 +26,7 @@ const styles = css`
     align-items: center;
     justify-content: center;
     min-height: 32rem;
+    border-bottom: 1px solid var(--color-secondary-darker);
   }
 
   .tabs ::slotted(kps-tab) {
@@ -94,6 +95,8 @@ const styles = css`
 
     .tabs {
       justify-content: flex-start;
+      border-bottom: none;
+      border-right: 1px solid var(--color-secondary-darker);
     }
   }
 `;

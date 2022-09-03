@@ -29,8 +29,6 @@ export default class Form extends LitElement {
     script.src = 'https://js.hsforms.net/forms/v2.js';
     document.body.appendChild(script);
 
-    console.log(this.portalId, this.formId, this.target);
-
     script.addEventListener('load', () => {
       window.hbspt.forms.create({
         portalId: this.portalId,
