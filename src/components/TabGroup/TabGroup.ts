@@ -2,6 +2,12 @@ import { LitElement, html, css } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 import Tab from '../Tab/Tab';
 
+interface Link {
+  label: string;
+  href: string;
+  isActive: boolean;
+}
+
 const ANIMATION_DURATION_MS = 300;
 
 const styles = css`
@@ -72,6 +78,7 @@ const styles = css`
     transition: color 0.3s ease-in-out;
   }
 
+  .nav > ul.links > li > a.active,
   .nav > ul.links > li > a:hover {
     color: var(--color-tertiary-light);
   }
@@ -94,19 +101,26 @@ export default class TabGroup extends LitElement {
   static styles = styles;
 
   @property({ type: String })
-    title: string = '';
+  title: string = '';
 
   @state()
-    tabs: Tab[] = [];
+  links: Link[] = [];
 
   constructor() {
     super();
-    this.setActiveTab = this.setActiveTab.bind(this);
+    this.updateLinks = this.updateLinks.bind(this);
+    this.updateTabs = this.updateTabs.bind(this);
   }
 
   get slottedTabs() {
     const slot = this.shadowRoot?.querySelector('slot');
     return slot?.assignedElements({ flatten: true }) as Tab[];
+  }
+
+  get tabLinks() {
+    return this.links.map((link) => html`
+      <li><a class="${link.isActive ? 'active' : ''}" href="${link.href}">${link.label}</a></li>
+    `);
   }
 
   static setTabStatus(tab: Tab, isActive: Boolean) {
@@ -119,7 +133,19 @@ export default class TabGroup extends LitElement {
     }
   }
 
-  setActiveTab() {
+  updateLinks() {
+    const { hash } = window.location;
+    this.links = this.slottedTabs?.map((tab) => {
+      const href = tab.getAttribute('name') ? `#${tab.getAttribute('name')}` : '';
+      return {
+        href,
+        label: tab.getAttribute('label') || '',
+        isActive: hash.includes(href),
+      };
+    });
+  }
+
+  updateTabs() {
     const hash = window.location.hash.replace('#', '');
     if (!hash) TabGroup.setTabStatus(this.slottedTabs?.[0], true);
     else {
@@ -131,18 +157,24 @@ export default class TabGroup extends LitElement {
   }
 
   onSlotChange() {
-    this.tabs = this.slottedTabs;
-    this.setActiveTab();
+    this.updateTabs();
+    this.updateLinks();
   }
 
   connectedCallback() {
     super.connectedCallback();
-    window.addEventListener('hashchange', this.setActiveTab);
+    window.addEventListener('hashchange', () => {
+      this.updateTabs();
+      this.updateLinks();
+    });
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    window.removeEventListener('hashchange', this.setActiveTab);
+    window.removeEventListener('hashchange', () => {
+      this.updateTabs();
+      this.updateLinks();
+    });
   }
 
   render() {
@@ -159,9 +191,7 @@ export default class TabGroup extends LitElement {
             <slot name="subtitle"></slot>
           </div>
           <ul class="links">
-            ${this.tabs.map((tab) => html`
-              <li><a href="#${tab.getAttribute('name')}">${tab.getAttribute('label')}</a></li>
-            `)}
+            ${this.tabLinks}
           </ul>
         </div>
       </div>
