@@ -13,12 +13,21 @@ const styles = css`
   }
 
   .wrap > .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
   }
 
   .wrap > .image > img.bg {
     display: none;
+  }
+
+  .wrap > .image > img.bg-mobile {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .wrap[condensed=true] kps-container {
@@ -30,7 +39,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 45rem;
+    min-height: 36rem;
   }
 
   kps-container > * {
@@ -45,7 +54,7 @@ const styles = css`
     display: flex;
     margin: 0;
     font-family: var(--font-heading);
-    font-size: var(--font-size-8xl);
+    font-size: 17.5vw;
     font-weight: var(--font-weight-light);
     line-height: 1;
     color: var(--color-secondary-lighter);
@@ -53,14 +62,17 @@ const styles = css`
 
   kps-container > .subtitle ::slotted(h2) {
     font-family: var(--font-heading);
-    font-size: var(--font-size-2xl);
+    font-size: 4.5vw;
     font-weight: var(--font-weight-light);
     color: var(--color-secondary-lighter);
+    line-height: 1.75;
     margin: 0;
   }
 
   kps-container > .tagline ::slotted(p) {
     color: var(--color-white);
+    font-size: 4.5vw;
+    margin: 0;
   }
 
   kps-container > .ctas ::slotted(kps-button) {
@@ -81,6 +93,10 @@ const styles = css`
   }
 
   @media (min-width: 768px) {
+    .wrap {
+      flex-direction: row;
+    }
+
     .wrap > .image {
       position: absolute;
       bottom: 0;
@@ -101,6 +117,23 @@ const styles = css`
 
     .wrap[contained=true] > .image > img.bg {
       object-fit: contain;
+    }
+
+    kps-container {
+      min-height: 45rem;
+    }
+
+    kps-container > .title ::slotted(h1) {
+      font-size: var(--font-size-8xl);
+    }
+
+    kps-container > .subtitle ::slotted(h2) {
+      font-size: var(--font-size-2xl);
+    }
+
+    kps-container > .tagline ::slotted(p) {
+      color: var(--color-white);
+      font-size: var(--font-size-xl);
     }
   }
 
@@ -133,6 +166,7 @@ class HeroBanner extends LitElement {
   render() {
     return html`
       <div class="wrap" condensed="${this.condensed}" contained="${this.contained}">
+      
         <div class="image">
           <img class="bg" src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
           <img class="bg-mobile" src="${this.mobileImg.src}" alt="${this.mobileImg.alt}" />
