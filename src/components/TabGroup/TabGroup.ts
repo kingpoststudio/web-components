@@ -8,7 +8,9 @@ const styles = css`
   .wrap {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 1rem;
+    width: 100%;
+    max-width: 36rem;
+    margin: 0 auto;
     background: var(--color-secondary-darkest);
   }
 
@@ -24,7 +26,6 @@ const styles = css`
     opacity: 0;
     display: none;
     position: absolute;
-    left: 0;
     transition: opacity var(--ease-time) var(--ease-type);
   }
 
@@ -39,8 +40,7 @@ const styles = css`
   .nav {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
+    padding: 3rem 2rem;
   }
 
   .nav > * {
@@ -79,6 +79,8 @@ const styles = css`
   @media (min-width: 768px) {
     .wrap {
       grid-template-columns: 1fr 1fr;
+      grid-gap: 1rem;
+      max-width: 72rem;
     }
   }
 `;
