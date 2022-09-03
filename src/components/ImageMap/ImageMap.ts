@@ -79,7 +79,7 @@ const styles = css`
 `;
 
 function goToHref(href: string) {
-  window.location.href = href;
+  if (href) window.location.href = href;
 }
 
 @customElement('kps-image-map')

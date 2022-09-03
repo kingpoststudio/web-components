@@ -82,6 +82,10 @@ const styles = css`
       grid-gap: 1rem;
       max-width: 72rem;
     }
+
+    .tabs {
+      justify-content: flex-start;
+    }
   }
 `;
 
