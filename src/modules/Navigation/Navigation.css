@@ -196,6 +196,7 @@ header {
                 }
 
                 > ul.hs-menu-children-wrapper {
+                  top: 6.5rem;
                   left: 50%;
                   transform: translate(-50%);
                   display: flex !important; /* !important to override forced HS styling */
