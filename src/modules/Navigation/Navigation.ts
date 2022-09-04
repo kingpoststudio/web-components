@@ -53,6 +53,10 @@ const styles = css`
     opacity: 0;
   }
 
+  nav kps-icon {
+    cursor: pointer;
+  }
+
   nav > kps-icon.back {
     opacity: 0;
     position: absolute;
@@ -79,7 +83,6 @@ const styles = css`
   nav > .right-menu > .buttons > kps-icon {
     grid-row: 1;
     grid-column: 1;
-    cursor: pointer;
     transition: opacity var(--ease-time) var(--ease-type);
   }
 
@@ -162,11 +165,11 @@ export default class Navigation extends LitElement {
   }
 
   private handleResize() {
-    if (!this.isMobile && window.innerWidth < 768) {
+    if (window.innerWidth < 768) {
       this.isMobile = true;
-    } else if (this.isMobile && window.innerWidth >= 768) {
+    } else {
+      if (this.isOpen) this.toggleMenu();
       this.isMobile = false;
-      if (this.isOpen) this.isOpen = false;
     }
   }
 
@@ -199,12 +202,18 @@ export default class Navigation extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     window.addEventListener('resize', this.handleResize);
+    window.addEventListener('keyup', (ke: KeyboardEvent) => {
+      if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
+    });
     this.setupMenuLinks();
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
     window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('keyup', (ke: KeyboardEvent) => {
+      if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
+    });
     this.setupMenuLinks(false);
   }
 
