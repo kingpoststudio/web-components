@@ -53,6 +53,21 @@ const styles = css`
     opacity: 0;
   }
 
+  nav > kps-icon.back {
+    opacity: 0;
+    position: absolute;
+    left: -4rem;
+    transform: rotate(270deg);
+    transition: opacity var(--ease-time) var(--ease-type), left var(--ease-time) var(--ease-type);
+  }
+
+  nav[isSubOpen="true"] > kps-icon.back {
+    opacity: 1;
+    left: 2rem;
+    position: absolute;
+    transform: rotate(270deg);
+  }
+
   nav > .right-menu > .buttons {
     display: grid;
     place-content: center;    
@@ -118,6 +133,9 @@ export default class Navigation extends LitElement {
   private isOpen = false;
 
   @state()
+  private isSubOpen = false;
+
+  @state()
   private isMobile = window.innerWidth < 768;
 
   @property({ type: Object })
@@ -132,6 +150,15 @@ export default class Navigation extends LitElement {
 
   private toggleMenu() {
     this.isOpen = !this.isOpen;
+    if (!this.isOpen && this.isSubOpen) this.toggleSubMenu();
+  }
+
+  private toggleSubMenu() {
+    this.isSubOpen = !this.isSubOpen;
+    if (!this.isSubOpen) {
+      const openItem = document.querySelector('.hs-item-open');
+      if (openItem) openItem.classList.remove('hs-item-open');
+    }
   }
 
   private handleResize() {
@@ -146,11 +173,18 @@ export default class Navigation extends LitElement {
   private menuLinkClickHandler(link: Element, teardown = false) {
     const { isMobile } = this;
 
+    const toggleSubOpen = (el: Element) => {
+      el.classList.toggle('hs-item-open');
+      this.toggleSubMenu();
+    };
+
     function handleClick(e: Event) {
       e.preventDefault();
 
       const parent = link.parentElement;
-      if (parent && isMobile) parent.classList.toggle('hs-item-open');
+      if (parent && isMobile) {
+        toggleSubOpen(parent);
+      }
     }
 
     if (teardown) link.removeEventListener('click', handleClick);
@@ -177,7 +211,9 @@ export default class Navigation extends LitElement {
   protected render() {
     return html`
       <kps-container padding-x="lg">
-        <nav isMobile="${this.isMobile}" isOpen="${this.isOpen}">
+        <nav isMobile="${this.isMobile}" isOpen="${this.isOpen}" isSubOpen="${this.isSubOpen}">
+          <kps-icon class="back" icon="chevron" @click="${this.toggleSubMenu}"></kps-icon>
+
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
           <div class="nav-menu">
@@ -185,9 +221,11 @@ export default class Navigation extends LitElement {
           </div>
 
           <div class="right-menu">
+
             <div class="cta">
               <slot name="cta"></slot>
             </div>
+
             <div class="buttons">
               <kps-icon class="hamburger" icon="hamburger" @click="${this.toggleMenu}"></kps-icon>
               <kps-icon class="cross" icon="cross" @click="${this.toggleMenu}"></kps-icon>            
