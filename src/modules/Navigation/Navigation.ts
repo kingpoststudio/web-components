@@ -121,7 +121,7 @@ export default class Navigation extends LitElement {
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
           <div class="nav-menu">
-            <slot class="${this.isMobile ? 'as-mobile' : 'as-desktop'}" name="main-menu"></slot>
+            <slot name="main-menu"></slot>
           </div>
 
           <div class="right-menu">
