@@ -29,8 +29,9 @@ const styles = css`
     align-items: center;
     top: 6.5rem;
     left: 100%;
-    width: 100vw;
+    width: 100%;
     height: calc(100vh - 6.5rem);
+    box-sizing: border-box;
     background: white;
     transition: left var(--ease-time) var(--ease-type);
   }
@@ -184,9 +185,8 @@ export default class Navigation extends LitElement {
     function handleClick(e: Event) {
       e.preventDefault();
 
-      const parent = link.parentElement;
-      if (parent && isMobile) {
-        toggleSubOpen(parent);
+      if (link && isMobile) {
+        toggleSubOpen(link);
       }
     }
 
@@ -195,7 +195,7 @@ export default class Navigation extends LitElement {
   }
 
   private setupMenuLinks(teardown = false) {
-    const hsMenuLinks = document.querySelectorAll('[slot="main-menu"] .hs-menu-depth-1.hs-item-has-children > a');
+    const hsMenuLinks = document.querySelectorAll('[slot="main-menu"] li.hs-menu-depth-1.hs-item-has-children');
     hsMenuLinks.forEach((link) => this.menuLinkClickHandler(link, teardown));
   }
 
@@ -205,16 +205,15 @@ export default class Navigation extends LitElement {
     window.addEventListener('keyup', (ke: KeyboardEvent) => {
       if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
     });
-    this.setupMenuLinks();
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
+    this.setupMenuLinks(true);
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('keyup', (ke: KeyboardEvent) => {
       if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
     });
-    this.setupMenuLinks(false);
   }
 
   protected render() {
@@ -226,7 +225,7 @@ export default class Navigation extends LitElement {
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
           <div class="nav-menu">
-            <slot name="main-menu"></slot>
+            <slot name="main-menu" @slotchange="${() => this.setupMenuLinks()}"></slot>
           </div>
 
           <div class="right-menu">

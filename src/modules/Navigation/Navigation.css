@@ -78,7 +78,7 @@ header {
                 z-index: 10;
                 display: flex !important; /* !important to override forced HS styling */
                 flex-direction: column;
-                width: 100%;
+                width: 100vw;
                 max-width: var(--page-max-width);
                 height: calc(100vh - 6.5rem);
                 overflow-y: scroll;
@@ -123,7 +123,7 @@ header {
               }
 
               &.hs-item-open {
-                > ul.hs-menu-children-wrapper {
+                ul.hs-menu-children-wrapper {
                   top: 0;
                 }
               }
