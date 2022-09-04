@@ -15,9 +15,7 @@ const styles = css`
   }
 
   .wrap > .strip {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,14 +37,14 @@ const styles = css`
 
   .wrap[position=left] > .strip {
     left: 0;
-    padding-left: 25%;
+    padding-left: 0;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
   }
 
   .wrap[position=right] > .strip {
     right: 0;
-    padding-right: 25%;
+    padding-right: 0;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
   }
@@ -55,7 +53,7 @@ const styles = css`
     content: '';
     position: absolute;
     top: 0;
-    width: 6rem;
+    width: 100%;
     height: 100%;
     background: inherit;
   }
@@ -66,6 +64,22 @@ const styles = css`
 
   .wrap[position=right] > .strip:after {
     left: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .wrap > .strip {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .wrap[position=left] > .strip {
+      padding-left: 25%;
+    }
+
+    .wrap[position=right] > .strip {
+      padding-right: 25%;
+    }
   }
 `;
 

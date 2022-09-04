@@ -21,8 +21,13 @@ const styles = css`
     height: 6.5rem;
   }
 
-  nav > .nav-menu {
+  .nav-menu {
+    display: none;
     height: 100%; 
+  }
+
+  nav[isOpen="true"] > .nav-menu {
+    display: flex;
   }
 
   img.logo {
@@ -44,6 +49,10 @@ const styles = css`
     }
   
   @media (min-width: 768px) {
+    .nav-menu {
+      display: block;
+    }
+
     img.logo {
       max-width: auto;
     }

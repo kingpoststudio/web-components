@@ -1,0 +1,162 @@
+
+header {
+  padding-bottom: 6.5rem;
+
+  kps-nav {
+    div[slot="main-menu"] {
+      @media screen and (min-width: 768px) {
+        height: 100%;
+
+        .hs-menu-wrapper {
+          height: 100%;
+
+          a {
+            color: var(--color-font);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.2s ease-in-out;
+
+            &:hover {
+              color: var(--color-primary);
+            }
+          }
+
+          > ul {
+            display: flex;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            gap: 3rem;
+            list-style: none;
+
+            > li.hs-menu-depth-1 {
+              display: flex;
+              align-items: center;
+              
+              > a,
+              > span {
+                position: relative;
+                display: flex;
+                align-items: center;
+                height: 100%;
+
+                &:after {
+                  content: '';
+                  position: absolute;
+                  bottom: 0;
+                  width: 0;
+                  height: 0.4rem;
+                  opacity: 0;
+                  background-color: var(--color-primary);
+                  transition: width .4s cubic-bezier(0,.75,.25,1),opacity .25s cubic-bezier(0.2, 0.4, 0.4, 0.8);
+                }
+              }
+
+
+              &:hover {
+                border-color: var(--color-primary);
+
+                > a,
+                > span {
+                  color: var(--color-primary);
+
+                  &:after {
+                    opacity: 1;
+                    width: 100%;
+                  }
+                }
+
+              }
+
+              &.hs-item-has-children {
+                > ul.hs-menu-children-wrapper {
+                  position: absolute;
+                  top: 100%;
+                  left: 50%;
+                  transform: translate(-50%);
+                  display: flex !important; /* !important to override forced HS styling */
+                  flex-direction: row;
+                  justify-content: center;
+                  width: calc(100% - 8rem);
+                  max-width: var(--page-max-width);
+                  margin: 0 auto;
+                  padding: 2rem 2rem 4rem;
+                  gap: 2rem;
+                  background: var(--color-white);
+                  opacity: 0;
+                  border: 1px solid var(--color-gray-lightest);
+                  list-style: none;
+                  overflow-y: hidden;
+                  pointer-events: none; 
+                  transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
+
+                  > li.hs-menu-depth-2 {
+                    max-width: 20rem;
+                    border-right: 1px solid var(--color-gray-lightest);
+
+                    > a {
+                      display: block;
+                      margin-bottom: 0.8rem;
+                    }
+
+                    &:first-child:nth-last-child(1) {
+                      width: 100%;
+                    }
+
+                    &:first-child:nth-last-child(2),
+                    &:first-child:nth-last-child(2) ~ li {
+                      width: 50%;
+                    }
+
+                    &:first-child:nth-last-child(3),
+                    &:first-child:nth-last-child(3) ~ li {
+                      width: 33%;
+                    }
+
+                    &:first-child:nth-last-child(4),
+                    &:first-child:nth-last-child(4) ~ li {
+                      width: 25%;
+                    }
+
+                    &:first-child:nth-last-child(5),
+                    &:first-child:nth-last-child(5) ~ li {
+                      width: 20%;
+                    }
+
+                    &:last-child {
+                      border-right: none;
+                    }
+
+                    &.hs-item-has-children {
+                      > ul.hs-menu-children-wrapper {
+                        padding: 0;
+                        list-style: none;
+
+                        > li.hs-menu-depth-3 {
+                          margin-bottom: 0.8rem;
+
+                          > a,
+                          > span {
+                            font-weight: var(--font-weight-normal);
+                            text-transform: none;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+
+                &:hover > ul {
+                  opacity: 1;
+                  pointer-events: auto;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

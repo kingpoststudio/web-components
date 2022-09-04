@@ -27,6 +27,8 @@ const styles = css`
 
   .wrap .mobile-img > img {
     object-fit: cover;
+    width: 100%;
+    height: 100%;
   }
 
   .wrap[condensed=true] kps-container {

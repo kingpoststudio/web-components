@@ -10,13 +10,13 @@ import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
 import ImageMap from './components/ImageMap/ImageMap';
 import Link from './components/Link/Link';
-import Navigation from './components/Navigation/Navigation';
 import Select from './components/Select/Select';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
 
 import HeroBanner from './modules/HeroBanner/HeroBanner';
+import Navigation from './modules/Navigation/Navigation';
 
 import './styles/main.css';
 
@@ -33,13 +33,13 @@ const lib = {
   Icon,
   ImageMap,
   Link,
-  Navigation,
   Select,
   Strip,
   Tab,
   TabGroup,
 
   HeroBanner,
+  Navigation,
 };
 
 export default lib;
