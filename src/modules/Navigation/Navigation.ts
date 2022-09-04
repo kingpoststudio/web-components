@@ -21,7 +21,7 @@ const styles = css`
     height: 6.5rem;
   }
 
-  .nav-menu {
+  nav[isMobile="true"] > .nav-menu {
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -39,6 +39,20 @@ const styles = css`
     left: 0;
   }
 
+  nav > .right-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  nav > .right-menu > kps-icon.hamburger {
+      margin-left: 2rem;
+      cursor: pointer;
+    }
+
+  nav[isMobile="false"] > .right-menu > kps-icon.hamburger {
+    display: none;
+  }
+
   img.logo {
     position: relative;
     height: 100%;
@@ -46,31 +60,14 @@ const styles = css`
     max-height: 4rem;
     object-fit: contain;  
   }
-
-  .right-menu {
-    display: flex;
-    align-items: center;
-  }
-
-  .right-menu > kps-icon.hamburger {
-      margin-left: 2rem;
-      cursor: pointer;
-    }
   
   @media (min-width: 768px) {
     .nav-menu {
-      position: inherit;
-      top: auto;
-      left: auto;
-      display: block;
+      height: 100%;
     }
 
     img.logo {
       max-width: auto;
-    }
-
-    .right-menu > kps-icon.hamburger {
-      display: none;
     }
   }
 `;
@@ -124,7 +121,7 @@ export default class Navigation extends LitElement {
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
           <div class="nav-menu">
-            <slot name="main-menu"></slot>
+            <slot class="${this.isMobile ? 'as-mobile' : 'as-desktop'}" name="main-menu"></slot>
           </div>
 
           <div class="right-menu">

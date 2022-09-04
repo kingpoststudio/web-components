@@ -4,7 +4,6 @@ header {
 
   kps-nav {
     div[slot="main-menu"] {
-      @media screen and (min-width: 768px) {
         height: 100%;
 
         .hs-menu-wrapper {
@@ -156,7 +155,6 @@ header {
             }
           }
         }
-      }
     }
   }
 }
