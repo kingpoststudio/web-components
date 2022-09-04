@@ -238,7 +238,7 @@ export default class Dialog extends LitElement {
               <div class="title">
                 <slot name="title"></slot>
               </div>
-              <kps-icon icon="cross" @click="${this.close}"></kps-icon>
+              <kps-icon icon="crossCircle" @click="${this.close}"></kps-icon>
             </div>
             <div class="body">
               <slot name="content"></slot>

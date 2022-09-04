@@ -35,7 +35,7 @@ const styles = css`
     transition: left var(--ease-time) var(--ease-type);
   }
 
-  nav[isOpen="true"] > .nav-menu {
+  nav[isMobile="true"][isOpen="true"] > .nav-menu {
     left: 0;
   }
 
@@ -44,23 +44,61 @@ const styles = css`
     align-items: center;
   }
 
-  nav > .right-menu > kps-icon.hamburger {
-      margin-left: 2rem;
-      cursor: pointer;
-    }
-
-  nav[isMobile="false"] > .right-menu > kps-icon.hamburger {
-    display: none;
+  nav[isMobile="true"] > .right-menu > .cta {
+    opacity: 1;
+    transition: opacity var(--ease-time) var(--ease-type);
   }
 
-  img.logo {
+  nav[isMobile="true"][isOpen="true"] > .right-menu > .cta {
+    opacity: 0;
+  }
+
+  nav > .right-menu > .buttons {
+    display: grid;
+    place-content: center;    
+    width: 2rem;
+    height: 2rem;
+    margin-left: 1rem;
+  }
+
+  nav > .right-menu > .buttons > kps-icon {
+    grid-row: 1;
+    grid-column: 1;
+    cursor: pointer;
+    transition: opacity var(--ease-time) var(--ease-type);
+  }
+
+  nav[isMobile="true"] > .right-menu > .buttons > kps-icon.hamburger,
+  nav[isMobile="true"][isOpen="true"] > .right-menu > .buttons > kps-icon.cross {
+    opacity: 1;
+  }
+
+  nav[isMobile="true"] > .right-menu > .buttons > kps-icon.cross,
+  nav[isMobile="true"][isOpen="true"] > .right-menu > .buttons > kps-icon.hamburger {
+    opacity: 0;
+  }
+
+  nav[isMobile="false"] > .right-menu > .buttons {
+    display: none; 
+  }
+
+  nav > img.logo {
     position: relative;
     height: 100%;
     max-width: 12rem;
     max-height: 4rem;
     object-fit: contain;  
   }
-  
+
+  nav[isMobile="true"] > img.logo {
+    left: 0;
+    transition: left var(--ease-time) var(--ease-type);
+  }
+
+  nav[isMobile="true"][isOpen="true"] > img.logo {
+    left: 30%;
+  }
+
   @media (min-width: 768px) {
     .nav-menu {
       height: 100%;
@@ -89,6 +127,7 @@ export default class Navigation extends LitElement {
     super();
     this.toggleMenu = this.toggleMenu.bind(this);
     this.handleResize = this.handleResize.bind(this);
+    this.menuLinkClickHandler = this.menuLinkClickHandler.bind(this);
   }
 
   private toggleMenu() {
@@ -104,32 +143,35 @@ export default class Navigation extends LitElement {
     }
   }
 
-  private static handleMenuLinkClick(link: Element, teardown = false) {
+  private menuLinkClickHandler(link: Element, teardown = false) {
+    const { isMobile } = this;
+
     function handleClick(e: Event) {
       e.preventDefault();
+
       const parent = link.parentElement;
-      if (parent) parent.classList.toggle('hs-item-open');
+      if (parent && isMobile) parent.classList.toggle('hs-item-open');
     }
 
     if (teardown) link.removeEventListener('click', handleClick);
     else link.addEventListener('click', handleClick);
   }
 
-  private static setupMenuLinks(teardown = false) {
+  private setupMenuLinks(teardown = false) {
     const hsMenuLinks = document.querySelectorAll('[slot="main-menu"] .hs-menu-depth-1.hs-item-has-children > a');
-    hsMenuLinks.forEach((link) => Navigation.handleMenuLinkClick(link, teardown));
+    hsMenuLinks.forEach((link) => this.menuLinkClickHandler(link, teardown));
   }
 
   connectedCallback(): void {
     super.connectedCallback();
     window.addEventListener('resize', this.handleResize);
-    Navigation.setupMenuLinks();
+    this.setupMenuLinks();
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
     window.removeEventListener('resize', this.handleResize);
-    Navigation.setupMenuLinks(false);
+    this.setupMenuLinks(false);
   }
 
   protected render() {
@@ -143,8 +185,13 @@ export default class Navigation extends LitElement {
           </div>
 
           <div class="right-menu">
-            <slot name="cta"></slot>
-            <kps-icon class="hamburger" icon="hamburger" @click="${this.toggleMenu}"></kps-icon>
+            <div class="cta">
+              <slot name="cta"></slot>
+            </div>
+            <div class="buttons">
+              <kps-icon class="hamburger" icon="hamburger" @click="${this.toggleMenu}"></kps-icon>
+              <kps-icon class="cross" icon="cross" @click="${this.toggleMenu}"></kps-icon>            
+            </div>
           </div>
         </nav>
       </kps-container>

@@ -8,6 +8,13 @@ const chevron = html`
 `;
 
 const cross = html`
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+    <path d="M7.778,9.192,1.414,15.557,0,14.142,6.364,7.778,0,1.414,1.414,0,7.778,6.364,14.142,0l1.415,1.414L9.192,7.778l6.364,6.364-1.415,1.415Z" fill="#0b032d"/>
+    <rect width="16" height="16" fill="none" />
+  </svg>
+`;
+
+const crossCircle = html`
   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25">
     <path class="fill-current" d="M14.5-25A12.515,12.515,0,0,0,2-12.5,12.515,12.515,0,0,0,14.5,0,12.515,12.515,0,0,0,27-12.5,12.515,12.515,0,0,0,14.5-25ZM19.456-9.185a.78.78,0,0,1,0,1.1l-.536.537a.78.78,0,0,1-1.1,0L14.5-10.8,11.185-7.544a.78.78,0,0,1-1.1,0L9.544-8.08a.78.78,0,0,1,0-1.1L12.8-12.5,9.544-15.815a.78.78,0,0,1,0-1.1l.537-.536a.78.78,0,0,1,1.1,0L14.5-14.2l3.315-3.251a.78.78,0,0,1,1.1,0l.536.536a.78.78,0,0,1,0,1.1L16.2-12.5Z" transform="translate(-2 25)" fill-rule="evenodd"/>
   </svg>
@@ -71,6 +78,7 @@ const youtube = html`
 const icons = {
   chevron,
   cross,
+  crossCircle,
   facebook,
   hamburger,
   instagram,
@@ -82,6 +90,8 @@ const icons = {
 const styles = css`
   .icon {
     display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .icon svg .fill-current {

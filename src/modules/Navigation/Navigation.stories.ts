@@ -1,7 +1,6 @@
 import { html } from 'lit';
 import './Navigation';
 import '../../styles/main.css';
-import logo from '../../assets/images/logo.svg';
 
 export default {
   title: 'Navigation',
@@ -12,7 +11,7 @@ export default {
 };
 
 const logoImg = {
-  src: logo,
+  src: 'https://21683844.fs1.hubspotusercontent-na1.net/hubfs/21683844/raw_assets/public/NoahMedicalGalaxyTheme/assets/images/logo.png',
   alt: 'Logo',
 };
 
@@ -54,8 +53,13 @@ export const Main = () => html`
         </div>
       </div>
 
-      <span slot="main-cta" color="primary" cta round uppercase>
-      </span>
+      <kps-dialog slot="cta">
+        <span slot="trigger">Request Product Info</span>
+        <div class="content" slot="content">
+          Your content goes here.
+        </div>
+      </kps-dialog>
+      
     </kps-nav>
   </header>
   <div style="height:100vh;width:100$;background:black;">
