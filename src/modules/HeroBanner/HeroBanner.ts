@@ -94,7 +94,7 @@ const styles = css`
 
   kps-container img.logo {
     width: 14rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   @media (min-width: 768px) {
@@ -190,7 +190,7 @@ class HeroBanner extends LitElement {
           <img src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
         </div>
 
-        <kps-container padding-x="lg" padding-y="lg">
+        <kps-container padding-x="lg" padding-y="2xl">
           ${this.logoImg.src && html`<img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />`}
           <div class="title"><slot name="title"></slot></div>
           <div class="subtitle"><slot name="subtitle"></slot></div>
