@@ -22,12 +22,21 @@ const styles = css`
   }
 
   .nav-menu {
-    display: none;
-    height: 100%; 
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 6.5rem;
+    left: 100%;
+    width: 100vw;
+    height: calc(100vh - 6.5rem);
+    background: white;
+    transition: left var(--ease-time) var(--ease-type);
   }
 
   nav[isOpen="true"] > .nav-menu {
-    display: flex;
+    left: 0;
   }
 
   img.logo {
@@ -50,6 +59,9 @@ const styles = css`
   
   @media (min-width: 768px) {
     .nav-menu {
+      position: inherit;
+      top: auto;
+      left: auto;
       display: block;
     }
 
@@ -68,19 +80,47 @@ export default class Navigation extends LitElement {
   static styles = styles;
 
   @state()
-    isOpen = false;
+  private isOpen = false;
+
+  @state()
+  private isMobile = window.innerWidth < 768;
 
   @property({ type: Object })
-  public logoImg = { src: '', alt: '' };
+  private logoImg = { src: '', alt: '' };
+
+  constructor() {
+    super();
+    this.toggleMenu = this.toggleMenu.bind(this);
+    this.handleResize = this.handleResize.bind(this);
+  }
 
   private toggleMenu() {
     this.isOpen = !this.isOpen;
   }
 
+  private handleResize() {
+    if (window.innerWidth < 768) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+      if (this.isOpen) this.isOpen = false;
+    }
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this.handleResize);
+  }
+
   protected render() {
     return html`
       <kps-container padding-x="lg">
-        <nav isOpen="${this.isOpen}">
+        <nav isMobile="${this.isMobile}" isOpen="${this.isOpen}">
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
           <div class="nav-menu">
