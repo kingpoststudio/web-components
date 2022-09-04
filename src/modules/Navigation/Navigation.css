@@ -73,8 +73,8 @@ header {
               > ul.hs-menu-children-wrapper {
                 box-sizing: border-box;
                 position: absolute;
-                top: 100%;
-                left: 0;
+                top: 0;
+                left: 100%;
                 z-index: 10;
                 display: flex !important; /* !important to override forced HS styling */
                 flex-direction: column;
@@ -87,7 +87,7 @@ header {
                 gap: 2rem;
                 background: var(--color-white);
                 list-style: none;
-                transition: opacity 0.2s ease-in-out, top 0.2s ease-in-out;
+                transition: opacity 0.2s ease-in-out, left 0.2s ease-in-out;
 
                 > li.hs-menu-depth-2 {
                   width: 100%;
@@ -124,7 +124,7 @@ header {
 
               &.hs-item-open {
                 ul.hs-menu-children-wrapper {
-                  top: 0;
+                  left: 0;
                 }
               }
 
