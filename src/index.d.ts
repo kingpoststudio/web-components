@@ -10,12 +10,12 @@ import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
 import ImageMap from './components/ImageMap/ImageMap';
 import Link from './components/Link/Link';
-import Navigation from './components/Navigation/Navigation';
 import Select from './components/Select/Select';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
+import Navigation from './modules/Navigation/Navigation';
 import './styles/main.css';
 
 declare const lib: {
@@ -31,11 +31,11 @@ declare const lib: {
     Icon: typeof Icon;
     ImageMap: typeof ImageMap;
     Link: typeof Link;
-    Navigation: typeof Navigation;
     Select: typeof Select;
     Strip: typeof Strip;
     Tab: typeof Tab;
     TabGroup: typeof TabGroup;
     HeroBanner: typeof HeroBanner;
+    Navigation: typeof Navigation;
 };
 export default lib;

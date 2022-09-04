@@ -96,22 +96,40 @@ export default class Navigation extends LitElement {
   }
 
   private handleResize() {
-    if (window.innerWidth < 768) {
+    if (!this.isMobile && window.innerWidth < 768) {
       this.isMobile = true;
-    } else {
+    } else if (this.isMobile && window.innerWidth >= 768) {
       this.isMobile = false;
       if (this.isOpen) this.isOpen = false;
     }
   }
 
+  private static handleMenuLinkClick(link: Element, teardown = false) {
+    function handleClick(e: Event) {
+      e.preventDefault();
+      const parent = link.parentElement;
+      if (parent) parent.classList.toggle('hs-item-open');
+    }
+
+    if (teardown) link.removeEventListener('click', handleClick);
+    else link.addEventListener('click', handleClick);
+  }
+
+  private static setupMenuLinks(teardown = false) {
+    const hsMenuLinks = document.querySelectorAll('[slot="main-menu"] .hs-menu-depth-1.hs-item-has-children > a');
+    hsMenuLinks.forEach((link) => Navigation.handleMenuLinkClick(link, teardown));
+  }
+
   connectedCallback(): void {
     super.connectedCallback();
     window.addEventListener('resize', this.handleResize);
+    Navigation.setupMenuLinks();
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
     window.removeEventListener('resize', this.handleResize);
+    Navigation.setupMenuLinks(false);
   }
 
   protected render() {
