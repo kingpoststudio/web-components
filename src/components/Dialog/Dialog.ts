@@ -261,9 +261,14 @@ export default class Dialog extends LitElement {
     }, ANIMATION_DURATION_MS);
   };
 
+  handleClick = (e: Event) => {
+    if (!this.isOpen) this.open(e);
+    else this.close(e);
+  };
+
   get trigger() {
     return html`
-      <kps-button color="${this.isOpen ? 'secondary' : 'primary'}" theme="${this.isOpen ? 'darkest' : 'base'}" uppercase @click="${this.open}">
+      <kps-button color="${this.isOpen ? 'secondary' : 'primary'}" theme="${this.isOpen ? 'darkest' : 'base'}" uppercase @click="${this.handleClick}">
         <slot name="trigger"></slot>
       </kps-button>
     `;
