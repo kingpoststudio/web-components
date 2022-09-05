@@ -70,7 +70,7 @@ const styles = css`
     align-items: center;
   }
 
-  dialog[theme=dark] .overlay {
+  dialog[theme="dark"] .overlay {
     background: var(--color-black);
     color: var(--color-white);
   }
@@ -117,6 +117,15 @@ const styles = css`
   dialog .container .header kps-icon:hover {
     color: var(--color-black);
   }
+
+  dialog[theme="dark"] .container .header kps-icon {
+    color: var(--color-white);
+  }
+
+  dialog[theme="dark"] .container .header kps-icon:hover {
+    color: var(--color-secondary-lighter);
+  }
+
 
   dialog .container .body {
     flex: 1;

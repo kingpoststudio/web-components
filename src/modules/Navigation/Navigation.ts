@@ -169,9 +169,11 @@ export default class Navigation extends LitElement {
   private handleResize() {
     if (window.innerWidth < 768) {
       this.isMobile = true;
+      this.setupMenuLinks();
     } else {
       if (this.isOpen) this.toggleMenu();
       this.isMobile = false;
+      this.setupMenuLinks(true);
     }
   }
 

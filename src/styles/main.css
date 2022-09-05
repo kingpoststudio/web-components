@@ -71,7 +71,7 @@
   --scale: min(15px, 3vw);
 
   @media (min-width: 768px) {
-    --scale: min(15px, 1.3vw);
+    --scale: min(15px, 1.4vw);
   }
 
   --page-max-width: 1440px;
