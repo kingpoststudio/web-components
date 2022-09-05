@@ -202,9 +202,7 @@ export default class Select extends LitElement {
           <kps-icon icon="chevron"></kps-icon>
         </div>
 
-        ${this.variant === 'nav' && html`
-          <div class="overlay" @click="${this.toggleOpen}"></div>
-        `}
+        ${this.variant === 'nav' ? html`<div class="overlay" @click="${this.toggleOpen}"></div>` : html`<div @click="${this.toggleOpen}"></div>`}
 
         <div class="options">
           <slot></slot>

@@ -12,8 +12,8 @@ const ANIMATION_DURATION_MS = 300;
 
 const styles = css`
   .wrap {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column-reverse;
     width: 100%;
     max-width: 36rem;
     margin: 0 auto;
@@ -88,6 +88,7 @@ const styles = css`
   
   @media (min-width: 768px) {
     .wrap {
+      display: grid;
       grid-template-columns: 1fr 1fr;
       grid-gap: 1rem;
       max-width: 72rem;
