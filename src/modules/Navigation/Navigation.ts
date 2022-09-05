@@ -52,6 +52,7 @@ const styles = css`
 
   nav[isMobile="true"][isOpen="true"] > .right-menu > .cta {
     opacity: 0;
+    pointer-events: none;
   }
 
   nav kps-icon {
