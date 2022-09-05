@@ -116,7 +116,7 @@
 
   /* Animations/Easings/Transitions */
   --ease-time: 300ms;
-  --ease-type: cubic-bezier(.28,.01,.55,.41);
+  --ease-type: cubic-bezier(.55,.15,.5,.9);
 }
 
 html {

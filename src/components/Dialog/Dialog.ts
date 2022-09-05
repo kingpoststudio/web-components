@@ -13,18 +13,21 @@ const styles = css`
   .trigger[variant="dropdown"] {
     max-width: 12rem;
     font-size: 0.75rem;
+    white-space: nowrap;
   }
 
   .trigger[variant="dropdown"]:after {
     content: "";
     position: absolute;
-    top: 0;
     left: 0;
-    width: 100%;
-    height: calc(100% + 2.08rem);
-    opacity: 0;
+    bottom: calc((6.5rem - 100%) / 2 * -1);
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
+    width: 100%;
+    height: calc(6.5rem - 100%);
+    opacity: 0;
+    left: 0px;
+    width: 100%;
     background: var(--color-secondary-darkest);
     transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
   }
@@ -140,7 +143,6 @@ const styles = css`
     left: auto;
     display: none;
     width: 100%;
-    border-bottom-left-radius: 0.5rem;
   }
 
   dialog[variant="dropdown"][open] {
@@ -149,7 +151,6 @@ const styles = css`
 
   dialog[variant="dropdown"] .overlay {
     width: 100%;
-    border-bottom-left-radius: 1rem;
     overflow: hidden;
   }
 
@@ -172,6 +173,14 @@ const styles = css`
   dialog[variant="dropdown"] .container {
     padding: var(--space-sm);
     background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
+    max-height: calc(100vh - 7.8rem);
+  }
+
+  dialog[variant="dropdown"] .container .body {
+    position: relative;
+    right: -3rem;
+    padding-block: var(--space-lg);
+    padding-right: var(--space-3xl);
   }
 
   @media (min-width: 768px) {
@@ -182,8 +191,25 @@ const styles = css`
 
     dialog[variant="dropdown"] {
       position: absolute;
-      top: calc(100% + 2.08rem);
-      min-width: 36rem; 
+      top: calc(100% + 2rem);
+      min-width: 40rem;
+      max-height: calc(100vh - 10rem);
+      border-bottom-left-radius: 0.5rem;
+    }
+
+    dialog[variant="dropdown"] .overlay {
+      display: flex;
+      border-bottom-left-radius: 0.5rem;
+    }
+
+    dialog[variant="dropdown"] .container {
+      overflow-y: auto;
+      max-height: 100%;
+    }
+
+    dialog[variant="dropdown"] .container .body {
+      padding: var(--space-lg);
+      right: auto;
     }
   }
 `;
