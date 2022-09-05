@@ -116,6 +116,28 @@ header {
                           font-weight: var(--font-weight-normal);
                           text-transform: none;
                         }
+
+                        &.hs-item-has-children {
+                          > ul.hs-menu-children-wrapper {
+                            padding: 0;
+                            list-style: none;
+
+                            > li.hs-menu-depth-4 {
+                              margin-left: 2rem;
+                              margin-bottom: 1.5rem;
+
+                              > a,
+                              > span {
+                                font-weight: var(--font-weight-normal);
+                                text-transform: none;
+                              }
+
+                              &:first-child {
+                                margin-top: 1.5rem;
+                              }
+                            }
+                          }
+                        }
                       }
                     }
                   }
@@ -200,9 +222,7 @@ header {
                   top: 6.5rem;
                   left: 50%;
                   transform: translate(-50%);
-                  display: flex !important; /* !important to override forced HS styling */
                   flex-direction: row;
-                  justify-content: center;
                   width: calc(100% - 8rem);
                   height: fit-content;
                   opacity: 0;
@@ -254,11 +274,21 @@ header {
   
                         > li.hs-menu-depth-3 {
                           margin-bottom: 0.8rem;
+
+                          &.hs-item-has-children {
+                            > ul.hs-menu-children-wrapper {
+                              padding: 0;
+                              list-style: none;
   
-                          > a,
-                          > span {
-                            font-weight: var(--font-weight-normal);
-                            text-transform: none;
+                              > li.hs-menu-depth-4 {
+                                margin-left: 2rem;
+                                margin-bottom: 0.8rem;
+  
+                                &:first-child {
+                                  margin-top: 0.8rem;
+                                }
+                              }
+                            }
                           }
                         }
                       }
