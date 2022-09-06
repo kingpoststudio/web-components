@@ -40,6 +40,15 @@ const styles = css`
     left: 0;
   }
 
+  nav[isMobile="true"] > .nav-menu > .social-media {
+    width: 100%;
+    height: 15rem;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-gray-light);
+  }
+
   nav > .right-menu {
     display: flex;
     align-items: center;
@@ -120,6 +129,10 @@ const styles = css`
   }
 
   @media (min-width: 768px) {
+    .social-media {
+      display: none;
+    }
+
     .nav-menu {
       height: 100%;
     }
@@ -229,10 +242,17 @@ export default class Navigation extends LitElement {
 
           <div class="nav-menu">
             <slot name="main-menu"></slot>
+
+            <div class="social-media">
+              <span>Follow Us</span>
+              <div class="social-icons">
+                <slot name="social-media"></slot>
+              </div>
+            </div>
+
           </div>
 
           <div class="right-menu">
-
             <div class="cta">
               <slot name="cta"></slot>
             </div>
