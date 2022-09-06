@@ -10,7 +10,7 @@ export default class BackToTop extends LitElement {
       position: fixed;
       bottom: 1rem;
       right: 1rem;
-      z-index: 100;
+      z-index: 40;
     }
 
     .wrap {

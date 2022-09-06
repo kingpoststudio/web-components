@@ -228,7 +228,7 @@ export default class Navigation extends LitElement {
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
           <div class="nav-menu">
-            <slot name="main-menu" @slotchange="${() => this.setupMenuLinks()}"></slot>
+            <slot name="main-menu"></slot>
           </div>
 
           <div class="right-menu">

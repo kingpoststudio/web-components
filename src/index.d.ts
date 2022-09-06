@@ -14,6 +14,7 @@ import Select from './components/Select/Select';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
+import BackToTop from './modules/BackToTop/BackToTop';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
 import './styles/main.css';
@@ -35,6 +36,7 @@ declare const lib: {
     Strip: typeof Strip;
     Tab: typeof Tab;
     TabGroup: typeof TabGroup;
+    BackToTop: typeof BackToTop;
     HeroBanner: typeof HeroBanner;
     Navigation: typeof Navigation;
 };
