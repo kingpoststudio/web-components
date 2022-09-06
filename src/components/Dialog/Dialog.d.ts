@@ -17,6 +17,8 @@ export default class Dialog extends LitElement {
 
   close: (e: Event) => void;
 
+  handleClick: (e: Event) => void;
+
   get trigger(): import('lit-html').TemplateResult<1>;
 
   get content(): import('lit-html').TemplateResult<1>;

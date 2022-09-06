@@ -14,13 +14,16 @@ export default class Button extends LitElement {
     variant: 'fill' | 'outline' = 'fill';
 
   @property({ type: String })
-    size: 'sm' | 'md' | 'lg' = 'md';
+    size: 'icon' | 'sm' | 'md' | 'lg' = 'md';
 
   @property({ type: String })
     href = '';
 
   @property({ type: String })
     target = '_self';
+
+  @property({ type: Boolean })
+    active = false;
 
   @property({ type: Boolean })
     cta = false;
@@ -54,6 +57,13 @@ export default class Button extends LitElement {
       transition: background-color var(--ease-time) var(--ease-type), border-color var(--ease-time) var(--ease-type);
     }
 
+    .wrap[size="icon"] > a {
+      display: flex;
+      align-items: center;
+      min-width: auto;
+      padding: 0.75rem 1rem;
+    }
+
     .wrap[size="lg"] > a {
       min-width: 9rem;
       padding: 0.75rem 1.25rem;
@@ -64,76 +74,92 @@ export default class Button extends LitElement {
       background: var(--color-secondary-darkest);
     }
 
-    .wrap[color=secondary] > a {
+    .wrap[color="secondary"] > a {
       color: var(--color-font);
       background: var(--color-secondary);
     }
 
-    .wrap[color=secondary][theme=dark] > a {
+    .wrap[color="secondary"][theme="dark"] > a {
       background: var(--color-secondary-dark);
     }
 
-    .wrap[color=secondary][theme=darker] > a {
+    .wrap[color="secondary"][theme="darker"] > a {
       background: var(--color-secondary-darker);
     }
 
-    .wrap[color=secondary][theme=darkest] > a {
+    .wrap[color="secondary"][theme="darkest"] > a {
       color: var(--color-white);
       background: var(--color-secondary-darkest);
     }
 
-    .wrap[color=secondary] > a:hover {
+    .wrap[color="secondary"] > a:hover {
       background: var(--color-secondary-darkest);
     }
 
-    .wrap[color=transparent] > a {
+    .wrap[color="transparent"] > a {
       background: var(--color-transparent);
     }
 
-    .wrap[color=success] > a {
+    .wrap[color="success"] > a {
       background: var(--color-success);
     }
 
-    .wrap[color=success] > a:hover {
+    .wrap[color="success"] > a:hover {
       background: var(--color-success-dark);
     }
 
-    .wrap[color=warning] > a {
+    .wrap[color="warning"] > a {
       background: var(--color-warning);
     }
 
-    .wrap[color=warning] > a:hover {
+    .wrap[color="warning"] > a:hover {
       background: var(--color-warning-dark);
     }
 
-    .wrap[color=error] > a {
+    .wrap[color="error"] > a {
       background: var(--color-error);
     }
 
-    .wrap[color=error] > a:hover {
+    .wrap[color="error"] > a:hover {
       background: var(--color-error-dark);
     }
 
-    .wrap[variant=outline] > a {
+    .wrap[variant="outline"] > a {
       border: 1px solid var(--color-white);
       background: transparent;
     }
 
-    .wrap[variant=outline] > a:hover {
+    .wrap[variant="outline"] > a:hover {
       background: var(--color-primary);
       border-color: var(--color-primary);
     }
 
-    .wrap[variant=outline][color=primary][theme=darkest] > a {
+    .wrap[variant="outline"][size="icon"] > a {
+      border: 1px solid var(--color-gray-light);
+      color: var(--color-gray-light);
+    }
+
+    .wrap[variant="outline"][size="icon"] > a:hover {
+      color: var(--color-white);
+      border-color: 1px solid var(--color-primary);
+    }
+
+    .wrap[variant="outline"][color="primary"][theme="darkest"] > a {
       background: var(--color-white);
       border-color: var(--color-primary-darkest);
       color: var(--color-primary-darkest);
     }
 
-    .wrap[variant=outline][color=primary][theme=darkest] > a:hover {
+    .wrap[variant="outline"][color="primary"][theme="darkest"] > a:hover {
       background: var(--color-primary);
       border-color: var(--color-primary);
       color: var(--color-white);
+    }
+
+    .wrap[active="true"][size="icon"][variant="outline"] > a {
+      color: var(--color-white);
+      background: var(--color-primary);
+      border-color: var(--color-primary);
     }
 
     .wrap[round] > a {
@@ -169,12 +195,13 @@ export default class Button extends LitElement {
   render() {
     return html`
       <div class="wrap"
-        variant=${this.variant}
-        color=${this.color}
-        theme=${this.theme}
-        size=${this.size}
-        round=${this.round}
-        uppercase=${this.uppercase}
+        variant="${this.variant}"
+        color="${this.color}"
+        theme="${this.theme}"
+        size="${this.size}"
+        round="${this.round}"
+        uppercase="${this.uppercase}"
+        active="${this.active}"
       >
         <a href="${this.href}" target="${this.target}">
           <slot @slotchange=${this.onSlotChange}></slot>

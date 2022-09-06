@@ -138,7 +138,7 @@ const styles = css`
 
   dialog[variant="dropdown"] {
     position: fixed;
-    top: 6.38rem;
+    top: 6.5rem;
     right: 0;
     left: auto;
     display: none;
