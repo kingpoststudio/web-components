@@ -26,6 +26,13 @@ const facebook = html`
   </svg>
 `;
 
+const facebookCircle = html`
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+    <circle class="fill-current" cx="18" cy="18" r="18" />
+    <path d="M85.817,17.165V9.345h2.67l.381-3.052H85.817V4.387c0-.858.286-1.526,1.526-1.526h1.621V.1C88.582.1,87.629,0,86.58,0a3.681,3.681,0,0,0-3.91,4.005V6.294H80V9.345h2.67v7.82Z" transform="translate(-66.674 9.228)" fill="#fff" fill-rule="evenodd"/>
+  </svg>
+`;
+
 const hamburger = html`
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="14" viewBox="0 0 20 14">
     <line class="stroke-current" x2="20" transform="translate(0 1)" fill="none" stroke-width="2"/>
@@ -54,9 +61,33 @@ const linkedin = html`
   </svg>
 `;
 
+const linkedinCircle = html`
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+    <circle class="fill-current" cx="18" cy="18" r="18"/>
+    <g transform="translate(10.236 9.228)">
+      <path d="M.27,5.445H3.675V16.4H.27ZM1.973,0A1.974,1.974,0,1,1,0,1.973,1.974,1.974,0,0,1,1.973,0" transform="translate(0 0)" fill="#fff" />
+      <path d="M54.688,48.949h3.265v1.5H58a3.578,3.578,0,0,1,3.221-1.769c3.444,0,4.081,2.268,4.081,5.218V59.9H61.9V54.575c0-1.271-.025-2.9-1.769-2.9-1.771,0-2.041,1.384-2.041,2.812V59.9h-3.4Z" transform="translate(-48.878 -43.504)" fill="#fff" />
+    </g>
+  </svg>
+`;
+
+const printCircle = html`
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
+    <circle class="fill-current" cx="18" cy="18" r="18" />
+    <path d="M13.333,16H2.666V12H1.333A1.319,1.319,0,0,1,0,10.667V4A1.319,1.319,0,0,1,1.333,2.666H2.666V0H13.333V2.666h1.333A1.319,1.319,0,0,1,16,4v6.667A1.319,1.319,0,0,1,14.666,12H13.333v4ZM4,9.333v5.333h8V9.333ZM2.666,8H13.333v2.666h1.333V4H1.333v6.667H2.666V8ZM4,1.333V2.666h8V1.333Z" transform="translate(10 10)" fill="#fff"/>
+  </svg>
+`;
+
 const twitter = html`
   <svg xmlns="http://www.w3.org/2000/svg" width="33.543" height="26.834" viewBox="0 0 33.543 26.834">
     <path class="fill-current" d="M14.549,7387.833a19.289,19.289,0,0,0,19.581-19.278c0-.294,0-.586-.02-.876a13.886,13.886,0,0,0,3.433-3.507,13.826,13.826,0,0,1-3.951,1.065,6.818,6.818,0,0,0,3.026-3.748,13.9,13.9,0,0,1-4.371,1.646,6.965,6.965,0,0,0-9.737-.294,6.718,6.718,0,0,0-1.991,6.474,19.654,19.654,0,0,1-14.184-7.078,6.716,6.716,0,0,0,2.132,9.042,6.9,6.9,0,0,1-3.125-.846v.085a6.806,6.806,0,0,0,5.521,6.641,6.939,6.939,0,0,1-3.106.115,6.878,6.878,0,0,0,6.428,4.708,13.95,13.95,0,0,1-8.547,2.906,14.5,14.5,0,0,1-1.639-.1,19.724,19.724,0,0,0,10.549,3.038" transform="translate(-4 -7361)" fill-rule="evenodd" />
+  </svg>
+`;
+
+const twitterCircle = html`
+  <svg xmlns="http://www.w3.org/2000/svg" width="37" height="36" viewBox="0 0 37 36">
+    <ellipse class="fill-current" cx="18.5" cy="18" rx="18.5" ry="18" />
+    <path d="M43.76,16.754A10.517,10.517,0,0,0,54.371,6.143V5.638a8.214,8.214,0,0,0,1.819-1.92,8.389,8.389,0,0,1-2.122.606A3.932,3.932,0,0,0,55.685,2.3a9.269,9.269,0,0,1-2.324.91A3.609,3.609,0,0,0,50.632,2a3.8,3.8,0,0,0-3.739,3.739,1.97,1.97,0,0,0,.1.808,10.448,10.448,0,0,1-7.68-3.941,3.87,3.87,0,0,0-.505,1.92,4.015,4.015,0,0,0,1.617,3.133,3.407,3.407,0,0,1-1.718-.505h0a3.693,3.693,0,0,0,3.032,3.638,3.115,3.115,0,0,1-1.011.1,1.72,1.72,0,0,1-.707-.1,3.828,3.828,0,0,0,3.537,2.627,7.63,7.63,0,0,1-4.649,1.617,2.8,2.8,0,0,1-.91-.1,9.538,9.538,0,0,0,5.76,1.819" transform="translate(-29.368 8.803)" fill="#fff" fill-rule="evenodd" />
   </svg>
 `;
 
@@ -80,10 +111,14 @@ const icons = {
   cross,
   crossCircle,
   facebook,
+  facebookCircle,
   hamburger,
   instagram,
   linkedin,
+  linkedinCircle,
+  printCircle,
   twitter,
+  twitterCircle,
   youtube,
 };
 
