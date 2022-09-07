@@ -8,7 +8,7 @@ interface Link {
   isActive: boolean;
 }
 
-const ANIMATION_DURATION_MS = 300;
+const ANIMATION_DURATION_MS = 200;
 
 const styles = css`
   .wrap {

@@ -29,7 +29,7 @@ const styles = css`
     left: 0px;
     width: 100%;
     background: var(--color-secondary-darkest);
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
+    transition: opacity var(--ease-time) var(--ease-type);
   }
 
   .trigger[variant="dropdown"].triggered:after {
@@ -56,7 +56,7 @@ const styles = css`
   dialog .overlay {
     z-index: 60;
     opacity: 0;
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
+    transition: opacity var(--ease-time) var(--ease-type);
   }
 
   dialog[variant="modal"] .overlay {
@@ -67,7 +67,7 @@ const styles = css`
     left: 0;
     opacity: 0;
     background: rgba(0, 0, 0, 0.6);
-    transition: opacity ${ANIMATION_DURATION_MS}ms var(--ease-type);
+    transition: opacity var(--ease-time) var(--ease-type);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,7 +97,7 @@ const styles = css`
     border-radius: 0.5rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.25);
     transform: scale(0.5);
-    transition: transform ${ANIMATION_DURATION_MS}ms var(--ease-type);
+    transition: transform var(--ease-time) var(--ease-type);
   }
 
   dialog[variant="modal"] .overlay[visible] .container {
@@ -114,7 +114,7 @@ const styles = css`
   dialog .container .header kps-icon {
     color: var(--color-gray-light);
     cursor: pointer;
-    transition: color ${ANIMATION_DURATION_MS}ms ease-in-out;
+    transition: color var(--ease-time) var(--ease-type);
   }
 
   dialog .container .header kps-icon:hover {
@@ -163,7 +163,7 @@ const styles = css`
     height: 100%;
     opacity: 0;
     background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
-    transition: opacity 150ms var(--ease-type);
+    transition: opacity var(--ease-time) var(--ease-type);
   }
 
   dialog[variant="dropdown"][open] .overlay:after {

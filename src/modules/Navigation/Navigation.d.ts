@@ -18,11 +18,13 @@ export default class Navigation extends LitElement {
 
   private toggleSubMenu;
 
+  private toggleSubOpen;
+
   private handleResize;
 
   private menuLinkClickHandler;
 
-  private setupMenuLinks;
+  private manageMenuLinks;
 
   connectedCallback(): void;
 

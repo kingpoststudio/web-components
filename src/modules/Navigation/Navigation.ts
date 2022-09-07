@@ -173,46 +173,47 @@ export default class Navigation extends LitElement {
 
   private toggleSubMenu() {
     this.isSubOpen = !this.isSubOpen;
+
     if (!this.isSubOpen) {
       const openItem = document.querySelector('.hs-item-open');
       if (openItem) openItem.classList.remove('hs-item-open');
     }
   }
 
+  private toggleSubOpen(el: Element) {
+    el.classList.toggle('hs-item-open');
+    this.toggleSubMenu();
+  }
+
   private handleResize() {
-    if (window.innerWidth < 768) {
+    if (window.innerWidth < 768 && !this.isMobile) {
       this.isMobile = true;
-      this.setupMenuLinks();
-    } else {
-      if (this.isOpen) this.toggleMenu();
+      this.manageMenuLinks();
+    } else if (window.innerWidth >= 768 && this.isMobile) {
       this.isMobile = false;
-      this.setupMenuLinks(true);
+      if (this.isOpen) this.toggleMenu();
+      this.manageMenuLinks();
     }
   }
 
-  private menuLinkClickHandler(link: Element, teardown = false) {
-    const { isMobile } = this;
-
-    const toggleSubOpen = (el: Element) => {
-      el.classList.toggle('hs-item-open');
-      this.toggleSubMenu();
+  private menuLinkClickHandler(link: Element, teardown?: Boolean) {
+    const handleClick = (e: Event) => {
+      e.preventDefault();
+      if (link) this.toggleSubOpen(link);
     };
 
-    function handleClick(e: Event) {
-      e.preventDefault();
-
-      if (link && isMobile) {
-        toggleSubOpen(link);
-      }
-    }
-
-    if (teardown) link.removeEventListener('click', handleClick);
-    else link.addEventListener('click', handleClick);
+    if (teardown) {
+      const newLink = link.cloneNode(true);
+      link.parentNode?.replaceChild(newLink, link);
+    } else link.addEventListener('click', handleClick);
   }
 
-  private setupMenuLinks(teardown = false) {
+  private manageMenuLinks() {
     const hsMenuLinks = document.querySelectorAll('[slot="main-menu"] li.hs-menu-depth-1.hs-item-has-children');
-    hsMenuLinks.forEach((link) => this.menuLinkClickHandler(link, teardown));
+    hsMenuLinks.forEach((link) => {
+      if (this.isMobile) this.menuLinkClickHandler(link);
+      else this.menuLinkClickHandler(link, true);
+    });
   }
 
   connectedCallback(): void {
@@ -225,7 +226,7 @@ export default class Navigation extends LitElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.setupMenuLinks(true);
+    this.manageMenuLinks();
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('keyup', (ke: KeyboardEvent) => {
       if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
@@ -241,7 +242,7 @@ export default class Navigation extends LitElement {
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
 
           <div class="nav-menu">
-            <slot name="main-menu"></slot>
+            <slot name="main-menu" @slotchange=${() => this.manageMenuLinks()}></slot>
 
             <div class="social-media">
               <span>Follow Us</span>
@@ -249,7 +250,6 @@ export default class Navigation extends LitElement {
                 <slot name="social-media"></slot>
               </div>
             </div>
-
           </div>
 
           <div class="right-menu">

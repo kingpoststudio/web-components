@@ -115,7 +115,7 @@
   --font-weight-black: 900;
 
   /* Animations/Easings/Transitions */
-  --ease-time: 300ms;
+  --ease-time: 200ms;
   --ease-type: cubic-bezier(.55,.15,.5,.9);
 }
 
