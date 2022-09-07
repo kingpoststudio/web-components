@@ -171,9 +171,10 @@ const styles = css`
   }
 
   dialog[variant="dropdown"] .container {
+    width: 100%;
+    max-height: calc(100vh - 7.8rem);
     padding: var(--space-sm);
     background: linear-gradient(var(--color-secondary-darkest), var(--color-gray-light));
-    max-height: calc(100vh - 7.8rem);
   }
 
   dialog[variant="dropdown"] .container .body {

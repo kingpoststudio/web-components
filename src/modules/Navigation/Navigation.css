@@ -173,7 +173,6 @@ header {
   
             > li.hs-menu-depth-1 {
               margin: 0 var(--space-md);
-              text-align: center;
               border: none;
 
               > a,
@@ -181,6 +180,7 @@ header {
                 width: auto;
                 height: 100%;
                 padding: 0;
+                text-align: center;
 
                 &:after,
                 &.hs-item-has-children:after {
