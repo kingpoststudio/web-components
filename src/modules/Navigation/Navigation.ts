@@ -208,11 +208,11 @@ export default class Navigation extends LitElement {
     } else link.addEventListener('click', handleClick);
   }
 
-  private manageMenuLinks() {
+  private manageMenuLinks(teardown?: Boolean) {
     const hsMenuLinks = document.querySelectorAll('[slot="main-menu"] li.hs-menu-depth-1.hs-item-has-children');
     hsMenuLinks.forEach((link) => {
       if (this.isMobile) this.menuLinkClickHandler(link);
-      else this.menuLinkClickHandler(link, true);
+      else this.menuLinkClickHandler(link, teardown || true);
     });
   }
 
@@ -226,7 +226,7 @@ export default class Navigation extends LitElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    this.manageMenuLinks();
+    this.manageMenuLinks(true);
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('keyup', (ke: KeyboardEvent) => {
       if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
