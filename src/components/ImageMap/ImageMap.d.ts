@@ -7,7 +7,15 @@ export default class ImageMap extends LitElement {
 
   private points;
 
+  constructor();
+
+  private repositionTags;
+
   firstUpdated(): void;
+
+  connectedCallback(): void;
+
+  disconnectedCallback(): void;
 
   render(): import('lit-html').TemplateResult<1>;
 }
