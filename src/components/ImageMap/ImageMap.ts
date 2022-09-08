@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 interface Point {
   x: number;
@@ -105,15 +105,41 @@ export default class ImageMap extends LitElement {
   @property({ type: Array })
   private points: Array<Point> = [];
 
-  firstUpdated() {
+  constructor() {
+    super();
+    this.repositionTags = this.repositionTags.bind(this);
+  }
+
+  private repositionTags() {
     const points = this.shadowRoot?.querySelectorAll('.point');
 
     points?.forEach((point) => {
       const tag = point.querySelector('.tag') as HTMLElement;
-      if (tag && tag.getBoundingClientRect().right > this.getBoundingClientRect().right) {
-        point.classList.add('to-bottom');
+
+      if (tag) {
+        let isOutside = tag.getBoundingClientRect().right > this.getBoundingClientRect().right;
+        if (isOutside && !point.classList.contains('to-bottom')) point.classList.add('to-bottom');
+        else if (point.classList.contains('to-bottom')) {
+          point.classList.remove('to-bottom');
+          isOutside = tag.getBoundingClientRect().right > this.getBoundingClientRect().right;
+          if (isOutside) point.classList.add('to-bottom');
+        }
       }
     });
+  }
+
+  firstUpdated() {
+    this.repositionTags();
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    window.addEventListener('resize', this.repositionTags);
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this.repositionTags);
   }
 
   render() {
