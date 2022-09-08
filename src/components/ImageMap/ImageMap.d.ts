@@ -7,5 +7,7 @@ export default class ImageMap extends LitElement {
 
   private points;
 
+  firstUpdated(): void;
+
   render(): import('lit-html').TemplateResult<1>;
 }
