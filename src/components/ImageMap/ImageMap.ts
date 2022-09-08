@@ -11,6 +11,7 @@ interface Point {
 const styles = css`
   .wrap {
     position: relative;
+    width: fit-content;
     height: 32rem;
   }
 
