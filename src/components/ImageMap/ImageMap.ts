@@ -36,7 +36,7 @@ const styles = css`
     background-color: var(--color-tertiary-light);
   }
 
-  .tag {
+  .point > .tag {
     opacity: 0;
     position: relative;
     top: 50%;
@@ -59,7 +59,13 @@ const styles = css`
     transition: opacity 0.2s ease-in-out;
   }
 
-  .arrow {
+  .point.to-bottom > .tag {
+    top: calc(100% + 0.725rem);
+    left: 50%;
+    transform: translate(-50%, 0);
+  }
+
+  .point > .arrow {
     opacity: 0;
     position: absolute;
     top: 50%;
@@ -71,6 +77,12 @@ const styles = css`
     border-right: 0.5rem solid var(--color-white);
     pointer-events: none;
     transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  }
+
+  .point.to-bottom > .arrow {
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(90deg);
   }
 
   .point:hover > .tag,
@@ -92,6 +104,17 @@ export default class ImageMap extends LitElement {
 
   @property({ type: Array })
   private points: Array<Point> = [];
+
+  firstUpdated() {
+    const points = this.shadowRoot?.querySelectorAll('.point');
+
+    points?.forEach((point) => {
+      const tag = point.querySelector('.tag') as HTMLElement;
+      if (tag && tag.getBoundingClientRect().right > this.getBoundingClientRect().right) {
+        point.classList.add('to-bottom');
+      }
+    });
+  }
 
   render() {
     return html`
