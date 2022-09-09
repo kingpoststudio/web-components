@@ -142,9 +142,7 @@ export default class ImageMap extends LitElement {
       const tag = point.querySelector('.tag') as HTMLElement;
 
       if (tag) {
-        tag.style.top = '';
         tag.style.left = '';
-        tag.style.bottom = '';
         point.classList.remove('to-top', 'to-bottom');
 
         let tagBounds = tag.getBoundingClientRect();
@@ -159,10 +157,8 @@ export default class ImageMap extends LitElement {
 
             if (exceedsBottom) {
               point.classList.add('to-top');
-              tag.style.top = '-100%';
             } else if (!exceedsBottom || exceedsTop) {
               point.classList.add('to-bottom');
-              tag.style.top = '100%';
             }
 
             tagBounds = tag.getBoundingClientRect();
@@ -173,7 +169,6 @@ export default class ImageMap extends LitElement {
             }
           } else if (exceedsTop) {
             point.classList.add('to-bottom');
-            tag.style.top = '100%';
 
             tagBounds = tag.getBoundingClientRect();
             if (tagBounds.left < mapBounds.left) {
