@@ -14,7 +14,6 @@ const styles = css`
     position: relative;
     width: fit-content;
     height: 32rem;
-    border: 1px solid blue;
   }
 
   img {
@@ -135,7 +134,7 @@ export default class ImageMap extends LitElement {
       if (tag) {
         let tagBounds = tag.getBoundingClientRect();
         const mapBounds = this.imageMapRef.value?.getBoundingClientRect();
-        
+
         if (tagBounds && mapBounds) {
           const exceedsRight = tagBounds.right > mapBounds?.right;
           const exceedsTop = tagBounds.top < mapBounds?.top;
