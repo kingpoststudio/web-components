@@ -125,6 +125,16 @@ export default class ImageMap extends LitElement {
     this.repositionTags = this.repositionTags.bind(this);
   }
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    window.addEventListener('resize', this.repositionTags);
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this.repositionTags);
+  }
+
   private repositionTags() {
     const points = this.shadowRoot?.querySelectorAll('.point');
 
@@ -132,6 +142,11 @@ export default class ImageMap extends LitElement {
       const tag = point.querySelector('.tag') as HTMLElement;
 
       if (tag) {
+        tag.style.top = '';
+        tag.style.left = '';
+        tag.style.bottom = '';
+        point.classList.remove('to-top', 'to-bottom');
+
         let tagBounds = tag.getBoundingClientRect();
         const mapBounds = this.imageMapRef.value?.getBoundingClientRect();
 

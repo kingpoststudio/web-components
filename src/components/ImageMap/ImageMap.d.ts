@@ -11,6 +11,10 @@ export default class ImageMap extends LitElement {
 
   constructor();
 
+  connectedCallback(): void;
+
+  disconnectedCallback(): void;
+
   private repositionTags;
 
   firstUpdated(): void;
