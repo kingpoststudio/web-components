@@ -34,7 +34,7 @@ const styles = css`
 
   .point:hover {
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -4px rgba(0,0,0,.3);
-    background-color: var(--color-tertiary-light);
+    background-color: var(--color-tertiary);
   }
 
   .point > .tag {
@@ -47,13 +47,15 @@ const styles = css`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 15rem;
+    width: max-content;
+    max-width: 15rem;
     height: auto;
-    padding: 0.5rem;
+    padding: 0.5rem 0.75rem;
     overflow: hidden;
-    background: var(--color-white);
+    border-radius: 0.5rem;
+    background: var(--color-tertiary);
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -4px rgba(0,0,0,.3);
-    color: var(--color-text);
+    color: var(--color-white);
     font-size: 1.125rem;
     text-align: center;
     pointer-events: none;
@@ -81,7 +83,7 @@ const styles = css`
     transform: translateY(-50%);
     border-top: 0.5rem solid transparent;
     border-bottom: 0.5rem solid transparent;
-    border-right: 0.5rem solid var(--color-white);
+    border-right: 0.5rem solid var(--color-tertiary);
     pointer-events: none;
     transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   }
@@ -100,7 +102,7 @@ const styles = css`
 
   .point:hover > .tag,
   .point:hover > .arrow {
-    opacity: 1;
+    opacity: 0.9;
   }
 `;
 
