@@ -1,5 +1,6 @@
 import { html, css, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { createRef, ref } from 'lit/directives/ref.js';
 
 interface Point {
   x: number;
@@ -61,8 +62,14 @@ const styles = css`
 
   .point.to-bottom > .tag {
     top: calc(100% + 0.725rem);
-    left: 50%;
     transform: translate(-50%, 0);
+    left: 50%;
+  }
+
+  .point.to-top > .tag {
+    top: calc(-100% - 5.275rem);
+    transform: translate(-50%, 0);
+    left: 50%;
   }
 
   .point > .arrow {
@@ -85,6 +92,12 @@ const styles = css`
     transform: translate(-50%, 0) rotate(90deg);
   }
 
+  .point.to-top > .arrow {
+    top: -1rem;
+    left: 50%;
+    transform: translate(-50%, 0) rotate(-90deg);
+  }
+
   .point:hover > .tag,
   .point:hover > .arrow {
     opacity: 1;
@@ -98,6 +111,8 @@ function goToHref(href: string) {
 @customElement('kps-image-map')
 export default class ImageMap extends LitElement {
   static styles = styles;
+
+  imageMapRef = createRef<HTMLDivElement>();
 
   @property({ type: String })
   private image: string = '';
@@ -117,12 +132,22 @@ export default class ImageMap extends LitElement {
       const tag = point.querySelector('.tag') as HTMLElement;
 
       if (tag) {
-        let isOutside = tag.getBoundingClientRect().right > this.getBoundingClientRect().right;
-        if (isOutside && !point.classList.contains('to-bottom')) point.classList.add('to-bottom');
-        else if (point.classList.contains('to-bottom')) {
-          point.classList.remove('to-bottom');
-          isOutside = tag.getBoundingClientRect().right > this.getBoundingClientRect().right;
-          if (isOutside) point.classList.add('to-bottom');
+        let tagBounds = tag.getBoundingClientRect();
+        const mapBounds = this.imageMapRef.value?.getBoundingClientRect();
+
+        if (tagBounds && mapBounds) {
+          if (tagBounds.right > mapBounds.right) {
+            const exceedsBottom = tagBounds.bottom + tagBounds.height > mapBounds.bottom;
+
+            if (exceedsBottom) point.classList.add('to-top');
+            else point.classList.add('to-bottom');
+
+            // Ensure that the repositioned tag is not cut off.
+            tagBounds = tag.getBoundingClientRect();
+            if (tagBounds.right > mapBounds.right) {
+              tag.style.left = `calc(50% - ${tagBounds.right - mapBounds.right}px)`;
+            }
+          }
         }
       }
     });
@@ -132,19 +157,9 @@ export default class ImageMap extends LitElement {
     this.repositionTags();
   }
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    window.addEventListener('resize', this.repositionTags);
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    window.removeEventListener('resize', this.repositionTags);
-  }
-
   render() {
     return html`
-      <div class="wrap">
+      <div class="wrap" ${ref(this.imageMapRef)}>
         <img src="${this.image}" />
         ${this.points?.length && this.points.map((point) => html`
         <div class="point" style="left:${point.x}%;top:${point.y}%;" @click="${() => goToHref(point.href)}">
