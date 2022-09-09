@@ -14,6 +14,7 @@ const styles = css`
     position: relative;
     width: fit-content;
     height: 32rem;
+    border: 1px solid blue;
   }
 
   img {
@@ -61,15 +62,15 @@ const styles = css`
   }
 
   .point.to-bottom > .tag {
-    top: calc(100% + 0.725rem);
-    transform: translate(-50%, 0);
     left: 50%;
+    top: 100%;
+    transform: translate(-50%, 0.7rem);
   }
-
+  
   .point.to-top > .tag {
-    top: calc(-100% - 5.275rem);
-    transform: translate(-50%, 0);
     left: 50%;
+    top: -100%;
+    transform: translate(-50%, calc(-100% + 1.8rem));
   }
 
   .point > .arrow {
@@ -134,18 +135,35 @@ export default class ImageMap extends LitElement {
       if (tag) {
         let tagBounds = tag.getBoundingClientRect();
         const mapBounds = this.imageMapRef.value?.getBoundingClientRect();
-
+        
         if (tagBounds && mapBounds) {
-          if (tagBounds.right > mapBounds.right) {
+          const exceedsRight = tagBounds.right > mapBounds?.right;
+          const exceedsTop = tagBounds.top < mapBounds?.top;
+
+          if (exceedsRight) {
             const exceedsBottom = tagBounds.bottom + tagBounds.height > mapBounds.bottom;
 
-            if (exceedsBottom) point.classList.add('to-top');
-            else point.classList.add('to-bottom');
+            if (exceedsBottom) {
+              point.classList.add('to-top');
+              tag.style.top = '-100%';
+            } else if (!exceedsBottom || exceedsTop) {
+              point.classList.add('to-bottom');
+              tag.style.top = '100%';
+            }
 
-            // Ensure that the repositioned tag is not cut off.
             tagBounds = tag.getBoundingClientRect();
             if (tagBounds.right > mapBounds.right) {
               tag.style.left = `calc(50% - ${tagBounds.right - mapBounds.right}px)`;
+            } else if (tagBounds.left < mapBounds.left) {
+              tag.style.left = `calc(50% + ${mapBounds.left + tagBounds.left}px)`;
+            }
+          } else if (exceedsTop) {
+            point.classList.add('to-bottom');
+            tag.style.top = '100%';
+
+            tagBounds = tag.getBoundingClientRect();
+            if (tagBounds.left < mapBounds.left) {
+              tag.style.left = `calc(50% + ${mapBounds.left - tagBounds.left}px)`;
             }
           }
         }
