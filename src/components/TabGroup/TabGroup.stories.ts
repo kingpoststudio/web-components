@@ -16,7 +16,9 @@ export const TabGroup = () => html`
       <kps-image-map
         image="https://21683844.fs1.hubspotusercontent-na1.net/hubfs/21683844/galaxy.png"
         .points="${[
-    { x: 80, y: 80, tag: 'This is a test, yes, yes it really is.', href: '#test-2'},
+    {
+      x: 80, y: 80, tag: 'This is a test, yes, yes it really is.', href: '#test-2',
+    },
     { x: 38, y: 49 }, { x: 60, y: 22 }, { x: 69, y: 65 },
   ]}"
       >

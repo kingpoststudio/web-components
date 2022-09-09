@@ -15,9 +15,9 @@ export default class ImageMap extends LitElement {
 
   disconnectedCallback(): void;
 
-  private repositionTags;
-
   firstUpdated(): void;
+
+  repositionTags(): void;
 
   render(): import('lit-html').TemplateResult<1>;
 }
