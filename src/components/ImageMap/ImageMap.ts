@@ -135,7 +135,11 @@ export default class ImageMap extends LitElement {
     window.removeEventListener('resize', this.repositionTags);
   }
 
-  private repositionTags() {
+  firstUpdated() {
+    this.repositionTags();
+  }
+
+  repositionTags() {
     const points = this.shadowRoot?.querySelectorAll('.point');
 
     points?.forEach((point) => {
@@ -178,10 +182,6 @@ export default class ImageMap extends LitElement {
         }
       }
     });
-  }
-
-  firstUpdated() {
-    this.repositionTags();
   }
 
   render() {

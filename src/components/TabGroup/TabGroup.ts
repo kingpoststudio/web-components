@@ -31,15 +31,16 @@ const styles = css`
 
   .tabs ::slotted(kps-tab) {
     opacity: 0;
-    display: none;
+    display: block;
     position: absolute;
+    z-index: -1;
     left: 0;
     right: 0;
     transition: opacity var(--ease-time) var(--ease-type);
   }
 
   .tabs ::slotted(kps-tab[active]) {
-    display: block;
+    z-index: 0;
   }
 
   .tabs ::slotted(kps-tab[active].visible) {
