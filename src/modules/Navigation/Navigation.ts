@@ -7,13 +7,13 @@ export default class Navigation extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @state()
-  private isOpen = false;
+  private isMenuOpen = false;
 
   @state()
-  private isSubOpen = false;
+  private isSubMenuOpen = false;
 
   @state()
-  private isMobile = window.innerWidth < 768;
+  private isMobileView = window.innerWidth < 768;
 
   @property({ type: Object })
   private logoImg = { src: '', alt: '' };
@@ -26,14 +26,14 @@ export default class Navigation extends LitElement {
   }
 
   private toggleMenu() {
-    this.isOpen = !this.isOpen;
-    if (!this.isOpen && this.isSubOpen) this.toggleSubMenu();
+    this.isMenuOpen = !this.isMenuOpen;
+    if (!this.isMenuOpen && this.isSubMenuOpen) this.toggleSubMenu();
   }
 
   private toggleSubMenu() {
-    this.isSubOpen = !this.isSubOpen;
+    this.isSubMenuOpen = !this.isSubMenuOpen;
 
-    if (!this.isSubOpen) {
+    if (!this.isSubMenuOpen) {
       const openItem = document.querySelector('.hs-item-open');
       if (openItem) openItem.classList.remove('hs-item-open');
     }
@@ -45,12 +45,12 @@ export default class Navigation extends LitElement {
   }
 
   private handleResize() {
-    if (window.innerWidth < 768 && !this.isMobile) {
-      this.isMobile = true;
+    if (window.innerWidth < 768 && !this.isMobileView) {
+      this.isMobileView = true;
       this.manageMenuLinks();
-    } else if (window.innerWidth >= 768 && this.isMobile) {
-      this.isMobile = false;
-      if (this.isOpen) this.toggleMenu();
+    } else if (window.innerWidth >= 768 && this.isMobileView) {
+      this.isMobileView = false;
+      if (this.isMenuOpen) this.toggleMenu();
       this.manageMenuLinks();
     }
   }
@@ -70,7 +70,7 @@ export default class Navigation extends LitElement {
   private manageMenuLinks(teardown?: Boolean) {
     const hsMenuLinks = document.querySelectorAll('[slot="main-menu"] li.hs-menu-depth-1.hs-item-has-children');
     hsMenuLinks.forEach((link) => {
-      if (this.isMobile) this.menuLinkClickHandler(link);
+      if (this.isMobileView) this.menuLinkClickHandler(link);
       else this.menuLinkClickHandler(link, teardown || true);
     });
   }
@@ -79,7 +79,7 @@ export default class Navigation extends LitElement {
     super.connectedCallback();
     window.addEventListener('resize', this.handleResize);
     window.addEventListener('keyup', (ke: KeyboardEvent) => {
-      if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
+      if (ke.key === 'Escape' && this.isMenuOpen) this.toggleMenu();
     });
   }
 
@@ -88,14 +88,14 @@ export default class Navigation extends LitElement {
     this.manageMenuLinks(true);
     window.removeEventListener('resize', this.handleResize);
     window.removeEventListener('keyup', (ke: KeyboardEvent) => {
-      if (ke.key === 'Escape' && this.isOpen) this.toggleMenu();
+      if (ke.key === 'Escape' && this.isMenuOpen) this.toggleMenu();
     });
   }
 
   protected render() {
     return html`
       <kps-container padding-x="lg">
-        <nav isMobile="${this.isMobile}" isOpen="${this.isOpen}" isSubOpen="${this.isSubOpen}">
+        <nav isMobileView="${this.isMobileView}" isMenuOpen="${this.isMenuOpen}" isSubMenuOpen="${this.isSubMenuOpen}">
           <kps-icon class="back" icon="chevron" @click="${this.toggleSubMenu}"></kps-icon>
 
           <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />

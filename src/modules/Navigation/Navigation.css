@@ -54,7 +54,7 @@ nav {
     }
   }
 
-  &[isMobile="true"] {
+  &[isMobileView="true"] {
     > img.logo {
       left: 0;
       transition: left var(--ease-time) var(--ease-type);
@@ -103,7 +103,7 @@ nav {
       }
     }
 
-    &[isOpen="true"] {
+    &[isMenuOpen="true"] {
       > img.logo {
         left: 30%;
       }
@@ -132,7 +132,7 @@ nav {
       }
     }
 
-    &[isSubOpen="true"] {
+    &[isSubMenuOpen="true"] {
       > kps-icon.back {
         opacity: 1;
         left: 2rem;
@@ -142,7 +142,7 @@ nav {
     }
   }
 
-  &[isMobile="false"] {
+  &[isMobileView="false"] {
     > .right-menu {
       .buttons {
         display: none;
