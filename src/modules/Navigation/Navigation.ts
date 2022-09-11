@@ -1,11 +1,10 @@
 import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
-import './Navigation.css';
-import GalaxyVariant from './variants/galaxy.variant.css';
+import Styles from './Navigation.css';
 
 @customElement('kps-nav')
 export default class Navigation extends LitElement {
-  static styles = [unsafeCSS(GalaxyVariant)];
+  static styles = [unsafeCSS(Styles)];
 
   @state()
   private isOpen = false;
