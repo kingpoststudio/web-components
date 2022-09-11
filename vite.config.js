@@ -3,6 +3,7 @@ import { dirname, resolve } from 'path';
 import { defineConfig } from 'vite';
 import autoprefixer from 'autoprefixer';
 import postcssNested from 'postcss-nested';
+import postcssLit from 'rollup-plugin-postcss-lit';
 
 function generateFileName(format) {
   return `kps.${format}.js`;
@@ -17,6 +18,9 @@ export default defineConfig({
       ],
     },
   },
+  plugins: [
+    postcssLit(),
+  ],
   build: {
     lib: {
       name: 'kps-wc',

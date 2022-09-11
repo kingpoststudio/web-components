@@ -2,7 +2,7 @@ import { LitElement } from 'lit';
 import './Navigation.css';
 
 export default class Navigation extends LitElement {
-  static styles: import('lit').CSSResult;
+  static styles: import('lit').CSSResult[];
 
   private isOpen;
 
