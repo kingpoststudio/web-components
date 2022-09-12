@@ -13,9 +13,8 @@ header {
         a {
           color: var(--color-font);
           font-size: var(--font-size-lg);
-          font-weight: var(--font-weight-semibold);
+          font-weight: var(--font-weight-bold);
           text-decoration: none;
-          text-transform: uppercase;
           transition: color var(--ease-time) var(--ease-type);
 
           &:hover {
@@ -36,7 +35,6 @@ header {
             align-items: center;
             justify-content: space-between;
             margin-top: -1px;
-            border-top: 1px solid var(--color-gray-lightest);
             border-bottom: 1px solid var(--color-gray-lightest);
             cursor: pointer;
             user-select: none;
@@ -190,11 +188,11 @@ header {
                   content: '';
                   position: absolute;
                   bottom: 0;
-                  width: 0;
-                  height: 0.4rem;
+                  width: 100%;
+                  height: 0.25rem;
                   opacity: 0;
                   background-color: var(--color-primary);
-                  transition: width var(--ease-time) var(--ease-type), opacity var(--ease-time) var(--ease-type);
+                  transition: opacity var(--ease-time) var(--ease-type);
                 }
               }
   
@@ -208,7 +206,6 @@ header {
   
                   &:after {
                     opacity: 1;
-                    width: 100%;
                   }
                 }
   
@@ -231,8 +228,6 @@ header {
                   gap: 0.8rem;
                   opacity: 0;
                   border: none;
-                  border-bottom-left-radius: 0.5rem;
-                  border-bottom-right-radius: 0.5rem;
                   overflow-y: hidden;
                   pointer-events: none; 
   
@@ -247,6 +242,12 @@ header {
                     }
   
                     &.hs-item-has-children {
+                      > a {
+                        border-bottom: 1px solid var(--color-gray-lightest);
+                        padding-bottom: 0.8rem;
+                        margin-bottom: 0.8rem;
+                      }
+
                       > ul.hs-menu-children-wrapper {
                         padding: 0;
                         list-style: none;
