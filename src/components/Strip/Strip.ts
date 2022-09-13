@@ -26,23 +26,23 @@ const styles = css`
     transition: background var(--ease-time) var(--ease-type);
   }
 
-  .wrap[color=secondary] > .strip {
+  .wrap[color="secondary"] > .strip {
     color: var(--color-secondary-darker);
   }
 
-  .wrap[color=secondary][theme=dark] > .strip {
+  .wrap[color="secondary"][theme="dark"] > .strip {
     color: var(--color-white);
     background: var(--color-secondary-dark);
   }
 
-  .wrap[position=left] > .strip {
+  .wrap[position="left"] > .strip {
     left: 0;
     padding-left: 0;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
   }
 
-  .wrap[position=right] > .strip {
+  .wrap[position="right"] > .strip {
     right: 0;
     padding-right: 0;
     border-top-left-radius: 1rem;
@@ -58,11 +58,11 @@ const styles = css`
     background: inherit;
   }
 
-  .wrap[position=left] > .strip:after {
+  .wrap[position="left"] > .strip:after {
     right: 100%;
   }
 
-  .wrap[position=right] > .strip:after {
+  .wrap[position="right"] > .strip:after {
     left: 100%;
   }
 
@@ -73,11 +73,11 @@ const styles = css`
       transform: translateY(-50%);
     }
 
-    .wrap[position=left] > .strip {
+    .wrap[position="left"] > .strip {
       padding-left: 25%;
     }
 
-    .wrap[position=right] > .strip {
+    .wrap[position="right"] > .strip {
       padding-right: 25%;
     }
   }
