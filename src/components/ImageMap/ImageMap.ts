@@ -13,6 +13,7 @@ const styles = css`
   .wrap {
     position: relative;
     width: fit-content;
+    min-width: 100%;
     height: 32rem;
   }
 
