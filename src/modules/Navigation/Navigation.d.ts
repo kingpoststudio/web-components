@@ -1,14 +1,13 @@
 import { LitElement } from 'lit';
-import './Navigation.css';
 
 export default class Navigation extends LitElement {
   static styles: import('lit').CSSResult[];
 
-  private isOpen;
+  private isMenuOpen;
 
-  private isSubOpen;
+  private isSubMenuOpen;
 
-  private isMobile;
+  private isMobileView;
 
   private logoImg;
 

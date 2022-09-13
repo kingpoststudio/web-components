@@ -16,10 +16,14 @@ const styles = css`
     height: 32rem;
   }
 
+  .is-hidden {
+    display: none !important;
+  }
+
   img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
   .point {
@@ -192,7 +196,7 @@ export default class ImageMap extends LitElement {
         <img src="${this.image}" />
         ${this.points?.length && this.points.map((point) => html`
         <div class="point" style="left:${point.x}%;top:${point.y}%;" @click="${() => goToHref(point.href)}">
-          ${point.tag && html`<div class="tag">${point.tag}</div><div class="arrow"></div>`}
+          ${point.tag && html`<div class="tag">${point.tag}</div><div class="arrow is-hidden"></div>`}
         </div>
         `)}
       </div>
