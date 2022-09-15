@@ -19,6 +19,8 @@ import BackToTop from './modules/BackToTop/BackToTop';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
 
+import Utils from './utils';
+
 import './styles/main.css';
 
 const lib = {
@@ -42,6 +44,8 @@ const lib = {
   BackToTop,
   HeroBanner,
   Navigation,
+
+  Utils,
 };
 
 export default lib;
