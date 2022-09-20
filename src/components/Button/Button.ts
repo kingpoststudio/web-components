@@ -34,6 +34,9 @@ export default class Button extends LitElement {
   @property({ type: Boolean })
     uppercase = false;
 
+  @property({ type: Boolean })
+    shadow = false;
+
   static styles = css`
     :host {
       display: inline-flex;
@@ -94,6 +97,15 @@ export default class Button extends LitElement {
 
     .wrap[color="secondary"] > a:hover {
       background: var(--color-secondary-darkest);
+    }
+
+    .wrap[color="white"] > a {
+      color: var(--color-font);
+      background: var(--color-white);
+    }
+
+    .wrap[color="white"] > a:hover {
+      background: var(--color-gray-lightest);
     }
 
     .wrap[color="transparent"] > a {
@@ -162,6 +174,10 @@ export default class Button extends LitElement {
       border-color: var(--color-primary);
     }
 
+    .wrap[shadow] > a {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+
     .wrap[round] > a {
       border-radius: 0.5rem;
     }
@@ -200,6 +216,7 @@ export default class Button extends LitElement {
         theme="${this.theme}"
         size="${this.size}"
         round="${this.round}"
+        shadow="${this.shadow}"
         uppercase="${this.uppercase}"
         active="${this.active}"
       >

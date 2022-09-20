@@ -12,7 +12,7 @@ export default class ButtonGroup extends LitElement {
       display: inline-flex;
     }
 
-    :host([direction=column]) {
+    :host([direction="column"]) {
       flex-direction: column;
     }
 
@@ -28,15 +28,15 @@ export default class ButtonGroup extends LitElement {
       margin-right: 0;
     }
 
-    :host([direction=column]) {
+    :host([direction="column"]) {
       flex-direction: column;
     }
 
-    :host([direction=column]) ::slotted(*) {
+    :host([direction="column"]) ::slotted(*) {
       margin-bottom: 0.5rem;
     }
 
-    :host([direction=column]) ::slotted(:last-child) {
+    :host([direction="column"]) ::slotted(:last-child) {
       margin-bottom: 0;
     }
   `;
