@@ -73,6 +73,12 @@ export default class Button extends LitElement {
       font-size: var(--font-size-lg);
     }
 
+    .wrap[size="xl"] > a {
+      min-width: 12rem;
+      padding: 1.25rem 2rem;
+      font-size: var(--font-size-lg);
+    }
+
     .wrap > a:hover {
       background: var(--color-secondary-darkest);
     }
