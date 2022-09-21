@@ -5,6 +5,8 @@ import { customElement, property } from 'lit/decorators.js';
 export default class BackToTop extends LitElement {
   @property({ type: String }) icon = 'chevron-up';
 
+  @property({ type: Boolean }) shadow = false;
+
   static styles = css`
     :host {
       position: fixed;
@@ -29,6 +31,10 @@ export default class BackToTop extends LitElement {
     .wrap:hover {
       background-color: var(--color-gray-light);
     }
+
+    .wrap[shadow="true"] {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
   `;
 
   static scrollToTop() {
@@ -40,7 +46,7 @@ export default class BackToTop extends LitElement {
 
   render() {
     return html`
-      <div class="wrap" @click=${BackToTop.scrollToTop}>
+      <div class="wrap" shadow="${this.shadow}" @click=${BackToTop.scrollToTop}>
         <kps-icon icon="chevron"></kps-icon>
       </div>
     `;
