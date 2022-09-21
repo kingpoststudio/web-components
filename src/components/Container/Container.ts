@@ -28,6 +28,14 @@ export default class Container extends LitElement {
     padding-block: var(--space-2xl);
   }
 
+  :host([padding-x="none"]) {
+    padding-inline: 0;
+  }
+
+  :host([padding-y="none"]) {
+    padding-block: 0;
+  }
+
   @media (min-width: 768px) {
     :host([padding-x='md']) {
       padding-inline: var(--space-md);
