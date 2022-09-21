@@ -24,6 +24,10 @@ export default class ButtonGroup extends LitElement {
       margin-right: 0.5rem;
     }
 
+    :host([gap="lg"]) ::slotted(*) {
+      margin-right: 1.5rem;
+    }
+
     :host ::slotted(:last-child) {
       margin-right: 0;
     }
@@ -34,6 +38,10 @@ export default class ButtonGroup extends LitElement {
 
     :host([direction="column"]) ::slotted(*) {
       margin-bottom: 0.5rem;
+    }
+
+    :host([gap="lg"][direction="column"]) ::slotted(*) {
+      margin-bottom: 1.5rem;
     }
 
     :host([direction="column"]) ::slotted(:last-child) {
