@@ -15,7 +15,7 @@ const styles = css`
     position: relative;
     width: fit-content;
     min-width: 100%;
-    height: 32rem;
+    height: 100%;
   }
 
   .wrap[emphasized="true"] > .point {
