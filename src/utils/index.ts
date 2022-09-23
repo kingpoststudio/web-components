@@ -14,6 +14,8 @@ export function elIntersectsCenter(el: HTMLElement): boolean {
   );
 }
 
-export default {
+const Utils = {
   elIntersectsCenter,
 };
+
+export default Utils;

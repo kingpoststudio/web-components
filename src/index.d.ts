@@ -39,5 +39,8 @@ declare const lib: {
     BackToTop: typeof BackToTop;
     HeroBanner: typeof HeroBanner;
     Navigation: typeof Navigation;
+    Utils: {
+        elIntersectsCenter: typeof import('./utils').elIntersectsCenter;
+    };
 };
 export default lib;

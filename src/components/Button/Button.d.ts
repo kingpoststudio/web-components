@@ -22,6 +22,8 @@ export default class Button extends LitElement {
 
   uppercase: boolean;
 
+  shadow: boolean;
+
   static styles: import('lit').CSSResult;
 
   /**

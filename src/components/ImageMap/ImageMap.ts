@@ -17,6 +17,10 @@ const styles = css`
     height: 32rem;
   }
 
+  .wrap[emphasized="true"] > .point {
+    opacity: 0.1;
+  }
+
   .is-hidden {
     display: none !important;
   }
@@ -24,7 +28,7 @@ const styles = css`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .point {
@@ -33,11 +37,13 @@ const styles = css`
     height: 2.5rem;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
     background: var(--radial-gradient-tertiary);
   }
 
-  .point:hover {
+  .point:hover,
+  .wrap[emphasized="true"] > .point:hover {
+    opacity: 1;
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -4px rgba(0,0,0,.3);
     background-color: var(--color-tertiary);
   }
@@ -127,6 +133,9 @@ export default class ImageMap extends LitElement {
   @property({ type: Array })
   private points: Array<Point> = [];
 
+  @property({ type: Boolean })
+  private emphasized = false;
+
   constructor() {
     super();
     this.repositionTags = this.repositionTags.bind(this);
@@ -144,6 +153,10 @@ export default class ImageMap extends LitElement {
 
   firstUpdated() {
     this.repositionTags();
+  }
+
+  toggleEmphasized() {
+    this.emphasized = !this.emphasized;
   }
 
   repositionTags() {
@@ -193,10 +206,16 @@ export default class ImageMap extends LitElement {
 
   render() {
     return html`
-      <div class="wrap" ${ref(this.imageMapRef)}>
+      <div class="wrap" emphasized="${this.emphasized}" ${ref(this.imageMapRef)}>
         <img src="${this.image}" />
         ${this.points?.length && this.points.map((point) => html`
-        <div class="point" style="left:${point.x}%;top:${point.y}%;" @click="${() => goToHref(point.href)}">
+        <div 
+          class="point"
+          style="left:${point.x}%;top:${point.y}%;"
+          @click="${() => goToHref(point.href)}"
+          @mouseenter=${this.toggleEmphasized}
+          @mouseleave=${this.toggleEmphasized}
+        >
           ${point.tag && html`<div class="tag">${point.tag}</div><div class="arrow is-hidden"></div>`}
         </div>
         `)}
