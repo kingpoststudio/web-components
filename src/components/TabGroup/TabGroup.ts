@@ -17,7 +17,6 @@ const styles = css`
     width: 100%;
     max-width: 36rem;
     margin: 0 auto;
-    background: var(--color-secondary-darkest);
   }
 
   .tabs {
@@ -26,7 +25,7 @@ const styles = css`
     align-items: center;
     justify-content: center;
     min-height: 32rem;
-    border-bottom: 1px solid var(--color-secondary-darker);
+    background: var(--color-gray-lightest);
   }
 
   .tabs ::slotted(kps-tab) {
@@ -51,6 +50,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     padding: 3rem 2rem;
+    background: var(--color-secondary-darkest);
   }
 
   .nav > * {
@@ -91,7 +91,6 @@ const styles = css`
     .wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-gap: 1rem;
       max-width: 72rem;
     }
 
@@ -131,6 +130,8 @@ export default class TabGroup extends LitElement {
   }
 
   static setTabStatus(tab: Tab, isActive: Boolean) {
+    if (!tab) return;
+
     if (isActive) {
       tab.setAttribute('active', '');
       setTimeout(() => { tab.classList.add('visible'); }, ANIMATION_DURATION_MS * 2);

@@ -177,6 +177,8 @@ export default class ImageMap extends LitElement {
     const points = this.shadowRoot?.querySelectorAll('.point');
 
     points?.forEach((point) => {
+      if (!point) return;
+
       const tag = point.querySelector('.tag') as HTMLElement;
       const position = point.getAttribute('position') as string;
 
