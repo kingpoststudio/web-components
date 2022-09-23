@@ -10,6 +10,7 @@ export default {
 export const ImageMap = () => html`
   <kps-image-map
     image="//21683844.fs1.hubspotusercontent-na1.net/hubfs/21683844/raw_assets/public/NoahMedicalGalaxyTheme/assets/images/galaxy.png"
+    imageSize="cover"
     .points="${[
     {
       x: 50, y: 50, tag: 'This is a test, bucko.', position: 'bottom',

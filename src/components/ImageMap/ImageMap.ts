@@ -29,6 +29,10 @@ const styles = css`
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+  }
+
+  img[size="contain"] {
     object-fit: contain;
   }
 
@@ -137,6 +141,9 @@ export default class ImageMap extends LitElement {
   @property({ type: String })
   private image: string = '';
 
+  @property({ type: String })
+  private imageSize: 'cover' | 'contain' = 'cover';
+
   @property({ type: Array })
   private points: Array<Point> = [];
 
@@ -223,7 +230,7 @@ export default class ImageMap extends LitElement {
   render() {
     return html`
       <div class="wrap" emphasized="${this.emphasized}" ${ref(this.imageMapRef)}>
-        <img src="${this.image}" />
+        <img src="${this.image}" size="${this.imageSize}" />
         ${this.points?.length && this.points.map((point) => html`
         <div 
           class="point"
