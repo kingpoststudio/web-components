@@ -1,5 +1,5 @@
 import { html, css, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 type CardVariant =
   | 'base'
@@ -20,17 +20,27 @@ const styles = css`
     display: flex;
     width: 100%;
     max-height: 16rem;
+    overflow: hidden;
   }
 
   .wrap > .image ::slotted(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    margin-bottom: 1rem;
+    transform: scale(1.01);
+    transition: transform 0.6s var(--ease-type);
+  }
+
+  .wrap > .image[zoomed="true"] ::slotted(img) {
+    transform: scale(1.2);
   }
 
   .wrap > .content {
     padding: 1rem 0;
+  }
+
+  .wrap > .content > .link {
+    display: inline-block;
   }
 
   .wrap[color="primary"] {
@@ -92,6 +102,10 @@ const styles = css`
 
   .wrap > .content > a:hover::after {
     width: 100%;
+  }
+
+  .wrap > .link {
+    display: inline-flex;
   }
 
   .wrap[variant="quote"] {
@@ -201,6 +215,9 @@ const styles = css`
 export default class Card extends LitElement {
   static styles = styles;
 
+  @state()
+  private zoomed = false;
+
   @property({ type: String })
     variant: CardVariant = 'base';
 
@@ -222,15 +239,21 @@ export default class Card extends LitElement {
   @property({ type: Object })
     link = { label: '', href: '', target: '_blank' };
 
+  toggleZoom() {
+    this.zoomed = !this.zoomed;
+  }
+
   get baseContent() {
     return html`
-      <div class="image">
+      <div class="image" zoomed=${this.zoomed}>
         <slot name="image"></slot>
       </div>
       <div class="content">
         <div class="title"><slot name="title"></slot></div>
         <div class="description"><slot name="description"></slot></div>
-        ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : html`<slot name="link"></slot>`}
+        <div class="link" @mouseenter=${this.toggleZoom} @mouseleave=${this.toggleZoom}>
+          ${this.link.href && this.link.label ? html`<a href=${this.link.href}>${this.link.label}</a>` : html`<slot name="link"></slot>`}
+        </div>
       </div>
     `;
   }
