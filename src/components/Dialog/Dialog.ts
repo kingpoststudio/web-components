@@ -8,6 +8,7 @@ const styles = css`
   .trigger {
     position: relative;
     display: inline-block;
+    user-select: none;
   }
 
   .trigger[variant="dropdown"] {
