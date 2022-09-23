@@ -9,6 +9,8 @@ export default class ImageMap extends LitElement {
 
   private points;
 
+  private emphasized;
+
   constructor();
 
   connectedCallback(): void;
@@ -16,6 +18,8 @@ export default class ImageMap extends LitElement {
   disconnectedCallback(): void;
 
   firstUpdated(): void;
+
+  toggleEmphasized(): void;
 
   repositionTags(): void;
 

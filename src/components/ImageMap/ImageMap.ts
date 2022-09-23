@@ -7,6 +7,7 @@ interface Point {
   y: number;
   tag: string;
   href: string;
+  position: string;
 }
 
 const styles = css`
@@ -83,6 +84,12 @@ const styles = css`
     left: 50%;
     top: -100%;
     transform: translate(-50%, calc(-100% + 1.8rem));
+  }
+
+  .point.to-left > .tag {
+    left: -100%;
+    top: 50%;
+    transform: translate(calc(-100% + 1.8rem), -50%);
   }
 
   .point > .arrow {
@@ -164,24 +171,32 @@ export default class ImageMap extends LitElement {
 
     points?.forEach((point) => {
       const tag = point.querySelector('.tag') as HTMLElement;
+      const position = point.getAttribute('position') as string;
 
       if (tag) {
         tag.style.left = '';
         point.classList.remove('to-top', 'to-bottom');
+        if (position) point.classList.add(`to-${position}`);
 
         let tagBounds = tag.getBoundingClientRect();
         const mapBounds = this.imageMapRef.value?.getBoundingClientRect();
 
         if (tagBounds && mapBounds) {
-          const exceedsRight = tagBounds.right > mapBounds?.right;
           const exceedsTop = tagBounds.top < mapBounds?.top;
+          const exceedsLeft = tagBounds.left < mapBounds?.left;
+          const exceedsRight = tagBounds.right > mapBounds?.right;
 
-          if (exceedsRight) {
+          if (exceedsLeft) {
+            if (position) point.classList.remove(`to-${position}`);
+            point.classList.add('to-right');
+          } else if (exceedsRight) {
             const exceedsBottom = tagBounds.bottom + tagBounds.height > mapBounds.bottom;
 
             if (exceedsBottom) {
+              if (position) point.classList.remove(`to-${position}`);
               point.classList.add('to-top');
             } else if (!exceedsBottom || exceedsTop) {
+              if (position) point.classList.remove(`to-${position}`);
               point.classList.add('to-bottom');
             }
 
@@ -192,6 +207,7 @@ export default class ImageMap extends LitElement {
               tag.style.left = `calc(50% + ${mapBounds.left + tagBounds.left}px)`;
             }
           } else if (exceedsTop) {
+            if (position) point.classList.remove(`to-${position}`);
             point.classList.add('to-bottom');
 
             tagBounds = tag.getBoundingClientRect();
@@ -212,6 +228,7 @@ export default class ImageMap extends LitElement {
         <div 
           class="point"
           style="left:${point.x}%;top:${point.y}%;"
+          position="${point.position}"
           @click="${() => goToHref(point.href)}"
           @mouseenter=${this.toggleEmphasized}
           @mouseleave=${this.toggleEmphasized}
