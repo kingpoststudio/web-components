@@ -1,4 +1,4 @@
-import Button from './components/Button/Button';
+import Button from './components/Button';
 import ButtonGroup from './components/ButtonGroup/ButtonGroup';
 import Card from './components/Card/Card';
 import Container from './components/Container/Container';

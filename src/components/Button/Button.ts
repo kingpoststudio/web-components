@@ -1,11 +1,13 @@
-import { html, css, LitElement } from 'lit';
+import {
+  html, css, LitElement, CSSResultGroup,
+} from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import './Button.css';
 
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-    color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
+    color: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
 
   @property({ type: String })
     theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest' = 'base';
@@ -14,28 +16,28 @@ export default class Button extends LitElement {
     variant: 'fill' | 'outline' = 'fill';
 
   @property({ type: String })
-    size: 'icon' | 'sm' | 'md' | 'lg' = 'md';
+    size: 'sm' | 'md' | 'lg' | 'icon' = 'md';
 
   @property({ type: String })
     href = '';
 
   @property({ type: String })
-    target = '_self';
+    target: '_self' | '_blank' | '_parent' | '_top' = '_self';
 
   @property({ type: Boolean })
     active = false;
 
   @property({ type: Boolean })
-    cta = false;
+    uppercase = false;
 
   @property({ type: Boolean })
     round = false;
 
   @property({ type: Boolean })
-    uppercase = false;
+    shadow = false;
 
   @property({ type: Boolean })
-    shadow = false;
+    cta = false;
 
   static styles = css`
     :host {
@@ -191,7 +193,7 @@ export default class Button extends LitElement {
     .wrap[uppercase] > a {
       text-transform: uppercase;
     }
-  `;
+  ` as CSSResultGroup;
 
   /**
    * onSlotChange
@@ -207,7 +209,7 @@ export default class Button extends LitElement {
 
     if (ctaLink) {
       const href = ctaLink.getAttribute('href');
-      const target = ctaLink.getAttribute('target');
+      const target = ctaLink.getAttribute('target') as '_blank' | '_self';
 
       if (href) this.href = href;
       if (target) this.target = target;
