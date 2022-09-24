@@ -1,4 +1,4 @@
-const { mergeConfig } = require('vite');
+const path = require('path');
 
 module.exports = {
   "stories": [
@@ -18,6 +18,11 @@ module.exports = {
   async viteFinal(config) {
     config.optimizeDeps.include = [...(config.optimizeDeps?.include ?? []), '@storybook/web-components'];
     config.optimizeDeps.exclude = [...(config.optimizeDeps?.exclude ?? []), 'lit', 'lit-html'];
-    return config;
+    return {
+      ...config,
+      resolve: {
+        alias: { "~": path.resolve(__dirname, "../src") },
+      },
+    };
   },
 };

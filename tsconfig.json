@@ -21,13 +21,17 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "baseUrl": "./src",
+    "paths": {
+      "~/*": ["./*"]
+    }
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
   ],
   "exclude": [
-    "src/**/*.stories.ts"
+    "src/**/*.stories.ts",
   ],
   "references": [
     {
