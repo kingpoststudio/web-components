@@ -24,14 +24,14 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "~/*": ["./*"]
+      "~/*": [
+        "./*"
+      ]
     }
   },
-  "include": [
-    "src/**/*.ts",
-  ],
   "exclude": [
     "src/**/*.stories.ts",
+    "node_modules"
   ],
   "references": [
     {
