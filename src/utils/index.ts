@@ -14,8 +14,20 @@ export function elIntersectsCenter(el: HTMLElement): boolean {
   );
 }
 
+export function getTextColor(el: HTMLElement): string {
+  const bgColor = window.getComputedStyle(el).backgroundColor;
+  const color = bgColor === 'transparent' ? 'white' : bgColor;
+  const rgb = color.replace(/[^\d,]/g, '').split(',');
+  const brightness = Math.round(((parseInt(rgb[0], 10) * 299)
+    + (parseInt(rgb[1], 10) * 587)
+    + (parseInt(rgb[2], 10) * 114)) / 1000);
+
+  return brightness > 125 ? 'black' : 'white';
+}
+
 const Utils = {
   elIntersectsCenter,
+  getTextColor,
 };
 
 export default Utils;
