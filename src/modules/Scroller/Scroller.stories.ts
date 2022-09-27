@@ -11,5 +11,14 @@ export default {
 };
 
 export const Main = () => html`
-  <kps-scroller></kps-scroller>
+  <div>
+    <div style="height: 50vh; background: red; display: flex; align-items: center; justify-content: center;"></div>
+    <kps-scroller>
+      <div>This is some text.</div>
+      <div>Can you believe it?</div>
+      <div>One more time.</div>
+      <div>Taco Bell.</div>
+    </kps-scroller>
+    <div style="height: 50vh; background: red; display: flex; align-items: center; justify-content: center;"></div>
+  </div>
 `;
