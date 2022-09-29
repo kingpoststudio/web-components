@@ -1,4 +1,3 @@
-import Button from './components/Button/Button';
 import ButtonGroup from './components/ButtonGroup/ButtonGroup';
 import Card from './components/Card/Card';
 import Container from './components/Container/Container';
@@ -20,7 +19,10 @@ import Navigation from './modules/Navigation/Navigation';
 import './styles/main.css';
 
 declare const lib: {
-    Button: typeof Button;
+    Button: {
+        Button: typeof import('./components/Button/Button').default;
+        GalaxyButton: typeof import('./components/Button/themes/Galaxy/Button').default;
+    };
     ButtonGroup: typeof ButtonGroup;
     Card: typeof Card;
     Container: typeof Container;
@@ -41,6 +43,7 @@ declare const lib: {
     Navigation: typeof Navigation;
     Utils: {
         elIntersectsCenter: typeof import('./utils').elIntersectsCenter;
+        getTextColor: typeof import('./utils').getTextColor;
     };
 };
 export default lib;

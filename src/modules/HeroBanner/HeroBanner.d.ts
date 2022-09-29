@@ -18,6 +18,10 @@ declare class HeroBanner extends LitElement {
         alt: string;
     };
 
+  hideCta: boolean;
+
+  hideExtra: boolean;
+
   condensed: boolean;
 
   contained: boolean;

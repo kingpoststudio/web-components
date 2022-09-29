@@ -4,6 +4,8 @@ declare type CardVariant = 'base' | 'article' | 'quote' | 'post';
 export default class Card extends LitElement {
   static styles: import('lit').CSSResult;
 
+  private zoomed;
+
   variant: CardVariant;
 
   color: 'primary' | 'secondary';
@@ -21,6 +23,8 @@ export default class Card extends LitElement {
         href: string;
         target: string;
     };
+
+  toggleZoom(): void;
 
   get baseContent(): import('lit-html').TemplateResult<1>;
 

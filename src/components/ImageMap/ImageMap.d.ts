@@ -7,6 +7,8 @@ export default class ImageMap extends LitElement {
 
   private image;
 
+  private imageSize;
+
   private points;
 
   private emphasized;

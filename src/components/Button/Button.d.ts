@@ -1,30 +1,30 @@
-import { LitElement } from 'lit';
+import { LitElement, CSSResultGroup } from 'lit';
 import './Button.css';
 
-export default class Button extends LitElement {
-  color: 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 'transparent';
+declare class Button extends LitElement {
+  color: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'transparent';
 
   theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest';
 
   variant: 'fill' | 'outline';
 
-  size: 'icon' | 'sm' | 'md' | 'lg';
+  size: 'sm' | 'md' | 'lg' | 'icon';
 
   href: string;
 
-  target: string;
+  target: '_self' | '_blank' | '_parent' | '_top';
 
   active: boolean;
 
-  cta: boolean;
+  uppercase: boolean;
 
   round: boolean;
 
-  uppercase: boolean;
-
   shadow: boolean;
 
-  static styles: import('lit').CSSResult;
+  cta: boolean;
+
+  static styles: CSSResultGroup;
 
   /**
      * onSlotChange
@@ -40,3 +40,4 @@ export default class Button extends LitElement {
 
   render(): import('lit-html').TemplateResult<1>;
 }
+export default Button;
