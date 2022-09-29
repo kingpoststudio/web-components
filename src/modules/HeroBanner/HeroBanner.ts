@@ -93,10 +93,15 @@ const styles = css`
     right: 2rem;
   }
 
-
   kps-container img.logo {
     width: 14rem;
     margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    kps-container.mobile-flush {
+      padding-bottom: 0;
+    }
   }
 
   @media (min-width: 768px) {
@@ -193,12 +198,11 @@ class HeroBanner extends LitElement {
   render() {
     return html`
       <div class="wrap" condensed="${this.condensed}" contained="${this.contained}">
-      
         <div class="bg-img">
           <img src="${this.bgImg.src}" alt="${this.bgImg.alt}" />
         </div>
 
-        <kps-container padding-x="lg" padding-y="2xl">
+        <kps-container class="${this.hideCta && this.hideExtra ? 'mobile-flush' : ''}" padding-x="lg" padding-y="2xl">
           ${this.logoImg.src && html`<img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />`}
           <div class="title"><slot name="title"></slot></div>
           <div class="subtitle"><slot name="subtitle"></slot></div>
