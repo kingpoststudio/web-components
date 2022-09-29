@@ -12,7 +12,7 @@ function generateFileName(format) {
 export default defineConfig({
   resolve: {
     alias: {
-      '~': resolve(dirname, 'src'),
+      '~': resolve(dirname('src')),
     },
   },
   css: {

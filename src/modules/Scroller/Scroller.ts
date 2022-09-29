@@ -11,10 +11,8 @@ const styles = css`
   .wrap {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 40vh;
     background: #CCC;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
   }
 
   .wrap::-webkit-scrollbar {
@@ -22,15 +20,15 @@ const styles = css`
   }
 
   ::slotted(*) {
+    position: sticky;
     flex: none;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    height: 40vh;
     border: 2px solid red;
     box-sizing: border-box;
-    scroll-snap-align: start;
   }
 `;
 
@@ -39,16 +37,6 @@ export default class Scroller extends LitElement {
   static styles = styles;
 
   wrapRef = createRef<HTMLDivElement>();
-
-  firstUpdated() {
-    const wrap = this.wrapRef.value;
-    window.addEventListener('scroll', () => {
-      const topPos = wrap?.getBoundingClientRect().top;
-      if (topPos && topPos <= 0) {
-        
-      }
-    });
-  }
 
   render() {
     return html`

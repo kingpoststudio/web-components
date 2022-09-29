@@ -179,6 +179,12 @@ class HeroBanner extends LitElement {
     mobileImg = { src: '', alt: '' };
 
   @property({ type: Boolean })
+    hideCta = false;
+
+  @property({ type: Boolean })
+    hideExtra = false;
+
+  @property({ type: Boolean })
     condensed = false;
 
   @property({ type: Boolean })
@@ -202,14 +208,18 @@ class HeroBanner extends LitElement {
             <img src="${this.mobileImg.src}" alt="${this.mobileImg.alt}" />
           </div>
 
+          ${!this.hideCta ? html`
           <kps-button-group class="ctas">
             <slot name="primary-cta"></slot>
             <slot name="secondary-cta"></slot>
           </kps-button-group>
+          ` : ''}
 
+          ${!this.hideExtra ? html`
           <div class="extra">
             <slot name="extra"></slot>
           </div>
+          ` : ''}
         </kps-container>
       </div>
     `;
