@@ -40,11 +40,6 @@ export default class Stepper extends LitElement {
 
     if (!stepsContainer || !aniContainer) return;
 
-    if (window.innerWidth <= 1020) {
-      aniContainer.style.position = 'relative';
-      return;
-    }
-
     const scrollLength = stepsContainer.offsetHeight - itemHeight;
     const { top, bottom } = stepsContainer.getBoundingClientRect();
     const containerFromTop = scrollLength - (scrollLength + top);
@@ -70,7 +65,6 @@ export default class Stepper extends LitElement {
 
     stepsContainer.style.setProperty('--sp', `${scrollPercent}`);
 
-    // find and set active step
     let activeStep = this.steps[0];
     const stepCount = this.steps.length;
     const stepPercent = scrollPercent * stepCount;
@@ -101,74 +95,41 @@ export default class Stepper extends LitElement {
     }
 
     .ani {
-      display: none;
+      position: absolute;
+      height: 100vh;
+      width: 100vw;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
     }
 
-    @media screen and (min-width: 1020px) {
-      .ani {
-        position: absolute;
-        height: 100vh;
-        width: 100vw;
-        left: 50%;
-        top: 0;
-        transform: translateX(-50%);
-      }
+    .live .ani {
+      display: block;
+    }
 
-      .live .ani {
-        display: block;
-      }
+    :host(:not([live])) {
+      --desktop-aside-opacity: 1;
+    }
 
-      :host(:not([live])) {
-        --desktop-aside-opacity: 1;
-      }
+    .images {
+      width: 100%;
+      height: 100%;
+      aspect-ratio: 1;
+      position: absolute;
+      overflow: hidden;
+    }
 
-      .images {
-        --size: 50%;
-        width: var(--size);
-        aspect-ratio: 1;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        border-radius: 50%;
-        overflow: hidden;
-        background-image: var(--gradient-sunrise-light);
-      }
+    .images img {
+      opacity: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      position: absolute;
+    }
 
-      .images img {
-        transition: opacity 0.4s ease-in-out;
-        opacity: 0;
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        position: absolute;
-      }
-
-      .images img.active {
-        opacity: 1;
-      }
-
-      .titles {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        max-width: 234px;
-        transform: translateY(calc(calc(var(--sp) - 0.5) * -25vh));
-        position: absolute;
-        left: 1rem;
-        top: 0;
-        bottom: 0;
-      }
-
-      .center {
-        position: relative;
-        margin: 0 auto;
-        max-width: var(--page-max-width);
-        height: 100vh;
-      }
+    .images img.active {
+      opacity: 1;
     }
   `;
 
