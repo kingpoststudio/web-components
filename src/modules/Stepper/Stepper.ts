@@ -43,6 +43,9 @@ export default class Stepper extends LitElement {
 
   constructor() {
     super();
+    this.getBlockContent = this.getBlockContent.bind(this);
+    this.getImageContent = this.getImageContent.bind(this);
+
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.handleScroll, { passive: true });
 
@@ -99,26 +102,23 @@ export default class Stepper extends LitElement {
     if (this.activeImage !== activeImage) this.activeImage = activeImage;
   };
 
+  getBlockContent(block: StepBlock) {
+    const activeIndex = this.activeImage ? this.images.indexOf(this.activeImage) : -1;
+    const isVisible = block.slides.from <= activeIndex && activeIndex <= block.slides.to;
+    return html`<div class="block ${isVisible ? 'visible' : ''}">${block?.text}</div>`;
+  }
+
+  getImageContent(image: StepImage) {
+    const isActive = this.activeImage === image;
+    return html`<img class="${isActive ? 'active' : ''}" src="${image?.src}" alt="${image?.alt}" />`;
+  }
+
   render() {
     return html`
       <div class="wrap" ${ref(this.wrapRef)}>
         <div class="animation ${this.visible ? 'visible' : ''}" ${ref(this.animationRef)}>
-          <div class="images">
-            ${this.images.map((image) => html`
-            <img class="${this.activeImage === image ? 'active' : ''}" src="${image?.src}" alt="${image?.alt}" />
-            `)}
-            </div>
-          <div class="blocks">
-            ${this.blocks.map((block) => {
-              const activeIndex = this.activeImage ? this.images.indexOf(this.activeImage) : -1;
-
-              const isVisible = block.slides.from <= activeIndex && activeIndex <= block.slides.to;
-              // const { x, y } = block.position;
-
-              return html`
-            <h2 class="block ${isVisible ? 'visible' : ''}">${block?.text}</h2>
-            `})}
-          </div>
+          <div class="images">${this.images.map(this.getImageContent)}</div>
+          <div class="blocks">${this.blocks.map(this.getBlockContent)}</div>
         </div>
       </div>
     `;
