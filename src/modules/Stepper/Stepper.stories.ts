@@ -25,6 +25,7 @@ const images = [
 
 const blocks = [
   { text: 'Lorem ipsum dolor sit amet.', position: { x: 10, y: 10 }, slides: { from: 0, to: 3 } },
+  { text: '<h1>This is a test, please be considerate.</h1>', position: { x: 30, y: 60 }, slides: { from: 4, to: 10 } },
 ];
 
 export const Main = () => html`

@@ -56,6 +56,9 @@
     height: 100%;
 
     > div.block {
+      position: absolute;
+      width: fit-content;
+      max-width: 24rem;
       opacity: 0;
       transition: opacity 0.25s ease-in-out;
 
