@@ -5,6 +5,8 @@ import styles from './Stepper.css?inline';
 
 @customElement('kps-stepper')
 export default class Stepper extends LitElement {
+  static styles = unsafeCSS(styles);
+
   @property()
     steps = [];
 
@@ -16,9 +18,7 @@ export default class Stepper extends LitElement {
 
   wrapRef = createRef();
 
-  aniRef = createRef();
-
-  static styles = unsafeCSS(styles);
+  animationRef = createRef();
 
   constructor() {
     super();
@@ -35,14 +35,14 @@ export default class Stepper extends LitElement {
   }
 
   handleScroll = () => {
-    const stepsContainer = this.wrapRef.value as HTMLElement;
-    const aniContainer = this.aniRef.value as HTMLElement;
+    const wrapEl = this.wrapRef.value as HTMLElement;
+    const animationEl = this.animationRef.value as HTMLElement;
 
-    if (!stepsContainer || !aniContainer) return;
+    if (!wrapEl || !animationEl) return;
 
     const itemHeight = window.innerHeight;
-    const scrollLength = stepsContainer.offsetHeight - itemHeight;
-    const { top } = stepsContainer.getBoundingClientRect();
+    const scrollLength = wrapEl.offsetHeight - itemHeight;
+    const { top } = wrapEl.getBoundingClientRect();
     const containerFromTop = scrollLength - (scrollLength + top);
     let scrollPercent = containerFromTop / scrollLength;
 
@@ -57,17 +57,17 @@ export default class Stepper extends LitElement {
       if (this.visible) {
         this.visible = false;
         setTimeout(() => {
-          aniContainer.style.position = 'absolute';
+          animationEl.style.position = 'absolute';
         }, 250);
       }
     } else if (scrollPercent <= 0) {
-      aniContainer.style.position = 'absolute';
+      animationEl.style.position = 'absolute';
     } else {
-      aniContainer.style.position = 'fixed';
+      animationEl.style.position = 'fixed';
       this.visible = true;
     }
 
-    stepsContainer.style.setProperty('--sp', `${scrollPercent}`);
+    wrapEl.style.setProperty('--sp', `${scrollPercent}`);
 
     let activeStep = this.steps[0];
     const stepCount = this.steps.length;
@@ -83,9 +83,9 @@ export default class Stepper extends LitElement {
   render() {
     return html`
       <div class="wrap" ${ref(this.wrapRef)}>
-        <div class="ani ${this.visible ? 'visible' : ''}" ${ref(this.aniRef)}>
+        <div class="animation ${this.visible ? 'visible' : ''}" ${ref(this.animationRef)}>
           <div class="images">
-            ${this.steps.map((step) => html`
+            ${this.steps.map((step: { image: string, title: string }) => html`
                 <img
                   class="${this.activeStep === step ? 'active' : ''}"
                   src="${step.image}"

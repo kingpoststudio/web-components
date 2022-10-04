@@ -6,7 +6,7 @@
   max-width: 100vw;
   height: 100vh;
   padding: 0 0;
-  margin: 0 auto;
+  margin: var(--space-4xl) auto 50vh;
   border: 1px solid red;
   box-sizing: border-box;
 }
@@ -14,7 +14,7 @@
 .wrap {
   position: relative;
 
-  .ani {
+  .animation {
     position: absolute;
     top: 0;
     left: 50%;
