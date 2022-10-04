@@ -21,6 +21,12 @@
     transform: translateX(-50%) translateY(6.5rem);
     width: 100vw;
     height: calc(100vh - 6.5rem);
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+    
+    &.visible {
+      opacity: 1;
+    }
   }
 
   .images {

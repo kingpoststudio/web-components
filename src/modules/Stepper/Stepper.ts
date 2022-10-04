@@ -53,9 +53,15 @@ export default class Stepper extends LitElement {
       scrollPercent = 1;
     }
 
-    if (scrollPercent >= 1 || scrollPercent <= 0) {
+    if (scrollPercent >= 1) {
+      if (this.visible) {
+        this.visible = false;
+        setTimeout(() => {
+          aniContainer.style.position = 'absolute';
+        }, 250);
+      }
+    } else if (scrollPercent <= 0) {
       aniContainer.style.position = 'absolute';
-      this.visible = false;
     } else {
       aniContainer.style.position = 'fixed';
       this.visible = true;
@@ -77,7 +83,7 @@ export default class Stepper extends LitElement {
   render() {
     return html`
       <div class="wrap" ${ref(this.wrapRef)}>
-        <div class="ani" ${ref(this.aniRef)}>
+        <div class="ani ${this.visible ? 'visible' : ''}" ${ref(this.aniRef)}>
           <div class="images">
             ${this.steps.map((step) => html`
                 <img
