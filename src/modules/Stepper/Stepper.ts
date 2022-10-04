@@ -1,8 +1,7 @@
-import { css, html, LitElement } from 'lit';
+import { html, LitElement, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
-
-const itemScreenHeight = 1;
+import styles from './Stepper.css?inline';
 
 @customElement('kps-stepper')
 export default class Stepper extends LitElement {
@@ -12,12 +11,14 @@ export default class Stepper extends LitElement {
   @property()
     activeStep = undefined;
 
-  stepsContainerRef = createRef();
+  @property({ type: Boolean })
+    visible = false;
+
+  wrapRef = createRef();
 
   aniRef = createRef();
 
-  @property({ type: Boolean, reflect: true })
-    live = true;
+  static styles = unsafeCSS(styles);
 
   constructor() {
     super();
@@ -34,18 +35,17 @@ export default class Stepper extends LitElement {
   }
 
   handleScroll = () => {
-    const stepsContainer = this.stepsContainerRef.value as HTMLElement;
+    const stepsContainer = this.wrapRef.value as HTMLElement;
     const aniContainer = this.aniRef.value as HTMLElement;
-    const itemHeight = window.innerHeight;
 
     if (!stepsContainer || !aniContainer) return;
 
+    const itemHeight = window.innerHeight;
     const scrollLength = stepsContainer.offsetHeight - itemHeight;
-    const { top, bottom } = stepsContainer.getBoundingClientRect();
+    const { top } = stepsContainer.getBoundingClientRect();
     const containerFromTop = scrollLength - (scrollLength + top);
     let scrollPercent = containerFromTop / scrollLength;
 
-    // Clamp range to 0-1
     if (scrollPercent < 0) {
       scrollPercent = 0;
     }
@@ -53,14 +53,12 @@ export default class Stepper extends LitElement {
       scrollPercent = 1;
     }
 
-    // Set fixed if in view, set absolute if view is outside
-    const scrolledBelow = bottom <= itemHeight;
     if (scrollPercent >= 1 || scrollPercent <= 0) {
       aniContainer.style.position = 'absolute';
-      aniContainer.style.top = scrolledBelow ? 'auto' : '0';
-      aniContainer.style.bottom = !scrolledBelow ? 'auto' : '0';
+      this.visible = false;
     } else {
       aniContainer.style.position = 'fixed';
+      this.visible = true;
     }
 
     stepsContainer.style.setProperty('--sp', `${scrollPercent}`);
@@ -76,87 +74,28 @@ export default class Stepper extends LitElement {
     if (this.activeStep !== activeStep) this.activeStep = activeStep;
   };
 
-  static styles = css`
-    :host {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      max-width: 100vw;
-      min-height: 100vh;
-      padding: 0 0 var(--space-xl);
-      margin: 0 auto;
-      border: 1px solid red;
-      box-sizing: border-box;
-    }
-
-    .steps {
-      position: relative;
-    }
-
-    .ani {
-      position: absolute;
-      height: 100vh;
-      width: 100vw;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-    }
-
-    .live .ani {
-      display: block;
-    }
-
-    :host(:not([live])) {
-      --desktop-aside-opacity: 1;
-    }
-
-    .images {
-      width: 100%;
-      height: 100%;
-      aspect-ratio: 1;
-      position: absolute;
-      overflow: hidden;
-    }
-
-    .images img {
-      opacity: 0;
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      position: absolute;
-    }
-
-    .images img.active {
-      opacity: 1;
-    }
-  `;
-
   render() {
     return html`
-      <section class="${this.live ? 'live' : ''}">
-        <div class="steps" ${ref(this.stepsContainerRef)}>
-          <div class="ani" ${ref(this.aniRef)}>
-            <div class="images">
-              ${this.steps.map((step) => html`
-                  <img
-                    class="${this.activeStep === step ? 'active' : ''}"
-                    src="${step.image}"
-                    alt="${step.title}"
-                  />
-                `)}
-              </div>
-            <div class="headlines">
-              ${this.steps.map((step) => html`
-                  <div class="step ${this.activeStep === step ? 'active' : ''}">
-                    <h2 class="stepTitle">${step.title}</h2>
-                  </div>
-                `)}
+      <div class="wrap" ${ref(this.wrapRef)}>
+        <div class="ani" ${ref(this.aniRef)}>
+          <div class="images">
+            ${this.steps.map((step) => html`
+                <img
+                  class="${this.activeStep === step ? 'active' : ''}"
+                  src="${step.image}"
+                  alt="${step.title}"
+                />
+              `)}
             </div>
+          <div class="headlines">
+            ${this.steps.map((step) => html`
+                <div class="step ${this.activeStep === step ? 'active' : ''}">
+                  <h2 class="stepTitle">${step.title}</h2>
+                </div>
+              `)}
           </div>
         </div>
-      </section>
+      </div>
     `;
   }
 }

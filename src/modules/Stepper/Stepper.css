@@ -1,0 +1,45 @@
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+  height: 100vh;
+  padding: 0 0;
+  margin: 0 auto;
+  border: 1px solid red;
+  box-sizing: border-box;
+}
+
+.wrap {
+  position: relative;
+
+  .ani {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(6.5rem);
+    width: 100vw;
+    height: calc(100vh - 6.5rem);
+  }
+
+  .images {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    > img {
+      opacity: 0;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      position: absolute;
+
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+}

@@ -25,9 +25,10 @@ const steps = [
 
 export const Main = () => html`
   <div>
-    <div style="height: 100vh; overflow: hidden;"></div>
+    <kps-nav style="background:white;"></kps-nav>
+    <div style="width:100vw;height:100vh;overflow:hidden;background:blue;"></div>
     <kps-stepper .steps=${steps}>
     </kps-stepper>
-    <div style="height: 100vh; overflow: hidden;"></div>
+    <div style="width:100vw;height:100vh;overflow:hidden;background:blue;"></div>
   </div>
 `;
