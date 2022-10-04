@@ -1,17 +1,38 @@
 import { html, LitElement, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
+import { getScrollbarWidth } from '../../utils';
 import styles from './Stepper.css?inline';
+
+interface StepImage {
+  src: string;
+  alt: string;
+}
+
+interface StepBlock {
+  text: string;
+  position: {
+    x: number;
+    y: number;
+  };
+  slides: {
+    from: number;
+    to: number;
+  };
+}
 
 @customElement('kps-stepper')
 export default class Stepper extends LitElement {
   static styles = unsafeCSS(styles);
 
   @property()
-    steps = [];
+    images: StepImage[] = [];
 
   @property()
-    activeStep = undefined;
+    blocks: StepBlock[] = [];
+
+  @property()
+    activeImage: StepImage | undefined;
 
   @property({ type: Boolean })
     visible = false;
@@ -22,9 +43,9 @@ export default class Stepper extends LitElement {
 
   constructor() {
     super();
-
     window.addEventListener('scroll', this.handleScroll);
     window.addEventListener('resize', this.handleScroll, { passive: true });
+
     this.handleScroll();
   }
 
@@ -40,44 +61,42 @@ export default class Stepper extends LitElement {
 
     if (!wrapEl || !animationEl) return;
 
-    const itemHeight = window.innerHeight;
-    const scrollLength = wrapEl.offsetHeight - itemHeight;
+    if (!animationEl.style.width) {
+      const scrollbarWidth = getScrollbarWidth();
+      animationEl.style.width = `calc(100vw - ${scrollbarWidth}px)`;
+    }
+
+    const windowHeight = window.innerHeight;
     const { top } = wrapEl.getBoundingClientRect();
+    const scrollLength = wrapEl.offsetHeight - windowHeight;
     const containerFromTop = scrollLength - (scrollLength + top);
-    let scrollPercent = containerFromTop / scrollLength;
+    let scrollPercent = 1 - containerFromTop / scrollLength;
 
-    if (scrollPercent < 0) {
-      scrollPercent = 0;
-    }
-    if (scrollPercent > 1) {
-      scrollPercent = 1;
-    }
+    if (scrollPercent < 0) scrollPercent = 0;
+    if (scrollPercent > 1) scrollPercent = 1;
 
-    if (scrollPercent >= 1) {
-      if (this.visible) {
-        this.visible = false;
-        setTimeout(() => {
-          animationEl.style.position = 'absolute';
-        }, 250);
-      }
-    } else if (scrollPercent <= 0) {
-      animationEl.style.position = 'absolute';
-    } else {
-      animationEl.style.position = 'fixed';
-      this.visible = true;
+    if (scrollPercent > 0) {
+      if (scrollPercent === 1) animationEl.style.position = 'absolute';
+      else animationEl.style.position = 'fixed';
+      if (!this.visible) this.visible = true;
+    } else if (this.visible) {
+      this.visible = false;
+      setTimeout(() => {
+        animationEl.style.position = 'absolute';
+      }, 250);
     }
 
     wrapEl.style.setProperty('--sp', `${scrollPercent}`);
 
-    let activeStep = this.steps[0];
-    const stepCount = this.steps.length;
+    let activeImage = this.images[0];
+    const stepCount = this.images.length;
     const stepPercent = scrollPercent * stepCount;
     if (stepCount > 1) {
-      activeStep = this.steps[Math.floor(stepPercent)];
-      if (!activeStep) return;
+      activeImage = this.images[Math.floor(stepPercent)];
+      if (!activeImage) return;
     }
 
-    if (this.activeStep !== activeStep) this.activeStep = activeStep;
+    if (this.activeImage !== activeImage) this.activeImage = activeImage;
   };
 
   render() {
@@ -85,20 +104,20 @@ export default class Stepper extends LitElement {
       <div class="wrap" ${ref(this.wrapRef)}>
         <div class="animation ${this.visible ? 'visible' : ''}" ${ref(this.animationRef)}>
           <div class="images">
-            ${this.steps.map((step: { image: string, title: string }) => html`
-                <img
-                  class="${this.activeStep === step ? 'active' : ''}"
-                  src="${step.image}"
-                  alt="${step.title}"
-                />
-              `)}
+            ${this.images.map((image) => html`
+            <img class="${this.activeImage === image ? 'active' : ''}" src="${image?.src}" alt="${image?.alt}" />
+            `)}
             </div>
-          <div class="headlines">
-            ${this.steps.map((step) => html`
-                <div class="step ${this.activeStep === step ? 'active' : ''}">
-                  <h2 class="stepTitle">${step.title}</h2>
-                </div>
-              `)}
+          <div class="blocks">
+            ${this.blocks.map((block) => {
+              const activeIndex = this.activeImage ? this.images.indexOf(this.activeImage) : -1;
+
+              const isVisible = block.slides.from <= activeIndex && activeIndex <= block.slides.to;
+              // const { x, y } = block.position;
+
+              return html`
+            <h2 class="block ${isVisible ? 'visible' : ''}">${block?.text}</h2>
+            `})}
           </div>
         </div>
       </div>
