@@ -65,10 +65,12 @@ export default class Stepper extends LitElement {
     const { top } = hostEl.getBoundingClientRect();
     const { innerHeight: windowHeight } = window;
     const scrollLength = hostEl.offsetHeight - windowHeight;
-    let scrollPercent = 1 - (-1 * top) / scrollLength;
+    let scrollPercent = (-1 * top) / scrollLength;
 
     if (scrollPercent < 0) scrollPercent = 0;
     if (scrollPercent > 1) scrollPercent = 1;
+
+    console.log('Top:', top, 'Scroll Length:', scrollLength, 'Scroll Percent:', scrollPercent);
 
     if (scrollPercent > 0) {
       if (scrollPercent === 1) animationEl.style.position = 'absolute';

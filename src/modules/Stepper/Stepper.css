@@ -6,7 +6,7 @@
   max-width: 100vw;
   height: 200vh;
   padding: 0;
-  margin: var(--space-3xl) auto calc(50vh + var(--space-3xl));
+  margin: var(--space-3xl) auto;
   border: 1px solid red;
   box-sizing: border-box;
 }

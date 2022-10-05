@@ -21,7 +21,7 @@ const images = [
   { src: 'https://21262706.fs1.hubspotusercontent-na1.net/hubfs/21262706/site%20images/tool-in-legion-scroll/Noah_Tool-in-Lesion_Scroll_3.jpg' },
   { src: 'https://21262706.fs1.hubspotusercontent-na1.net/hubfs/21262706/site%20images/tool-in-legion-scroll/Noah_Tool-in-Lesion_Scroll_2.jpg' },
   { src: 'https://21262706.fs1.hubspotusercontent-na1.net/hubfs/21262706/site%20images/tool-in-legion-scroll/Noah_Tool-in-Lesion_Scroll_1.jpg' },
-];
+].reverse();
 
 const blocks = [
   { text: 'Lorem ipsum dolor sit amet.', position: { x: 10, y: 10 }, slides: { from: 0, to: 3 } },
