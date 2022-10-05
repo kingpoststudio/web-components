@@ -25,10 +25,10 @@ interface StepBlock {
 export default class Stepper extends LitElement {
   static styles = unsafeCSS(styles);
 
-  @property()
+  @property({ type: Array })
     images: StepImage[] = [];
 
-  @property()
+  @property({ type: Array })
     blocks: StepBlock[] = [];
 
   @property()
@@ -112,8 +112,8 @@ export default class Stepper extends LitElement {
     return html`
       <div class="wrap" ${ref(this.wrapRef)}>
         <div class="animation ${this.visible ? 'visible' : ''}" ${ref(this.animationRef)}>
-          <div class="images">${this.images.map(this.getImageContent)}</div>
-          <div class="blocks">${this.blocks.map(this.getBlockContent)}</div>
+          <div class="images">${this.images?.length && this.images.map(this.getImageContent)}</div>
+          <div class="blocks">${this.blocks?.length && this.blocks.map(this.getBlockContent)}</div>
         </div>
       </div>
     `;

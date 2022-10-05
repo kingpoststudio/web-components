@@ -18,6 +18,7 @@ import TabGroup from './components/TabGroup/TabGroup';
 import BackToTop from './modules/BackToTop/BackToTop';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
+import Stepper from './modules/Stepper/Stepper';
 
 import Utils from './utils';
 
@@ -44,6 +45,7 @@ const lib = {
   BackToTop,
   HeroBanner,
   Navigation,
+  Stepper,
 
   Utils,
 };

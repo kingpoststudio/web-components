@@ -32,8 +32,7 @@ export const Main = () => html`
   <div>
     <kps-nav style="background:white;"></kps-nav>
     <div style="width:100vw;height:100vh;overflow:hidden;background:blue;"></div>
-    <kps-stepper .images=${images} .blocks=${blocks}>
-    </kps-stepper>
+    <kps-stepper .images=${images} .blocks=${blocks}></kps-stepper>
     <div style="width:100vw;height:100vh;overflow:hidden;background:blue;"></div>
   </div>
 `;
