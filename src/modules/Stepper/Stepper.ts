@@ -37,8 +37,6 @@ export default class Stepper extends LitElement {
   @property({ type: Boolean })
     visible = false;
 
-  wrapRef = createRef();
-
   animationRef = createRef();
 
   constructor() {
@@ -59,16 +57,15 @@ export default class Stepper extends LitElement {
   }
 
   handleScroll = () => {
-    const wrapEl = this.wrapRef.value as HTMLElement;
     const animationEl = this.animationRef.value as HTMLElement;
+    const hostEl = this.shadowRoot?.host as HTMLElement;
 
-    if (!wrapEl || !animationEl) return;
+    if (!animationEl || !hostEl) return;
 
-    const windowHeight = window.innerHeight;
-    const { top } = wrapEl.getBoundingClientRect();
-    const scrollLength = wrapEl.offsetHeight - windowHeight;
-    const containerFromTop = scrollLength - (scrollLength + top);
-    let scrollPercent = 1 - containerFromTop / scrollLength;
+    const { top } = hostEl.getBoundingClientRect();
+    const { innerHeight: windowHeight } = window;
+    const scrollLength = hostEl.offsetHeight - windowHeight;
+    let scrollPercent = 1 - (-1 * top) / scrollLength;
 
     if (scrollPercent < 0) scrollPercent = 0;
     if (scrollPercent > 1) scrollPercent = 1;
@@ -110,7 +107,7 @@ export default class Stepper extends LitElement {
 
   render() {
     return html`
-      <div class="wrap" ${ref(this.wrapRef)}>
+      <div class="wrap">
         <div class="animation ${this.visible ? 'visible' : ''}" ${ref(this.animationRef)}>
           <div class="images">${this.images?.length && this.images.map(this.getImageContent)}</div>
           <div class="blocks">${this.blocks?.length && this.blocks.map(this.getBlockContent)}</div>

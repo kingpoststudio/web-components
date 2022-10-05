@@ -41,6 +41,7 @@ export function getTextColor(el: HTMLElement): string {
 
 const Utils = {
   elIntersectsCenter,
+  getScrollbarWidth,
   getTextColor,
 };
 
