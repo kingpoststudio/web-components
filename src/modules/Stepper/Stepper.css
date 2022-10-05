@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: center;
   max-width: 100vw;
-  height: 200vh;
   padding: 0;
   margin: -25vh auto var(--space-3xl);
   border: 1px solid red;
@@ -13,7 +12,16 @@
 
 .wrap {
   position: relative;
+  height: 250vh;
   width: 100%;
+
+  &[speed="fast"] {
+    height: 200vh;
+  }
+
+  &[speed="slow"] {
+    height: 300vh;
+  }
 
   .animation {
     position: absolute;
@@ -27,6 +35,16 @@
     
     &.visible {
       opacity: 1;
+    }
+
+    &.in-progress {
+      position: fixed;
+    }
+
+    &.completed {
+      top: auto;
+      bottom: 6.5rem;
+      position: absolute;
     }
   }
 

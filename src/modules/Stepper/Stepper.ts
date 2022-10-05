@@ -37,6 +37,9 @@ export default class Stepper extends LitElement {
   @property({ type: Boolean })
     visible = false;
 
+  @property({ type: String })
+    speed: 'slow' | 'normal' | 'fast' = 'normal';
+
   animationRef = createRef();
 
   constructor() {
@@ -71,8 +74,15 @@ export default class Stepper extends LitElement {
     if (scrollPercent > 1) scrollPercent = 1;
 
     if (scrollPercent > 0) {
-      if (scrollPercent === 1) animationEl.style.position = 'absolute';
-      else animationEl.style.position = 'fixed';
+      if (scrollPercent === 1) {
+        animationEl.style.position = 'absolute';
+        animationEl.style.top = 'auto';
+        animationEl.style.bottom = '6.5rem';
+      } else {
+        animationEl.style.position = 'fixed';
+        animationEl.style.top = '0';
+        animationEl.style.bottom = 'auto';
+      }
       if (!this.visible) this.visible = true;
     } else if (this.visible) {
       this.visible = false;
@@ -107,7 +117,7 @@ export default class Stepper extends LitElement {
 
   render() {
     return html`
-      <div class="wrap">
+      <div class="wrap" speed="${this.speed}">
         <div class="animation ${this.visible ? 'visible' : ''}" ${ref(this.animationRef)}>
           <div class="images">${this.images?.length && this.images.map(this.getImageContent)}</div>
           <div class="blocks">${this.blocks?.length && this.blocks.map(this.getBlockContent)}</div>
