@@ -16,12 +16,12 @@ import TabGroup from './components/TabGroup/TabGroup';
 import BackToTop from './modules/BackToTop/BackToTop';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
+import Stepper from './modules/Stepper/Stepper';
 import './styles/main.css';
-
 declare const lib: {
     Button: {
-        Button: typeof import('./components/Button/Button').default;
-        GalaxyButton: typeof import('./components/Button/themes/Galaxy/Button').default;
+        Button: typeof import("./components/Button/Button").default;
+        GalaxyButton: typeof import("./components/Button/themes/Galaxy/Button").default;
     };
     ButtonGroup: typeof ButtonGroup;
     Card: typeof Card;
@@ -41,9 +41,11 @@ declare const lib: {
     BackToTop: typeof BackToTop;
     HeroBanner: typeof HeroBanner;
     Navigation: typeof Navigation;
+    Stepper: typeof Stepper;
     Utils: {
-        elIntersectsCenter: typeof import('./utils').elIntersectsCenter;
-        getTextColor: typeof import('./utils').getTextColor;
+        elIntersectsCenter: typeof import("./utils").elIntersectsCenter;
+        getScrollbarWidth: typeof import("./utils").getScrollbarWidth;
+        getTextColor: typeof import("./utils").getTextColor;
     };
 };
 export default lib;
