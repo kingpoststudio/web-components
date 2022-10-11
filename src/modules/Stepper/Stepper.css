@@ -5,12 +5,13 @@
   justify-content: center;
   max-width: 100vw;
   padding: 0;
-  margin: -45vh auto var(--space-3xl);
+  margin: -50vh auto var(--space-3xl);
   box-sizing: border-box;
 }
 
 .wrap {
   position: relative;
+  z-index: 10;
   height: 250vh;
   width: 100%;
 
