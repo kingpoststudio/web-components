@@ -15,7 +15,6 @@ const styles = css`
     display: flex;
     flex-direction: column-reverse;
     width: 100%;
-    max-width: 36rem;
     margin: 0 auto;
   }
 
@@ -91,10 +90,10 @@ const styles = css`
     .wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      max-width: 72rem;
     }
 
     .tabs {
+      aspect-ratio: 1;
       justify-content: flex-start;
       border-bottom: none;
       border-right: 1px solid var(--color-secondary-darker);
