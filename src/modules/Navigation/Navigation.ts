@@ -98,7 +98,9 @@ export default class Navigation extends LitElement {
         <nav isMobileView="${this.isMobileView}" isMenuOpen="${this.isMenuOpen}" isSubMenuOpen="${this.isSubMenuOpen}">
           <kps-icon class="back" icon="chevron" @click="${this.toggleSubMenu}"></kps-icon>
 
-          <img class="logo" src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
+          <a class="logo" href="/">
+            <img src="${this.logoImg.src}" alt="${this.logoImg.alt}" />
+          </a>
 
           <div class="nav-menu">
             <slot name="main-menu" @slotchange=${() => this.manageMenuLinks()}></slot>

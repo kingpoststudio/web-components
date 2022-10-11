@@ -14,12 +14,16 @@ nav {
   align-items: center;
   height: 6.5rem;
 
-  > img.logo {
+  > .logo {
     position: relative;
-    height: 100%;
     max-width: 12rem;
     max-height: 4rem;
-    object-fit: contain;  
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 
   > .right-menu {
@@ -54,7 +58,7 @@ nav {
   }
 
   &[isMobileView="true"] {
-    > img.logo {
+    > .logo {
       left: 0;
       transition: left var(--ease-time) var(--ease-type);
     }
@@ -103,7 +107,7 @@ nav {
     }
 
     &[isMenuOpen="true"] {
-      > img.logo {
+      > .logo {
         left: 30%;
       }
 
@@ -159,7 +163,7 @@ nav {
     height: 100%;
   }
 
-  img.logo {
+  .logo {
     max-width: auto;
   }
 }
