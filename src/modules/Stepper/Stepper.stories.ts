@@ -24,15 +24,23 @@ const images = [
 ].reverse();
 
 const blocks = [
-  { text: 'Lorem ipsum dolor sit amet.', position: { x: 10, y: 10 }, slides: { from: 0, to: 3 } },
-  { text: '<h1>This is a test, please be considerate.</h1>', position: { x: 30, y: 60 }, slides: { from: 4, to: 10 } },
+  { text: '<p style="font-size:3rem;font-weight:thin;color:#353535;">Lorem ipsum dolor sit amet.</p>', position: { x: 10, y: 10 }, slides: { from: 0, to: 3 } },
+  { text: '<p style="font-size:2rem;font-weight:thin;color:#353535;">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>', position: { x: 30, y: 40 }, slides: { from: 4, to: 10 } },
+  { text: '<p style="font-size:2rem;font-weight:thin;color:#353535;">Nice.</p>', position: { x: 70, y: 70 }, slides: { from: 8, to: 10 } },
 ];
 
 export const Main = () => html`
+  <style>
+    .content {
+      display: flex;
+      height: 100vh;
+      background: #CCC;
+    }
+  </style>
   <div>
     <kps-nav style="background:white;"></kps-nav>
-    <div style="width:100vw;height:100vh;overflow:hidden;background:blue;"></div>
+    <div class="content"></div>
     <kps-stepper speed="fast" .images=${images} .blocks=${blocks}></kps-stepper>
-    <div style="width:100vw;height:100vh;overflow:hidden;background:blue;"></div>
+    <div class="content"></div>
   </div>
 `;
