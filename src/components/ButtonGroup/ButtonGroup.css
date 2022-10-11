@@ -1,0 +1,39 @@
+:host {
+  display: flex;
+
+  ::slotted(*) {
+    margin-right: 0.5rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &([inline]) {
+    display: inline-flex;
+  }
+
+  &([direction="column"]) {
+    flex-direction: column;
+
+    ::slotted(*) {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &([gap="lg"]) {
+    ::slotted(*) {
+      margin-right: 1.5rem;
+    }
+
+    &([direction="column"]) {
+      ::slotted(*) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+}
