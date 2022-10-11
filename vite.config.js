@@ -10,11 +10,6 @@ function generateFileName(format) {
 }
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '~': resolve(dirname('src')),
-    },
-  },
   css: {
     postcss: {
       plugins: [

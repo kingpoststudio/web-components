@@ -1,6 +1,4 @@
 import { html } from 'lit';
-import '~/styles/main.css';
-import '~/styles/fonts.css';
 
 export default {
   title: 'Button',

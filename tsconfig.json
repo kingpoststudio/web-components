@@ -21,13 +21,7 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": false,
-    "skipLibCheck": true,
-    "baseUrl": "./src",
-    "paths": {
-      "~/*": [
-        "./*"
-      ]
-    }
+    "skipLibCheck": true
   },
   "exclude": [
     "src/**/*.stories.ts",
