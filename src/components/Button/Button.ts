@@ -2,12 +2,11 @@ import {
   html, css, LitElement, CSSResultGroup,
 } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import './Button.css';
 
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-    color: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
+    color: 'primary' | 'secondary' | 'tertiary' | 'gray' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
 
   @property({ type: String })
     theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest' = 'base';
@@ -105,6 +104,15 @@ export default class Button extends LitElement {
 
     .wrap[color="secondary"] > a:hover {
       background: var(--color-secondary-darkest);
+    }
+
+    .wrap[color="gray"] > a {
+      color: var(--color-white);
+      background: var(--color-gray);
+    }
+
+    .wrap[color="gray"] > a:hover {
+      background: var(--color-gray-dark);
     }
 
     .wrap[color="white"] > a {
