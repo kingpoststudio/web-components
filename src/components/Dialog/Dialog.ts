@@ -228,6 +228,9 @@ export default class Dialog extends LitElement {
   @property({ type: String })
   private theme: 'light' | 'dark' = 'light';
 
+  @property({ type: Boolean })
+  private button = true;
+
   @state()
   private isOpen = false;
 
@@ -269,10 +272,14 @@ export default class Dialog extends LitElement {
   };
 
   get trigger() {
-    return html`
+    return this.useButton ? html`
       <kps-button color="${this.isOpen ? 'secondary' : 'primary'}" theme="${this.isOpen ? 'darkest' : 'base'}" uppercase @click="${this.handleClick}">
         <slot name="trigger"></slot>
       </kps-button>
+    ` : html`
+      <div @click="${this.handleClick}">
+        <slot name="trigger"></slot>
+      </div>
     `;
   }
 
