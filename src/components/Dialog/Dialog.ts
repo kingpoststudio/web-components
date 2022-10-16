@@ -61,7 +61,7 @@ const styles = css`
   }
 
   dialog[variant="modal"] .overlay {
-    width: 100vw;
+    width: calc(100vw - (100vw - 100%));
     height: 100vh;
     position: fixed;
     top: 0;
@@ -90,7 +90,7 @@ const styles = css`
 
   dialog[variant="modal"] .container {
     min-width: 16rem;
-    width: fit-content;
+    width: calc(100vw - 2rem);
     max-width: 48rem;
     height: fit-content;
     max-height: 40rem;
