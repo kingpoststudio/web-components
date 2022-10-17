@@ -27,8 +27,7 @@ export default class Pagination extends LitElement {
     const params = new URLSearchParams(url.search);
 
     params.set(this.urlParam, page.toString());
-    window.history.pushState({}, '', `${url.pathname}?${params.toString()}`);
-    this.currentPage = page;
+    window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
   generateButton(i: number) {
@@ -51,7 +50,7 @@ export default class Pagination extends LitElement {
       <div id="pagination">
         <nav aria-label="Pagination" role="navigation">
           <a
-            class="block"
+            class="block prev-next ${this.currentPage === 1 ? 'disabled' : ''}"
             @click=${() => this.goToPage(1)}
             rel="prev"
             role="button"
@@ -63,7 +62,7 @@ export default class Pagination extends LitElement {
             </svg>
           </a>
           <a
-            class="block"
+            class="block prev-next ${this.currentPage === 1 ? 'disabled' : ''}"
             @click=${() => this.goToPage(this.currentPage - 1)}
             rel="prev"
             role="button"
@@ -77,7 +76,7 @@ export default class Pagination extends LitElement {
           ${Array.from({ length: 6 }, (_, i) => i - 2).map(this.generateButton)}
 
           <a
-              class="block"
+              class="block prev-next ${this.currentPage === this.pageCount ? 'disabled' : ''}"
               @click=${() => this.goToPage(this.currentPage + 1)}
               rel="next"
               role="button"
@@ -88,7 +87,7 @@ export default class Pagination extends LitElement {
             </svg>
           </a>
           <a
-              class="block"
+              class="block prev-next ${this.currentPage === this.pageCount ? 'disabled' : ''}"
               @click=${() => this.goToPage(this.pageCount)}
               aria-label="Go to last page"
               role="button"
