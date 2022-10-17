@@ -10,26 +10,29 @@ export default class Search extends LitElement {
     super();
   }
 
+  private searchTerm = '';
+
   @property({ type: String })
     title = 'Search';
 
   @property({ type: String })
     urlParam = 'search-term';
 
-  // setSearchTermValue() {
-  //   const url = new URL(window.location.href);
-  //   const params = new URLSearchParams(url.search);
-  //   const urlParamValue = params.get(this.urlParam);
+  setSearchTermValue() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    const urlParamValue = params.get(this.urlParam);
 
-  //   if (urlParamValue) {
-  //     this.searchTerm = urlParamValue;
-  //   }
-  // }
+    if (urlParamValue) {
+      this.searchTerm = urlParamValue;
+    }
+  }
 
   searchByTerm(e: HTMLFormElement): void {
     e.preventDefault();
 
-    const { value: searchTerm } = e.target['search-term'];
+    // @ts-ignore
+    const searchTerm = e.target['search-term'].value;
     const url = new URL(window.location.href);
     const params = new URLSearchParams();
 
@@ -37,17 +40,21 @@ export default class Search extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
+  handleSubmit(e: HTMLFormElement): void {
+    e.preventDefault();
+  }
+
   render() {
     return html`
       <div id="search">
         <div class="intro">
           <p>${this.title}</p>
-          <a class="clear" @click=${() => { }}>Clear!!!</a>
+          ${this.searchTerm ? html`<a class="clear" @click=${() => { }}>Clear!!!</a>` : ''}
         </div>
 
-        <form class="" @submit=${this.searchByTerm}>
+        <form @submit=${this.searchByTerm}>
           <input name="search-term" placeholder="Search..." />
-          <button type="submit">Search</button>
+          <kps-button type="submit">Search</kps-button>
         </form>
       </div>
     `;
