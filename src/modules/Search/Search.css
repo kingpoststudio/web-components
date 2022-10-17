@@ -12,5 +12,24 @@
     > p {
       font-size: var(--font-size-lg);
     }
+
+    > a {
+      color: var(--color-primary);
+      transition: color 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--color-primary-dark);
+      }
+    }
+  }
+
+  > form {
+    input {
+      padding: 0.5rem;
+      border: 1px solid var(--color-gray-light);
+      border-radius: 0.5rem;
+      outline: none;
+    }
   }
 }

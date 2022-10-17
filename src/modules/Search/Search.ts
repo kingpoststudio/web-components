@@ -8,6 +8,7 @@ export default class Search extends LitElement {
 
   constructor() {
     super();
+    this.setSearchTermValue();
   }
 
   private searchTerm = '';
@@ -40,8 +41,10 @@ export default class Search extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
-  handleSubmit(e: HTMLFormElement): void {
-    e.preventDefault();
+  clearSearchTerm(): void {
+    this.searchTerm = '';
+    const url = new URL(window.location.href);
+    window.location.href = url.pathname;
   }
 
   render() {
@@ -49,7 +52,7 @@ export default class Search extends LitElement {
       <div id="search">
         <div class="intro">
           <p>${this.title}</p>
-          ${this.searchTerm ? html`<a class="clear" @click=${() => { }}>Clear!!!</a>` : ''}
+          ${this.searchTerm ? html`<a class="clear" @click=${this.clearSearchTerm}>Clear</a>` : ''}
         </div>
 
         <form @submit=${this.searchByTerm}>
