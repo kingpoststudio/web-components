@@ -19,6 +19,7 @@ import BackToTop from './modules/BackToTop/BackToTop';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
 import Pagination from './modules/Pagination/Pagination';
+import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
 
 import Utils from './utils';
@@ -47,6 +48,7 @@ const lib = {
   HeroBanner,
   Navigation,
   Pagination,
+  Search,
   Stepper,
 
   Utils,
