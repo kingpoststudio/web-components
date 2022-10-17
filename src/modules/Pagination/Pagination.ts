@@ -100,8 +100,11 @@ export default class Pagination extends LitElement {
           </a>
         </nav>
 
-        <select class="pagination-select-page" onchange="controllers.hubDbPaginationCtrl.goToPage(event.target.value)">
+        <select class="pagination-select-page" @change="${(event: any) => this.goToPage(event?.target.value)}">
           <option value="" disabled selected>Go to Page</option>
+          ${Array.from({ length: this.pageCount }, (_, i) => i + 1).map((page) => html`
+            <option value="${page}" ?disabled="${this.currentPage === page}">${page}</option>
+          `)}
         </select>
       </div>
     `;
