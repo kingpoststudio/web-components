@@ -27,6 +27,23 @@
   > .topics {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
     border-top: 1px solid var(--color-gray-lightest);
+
+    > .topic {
+      > .header {
+        margin: 0.5rem 0;
+        font-size: var(--font-size-lg);
+      }
+
+      > .options {
+        > .option {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+        }
+      }
+    }
   }
 }

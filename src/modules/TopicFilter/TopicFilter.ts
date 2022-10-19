@@ -79,9 +79,7 @@ export default class TopicFilter extends LitElement {
         <div class="topics">
           ${this.topics.map((topic) => html`
             <div class="topic">
-              <div class="header">
-                <h4>${topic.name}</h4>
-              </div>
+              <p class="header">${topic.name}</p>
               <div class="options">
                 ${topic.options.map((option) => html`
                   <div class="option">
