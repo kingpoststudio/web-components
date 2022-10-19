@@ -27,6 +27,6 @@
   > .topics {
     display: flex;
     flex-direction: column;
-    border-block: 1px solid var(--color-gray-lightest);
+    border-top: 1px solid var(--color-gray-lightest);
   }
 }
