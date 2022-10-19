@@ -69,9 +69,11 @@ export default class TopicFilter extends LitElement {
     const params = new URLSearchParams(url.search);
 
     params.forEach((value, key) => {
-      const id = `${key}__${value}`;
-      const input = this.shadowRoot?.querySelector(`#${id}`) as HTMLInputElement;
-      if (input) input.checked = true;
+      const valueArr = value.split(',');
+      valueArr.forEach((val) => {
+        const el = this.shadowRoot?.querySelector(`#${key}__${val}`) as HTMLInputElement;
+        if (el) el.checked = true;
+      });
     });
   }
 
@@ -88,13 +90,23 @@ export default class TopicFilter extends LitElement {
   filterByTopicOption(topic: string, option: string) {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
-    const urlParamValue = params.get(topic);
+    const topicValues = params.get(topic);
 
-    if (urlParamValue) {
-      params.delete(topic);
+    if (topicValues) {
+      const activeOptions = topicValues.split(',');
+      const index = activeOptions.indexOf(option);
+
+      if (index > -1) activeOptions.splice(index, 1);
+      if (activeOptions.length > 0) {
+        activeOptions.push(option);
+        params.set(topic, activeOptions.join(','));
+      } else {
+        params.delete(topic);
+      }
+    } else {
+      params.set(topic, option);
     }
 
-    params.set(topic, option);
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
