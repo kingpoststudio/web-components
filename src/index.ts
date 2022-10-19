@@ -21,6 +21,7 @@ import Navigation from './modules/Navigation/Navigation';
 import Pagination from './modules/Pagination/Pagination';
 import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
+import TopicFilter from './modules/TopicFilter/TopicFilter';
 
 import Utils from './utils';
 
@@ -50,6 +51,7 @@ const lib = {
   Pagination,
   Search,
   Stepper,
+  TopicFilter,
 
   Utils,
 };
