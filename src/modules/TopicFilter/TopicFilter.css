@@ -8,9 +8,11 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    margin: 0 0 1rem;
 
     > p {
       font-size: var(--font-size-lg);
+      margin: 0;
     }
 
     > a {
