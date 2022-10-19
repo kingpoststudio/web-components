@@ -60,8 +60,19 @@ export default class TopicFilter extends LitElement {
       },
     ];
 
-  constructor() {
-    super();
+  firstUpdated() {
+    this.setActiveTopicOptions();
+  }
+
+  setActiveTopicOptions() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+
+    params.forEach((value, key) => {
+      const id = `${key}__${value}`;
+      const input = this.shadowRoot?.querySelector(`#${id}`) as HTMLInputElement;
+      if (input) input.checked = true;
+    });
   }
 
   selectTopicOption(e: Event) {
@@ -70,7 +81,6 @@ export default class TopicFilter extends LitElement {
     const optionId = topicOption.split('__')[1];
 
     if (topicId && optionId) {
-      console.log(topicId, optionId);
       this.filterByTopicOption(topicId, optionId);
     }
   }
