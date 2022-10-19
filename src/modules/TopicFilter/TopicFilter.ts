@@ -21,44 +21,7 @@ export default class TopicFilter extends LitElement {
     title = 'Topic Filters';
 
   @property({ type: Array })
-  private topics: Array<Topic> = [
-      {
-        name: 'Topic 1',
-        id: 'topic-1',
-        options: [
-          {
-            id: '1',
-            name: 'Option 1',
-          },
-          {
-            id: '2',
-            name: 'Option 2',
-          },
-          {
-            id: '3',
-            name: 'Option 3',
-          },
-        ],
-      },
-      {
-        name: 'Topic 2',
-        id: 'topic-2',
-        options: [
-          {
-            id: '1',
-            name: 'Option 1',
-          },
-          {
-            id: '2',
-            name: 'Option 2',
-          },
-          {
-            id: '3',
-            name: 'Option 3',
-          },
-        ],
-      },
-    ];
+  private topics: Array<Topic> = [];
 
   firstUpdated() {
     this.setActiveTopicOptions();
