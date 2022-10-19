@@ -27,16 +27,16 @@ export default class TopicFilter extends LitElement {
         id: 'topic-1',
         options: [
           {
-            id: 'topic-1-option-1',
-            name: 'Topic 1 Option 1',
+            id: '1',
+            name: 'Option 1',
           },
           {
-            id: 'topic-1-option-2',
-            name: 'Topic 1 Option 2',
+            id: '2',
+            name: 'Option 2',
           },
           {
-            id: 'topic-1-option-3',
-            name: 'Topic 1 Option 3',
+            id: '3',
+            name: 'Option 3',
           },
         ],
       },
@@ -45,16 +45,16 @@ export default class TopicFilter extends LitElement {
         id: 'topic-2',
         options: [
           {
-            id: 'topic-2-option-1',
-            name: 'Topic 2 Option 1',
+            id: '1',
+            name: 'Option 1',
           },
           {
-            id: 'topic-2-option-2',
-            name: 'Topic 2 Option 2',
+            id: '2',
+            name: 'Option 2',
           },
           {
-            id: 'topic-2-option-3',
-            name: 'Topic 2 Option 3',
+            id: '3',
+            name: 'Option 3',
           },
         ],
       },
@@ -62,6 +62,30 @@ export default class TopicFilter extends LitElement {
 
   constructor() {
     super();
+  }
+
+  selectTopicOption(e: Event) {
+    const topicOption = (e.target as HTMLInputElement)?.value;
+    const topicId = topicOption.split('__')[0];
+    const optionId = topicOption.split('__')[1];
+
+    if (topicId && optionId) {
+      console.log(topicId, optionId);
+      this.filterByTopicOption(topicId, optionId);
+    }
+  }
+
+  filterByTopicOption(topic: string, option: string) {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    const urlParamValue = params.get(topic);
+
+    if (urlParamValue) {
+      params.delete(topic);
+    }
+
+    params.set(topic, option);
+    window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
   clearTopicFilters() {
@@ -83,10 +107,10 @@ export default class TopicFilter extends LitElement {
               <div class="options">
                 ${topic.options.map((option) => html`
                   <div class="option">
-                    <input type="checkbox" id="${option.id}" name="${option.name}" value="${option.id}">
-                    <label for="${option.id}">${option.name}</label>
+                    <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
+                    <label for="${topic.id}__${option.id}">${option.name}</label>
                   </div>
-                  `)}
+                `)}
               </div>
             </div>
           `)}
