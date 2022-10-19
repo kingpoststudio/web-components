@@ -97,15 +97,11 @@ export default class TopicFilter extends LitElement {
       const index = activeOptions.indexOf(option);
 
       if (index > -1) activeOptions.splice(index, 1);
-      if (activeOptions.length > 0) {
-        activeOptions.push(option);
-        params.set(topic, activeOptions.join(','));
-      } else {
-        params.delete(topic);
-      }
-    } else {
-      params.set(topic, option);
-    }
+      else activeOptions.push(option);
+
+      if (activeOptions.length > 0) params.set(topic, activeOptions.join(','));
+      else params.delete(topic);
+    } else params.set(topic, option);
 
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
