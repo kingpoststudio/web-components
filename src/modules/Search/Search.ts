@@ -17,7 +17,7 @@ export default class Search extends LitElement {
     title = 'Search';
 
   @property({ type: String })
-    urlParam = 'search-term';
+    urlParam = 'search_term';
 
   setSearchTermValue() {
     const url = new URL(window.location.href);
