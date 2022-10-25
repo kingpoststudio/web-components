@@ -272,7 +272,7 @@ export default class Dialog extends LitElement {
   };
 
   get trigger() {
-    return this.useButton ? html`
+    return this.button ? html`
       <kps-button color="${this.isOpen ? 'secondary' : 'primary'}" theme="${this.isOpen ? 'darkest' : 'base'}" uppercase @click="${this.handleClick}">
         <slot name="trigger"></slot>
       </kps-button>
