@@ -22,18 +22,19 @@ export default class Form extends LitElement {
     target = '';
 
   static styles = css`
-`;
+  `;
 
   private initHsFormScript() {
     const script = document.createElement('script');
     script.src = 'https://js.hsforms.net/forms/v2.js';
     document.body.appendChild(script);
+    const { formId, portalId, target } = this;
 
     script.addEventListener('load', () => {
       window.hbspt.forms.create({
-        portalId: this.portalId,
-        formId: this.formId,
-        target: this.target,
+        portalId,
+        formId,
+        target,
         cssClass: 'kps-form',
       });
     });
