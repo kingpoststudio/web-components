@@ -4,6 +4,7 @@ export default class Dialog extends LitElement {
     overlayRef: import("lit-html/directives/ref").Ref<HTMLDivElement>;
     private variant;
     private theme;
+    private button;
     private isOpen;
     static styles: import("lit").CSSResult;
     open: (e: Event) => void;

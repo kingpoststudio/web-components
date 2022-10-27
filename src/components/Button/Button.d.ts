@@ -1,7 +1,6 @@
 import { LitElement, CSSResultGroup } from 'lit';
-import './Button.css';
 export default class Button extends LitElement {
-    color: 'primary' | 'secondary' | 'tertiary' | 'success' | 'warning' | 'error' | 'transparent';
+    color: 'primary' | 'secondary' | 'tertiary' | 'gray' | 'success' | 'warning' | 'error' | 'transparent';
     theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest';
     variant: 'fill' | 'outline';
     size: 'sm' | 'md' | 'lg' | 'icon';

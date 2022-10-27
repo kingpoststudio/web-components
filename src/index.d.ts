@@ -16,7 +16,10 @@ import TabGroup from './components/TabGroup/TabGroup';
 import BackToTop from './modules/BackToTop/BackToTop';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
+import Pagination from './modules/Pagination/Pagination';
+import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
+import TopicFilter from './modules/TopicFilter/TopicFilter';
 import './styles/main.css';
 declare const lib: {
     Button: {
@@ -41,7 +44,10 @@ declare const lib: {
     BackToTop: typeof BackToTop;
     HeroBanner: typeof HeroBanner;
     Navigation: typeof Navigation;
+    Pagination: typeof Pagination;
+    Search: typeof Search;
     Stepper: typeof Stepper;
+    TopicFilter: typeof TopicFilter;
     Utils: {
         elIntersectsCenter: typeof import("./utils").elIntersectsCenter;
         getScrollbarWidth: typeof import("./utils").getScrollbarWidth;
