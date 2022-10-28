@@ -79,6 +79,8 @@ export default class TopicFilter extends LitElement {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     this.topics.forEach((topic) => params.delete(topic.id));
+    params.delete('page');
+
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
