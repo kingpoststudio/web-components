@@ -17,11 +17,14 @@ interface Topic {
 export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
+  @property({ type: Boolean })
+    isFilteringActive = false;
+
   @property({ type: String })
     title = 'Topic Filters';
 
   @property({ type: Array })
-  private topics: Array<Topic> = [];
+    topics: Array<Topic> = [];
 
   firstUpdated() {
     this.setActiveTopicOptions();
@@ -35,7 +38,10 @@ export default class TopicFilter extends LitElement {
       const valueArr = value.split(',');
       valueArr.forEach((val) => {
         const el = this.shadowRoot?.querySelector(`#${key}__${val}`) as HTMLInputElement;
-        if (el) el.checked = true;
+        if (el) {
+          el.checked = true;
+          this.isFilteringActive = true;
+        }
       });
     });
   }
@@ -70,7 +76,10 @@ export default class TopicFilter extends LitElement {
   }
 
   clearTopicFilters() {
-    console.log('clearTopicFilters');
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    this.topics.forEach((topic) => params.delete(topic.id));
+    window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
   render() {
@@ -78,7 +87,7 @@ export default class TopicFilter extends LitElement {
       <div id="topic-filter">
         <div class="intro">
           <p>${this.title}</p>
-          ${true ? html`<a class="clear" @click=${this.clearTopicFilters}>Clear</a>` : ''}
+          ${this.isFilteringActive ? html`<a class="clear" @click=${this.clearTopicFilters}>Clear</a>` : ''}
         </div>
 
         <div class="topics">
