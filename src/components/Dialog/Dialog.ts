@@ -229,7 +229,7 @@ export default class Dialog extends LitElement {
   private theme: 'light' | 'dark' = 'light';
 
   @property({ type: Boolean })
-  private button = true;
+  private button = false;
 
   @state()
   private isOpen = false;

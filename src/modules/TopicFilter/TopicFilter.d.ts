@@ -1,8 +1,18 @@
 import { LitElement } from 'lit';
+interface TopicOption {
+    id: string;
+    name: string;
+}
+interface Topic {
+    name: string;
+    id: string;
+    options: TopicOption[];
+}
 export default class TopicFilter extends LitElement {
     static styles: import("lit").CSSResult[];
+    isFilteringActive: boolean;
     title: string;
-    private topics;
+    topics: Array<Topic>;
     firstUpdated(): void;
     setActiveTopicOptions(): void;
     selectTopicOption(e: Event): void;
@@ -10,3 +20,4 @@ export default class TopicFilter extends LitElement {
     clearTopicFilters(): void;
     render(): import("lit-html").TemplateResult<1>;
 }
+export {};
