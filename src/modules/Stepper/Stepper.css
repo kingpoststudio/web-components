@@ -5,7 +5,7 @@
   justify-content: center;
   max-width: 100vw;
   padding: 0;
-  margin: -50vh auto var(--space-3xl);
+  margin: 0 auto var(--space-3xl);
   box-sizing: border-box;
 }
 
@@ -27,11 +27,12 @@
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50%) translateY(6.5rem);
     width: 100%;
+    max-width: var(--page-max-width);
     height: calc(100vh - 6.5rem);
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.2s ease-in-out;
+    transform: translateX(-50%) translateY(6.5rem);
     
     &.visible {
       opacity: 1;

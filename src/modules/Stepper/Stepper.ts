@@ -1,4 +1,4 @@
-import { html, LitElement, unsafeCSS } from 'lit';
+import { css, html, LitElement, unsafeCSS } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -39,6 +39,9 @@ export default class Stepper extends LitElement {
 
   @property({ type: String })
     speed: 'slow' | 'normal' | 'fast' = 'normal';
+
+  @property({ type: Boolean })
+    fade = false;
 
   animationRef = createRef();
 
@@ -88,7 +91,7 @@ export default class Stepper extends LitElement {
       this.visible = false;
       setTimeout(() => {
         animationEl.style.position = 'absolute';
-      }, 250);
+      }, this.fade ? 250 : 0);
     }
 
     let activeImage = this.images[0];
