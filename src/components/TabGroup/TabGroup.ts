@@ -124,9 +124,8 @@ export default class TabGroup extends LitElement {
     this.updateLinks = this.updateLinks.bind(this);
     this.updateTabs = this.updateTabs.bind(this);
 
-    // @ts-ignore
-    this.addEventListener('imageMapPointEmphasized', (e: CustomEvent) => {
-      const emphasizedHref = e.detail.point.getAttribute('href');
+    this.addEventListener('imageMapPointEmphasized', (e) => {
+      const emphasizedHref = (e as any).detail.point.getAttribute('href');
       const emphasizedLink = this.links.find((link) => link.href === emphasizedHref);
       this.emphasizedLink = emphasizedLink;
       this.updateLinks();
@@ -138,6 +137,24 @@ export default class TabGroup extends LitElement {
     });
   }
 
+  onLinkHover(e: MouseEvent) {
+    const href = (e.target as HTMLAnchorElement).getAttribute('href');
+    this.dispatchEvent(new CustomEvent('tabGroupLinkEmphasized', {
+      bubbles: true,
+      cancelable: false,
+      composed: true,
+      detail: { href },
+    }));
+  }
+
+  onLinkLeave() {
+    this.dispatchEvent(new CustomEvent('tabGroupLinkDeEmphasized', {
+      bubbles: true,
+      cancelable: false,
+      composed: true,
+    }));
+  }
+
   get slottedTabs() {
     const slot = this.shadowRoot?.querySelector('slot');
     return slot?.assignedElements({ flatten: true }) as Tab[];
@@ -145,7 +162,16 @@ export default class TabGroup extends LitElement {
 
   get tabLinks() {
     return this.links.map((link) => html`
-      <li><a class="${link.isActive ? 'active' : ''} ${link.isEmphasized ? 'emphasized' : ''}" href="${link.href}">${link.label}</a></li>
+      <li>
+        <a
+          href="${link.href}"
+          class="${link.isActive ? 'active' : ''} ${link.isEmphasized ? 'emphasized' : ''}"
+          @mouseenter=${this.onLinkHover}
+          @mouseleave=${this.onLinkLeave}
+        >
+          ${link.label}
+        </a>
+      </li>
     `);
   }
 
