@@ -79,12 +79,16 @@ const styles = css`
     font-weight: var(--font-weight-semibold);
     color: var(--color-white);
     text-decoration: none;
-    transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, margin 0.15s ease-in-out;
   }
 
   .nav > ul.links > li > a.active,
   .nav > ul.links > li > a:hover {
     color: var(--color-tertiary-light);
+  }
+
+  .nav > ul.links > li > a.emphasized {
+    margin-left: 1rem;
   }
   
   @media (min-width: 768px) {
