@@ -6,6 +6,7 @@ interface Link {
   label: string;
   href: string;
   isActive: boolean;
+  isEmphasized: boolean;
 }
 
 const ANIMATION_DURATION_MS = 200;
@@ -111,6 +112,9 @@ export default class TabGroup extends LitElement {
   @state()
     links: Link[] = [];
 
+  @state()
+    emphasizedLink: Link | undefined;
+
   constructor() {
     super();
     this.updateLinks = this.updateLinks.bind(this);
@@ -118,7 +122,10 @@ export default class TabGroup extends LitElement {
 
     // @ts-ignore
     this.addEventListener('imageMapPointEmphasized', (e: CustomEvent) => {
-      console.log(e);
+      const emphasizedHref = e.detail.point.getAttribute('href');
+      const emphasizedLink = this.links.find((link) => link.href === emphasizedHref);
+      this.emphasizedLink = emphasizedLink;
+      this.updateLinks();
     });
   }
 
@@ -129,7 +136,7 @@ export default class TabGroup extends LitElement {
 
   get tabLinks() {
     return this.links.map((link) => html`
-      <li><a class="${link.isActive ? 'active' : ''}" href="${link.href}">${link.label}</a></li>
+      <li><a class="${link.isActive ? 'active' : ''} ${link.isEmphasized ? 'emphasized' : ''}" href="${link.href}">${link.label}</a></li>
     `);
   }
 
@@ -153,6 +160,7 @@ export default class TabGroup extends LitElement {
         href,
         label: tab.getAttribute('label') || '',
         isActive: !i && !hash ? true : hash.includes(href),
+        isEmphasized: this.emphasizedLink?.href === href,
       };
     });
   }
