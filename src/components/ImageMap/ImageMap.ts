@@ -182,7 +182,11 @@ export default class ImageMap extends LitElement {
         detail: { point },
       }));
     } else {
-      this.dispatchEvent(new CustomEvent('imageMapPointUnemphasized'));
+      this.dispatchEvent(new CustomEvent('imageMapPointDeEmphasized', {
+        bubbles: true,
+        cancelable: false,
+        composed: true,
+      }));
     }
   }
 

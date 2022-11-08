@@ -127,6 +127,11 @@ export default class TabGroup extends LitElement {
       this.emphasizedLink = emphasizedLink;
       this.updateLinks();
     });
+
+    this.addEventListener('imageMapPointDeEmphasized', () => {
+      this.emphasizedLink = undefined;
+      this.updateLinks();
+    });
   }
 
   get slottedTabs() {
