@@ -47,7 +47,8 @@ const styles = css`
   }
 
   .point:hover,
-  .wrap[emphasized="true"] > .point:hover {
+  .wrap[emphasized="true"] > .point:hover,
+  .wrap[emphasized="true"] > .point.emphasized {
     opacity: 1;
     box-shadow: 0 10px 15px -3px rgba(0,0,0,.3), 0 4px 6px -4px rgba(0,0,0,.3);
     background-color: var(--color-tertiary);
@@ -123,7 +124,9 @@ const styles = css`
   }
 
   .point:hover > .tag,
-  .point:hover > .arrow {
+  .point:hover > .arrow,
+  .point.emphasized > .tag,
+  .point.emphasized > .arrow {
     opacity: 0.9;
   }
 `;
@@ -159,6 +162,20 @@ export default class ImageMap extends LitElement {
   connectedCallback(): void {
     super.connectedCallback();
     window.addEventListener('resize', this.repositionTags);
+
+    window.addEventListener('tabGroupLinkEmphasized', (e) => {
+      const emphasizedHref = (e as any).detail.href;
+      const point = this.imageMapRef.value?.querySelector(`.point[href="${emphasizedHref}"]`);
+
+      if (point) {
+        this.emphasized = true;
+        point.classList.add('emphasized');
+      }
+    });
+
+    window.addEventListener('tabGroupLinkDeEmphasized', () => {
+      console.log('deEmphasized');
+    });
   }
 
   disconnectedCallback(): void {

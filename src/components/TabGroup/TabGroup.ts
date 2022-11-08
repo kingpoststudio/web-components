@@ -106,6 +106,26 @@ const styles = css`
   }
 `;
 
+function onLinkHover(e: MouseEvent) {
+  const el = e.target as HTMLAnchorElement;
+  const href = el.getAttribute('href');
+  el.dispatchEvent(new CustomEvent('tabGroupLinkEmphasized', {
+    bubbles: true,
+    cancelable: false,
+    composed: true,
+    detail: { href },
+  }));
+}
+
+function onLinkLeave(e: MouseEvent) {
+  const el = e.target as HTMLAnchorElement;
+  el.dispatchEvent(new CustomEvent('tabGroupLinkDeEmphasized', {
+    bubbles: true,
+    cancelable: false,
+    composed: true,
+  }));
+}
+
 @customElement('kps-tab-group')
 export default class TabGroup extends LitElement {
   static styles = styles;
@@ -137,24 +157,6 @@ export default class TabGroup extends LitElement {
     });
   }
 
-  onLinkHover(e: MouseEvent) {
-    const href = (e.target as HTMLAnchorElement).getAttribute('href');
-    this.dispatchEvent(new CustomEvent('tabGroupLinkEmphasized', {
-      bubbles: true,
-      cancelable: false,
-      composed: true,
-      detail: { href },
-    }));
-  }
-
-  onLinkLeave() {
-    this.dispatchEvent(new CustomEvent('tabGroupLinkDeEmphasized', {
-      bubbles: true,
-      cancelable: false,
-      composed: true,
-    }));
-  }
-
   get slottedTabs() {
     const slot = this.shadowRoot?.querySelector('slot');
     return slot?.assignedElements({ flatten: true }) as Tab[];
@@ -166,8 +168,8 @@ export default class TabGroup extends LitElement {
         <a
           href="${link.href}"
           class="${link.isActive ? 'active' : ''} ${link.isEmphasized ? 'emphasized' : ''}"
-          @mouseenter=${this.onLinkHover}
-          @mouseleave=${this.onLinkLeave}
+          @mouseenter=${onLinkHover}
+          @mouseleave=${onLinkLeave}
         >
           ${link.label}
         </a>
