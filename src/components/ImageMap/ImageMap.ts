@@ -131,7 +131,7 @@ const styles = css`
   }
 `;
 
-function goToHref(e) {
+function goToHref(e: any) {
   const href = e.target.getAttribute('href');
   if (href) window.location.href = href;
 }
@@ -174,7 +174,8 @@ export default class ImageMap extends LitElement {
     });
 
     window.addEventListener('tabGroupLinkDeEmphasized', () => {
-      console.log('deEmphasized');
+      this.emphasized = false;
+      this.imageMapRef.value?.querySelectorAll('.point').forEach((point) => point.classList.remove('emphasized'));
     });
   }
 
