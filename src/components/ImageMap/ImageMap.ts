@@ -172,6 +172,15 @@ export default class ImageMap extends LitElement {
 
   toggleEmphasized() {
     this.emphasized = !this.emphasized;
+    const point = this.imageMapRef.value?.querySelector('.point:hover');
+
+    if (this.emphasized) {
+      this.dispatchEvent(new CustomEvent('image-map-point-emphasized', {
+        detail: { point },
+      }));
+    } else {
+      this.dispatchEvent(new CustomEvent('image-map-point-unemphasized'));
+    }
   }
 
   repositionTags() {
