@@ -128,7 +128,8 @@ const styles = css`
   }
 `;
 
-function goToHref(href: string) {
+function goToHref(e) {
+  const href = e.target.getAttribute('href');
   if (href) window.location.href = href;
 }
 
@@ -236,9 +237,10 @@ export default class ImageMap extends LitElement {
         ${this.points?.length && this.points.map((point) => html`
         <div 
           class="point"
+          href="${point.href}"
           style="left:${point.x}%;top:${point.y}%;"
           position="${point.position}"
-          @click="${() => goToHref(point.href)}"
+          @click="${goToHref}"
           @mouseenter=${this.toggleEmphasized}
           @mouseleave=${this.toggleEmphasized}
         >
