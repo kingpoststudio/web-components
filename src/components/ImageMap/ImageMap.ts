@@ -175,11 +175,14 @@ export default class ImageMap extends LitElement {
     const point = this.imageMapRef.value?.querySelector('.point:hover');
 
     if (this.emphasized) {
-      this.dispatchEvent(new CustomEvent('image-map-point-emphasized', {
+      this.dispatchEvent(new CustomEvent('imageMapPointEmphasized', {
+        bubbles: true,
+        cancelable: false,
+        composed: true,
         detail: { point },
       }));
     } else {
-      this.dispatchEvent(new CustomEvent('image-map-point-unemphasized'));
+      this.dispatchEvent(new CustomEvent('imageMapPointUnemphasized'));
     }
   }
 
