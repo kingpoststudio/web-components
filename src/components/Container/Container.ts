@@ -20,14 +20,6 @@ export default class Container extends LitElement {
     padding-block: var(--space-md);
   }
 
-  :host([padding-x='2xl']) {
-      padding-inline: var(--space-2xl);
-    }
-
-  :host([padding-y='2xl']) {
-    padding-block: var(--space-2xl);
-  }
-
   :host([padding-x="none"]) {
     padding-inline: 0;
   }
@@ -36,54 +28,52 @@ export default class Container extends LitElement {
     padding-block: 0;
   }
 
-  @media (min-width: 768px) {
-    :host([padding-x='md']) {
-      padding-inline: var(--space-md);
-    }
+  :host([padding-x='md']) {
+    padding-inline: var(--space-md);
+  }
 
-    :host([padding-y='md']) {
-      padding-block: var(--space-md);
-    }
+  :host([padding-y='md']) {
+    padding-block: var(--space-md);
+  }
 
-    :host([padding-x='lg']) {
-      padding-inline: var(--space-lg);
-    }
+  :host([padding-x='lg']) {
+    padding-inline: var(--space-lg);
+  }
 
-    :host([padding-y='lg']) {
-      padding-block: var(--space-lg);
-    }
+  :host([padding-y='lg']) {
+    padding-block: var(--space-lg);
+  }
 
-    :host([padding-x='xl']) {
-      padding-inline: var(--space-xl);
-    }
+  :host([padding-x='xl']) {
+    padding-inline: var(--space-xl);
+  }
 
-    :host([padding-y='xl']) {
-      padding-block: var(--space-xl);
-    }
+  :host([padding-y='xl']) {
+    padding-block: var(--space-xl);
+  }
 
-    :host([padding-x='2xl']) {
-      padding-inline: var(--space-2xl);
-    }
+  :host([padding-x='2xl']) {
+    padding-inline: var(--space-2xl);
+  }
 
-    :host([padding-y='2xl']) {
-      padding-block: var(--space-2xl);
-    }
-    
-    :host([padding-x='3xl']) {
-      padding-inline: var(--space-3xl);
-    }
+  :host([padding-y='2xl']) {
+    padding-block: var(--space-2xl);
+  }
+  
+  :host([padding-x='3xl']) {
+    padding-inline: var(--space-3xl);
+  }
 
-    :host([padding-y='3xl']) {
-      padding-block: var(--space-3xl);
-    }
+  :host([padding-y='3xl']) {
+    padding-block: var(--space-3xl);
+  }
 
-    :host([padding-x='4xl']) {
-      padding-inline: var(--space-4xl);
-    }
+  :host([padding-x='4xl']) {
+    padding-inline: var(--space-4xl);
+  }
 
-    :host([padding-y='4xl']) {
-      padding-block: var(--space-4xl);
-    }
+  :host([padding-y='4xl']) {
+    padding-block: var(--space-4xl);
   }
 
   :host([full-width]) {
@@ -92,13 +82,13 @@ export default class Container extends LitElement {
 `;
 
   @property({ type: String, attribute: 'padding-x' })
-    paddingX = '';
+  paddingX = '';
 
   @property({ type: String, attribute: 'padding-y' })
-    paddingY = '';
+  paddingY = '';
 
   @property({ type: Boolean, attribute: 'full-width' })
-    fullWidth = false;
+  fullWidth = false;
 
   protected render() {
     return html`<slot></slot>`;

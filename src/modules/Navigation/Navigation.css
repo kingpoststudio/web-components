@@ -57,6 +57,22 @@ nav {
     }
   }
 
+  &[theme="dark"] {
+    kps-icon {
+      &.back {
+        color: var(--color-white);
+      }
+
+      &.cross {
+        color: var(--color-white);
+      }
+
+      &.hamburger {
+        color: var(--color-white);
+      }
+    }
+  }
+
   &[isMobileView="true"] {
     > .logo {
       left: 0;

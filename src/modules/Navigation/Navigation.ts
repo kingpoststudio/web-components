@@ -15,6 +15,9 @@ export default class Navigation extends LitElement {
   @state()
   private isMobileView = window.innerWidth < 768;
 
+  @property({ type: String })
+  private theme: 'light' | 'dark' = 'light';
+
   @property({ type: Object })
   private logoImg = { src: '', alt: '' };
 
@@ -95,7 +98,7 @@ export default class Navigation extends LitElement {
   protected render() {
     return html`
       <kps-container padding-x="lg">
-        <nav isMobileView="${this.isMobileView}" isMenuOpen="${this.isMenuOpen}" isSubMenuOpen="${this.isSubMenuOpen}">
+        <nav theme="${this.theme}" isMobileView="${this.isMobileView}" isMenuOpen="${this.isMenuOpen}" isSubMenuOpen="${this.isSubMenuOpen}">
           <kps-icon class="back" icon="chevron" @click="${this.toggleSubMenu}"></kps-icon>
 
           <a class="logo" href="/">
