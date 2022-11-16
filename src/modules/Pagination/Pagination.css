@@ -6,7 +6,8 @@
 
   > nav {
     display: flex;
-    border: 1px solid var(--color-gray-lightest);
+    background: white;
+    border: 1px solid var(--color-gray-lighter);
 
     > a.block {
       display: flex;
@@ -65,7 +66,7 @@
       }
 
       &.disabled {
-        background: var(--color-gray-lightest);
+        background: var(--color-gray-lighter);
         pointer-events: none;
 
         .arrow {
@@ -79,7 +80,7 @@
     height: 2rem;
     padding-inline: 0.25rem;
     margin-left: 1rem;
-    border: 1px solid var(--color-gray-lightest);
+    border: 1px solid var(--color-gray-lighter);
     cursor: pointer;
   }
 }

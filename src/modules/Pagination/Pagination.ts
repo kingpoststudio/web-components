@@ -20,14 +20,25 @@ export default class Pagination extends LitElement {
   @property({ type: String })
   private urlParam = 'page';
 
+  @property({ type: Boolean })
+  private blog = false;
+
   goToPage(page: number) {
     if (page === this.currentPage) return;
 
     const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
+    let newPath = null;
 
-    params.set(this.urlParam, page.toString());
-    window.location.href = `${url.pathname}?${params.toString()}`;
+    if (this.blog) {
+      const blogPath = url.pathname.split('/')[1];
+      newPath = `/${blogPath}/page/${page}`;
+    } else {
+      const params = new URLSearchParams(url.search);
+      params.set(this.urlParam, page.toString());
+      newPath = `${url.pathname}?${params.toString()}`;
+    }
+
+    window.location.href = newPath;
   }
 
   generateButton(i: number) {
