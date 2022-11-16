@@ -68,6 +68,11 @@ export default class Button extends LitElement {
       padding: 0.75rem 1rem;
     }
 
+    .wrap[size="sm"] > a {
+      min-width: 4rem;
+      padding: 0.375rem 0.75rem;
+    }
+
     .wrap[size="lg"] > a {
       min-width: 9rem;
       padding: 0.75rem 1.25rem;
