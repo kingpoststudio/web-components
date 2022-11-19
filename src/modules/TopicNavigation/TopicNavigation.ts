@@ -14,10 +14,17 @@ export default class TopicFilter extends LitElement {
   @property({ type: Array })
   private topics: Topic[] = [];
 
+  setTopicHref(topic?: string) {
+    const url = new URL(window.location.href);
+    const blogPath = url.pathname.split('/')[1];
+    return topic ? `/${blogPath}/topic/${topic}` : `/${blogPath}`;
+  }
+
   render() {
     return html`
       <div id="topic-navigation">
-        ${this.topics.map((topic) => (html`<a class="topic" href="#${topic.id}">${topic.label}</a>`))}
+        <a class="topic" href="${this.setTopicHref()}">All</a>
+        ${this.topics.map((topic) => (html`<a class="topic" href="${this.setTopicHref(topic.id)}">${topic.label}</a>`))}
       </div>
     `;
   }
