@@ -20,7 +20,7 @@ export default class TopicFilter extends LitElement {
 
   setActiveTopic() {
     const url = new URL(window.location.href);
-    const topic = url.pathname.split('/').find((path) => path === 'topic' || path === 'tag');
+    const topic = url.pathname.split('/').find((path) => path === 'tag');
     const activeTopic = topic ? url.pathname.split('/')[url.pathname.split('/').indexOf(topic) + 1] : undefined;
     const topicEl = this.shadowRoot?.querySelector(`a[href*="${this.getTopicHref(activeTopic)}"]`);
     if (topicEl) topicEl.classList.add('active');
@@ -29,7 +29,7 @@ export default class TopicFilter extends LitElement {
   getTopicHref(topic?: string) {
     const url = new URL(window.location.href);
     const blogPath = url.pathname.split('/')[1];
-    return topic ? `/${blogPath}/topic/${topic}` : `/${blogPath}`;
+    return topic ? `/${blogPath}/tag/${topic}` : `/${blogPath}`;
   }
 
   render() {
