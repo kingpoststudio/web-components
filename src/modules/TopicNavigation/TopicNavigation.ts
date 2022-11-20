@@ -34,7 +34,7 @@ export default class TopicFilter extends LitElement {
 
   render() {
     return html`
-      <div id="topic-navigation">
+      <div class="wrap">
         <a class="topic" href="${this.getTopicHref()}">All</a>
         ${this.topics.map((topic) => (html`<a class="topic" href="${this.getTopicHref(topic.id)}">${topic.label}</a>`))}
       </div>
