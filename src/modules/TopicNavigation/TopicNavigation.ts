@@ -11,6 +11,9 @@ interface Topic {
 export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
+  @property({ type: String })
+    title = 'Topics';
+
   @property({ type: Array })
   private topics: Topic[] = [];
 
@@ -35,8 +38,11 @@ export default class TopicFilter extends LitElement {
   render() {
     return html`
       <div class="wrap">
-        <a class="topic" href="${this.getTopicHref()}">All</a>
-        ${this.topics.map((topic) => (html`<a class="topic" href="${this.getTopicHref(topic.id)}">${topic.label}</a>`))}
+        <h3>${this.title}</h3>
+        <div class="topics">
+          <a class="topic" href="${this.getTopicHref()}">All</a>
+          ${this.topics.map((topic) => (html`<a class="topic" href="${this.getTopicHref(topic.id)}">${topic.label}</a>`))}
+        </div>
       </div>
     `;
   }
