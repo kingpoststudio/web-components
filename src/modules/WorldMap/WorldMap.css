@@ -1,0 +1,22 @@
+:host {
+  .wrap {
+    display: flex;
+    margin: 1rem 0;
+
+    > .tabs {
+      position: relative;
+      flex: 0 0 25%;
+      max-width: 25%;
+      padding: 1rem;
+      background: white;
+      transition: opacity var(--ease-timing) var(--ease-type);
+      background: black;
+    }
+
+    > .map {
+      position: relative;
+      flex: 0 0 75%;
+      background: blue;
+    }
+  }
+}
