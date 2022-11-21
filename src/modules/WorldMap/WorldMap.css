@@ -1,6 +1,6 @@
 :host {
   .wrap {
-    display: flex;
+    display: inline-flex;
     margin: 1rem 0;
 
     > .tabs {
@@ -9,7 +9,7 @@
       max-width: 25%;
       padding: 1rem;
       background: white;
-      transition: opacity var(--ease-timing) var(--ease-type);
+      transition: opacity var(--ease-time) var(--ease-type);
       background: black;
     }
 
@@ -17,6 +17,36 @@
       position: relative;
       flex: 0 0 75%;
       background: blue;
+
+      > img {
+        display: block;
+        height: auto;
+        width: auto;
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      > svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        
+        .section-outline {
+          fill: var(--color-secondary);
+          fill-opacity: 0.7;
+          stroke: var(--color-secondary-dark);
+          stroke-opacity: 0.5;
+          opacity: 0;
+          transition: opacity var(--ease-time) var(--ease-type);
+          cursor: pointer;
+
+          &:hover,
+          &.active {
+            opacity: 1;
+          }
+        }
+      }
     }
   }
 }
