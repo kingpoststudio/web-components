@@ -1,5 +1,5 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import Styles from './WorldMap.css';
 import worldMap from '../../assets/images/world-map.png';
 
