@@ -12,72 +12,72 @@ export default class WorldMap extends LitElement {
       id: 'tagaca',
       label: 'Tagaca - South America',
       coords: {
-        x: 0,
-        y: 0,
+        x: 10,
+        y: 70,
       },
     },
     {
       id: 'triolab',
       label: 'Triolab Group - Denmark, Finland, Iceland, Norway, Sweden, Estonia, Latvia, Lithuania',
       coords: {
-        x: 0,
-        y: 0,
+        x: 20,
+        y: 20,
       },
     },
     {
       id: 'iab',
       label: 'IAB - Czech Republic, Slovak Republic, Hungary and Poland',
       coords: {
-        x: 0,
-        y: 0,
+        x: 30,
+        y: 25,
       },
     },
     {
       id: 'atc',
       label: 'ATC Healthcare - Turkey',
       coords: {
-        x: 0,
-        y: 0,
+        x: 35,
+        y: 39,
       },
     },
     {
       id: 'p4ml',
       label: 'P4ML - United Arab Emirates and Kingdom of Saudi Arabia',
       coords: {
-        x: 0,
-        y: 0,
+        x: 13,
+        y: 50,
       },
     },
     {
       id: 'jabrehoo',
       label: 'Jabrehoo - Mainland China',
       coords: {
-        x: 0,
-        y: 0,
+        x: 50,
+        y: 40,
       },
     },
     {
       id: 'camtech',
       label: 'Camtech Diagnostics - Singapore, Malaysia, Japan',
       coords: {
-        x: 0,
-        y: 0,
+        x: 43.5,
+        y: 43,
       },
     },
     {
       id: 'helixrus',
       label: 'HELiXrUS - Korea',
       coords: {
-        x: 0,
-        y: 0,
+        x: 68,
+        y: 41,
       },
     },
     {
       id: 'tgia',
       label: 'TGIA - Taiwan',
       coords: {
-        x: 0,
-        y: 0,
+        x: 69,
+        y: 49,
       },
     },
   ];
