@@ -3,7 +3,7 @@
     display: inline-flex;
     margin: 1rem 0;
 
-    > .tabs {
+    > .info {
       position: relative;
       flex: 0 0 25%;
       max-width: 25%;
@@ -15,7 +15,7 @@
 
     > .map {
       position: relative;
-      flex: 0 0 75%;
+      display: flex;
       background: blue;
 
       > img {
@@ -45,6 +45,18 @@
           &.active {
             opacity: 1;
           }
+        }
+      }
+
+      > .tabs {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        > .tab {
+          position: absolute;
+          background: black;
+          color: white;
         }
       }
     }
