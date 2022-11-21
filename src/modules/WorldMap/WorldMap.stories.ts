@@ -10,5 +10,7 @@ export default {
 };
 
 export const Main = () => html`
-  <kps-world-map></kps-world-map>
+  <kps-container>
+    <kps-world-map></kps-world-map>
+  </kps-container>
 `;

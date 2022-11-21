@@ -1,7 +1,11 @@
 :host {
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
+
   .wrap {
-    display: inline-flex;
-    margin: 1rem 0;
+    display: flex;
 
     > .info {
       position: relative;
