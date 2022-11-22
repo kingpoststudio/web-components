@@ -6,14 +6,14 @@
 
   .wrap {
     display: flex;
+    background: white;
 
     > .info-container {
       visibility: hidden;
       opacity: 0;
       position: relative;
-      flex: 0 0 25%;
-      max-width: 25%;
-      background: white;
+      display: flex;
+      width: 25%;
       transition: opacity var(--ease-time) var(--ease-type);
 
       &.visible {
@@ -35,7 +35,7 @@
     > .map {
       position: relative;
       display: flex;
-      background: blue;
+      width: 100%;
 
       > img {
         display: block;
