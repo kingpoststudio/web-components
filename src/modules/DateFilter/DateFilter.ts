@@ -1,5 +1,5 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import Styles from './DateFilter.css';
 
 const months = [
@@ -21,7 +21,8 @@ const months = [
 export default class DateFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
-  private dateValue = '';
+  @state()
+    dateValue = '';
 
   @property({ type: String })
     title = 'Filter by Date';
