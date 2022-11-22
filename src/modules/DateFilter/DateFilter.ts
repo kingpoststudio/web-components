@@ -63,6 +63,7 @@ export default class DateFilter extends LitElement {
           <select>
             <option value="" disabled selected>Year</option>
             ${Array.from(Array(10).keys()).map((year) => html`<option value="${year + 2021}">${year + 2021}</option>`)}
+          </select>
         </div>
 
       </div>

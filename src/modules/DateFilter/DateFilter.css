@@ -31,5 +31,13 @@
     gap: 0.5rem;
     padding: 1rem;
     border-top: 1px solid var(--color-gray-lightest);
+
+    select {
+      padding: 0.75rem 1rem;
+      font-size: var(--font-size-md);
+      border: 1px solid var(--color-gray-lightest);
+      border-radius: 0.5rem;
+      cursor: pointer;
+    }
   }
 }
