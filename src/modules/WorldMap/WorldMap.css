@@ -6,6 +6,7 @@
 
   .wrap {
     display: flex;
+    flex-direction: column;
     background: white;
 
     > .info-container {
@@ -13,7 +14,8 @@
       opacity: 0;
       position: relative;
       display: flex;
-      width: 25%;
+      width: 80%;
+      margin: 0 auto;
       transition: opacity var(--ease-time) var(--ease-type);
 
       &.visible {
@@ -22,12 +24,9 @@
       }
 
       ::slotted(div) {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
-        padding: 1rem;
+        padding: 2rem;
         box-sizing: border-box;
       }
     }
@@ -89,6 +88,16 @@
         > .tag.visible {
           opacity: 1;
         }
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .wrap {
+      flex-direction: row;
+
+      > .info-container {
+        width: 50%;
       }
     }
   }

@@ -1,7 +1,7 @@
 import {
   html, svg, unsafeCSS, LitElement,
 } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import Styles from './WorldMap.css';
 import worldMap from '../../assets/images/world-map.png';
 
@@ -133,13 +133,12 @@ export default class WorldMap extends LitElement {
     const sections = this.shadowRoot?.querySelectorAll('svg g > .section-outline');
     sections?.forEach((section) => section.classList.remove('active'));
 
-    el.classList.add('active');
     this.activeSectionId = el.parentElement?.getAttribute('id') || '';
+    el.classList.add('active');
     this.flashInfoContainer();
   }
 
   renderSectionInfo(section: GeoSection) {
-    if (!this.activeSectionId) return html`<slot name="default"></slot>`;
     if (this.activeSectionId === section.id) return html`<slot name="${section.id}"></slot>`;
     return html``;
   }
@@ -149,12 +148,12 @@ export default class WorldMap extends LitElement {
       <div class="wrap">
 
         <div class="info-container visible">
-          ${geoSections.map(this.renderSectionInfo)}
+          ${!this.activeSectionId ? html`<slot name="default"></slot>` : geoSections.map(this.renderSectionInfo)}
         </div>
 
         <div class="map">
           <img src="${worldMap}" alt="World Map" />
-          <svg viewBox="0 0 1200 638">
+          <svg viewBox="0 0 1200 640">
             ${geoSections.map((section) => (svg`<g id="${section.id}" @click=${this.setActiveSection} @mouseenter=${this.toggleVisibleTag} @mouseleave=${this.toggleVisibleTag}><polygon class="section-outline" points="${section.svgPoints}"/>)</g>`))}
           </svg>
 
