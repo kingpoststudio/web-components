@@ -103,6 +103,14 @@ export default class WorldMap extends LitElement {
     else tag?.classList.add('visible');
   }
 
+  setActiveSection(e: any) {
+    const el = e.target as SVGGElement;
+    const sections = this.shadowRoot?.querySelectorAll('svg g > .section-outline');
+    sections?.forEach((section) => section.classList.remove('active'));
+
+    el.classList.add('active');
+  }
+
   render() {
     return html`
       <div class="wrap">
@@ -114,7 +122,7 @@ export default class WorldMap extends LitElement {
         <div class="map">
           <img src="${worldMap}" alt="World Map" />
           <svg viewBox="0 0 1200 638">
-            ${this.geoSections.map((section) => (svg`<g id="${section.id}" @mouseenter=${this.toggleVisibleTag} @mouseleave=${this.toggleVisibleTag}><polygon class="section-outline" points="${section.svgPoints}"/>)</g>`))}
+            ${this.geoSections.map((section) => (svg`<g id="${section.id}" @click=${this.setActiveSection} @mouseenter=${this.toggleVisibleTag} @mouseleave=${this.toggleVisibleTag}><polygon class="section-outline" points="${section.svgPoints}"/>)</g>`))}
           </svg>
 
           <div class="tags">
