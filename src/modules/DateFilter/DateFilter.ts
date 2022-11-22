@@ -38,6 +38,18 @@ export default class DateFilter extends LitElement {
     const params = new URLSearchParams(url.search);
 
     this.dateValue = params.get(this.urlParam) || '';
+
+    if (this.dateValue) {
+      const month = this.dateValue.split('-')[0];
+      const year = this.dateValue.split('-')[1];
+
+      const form = this.shadowRoot?.querySelector('form') as HTMLFormElement;
+      const monthSelect = form.querySelector('select[name="month"]') as HTMLSelectElement;
+      const yearSelect = form.querySelector('select[name="year"]') as HTMLSelectElement;
+
+      monthSelect.value = month;
+      yearSelect.value = year;
+    }
   }
 
   clearDateFilter() {
