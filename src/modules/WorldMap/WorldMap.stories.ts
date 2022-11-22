@@ -12,6 +12,9 @@ export default {
 export const Main = () => html`
   <kps-container>
     <kps-world-map>
+      <div slot="default">
+        This is the default.
+      </div>
       <div slot="helixrus">
         Testing this.
       </div>

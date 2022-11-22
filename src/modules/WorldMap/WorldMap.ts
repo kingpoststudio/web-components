@@ -139,6 +139,7 @@ export default class WorldMap extends LitElement {
   }
 
   renderSectionInfo(section: GeoSection) {
+    if (!this.activeSectionId) return html`<slot name="default"></slot>`;
     if (this.activeSectionId === section.id) return html`<slot name="${section.id}"></slot>`;
     return html``;
   }
