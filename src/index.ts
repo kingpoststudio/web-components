@@ -16,6 +16,7 @@ import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
 
 import BackToTop from './modules/BackToTop/BackToTop';
+import DateFilter from './modules/DateFilter/DateFilter';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
 import Pagination from './modules/Pagination/Pagination';
@@ -48,6 +49,7 @@ const lib = {
   TabGroup,
 
   BackToTop,
+  DateFilter,
   HeroBanner,
   Navigation,
   Pagination,
