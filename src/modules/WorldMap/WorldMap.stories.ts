@@ -11,6 +11,13 @@ export default {
 
 export const Main = () => html`
   <kps-container>
-    <kps-world-map></kps-world-map>
+    <kps-world-map>
+      <div slot="helixrus">
+        Testing this.
+      </div>
+      <div slot="tgia">
+        Testing this, too.
+      </div>
+    </kps-world-map>
   </kps-container>
 `;

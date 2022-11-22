@@ -7,14 +7,23 @@
   .wrap {
     display: flex;
 
-    > .info {
+    > .info-container {
       position: relative;
       flex: 0 0 25%;
       max-width: 25%;
-      padding: 1rem;
       background: white;
-      transition: opacity var(--ease-time) var(--ease-type);
-      background: black;
+
+      ::slotted(div) {
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        transition: opacity var(--ease-time) var(--ease-type);
+      }
     }
 
     > .map {

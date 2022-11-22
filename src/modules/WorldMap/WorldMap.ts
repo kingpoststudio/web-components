@@ -1,13 +1,16 @@
 import {
   html, svg, unsafeCSS, LitElement,
 } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, state } from 'lit/decorators.js';
 import Styles from './WorldMap.css';
 import worldMap from '../../assets/images/world-map.png';
 
 @customElement('kps-world-map')
 export default class WorldMap extends LitElement {
   static styles = [unsafeCSS(Styles)];
+
+  @state()
+    activeSectionId: string = '';
 
   geoSections = [
     {
@@ -109,14 +112,15 @@ export default class WorldMap extends LitElement {
     sections?.forEach((section) => section.classList.remove('active'));
 
     el.classList.add('active');
+    this.activeSectionId = el.parentElement?.getAttribute('id') || '';
   }
 
   render() {
     return html`
       <div class="wrap">
 
-        <div class="info">
-
+        <div class="info-container ${this.activeSectionId}">
+          ${this.geoSections.map((section) => html`<slot name="${section.id}"></slot>`)}
         </div>
 
         <div class="map">
@@ -129,6 +133,7 @@ export default class WorldMap extends LitElement {
             ${this.geoSections.map((section) => (html`<div class="tag" style="left:${section.tagCoords.x}%;top:${section.tagCoords.y}%;" data-id="${section.id}">${section.label}</div>`))}
           </div>
         </div>
+
       </div>
     `;
   }
