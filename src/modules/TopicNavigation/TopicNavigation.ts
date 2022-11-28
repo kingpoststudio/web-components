@@ -17,22 +17,38 @@ export default class TopicFilter extends LitElement {
   @property({ type: Array })
   private topics: Topic[] = [];
 
+  @property({ type: String })
+  private urlParam = 'event_type';
+
+  @property({ type: Boolean })
+  private blog = false;
+
   firstUpdated() {
     this.setActiveTopic();
   }
 
   setActiveTopic() {
     const url = new URL(window.location.href);
-    const topic = url.pathname.split('/').find((path) => path === 'tag');
-    const activeTopic = topic ? url.pathname.split('/')[url.pathname.split('/').indexOf(topic) + 1] : undefined;
-    const topicEl = this.shadowRoot?.querySelector(`a[href*="${this.getTopicHref(activeTopic)}"]`);
-    if (topicEl) topicEl.classList.add('active');
+
+    if (this.blog) {
+      const topic = url.pathname.split('/').find((path) => path === 'tag');
+      const activeTopic = topic ? url.pathname.split('/')[url.pathname.split('/').indexOf(topic) + 1] : undefined;
+      const topicEl = this.shadowRoot?.querySelector(`a[href*="${this.getTopicHref(activeTopic)}"]`);
+      if (topicEl) topicEl.classList.add('active');
+    } else {
+      const param = url.searchParams.get(this.urlParam) || undefined;
+      const topicEl = this.shadowRoot?.querySelector(`a[href*="${this.getTopicHref(param)}"]`);
+      if (topicEl) topicEl.classList.add('active');
+    }
   }
 
   getTopicHref(topic?: string) {
     const url = new URL(window.location.href);
-    const blogPath = url.pathname.split('/')[1];
-    return topic ? `/${blogPath}/tag/${topic}` : `/${blogPath}`;
+    const parentPath = url.pathname.split('/')[1];
+    if (!topic) return `/${parentPath}`;
+
+    const newUrl = this.blog ? `/${parentPath}/tag/${topic}` : `${url.pathname}?${this.urlParam}=${topic}`;
+    return newUrl;
   }
 
   render() {
