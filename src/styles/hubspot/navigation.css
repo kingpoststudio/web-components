@@ -11,7 +11,7 @@ header {
         padding: var(--space-md);
 
         a {
-          color: var(--color-font);
+          color: var(--color-text);
           font-size: var(--font-size-lg);
           font-weight: var(--font-weight-bold);
           text-decoration: none;

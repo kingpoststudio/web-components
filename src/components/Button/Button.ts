@@ -6,7 +6,7 @@ import { customElement, property } from 'lit/decorators.js';
 @customElement('kps-button')
 export default class Button extends LitElement {
   @property({ type: String })
-    color: 'primary' | 'secondary' | 'tertiary' | 'gray' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
+    color: 'primary' | 'secondary' | 'tertiary' | 'gray' | 'white' | 'success' | 'warning' | 'error' | 'transparent' = 'primary';
 
   @property({ type: String })
     theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest' = 'base';
@@ -90,7 +90,7 @@ export default class Button extends LitElement {
     }
 
     .wrap[color="secondary"] > a {
-      color: var(--color-font);
+      color: var(--color-text);
       background: var(--color-secondary);
     }
 
@@ -121,7 +121,7 @@ export default class Button extends LitElement {
     }
 
     .wrap[color="white"] > a {
-      color: var(--color-font);
+      color: var(--color-text);
       background: var(--color-white);
     }
 
