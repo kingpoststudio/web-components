@@ -38,18 +38,18 @@ export default class TopicFilter extends LitElement {
     params.forEach((value, key) => {
       const valueArr = value.split(',');
       valueArr.forEach((val) => {
-        const el = this.shadowRoot?.querySelector(`#${key}__${val}`) as HTMLInputElement;
-        if (el) {
-          el.checked = true;
-          this.isFilteringActive = true;
-        }
+        const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${key}"]`);
+        const type = parentEl?.getAttribute('data-type');
+        const childEl = parentEl?.querySelector(`[value="${key}__${val}"]`);
+
+        if (type === 'checkbox') (childEl as HTMLInputElement).checked = true;
+        else if (type === 'select') (childEl as HTMLOptionElement).selected = true;
       });
     });
   }
 
   selectTopicOption(e: Event) {
     const topicOption = (e.target as HTMLInputElement)?.value;
-    console.log(topicOption);
     const topicId = topicOption.split('__')[0];
     const optionId = topicOption.split('__')[1];
 
@@ -58,21 +58,26 @@ export default class TopicFilter extends LitElement {
     }
   }
 
-  filterByTopicOption(topic: string, option: string) {
+  filterByTopicOption(topicId: string, optionId: string) {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
-    const topicValues = params.get(topic);
+    const topic = this.topics.find((t) => t.id === topicId);
+    const topicValues = params.get(topicId);
+    if (!topic) return;
 
-    if (topicValues) {
+    if (topic.type === 'checkbox' && topicValues) {
       const activeOptions = topicValues.split(',');
-      const index = activeOptions.indexOf(option);
+      const index = activeOptions.indexOf(optionId);
 
       if (index > -1) activeOptions.splice(index, 1);
-      else activeOptions.push(option);
+      else activeOptions.push(optionId);
 
-      if (activeOptions.length > 0) params.set(topic, activeOptions.join(','));
-      else params.delete(topic);
-    } else params.set(topic, option);
+      if (activeOptions.length > 0) params.set(topicId, activeOptions.join(','));
+      else params.delete(topicId);
+    } else if (topic.type === 'select' || !topicValues) {
+      params.set(topicId, optionId);
+    }
+
 
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
@@ -88,46 +93,37 @@ export default class TopicFilter extends LitElement {
 
   renderSelect(topic: Topic) {
     return html`
-      <div class="topic">
-        <p class="header">${topic.name}</p>
-        <select @change=${this.selectTopicOption}>
-          <option value="" disabled selected>Select...</option>
-          ${topic.options.map((option) => html`
-              <option value="${topic.id}__${option.id}">${option.name}</option>
-            </div>
-          `)}
-        </select>
-      </div>
+      <select @change=${this.selectTopicOption}>
+        <option value="" disabled selected>Select...</option>
+        ${topic.options.map((option) => html`
+            <option value="${topic.id}__${option.id}">${option.name}</option>
+          </div>
+        `)}
+      </select>
     `;
   }
 
   renderMultiSelect(topic: Topic) {
     return html`
-      <div class="topic">
-        <p class="header">${topic.name}</p>
-        <select multiple @change=${this.selectTopicOption}>
-          <option value="" disabled selected>Select</option>
-          ${topic.options.map((option) => html`
-              <option value="${topic.id}__${option.id}">${option.name}</option>
-            </div>
-          `)}
-        </select>
-      </div>
+      <select multiple @change=${this.selectTopicOption}>
+        <option value="" disabled selected>Select</option>
+        ${topic.options.map((option) => html`
+            <option value="${topic.id}__${option.id}">${option.name}</option>
+          </div>
+        `)}
+      </select>
     `;
   }
 
   renderCheckboxes(topic: Topic) {
     return html`
-    <div class="topic">
-      <p class="header">${topic.name}</p>
-      <div class="options">
-        ${topic.options.map((option: TopicOption) => html`
-          <div class="option">
-            <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
-            <label for="${topic.id}__${option.id}">${option.name}</label>
-          </div>
-        `)}
-      </div>
+    <div class="options">
+      ${topic.options.map((option: TopicOption) => html`
+        <div class="option">
+          <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
+          <label for="${topic.id}__${option.id}">${option.name}</label>
+        </div>
+      `)}
     </div>
   `;
   }
@@ -140,7 +136,12 @@ export default class TopicFilter extends LitElement {
     };
 
     return html`
-      ${this.topics.map(renderTopic)}
+      ${this.topics.map((topic) => html`
+        <div class="topic" data-topic-id="${topic.id}" data-type="${topic.type}">
+          <p class="header">${topic.name}</p>
+          ${renderTopic(topic)}
+        </div>
+      `)}
     `;
   }
 
