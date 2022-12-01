@@ -49,6 +49,7 @@ export default class TopicFilter extends LitElement {
 
   selectTopicOption(e: Event) {
     const topicOption = (e.target as HTMLInputElement)?.value;
+    console.log(topicOption);
     const topicId = topicOption.split('__')[0];
     const optionId = topicOption.split('__')[1];
 
@@ -85,11 +86,11 @@ export default class TopicFilter extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
-  static renderSelect(topic: Topic) {
+  renderSelect(topic: Topic) {
     return html`
       <div class="topic">
         <p class="header">${topic.name}</p>
-        <select>
+        <select @change=${this.selectTopicOption}>
           <option value="" disabled selected>Select...</option>
           ${topic.options.map((option) => html`
               <option value="${topic.id}__${option.id}">${option.name}</option>
@@ -100,11 +101,11 @@ export default class TopicFilter extends LitElement {
     `;
   }
 
-  static renderMultiSelect(topic: Topic) {
+  renderMultiSelect(topic: Topic) {
     return html`
       <div class="topic">
         <p class="header">${topic.name}</p>
-        <select multiple>
+        <select multiple @change=${this.selectTopicOption}>
           <option value="" disabled selected>Select</option>
           ${topic.options.map((option) => html`
               <option value="${topic.id}__${option.id}">${option.name}</option>
@@ -115,7 +116,7 @@ export default class TopicFilter extends LitElement {
     `;
   }
 
-  static renderCheckboxes(topic: Topic) {
+  renderCheckboxes(topic: Topic) {
     return html`
     <div class="topic">
       <p class="header">${topic.name}</p>
@@ -133,9 +134,9 @@ export default class TopicFilter extends LitElement {
 
   get renderedTopics() {
     const renderTopic = (topic: Topic) => {
-      // if (topic.type === 'multiselect') return TopicFilter.renderMultiSelect(topic);
-      if (topic.type === 'select') return TopicFilter.renderSelect(topic);
-      return TopicFilter.renderCheckboxes(topic);
+      if (topic.type === 'multiselect') return this.renderMultiSelect(topic);
+      if (topic.type === 'select') return this.renderSelect(topic);
+      return this.renderCheckboxes(topic);
     };
 
     return html`
