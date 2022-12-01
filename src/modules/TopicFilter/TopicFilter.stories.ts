@@ -13,6 +13,7 @@ const mockTopics = [
   {
     name: 'Topic 1',
     id: 'topic-1',
+    type: 'checkbox',
     options: [
       {
         id: '1',
@@ -31,6 +32,7 @@ const mockTopics = [
   {
     name: 'Topic 2',
     id: 'topic-2',
+    type: 'select',
     options: [
       {
         id: '1',

@@ -10,6 +10,7 @@ interface TopicOption {
 interface Topic {
   name: string;
   id: string;
+  type: 'checkbox' | 'select' | 'multiselect';
   options: TopicOption[];
 }
 
@@ -18,16 +19,13 @@ export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: Boolean })
-    isFilteringActive = false;
+  isFilteringActive = false;
 
   @property({ type: String })
-    title = 'Topic Filters';
+  title = 'Topic Filters';
 
   @property({ type: Array })
-    topics: Array<Topic> = [];
-
-  @property({ type: String })
-    type: 'checkbox' | 'select' | 'multiselect' = 'checkbox';
+  topics: Array<Topic> = [];
 
   firstUpdated() {
     this.setActiveTopicOptions();
@@ -87,20 +85,30 @@ export default class TopicFilter extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
-  renderSelects() {
-
+  static renderSelect(topic: Topic) {
+    return html`
+      <div class="topic">
+        <p class="header">${topic.name}</p>
+        <select>
+          <option value="" disabled selected>Select</option>
+          ${topic.options.map((option) => html`
+              <option value="${topic.id}__${option.id}">${option.name}</option>
+            </div>
+          `)}
+        </select>
+      </div>
+    `;
   }
 
-  renderMultiSelects() {
-
+  static renderMultiSelect(topic: Topic) {
   }
 
-  renderCheckboxes() {
-    return this.topics.map((topic) => html`
+  static renderCheckboxes(topic: Topic) {
+    return html`
     <div class="topic">
       <p class="header">${topic.name}</p>
       <div class="options">
-        ${topic.options.map((option) => html`
+        ${topic.options.map((option: TopicOption) => html`
           <div class="option">
             <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
             <label for="${topic.id}__${option.id}">${option.name}</label>
@@ -108,13 +116,19 @@ export default class TopicFilter extends LitElement {
         `)}
       </div>
     </div>
-  `);
+  `;
   }
 
   get renderedTopics() {
-    if (this.type === 'select') return this.renderSelects();
-    if (this.type === 'multiselect') return this.renderMultiSelects();
-    return this.renderCheckboxes();
+    const renderTopic = (topic: Topic) => {
+      if (topic.type === 'select') return TopicFilter.renderSelect(topic);
+      if (topic.type === 'multiselect') return TopicFilter.renderMultiSelect(topic);
+      return TopicFilter.renderCheckboxes(topic);
+    };
+
+    return html`
+      ${this.topics.map(renderTopic)}
+    `;
   }
 
   render() {
