@@ -109,7 +109,7 @@ const styles = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: var(--space-lg) var(--space-lg) var(--space-sm);
+    padding: var(--space-md) var(--space-lg);
   }
 
   dialog .container .header kps-icon {
