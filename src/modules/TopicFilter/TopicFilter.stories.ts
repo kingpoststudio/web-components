@@ -48,6 +48,25 @@ const mockTopics = [
       },
     ],
   },
+  {
+    name: 'Topic 3',
+    id: 'topic-3',
+    type: 'multiselect',
+    options: [
+      {
+        id: '1',
+        name: 'Option 1',
+      },
+      {
+        id: '2',
+        name: 'Option 2',
+      },
+      {
+        id: '3',
+        name: 'Option 3',
+      },
+    ],
+  },
 ];
 
 export const Main = () => html`

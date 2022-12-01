@@ -90,7 +90,7 @@ export default class TopicFilter extends LitElement {
       <div class="topic">
         <p class="header">${topic.name}</p>
         <select>
-          <option value="" disabled selected>Select</option>
+          <option value="" disabled selected>Select...</option>
           ${topic.options.map((option) => html`
               <option value="${topic.id}__${option.id}">${option.name}</option>
             </div>
@@ -101,6 +101,18 @@ export default class TopicFilter extends LitElement {
   }
 
   static renderMultiSelect(topic: Topic) {
+    return html`
+      <div class="topic">
+        <p class="header">${topic.name}</p>
+        <select multiple>
+          <option value="" disabled selected>Select</option>
+          ${topic.options.map((option) => html`
+              <option value="${topic.id}__${option.id}">${option.name}</option>
+            </div>
+          `)}
+        </select>
+      </div>
+    `;
   }
 
   static renderCheckboxes(topic: Topic) {
@@ -121,8 +133,8 @@ export default class TopicFilter extends LitElement {
 
   get renderedTopics() {
     const renderTopic = (topic: Topic) => {
+      // if (topic.type === 'multiselect') return TopicFilter.renderMultiSelect(topic);
       if (topic.type === 'select') return TopicFilter.renderSelect(topic);
-      if (topic.type === 'multiselect') return TopicFilter.renderMultiSelect(topic);
       return TopicFilter.renderCheckboxes(topic);
     };
 
@@ -133,7 +145,7 @@ export default class TopicFilter extends LitElement {
 
   render() {
     return html`
-      <div id="topic-filter">
+      <div class="wrap">
         <div class="intro">
           <p>${this.title}</p>
           ${this.isFilteringActive ? html`<a class="clear" @click=${this.clearTopicFilters}>Clear</a>` : ''}

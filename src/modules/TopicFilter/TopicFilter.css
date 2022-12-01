@@ -1,4 +1,4 @@
-#topic-filter {
+.wrap {
   display: flex;
   flex-direction: column;
   max-width: 24rem;
@@ -37,6 +37,15 @@
       > .header {
         margin: 0.5rem 0;
         font-size: var(--font-size-lg);
+      }
+
+      > select {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border: 1px solid var(--color-gray);
+        border-radius: 0.5rem;
+        font-size: var(--font-size-md);
+        cursor: pointer;
       }
 
       > .options {
