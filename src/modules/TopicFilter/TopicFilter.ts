@@ -26,6 +26,9 @@ export default class TopicFilter extends LitElement {
   @property({ type: Array })
     topics: Array<Topic> = [];
 
+  @property({ type: String })
+    type: 'checkbox' | 'select' | 'multiselect' = 'checkbox';
+
   firstUpdated() {
     this.setActiveTopicOptions();
   }
@@ -84,6 +87,36 @@ export default class TopicFilter extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
+  renderSelects() {
+
+  }
+
+  renderMultiSelects() {
+
+  }
+
+  renderCheckboxes() {
+    return this.topics.map((topic) => html`
+    <div class="topic">
+      <p class="header">${topic.name}</p>
+      <div class="options">
+        ${topic.options.map((option) => html`
+          <div class="option">
+            <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
+            <label for="${topic.id}__${option.id}">${option.name}</label>
+          </div>
+        `)}
+      </div>
+    </div>
+  `);
+  }
+
+  get renderedTopics() {
+    if (this.type === 'select') return this.renderSelects();
+    if (this.type === 'multiselect') return this.renderMultiSelects();
+    return this.renderCheckboxes();
+  }
+
   render() {
     return html`
       <div id="topic-filter">
@@ -93,19 +126,7 @@ export default class TopicFilter extends LitElement {
         </div>
 
         <div class="topics">
-          ${this.topics.map((topic) => html`
-            <div class="topic">
-              <p class="header">${topic.name}</p>
-              <div class="options">
-                ${topic.options.map((option) => html`
-                  <div class="option">
-                    <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
-                    <label for="${topic.id}__${option.id}">${option.name}</label>
-                  </div>
-                `)}
-              </div>
-            </div>
-          `)}
+          ${this.renderedTopics}
         </div>
 
       </div>
