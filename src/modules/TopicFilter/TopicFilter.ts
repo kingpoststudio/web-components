@@ -18,14 +18,11 @@ interface Topic {
 export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
-  @property({ type: Boolean })
-  isFilteringActive = false;
-
   @property({ type: String })
-  title = 'Topic Filters';
+    title = 'Topic Filters';
 
   @property({ type: Array })
-  topics: Array<Topic> = [];
+    topics: Array<Topic> = [];
 
   firstUpdated() {
     this.setActiveTopicOptions();

@@ -19,6 +19,21 @@ export default class Search extends LitElement {
   @property({ type: String })
     urlParam = 'search_term';
 
+  firstUpdated() {
+    this.setActiveSearchTerm();
+  }
+
+  setActiveSearchTerm() {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+    const searchTerm = params.get(this.urlParam);
+
+    if (searchTerm) {
+      this.searchTerm = searchTerm;
+      this.shadowRoot?.querySelector('input')?.setAttribute('value', searchTerm);
+    }
+  }
+
   setSearchTermValue() {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
