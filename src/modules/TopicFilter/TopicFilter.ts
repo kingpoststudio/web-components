@@ -19,13 +19,13 @@ export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: Boolean })
-    isFilteringActive = false;
+  isFilteringActive = false;
 
   @property({ type: String })
-    title = 'Topic Filters';
+  title = 'Topic Filters';
 
   @property({ type: Array })
-    topics: Array<Topic> = [];
+  topics: Array<Topic> = [];
 
   firstUpdated() {
     this.setActiveTopicOptions();
@@ -38,13 +38,15 @@ export default class TopicFilter extends LitElement {
     params.forEach((value, key) => {
       const valueArr = value.split(',');
       valueArr.forEach((val) => {
+        const clearEl = this.shadowRoot?.querySelector('.intro .clear');
         const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${key}"]`);
         const childEl = parentEl?.querySelector(`[value="${key}__${val}"]`);
-        const clearEl = parentEl?.querySelector('.clear');
         const type = parentEl?.getAttribute('data-type');
 
         if (childEl) {
           clearEl?.classList.remove('hidden');
+          parentEl?.querySelector('.clear')?.classList.remove('hidden');
+
           if (type === 'checkbox') (childEl as HTMLInputElement).checked = true;
           else if (type === 'select') (childEl as HTMLOptionElement).selected = true;
         }
@@ -85,15 +87,23 @@ export default class TopicFilter extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
-  clearTopicFilter(topicId: string) {
+  clearTopicFilter(topicId?: string) {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
-    const topic = this.topics.find((t) => t.id === topicId);
 
-    if (topic) params.delete(topic.id);
-    params.delete('page');
+    if (topicId) {
+      const topic = this.topics.find((t) => t.id === topicId);
 
-    window.location.href = `${url.pathname}?${params.toString()}`;
+      if (topic) params.delete(topic.id);
+      params.delete('page');
+
+      window.location.href = `${url.pathname}?${params.toString()}`;
+    } else {
+      this.topics.forEach((topic) => params.delete(topic.id));
+      params.delete('page');
+
+      window.location.href = `${url.pathname}?${params.toString()}`;
+    }
   }
 
   renderSelect(topic: Topic) {
@@ -158,6 +168,7 @@ export default class TopicFilter extends LitElement {
       <div class="wrap">
         <div class="intro">
           <h4>${this.title}</h4>
+          <a class="clear hidden" @click=${() => this.clearTopicFilter()}>Clear all</a>
         </div>
 
         <div class="topics">
