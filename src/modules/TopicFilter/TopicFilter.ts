@@ -19,13 +19,13 @@ export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: Boolean })
-  isFilteringActive = false;
+    isFilteringActive = false;
 
   @property({ type: String })
-  title = 'Topic Filters';
+    title = 'Topic Filters';
 
   @property({ type: Array })
-  topics: Array<Topic> = [];
+    topics: Array<Topic> = [];
 
   firstUpdated() {
     this.setActiveTopicOptions();
@@ -39,11 +39,15 @@ export default class TopicFilter extends LitElement {
       const valueArr = value.split(',');
       valueArr.forEach((val) => {
         const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${key}"]`);
-        const type = parentEl?.getAttribute('data-type');
         const childEl = parentEl?.querySelector(`[value="${key}__${val}"]`);
+        const clearEl = parentEl?.querySelector('.clear');
+        const type = parentEl?.getAttribute('data-type');
 
-        if (type === 'checkbox') (childEl as HTMLInputElement).checked = true;
-        else if (type === 'select') (childEl as HTMLOptionElement).selected = true;
+        if (childEl) {
+          clearEl?.classList.remove('hidden');
+          if (type === 'checkbox') (childEl as HTMLInputElement).checked = true;
+          else if (type === 'select') (childEl as HTMLOptionElement).selected = true;
+        }
       });
     });
   }
@@ -78,14 +82,15 @@ export default class TopicFilter extends LitElement {
       params.set(topicId, optionId);
     }
 
-
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
-  clearTopicFilters() {
+  clearTopicFilter(topicId: string) {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
-    this.topics.forEach((topic) => params.delete(topic.id));
+    const topic = this.topics.find((t) => t.id === topicId);
+
+    if (topic) params.delete(topic.id);
     params.delete('page');
 
     window.location.href = `${url.pathname}?${params.toString()}`;
@@ -138,7 +143,10 @@ export default class TopicFilter extends LitElement {
     return html`
       ${this.topics.map((topic) => html`
         <div class="topic" data-topic-id="${topic.id}" data-type="${topic.type}">
-          <p class="header">${topic.name}</p>
+          <div class="header">
+            <h5>${topic.name}</h5>
+            <a class="clear hidden" @click=${() => this.clearTopicFilter(topic.id)}>Clear</a>
+          </div>
           ${renderTopic(topic)}
         </div>
       `)}
@@ -149,14 +157,12 @@ export default class TopicFilter extends LitElement {
     return html`
       <div class="wrap">
         <div class="intro">
-          <p>${this.title}</p>
-          ${this.isFilteringActive ? html`<a class="clear" @click=${this.clearTopicFilters}>Clear</a>` : ''}
+          <h4>${this.title}</h4>
         </div>
 
         <div class="topics">
           ${this.renderedTopics}
         </div>
-
       </div>
     `;
   }
