@@ -127,7 +127,7 @@ export default class Search extends LitElement {
           ${this.searchTerm ? html`<a class="clear" @click=${this.clearSearchTerm}>Clear</a>` : ''}
         </div>
 
-        <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm}>
+        <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm} autocomplete="off">
           <div class="search">
             <input name="term" placeholder="Search..." @blur=${this.clearMatchingTerms} />
             ${this.typeahead ? html`
