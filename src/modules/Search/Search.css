@@ -17,7 +17,7 @@
 
     > a {
       color: var(--color-primary);
-      transition: color 0.2s ease-in-out;
+      transition: color var(--ease-time) var(--ease-type);
       cursor: pointer;
 
       &:hover {
@@ -44,27 +44,56 @@
         outline: none;
       }
   
-      > ul.typeahead {
+      > .typeahead {
+        opacity: 0;
+        visibility: hidden;
         position: absolute;
-        top: calc(100% + 0.25rem);
+        top: 100%;
         left: -1px;
         z-index: 10;
         width: 100%;
-        margin: 0;
-        padding: 0;
+        height: fit-content;
+        pointer-events: none;
         font-size: var(--font-size);
         background: white;
         border: 1px solid var(--color-gray);
         border-radius: 0.5rem;
         list-style: none;
         overflow: hidden;
+        transition: opacity var(--ease-time) var(--ease-type), top var(--ease-time) var(--ease-type);
 
-        > li {
-          padding: 0.5rem 1rem;
-          cursor: pointer;
+        &.visible {
+          opacity: 1;
+          visibility: visible;
+          top: calc(100% + 0.25rem);
+          pointer-events: all;
+        }
 
-          &:hover {
-            background-color: var(--color-gray-lightest);
+        > span {
+          display: flex;
+          justify-content: center;
+          padding: 0.5rem 0;
+          font-size: var(--font-size-sm);
+          font-style: italic;
+          border-bottom: 1px solid var(--color-gray-lightest);
+        }
+
+        > ul {
+          width: 100%;
+          height: fit-content;
+          max-height: 12rem;
+          margin: 0;
+          padding: 0;
+          overflow-y: auto;
+          list-style: none;
+
+          > li {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+  
+            &:hover {
+              background-color: var(--color-gray-lightest);
+            }
           }
         }
       }

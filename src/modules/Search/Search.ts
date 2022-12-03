@@ -78,7 +78,7 @@ export default class Search extends LitElement {
 
     const fetchResults = async () => {
       const { columnId, tableId, portalId } = this.settings;
-      const url = 'http://localhost:3000/api/hubdb/search/byTerm';
+      const url = 'https://kingpoststudio.com/api/hubdb/search/byTerm';
       const query = `?term=${searchTerm}&columnId=${columnId}&tableId=${tableId}&portalId=${portalId}`;
       const response = await fetch(`${url}${query}`);
       const { matchingTerms } = await response.json();
@@ -106,10 +106,13 @@ export default class Search extends LitElement {
         <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm}>
           <div class="search">
             <input name="search-term" placeholder="Search..." />
-            ${this.typeahead && this.matchingTerms?.length ? html`
-              <ul class="typeahead">
+            ${this.typeahead ? html`
+            <div class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}">
+              <span>Possible results</span>
+              <ul>
                 ${this.matchingTerms.map((match) => html`<li>${match}</li>`)}
               </ul>
+            </div>
             ` : ''}
           </div>
           <kps-button type="submit">Search</kps-button>
