@@ -9,6 +9,12 @@ export default {
   },
 };
 
+const mockSettings = {
+  columnId: 'search_terms',
+  tableId: 'chromatography_documents',
+  portalId: '22628452',
+};
+
 export const Main = () => html`
-  <kps-search typeahead=true></kps-search>
+  <kps-search typeahead=true .settings=${mockSettings}></kps-search>
 `;

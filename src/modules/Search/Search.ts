@@ -25,7 +25,7 @@ export default class Search extends LitElement {
     typeahead = false;
 
   @property({ type: Object })
-    settings = { portalId: 22628452 };
+    settings = { columnId: '', tableId: '', portalId: '' };
 
   @state()
     matchingTerms: string[] = [];
@@ -71,16 +71,22 @@ export default class Search extends LitElement {
     if (!this.typeahead) return;
 
     const searchTerm = (e.target as HTMLInputElement).value;
-    if (searchTerm.length < 3) return;
+    if (searchTerm.length < 3) {
+      this.matchingTerms = [];
+      return;
+    }
 
     const fetchResults = async () => {
-      const response = await fetch(`http://localhost:3000/api/hubdb/search/byTerm?term=${searchTerm}&columnId=search_terms&tableId=chromatogram_documents&hsAccountId=22628452`);
+      const { columnId, tableId, portalId } = this.settings;
+      const url = 'http://localhost:3000/api/hubdb/search/byTerm';
+      const query = `?term=${searchTerm}&columnId=${columnId}&tableId=${tableId}&portalId=${portalId}`;
+      const response = await fetch(`${url}${query}`);
       const { matchingTerms } = await response.json();
       this.matchingTerms = matchingTerms as string[];
     };
 
     clearTimeout(timeout);
-    timeout = setTimeout(fetchResults, 500);
+    timeout = setTimeout(fetchResults, 250);
   }
 
   clearSearchTerm(): void {
@@ -100,7 +106,7 @@ export default class Search extends LitElement {
         <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm}>
           <div class="search">
             <input name="search-term" placeholder="Search..." />
-            ${this.typeahead ? html`
+            ${this.typeahead && this.matchingTerms?.length ? html`
               <ul class="typeahead">
                 ${this.matchingTerms.map((match) => html`<li>${match}</li>`)}
               </ul>
