@@ -30,6 +30,9 @@ export default class Search extends LitElement {
   @state()
     matchingTerms: string[] = [];
 
+  @state()
+    isLoading: boolean = false;
+
   firstUpdated() {
     this.setActiveSearchTerm();
   }
@@ -68,9 +71,18 @@ export default class Search extends LitElement {
       const { columnId, tableId, portalId } = this.settings;
       const url = 'https://kingpoststudio.com/api/hubdb/search/byTerm';
       const query = `?term=${searchTerm}&columnId=${columnId}&tableId=${tableId}&portalId=${portalId}`;
-      const response = await fetch(`${url}${query}`);
-      const { matchingTerms } = await response.json();
-      this.matchingTerms = matchingTerms as string[];
+
+      this.isLoading = true;
+
+      try {
+        const response = await fetch(`${url}${query}`);
+        const { matchingTerms } = await response.json();
+        this.matchingTerms = matchingTerms as string[];
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.isLoading = false;
+      }
     };
 
     clearTimeout(timeout);
@@ -111,7 +123,7 @@ export default class Search extends LitElement {
           <div class="search">
             <input name="term" placeholder="Search..." />
             ${this.typeahead ? html`
-            <kps-icon class="spinner" icon="spinner"></kps-icon>
+            ${this.isLoading ? html`<kps-icon class="spinner" icon="spinner"></kps-icon>` : ''}
             <div class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}">
               <span>Possible results</span>
               <ul>
