@@ -44,17 +44,6 @@ export default class Search extends LitElement {
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') this.clearMatchingTerms();
     });
-
-    // this.shadowRoot?.addEventListener('click', (e) => {
-    //   const el = e.target as HTMLElement;
-
-    //   if (el === this.inputRef.value
-    //     || el === this.resultsRef.value
-    //     || this.resultsRef.value?.contains(el)
-    //   ) return;
-
-    //   this.clearMatchingTerms();
-    // });
   }
 
   clearMatchingTerms() {
@@ -137,7 +126,6 @@ export default class Search extends LitElement {
 
   handleBlur(e: Event): void {
     const relTarget = (e as FocusEvent).relatedTarget as HTMLElement;
-    console.log(relTarget);
     if (relTarget === this.resultsRef.value || relTarget === this.inputRef.value) return;
 
     this.clearMatchingTerms();
