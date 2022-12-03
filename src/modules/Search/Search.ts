@@ -55,18 +55,6 @@ export default class Search extends LitElement {
     }
   }
 
-  searchByTerm(e: HTMLFormElement): void {
-    e.preventDefault();
-
-    // @ts-ignore
-    const searchTerm = e.target['search-term'].value;
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams();
-
-    params.set(this.urlParam, searchTerm);
-    window.location.href = `${url.pathname}?${params.toString()}`;
-  }
-
   async findPartialtermMatches(e: Event): Promise<void> {
     if (!this.typeahead) return;
 
@@ -89,10 +77,26 @@ export default class Search extends LitElement {
     timeout = setTimeout(fetchResults, 250);
   }
 
+  searchByTerm(searchTerm: string): void {
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams();
+
+    params.set(this.urlParam, searchTerm);
+    window.location.href = `${url.pathname}?${params.toString()}`;
+  }
+
   clearSearchTerm(): void {
     this.searchTerm = '';
     const url = new URL(window.location.href);
     window.location.href = url.pathname;
+  }
+
+  handleFormSubmit(e: Event): void {
+    e.preventDefault();
+
+    const searchTerm = ((e.target as HTMLFormElement)?.querySelector('input[name="term"]') as HTMLInputElement)?.value;
+    if (!searchTerm) this.clearSearchTerm();
+    this.searchByTerm(searchTerm);
   }
 
   render() {
@@ -105,12 +109,12 @@ export default class Search extends LitElement {
 
         <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm}>
           <div class="search">
-            <input name="search-term" placeholder="Search..." />
+            <input name="term" placeholder="Search..." />
             ${this.typeahead ? html`
             <div class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}">
               <span>Possible results</span>
               <ul>
-                ${this.matchingTerms.map((match) => html`<li>${match}</li>`)}
+                ${this.matchingTerms.map((match) => html`<li @click=${() => this.searchByTerm(match)}>${match}</li>`)}
               </ul>
             </div>
             ` : ''}
