@@ -129,9 +129,12 @@ export default class Search extends LitElement {
 
         <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm} autocomplete="off">
           <div class="search">
-            <input name="term" placeholder="Search..." @blur=${this.clearMatchingTerms} />
+            <div class="input">
+              <input name="term" placeholder="Search..." @blur=${this.clearMatchingTerms} />
+              ${this.isLoading ? html`<kps-icon class="spinner" icon="spinner"></kps-icon>` : ''}
+            </div>
+
             ${this.typeahead ? html`
-            ${this.isLoading ? html`<kps-icon class="spinner" icon="spinner"></kps-icon>` : ''}
             <div class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}">
               <span>Possible results</span>
               <ul>

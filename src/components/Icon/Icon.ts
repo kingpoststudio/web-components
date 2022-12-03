@@ -79,7 +79,7 @@ const printCircle = html`
 `;
 
 const spinner = html`
-  <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 38 38">
     <style>
       stop {
         stop-color: var(--color-primary);
