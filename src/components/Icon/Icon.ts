@@ -78,6 +78,33 @@ const printCircle = html`
   </svg>
 `;
 
+const spinner = html`
+  <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38">
+    <style>
+      stop {
+        stop-color: var(--color-primary);
+      }
+    </style>
+    <defs>
+      <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
+        <stop stop-opacity="0" offset="0%"/>
+        <stop stop-opacity=".631" offset="63.146%"/>
+        <stop offset="100%"/>
+      </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+      <g transform="translate(1 1)">
+        <path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="2">
+          <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+        </path>
+        <circle fill="#fff" cx="36" cy="18" r="1">
+          <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
+        </circle>
+      </g>
+    </g>
+  </svg>
+`;
+
 const twitter = html`
   <svg xmlns="http://www.w3.org/2000/svg" width="33.543" height="26.834" viewBox="0 0 33.543 26.834">
     <path class="fill-current" d="M14.549,7387.833a19.289,19.289,0,0,0,19.581-19.278c0-.294,0-.586-.02-.876a13.886,13.886,0,0,0,3.433-3.507,13.826,13.826,0,0,1-3.951,1.065,6.818,6.818,0,0,0,3.026-3.748,13.9,13.9,0,0,1-4.371,1.646,6.965,6.965,0,0,0-9.737-.294,6.718,6.718,0,0,0-1.991,6.474,19.654,19.654,0,0,1-14.184-7.078,6.716,6.716,0,0,0,2.132,9.042,6.9,6.9,0,0,1-3.125-.846v.085a6.806,6.806,0,0,0,5.521,6.641,6.939,6.939,0,0,1-3.106.115,6.878,6.878,0,0,0,6.428,4.708,13.95,13.95,0,0,1-8.547,2.906,14.5,14.5,0,0,1-1.639-.1,19.724,19.724,0,0,0,10.549,3.038" transform="translate(-4 -7361)" fill-rule="evenodd" />
@@ -117,6 +144,7 @@ const icons = {
   linkedin,
   linkedinCircle,
   printCircle,
+  spinner,
   twitter,
   twitterCircle,
   youtube,

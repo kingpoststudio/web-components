@@ -111,6 +111,7 @@ export default class Search extends LitElement {
           <div class="search">
             <input name="term" placeholder="Search..." />
             ${this.typeahead ? html`
+            <kps-icon class="spinner" icon="spinner"></kps-icon>
             <div class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}">
               <span>Possible results</span>
               <ul>

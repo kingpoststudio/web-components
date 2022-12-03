@@ -34,13 +34,22 @@
 
     > .search {
       position: relative;
-      width: fit-content;
+      width: 100%;
+
+      > kps-icon.spinner {
+        position: absolute;
+        right: 0.25rem;
+        top: -1px;
+        transform: scale(.6);
+      }
 
       > input {
+        width: 100%;
         padding: 0.5rem 1rem;
         font-size: var(--font-size-md);
         border: 1px solid var(--color-gray);
         border-radius: 0.5rem;
+        box-sizing: border-box;
         outline: none;
       }
   
@@ -57,6 +66,7 @@
         background: white;
         border: 1px solid var(--color-gray);
         border-radius: 0.5rem;
+        box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
         list-style: none;
         overflow: hidden;
         transition: opacity var(--ease-time) var(--ease-type), top var(--ease-time) var(--ease-type);
