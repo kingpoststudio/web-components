@@ -91,19 +91,21 @@ export default class Search extends LitElement {
 
   render() {
     return html`
-      <div id="search">
+      <div class="wrap">
         <div class="intro">
           <p>${this.title}</p>
           ${this.searchTerm ? html`<a class="clear" @click=${this.clearSearchTerm}>Clear</a>` : ''}
         </div>
 
         <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm}>
-          <input name="search-term" placeholder="Search..." />
-          ${this.typeahead ? html`
-            <ul class="typeahead">
-              ${this.matchingTerms.map((match) => html`<li>${match}</li>`)}
-            </ul>
-          ` : ''}
+          <div class="search">
+            <input name="search-term" placeholder="Search..." />
+            ${this.typeahead ? html`
+              <ul class="typeahead">
+                ${this.matchingTerms.map((match) => html`<li>${match}</li>`)}
+              </ul>
+            ` : ''}
+          </div>
           <kps-button type="submit">Search</kps-button>
         </form>
       </div>

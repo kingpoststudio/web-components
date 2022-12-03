@@ -1,4 +1,4 @@
-#search {
+.wrap {
   display: flex;
   flex-direction: column;
   max-width: 24rem;
@@ -27,17 +27,48 @@
   }
 
   > form {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding-inline: 1rem;
 
-    > input {
-      padding: 0.5rem 1rem;
-      font-size: var(--font-size-md);
-      border: 1px solid var(--color-gray);
-      border-radius: 0.5rem;
-      outline: none;
+    > .search {
+      position: relative;
+      width: fit-content;
+
+      > input {
+        padding: 0.5rem 1rem;
+        font-size: var(--font-size-md);
+        border: 1px solid var(--color-gray);
+        border-radius: 0.5rem;
+        outline: none;
+      }
+  
+      > ul.typeahead {
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: -1px;
+        z-index: 10;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: var(--font-size);
+        background: white;
+        border: 1px solid var(--color-gray);
+        border-radius: 0.5rem;
+        list-style: none;
+
+        > li {
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+
+          &:hover {
+            background-color: var(--color-gray-lightest);
+          }
+        }
+      }
     }
+
 
     > *[type="submit"] {
       flex: none;
