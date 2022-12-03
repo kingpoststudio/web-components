@@ -1,6 +1,8 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import Styles from './Search.css';
+
+let timeout: ReturnType<typeof setTimeout>;
 
 @customElement('kps-search')
 export default class Search extends LitElement {
@@ -14,16 +16,19 @@ export default class Search extends LitElement {
   private searchTerm = '';
 
   @property({ type: String })
-  title = 'Search';
+    title = 'Search';
 
   @property({ type: String })
-  urlParam = 'search_term';
+    urlParam = 'search_term';
 
   @property({ type: Boolean })
-  typeahead = false;
+    typeahead = false;
 
   @property({ type: Object })
-  settings = { portalId: 22628452 };
+    settings = { portalId: 22628452 };
+
+  @state()
+  private matches = [];
 
   firstUpdated() {
     this.setActiveSearchTerm();
@@ -62,15 +67,19 @@ export default class Search extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
-  findPartialMatches(e: HTMLElement): void {
-    // @ts-ignore
+  async findPartialMatches(e: Event): Promise<void> {
     const searchTerm = (e.target as HTMLInputElement).value;
+    if (searchTerm.length < 3) return;
 
-    fetch(`http://localhost:3000/api/hubdb/search/byTerm?term=${searchTerm}&columnId=search_terms&tableId=chromatogram_documents&hsAccountId=22628452`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
+    const fetchResults = async () => {
+      const response = await fetch(`http://localhost:3000/api/hubdb/search/byTerm?term=${searchTerm}&columnId=search_terms&tableId=chromatogram_documents&hsAccountId=22628452`);
+      const { matchingTerms } = await response.json();
+      console.log(matchingTerms);
+      this.matches = matchingTerms;
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(fetchResults, 500);
   }
 
   clearSearchTerm(): void {
