@@ -10,5 +10,5 @@ export default {
 };
 
 export const Main = () => html`
-  <kps-search></kps-search>
+  <kps-search typeahead=true></kps-search>
 `;

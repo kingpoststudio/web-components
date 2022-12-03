@@ -28,7 +28,7 @@ export default class Search extends LitElement {
     settings = { portalId: 22628452 };
 
   @state()
-  private matches = [];
+    matchingTerms: string[] = [];
 
   firstUpdated() {
     this.setActiveSearchTerm();
@@ -67,15 +67,16 @@ export default class Search extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
-  async findPartialMatches(e: Event): Promise<void> {
+  async findPartialtermMatches(e: Event): Promise<void> {
+    if (!this.typeahead) return;
+
     const searchTerm = (e.target as HTMLInputElement).value;
     if (searchTerm.length < 3) return;
 
     const fetchResults = async () => {
       const response = await fetch(`http://localhost:3000/api/hubdb/search/byTerm?term=${searchTerm}&columnId=search_terms&tableId=chromatogram_documents&hsAccountId=22628452`);
       const { matchingTerms } = await response.json();
-      console.log(matchingTerms);
-      this.matches = matchingTerms;
+      this.matchingTerms = matchingTerms as string[];
     };
 
     clearTimeout(timeout);
@@ -96,8 +97,13 @@ export default class Search extends LitElement {
           ${this.searchTerm ? html`<a class="clear" @click=${this.clearSearchTerm}>Clear</a>` : ''}
         </div>
 
-        <form @input=${this.findPartialMatches} @submit=${this.searchByTerm}>
+        <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm}>
           <input name="search-term" placeholder="Search..." />
+          ${this.typeahead ? html`
+            <ul class="typeahead">
+              ${this.matchingTerms.map((match) => html`<li>${match}</li>`)}
+            </ul>
+          ` : ''}
           <kps-button type="submit">Search</kps-button>
         </form>
       </div>
