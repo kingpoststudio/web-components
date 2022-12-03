@@ -1,5 +1,6 @@
 import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { createRef, ref, Ref } from 'lit/directives/ref.js';
 import Styles from './Search.css';
 
 let timeout: ReturnType<typeof setTimeout>;
@@ -33,12 +34,27 @@ export default class Search extends LitElement {
   @state()
     isLoading: boolean = false;
 
+  inputRef: Ref<HTMLInputElement> = createRef();
+
+  resultsRef: Ref<HTMLDivElement> = createRef();
+
   firstUpdated() {
     this.setActiveSearchTerm();
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') this.clearMatchingTerms();
     });
+
+    // this.shadowRoot?.addEventListener('click', (e) => {
+    //   const el = e.target as HTMLElement;
+
+    //   if (el === this.inputRef.value
+    //     || el === this.resultsRef.value
+    //     || this.resultsRef.value?.contains(el)
+    //   ) return;
+
+    //   this.clearMatchingTerms();
+    // });
   }
 
   clearMatchingTerms() {
@@ -119,6 +135,14 @@ export default class Search extends LitElement {
     this.searchByTerm(inputVal);
   }
 
+  handleBlur(e: Event): void {
+    const relTarget = (e as FocusEvent).relatedTarget as HTMLElement;
+    console.log(relTarget);
+    if (relTarget === this.resultsRef.value || relTarget === this.inputRef.value) return;
+
+    this.clearMatchingTerms();
+  }
+
   render() {
     return html`
       <div class="wrap">
@@ -130,12 +154,12 @@ export default class Search extends LitElement {
         <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm} autocomplete="off">
           <div class="search">
             <div class="input">
-              <input name="term" placeholder="Search..." @blur=${this.clearMatchingTerms} />
+              <input name="term" placeholder="Search..." @blur=${this.handleBlur} ${ref(this.inputRef)} />
               ${this.isLoading ? html`<kps-icon class="spinner" icon="spinner"></kps-icon>` : ''}
             </div>
 
             ${this.typeahead ? html`
-            <div class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}">
+            <div tabindex="-1" class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}" @blur=${this.handleBlur} ${ref(this.resultsRef)}>
               <span>Possible results</span>
               <ul>
                 ${this.matchingTerms.map((match) => html`<li @click=${() => this.searchByTerm(match)}>${match}</li>`)}

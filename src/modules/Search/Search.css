@@ -51,6 +51,10 @@
         }
 
         > .spinner {
+          position: absolute;
+          top: 50%;
+          right: 0.5rem;
+          transform: translateY(-50%) scale(0.75);
         }
       }
   
