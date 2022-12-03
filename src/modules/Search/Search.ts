@@ -37,6 +37,11 @@ export default class Search extends LitElement {
     this.setActiveSearchTerm();
   }
 
+  clearMatchingTerms() {
+    console.log('TEST');
+    this.matchingTerms = [];
+  }
+
   setActiveSearchTerm() {
     const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
@@ -63,7 +68,7 @@ export default class Search extends LitElement {
 
     const searchTerm = (e.target as HTMLInputElement).value;
     if (searchTerm.length < 3) {
-      this.matchingTerms = [];
+      this.clearMatchingTerms();
       return;
     }
 
@@ -121,7 +126,7 @@ export default class Search extends LitElement {
 
         <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm}>
           <div class="search">
-            <input name="term" placeholder="Search..." />
+            <input name="term" placeholder="Search..." @blur=${this.clearMatchingTerms} />
             ${this.typeahead ? html`
             ${this.isLoading ? html`<kps-icon class="spinner" icon="spinner"></kps-icon>` : ''}
             <div class="typeahead ${this.matchingTerms?.length ? 'visible' : ''}">
