@@ -94,9 +94,9 @@ export default class Search extends LitElement {
   handleFormSubmit(e: Event): void {
     e.preventDefault();
 
-    const searchTerm = ((e.target as HTMLFormElement)?.querySelector('input[name="term"]') as HTMLInputElement)?.value;
-    if (!searchTerm) this.clearSearchTerm();
-    this.searchByTerm(searchTerm);
+    const inputVal = ((e.target as HTMLFormElement)?.querySelector('input[name="term"]') as HTMLInputElement)?.value;
+    if (!inputVal) this.clearSearchTerm();
+    this.searchByTerm(inputVal);
   }
 
   render() {
