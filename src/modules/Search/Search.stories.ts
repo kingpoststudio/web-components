@@ -11,7 +11,7 @@ export default {
 
 const mockSettings = {
   columnId: 'search_terms',
-  tableId: 'chromatography_documents',
+  tableId: 'chromatogram_documents',
   portalId: '22628452',
 };
 
