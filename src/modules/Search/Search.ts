@@ -14,10 +14,16 @@ export default class Search extends LitElement {
   private searchTerm = '';
 
   @property({ type: String })
-    title = 'Search';
+  title = 'Search';
 
   @property({ type: String })
-    urlParam = 'search_term';
+  urlParam = 'search_term';
+
+  @property({ type: Boolean })
+  typeahead = false;
+
+  @property({ type: Object })
+  settings = { portalId: 22628452 };
 
   firstUpdated() {
     this.setActiveSearchTerm();
@@ -56,6 +62,17 @@ export default class Search extends LitElement {
     window.location.href = `${url.pathname}?${params.toString()}`;
   }
 
+  findPartialMatches(e: HTMLElement): void {
+    // @ts-ignore
+    const searchTerm = (e.target as HTMLInputElement).value;
+
+    fetch(`http://localhost:3000/api/hubdb/search/byTerm?term=${searchTerm}&columnId=search_terms&tableId=chromatogram_documents&hsAccountId=22628452`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
   clearSearchTerm(): void {
     this.searchTerm = '';
     const url = new URL(window.location.href);
@@ -70,7 +87,7 @@ export default class Search extends LitElement {
           ${this.searchTerm ? html`<a class="clear" @click=${this.clearSearchTerm}>Clear</a>` : ''}
         </div>
 
-        <form @submit=${this.searchByTerm}>
+        <form @input=${this.findPartialMatches} @submit=${this.searchByTerm}>
           <input name="search-term" placeholder="Search..." />
           <kps-button type="submit">Search</kps-button>
         </form>
