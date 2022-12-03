@@ -35,10 +35,13 @@ export default class Search extends LitElement {
 
   firstUpdated() {
     this.setActiveSearchTerm();
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') this.clearMatchingTerms();
+    });
   }
 
   clearMatchingTerms() {
-    console.log('TEST');
     this.matchingTerms = [];
   }
 
