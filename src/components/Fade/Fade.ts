@@ -1,7 +1,7 @@
 import {
   html, LitElement, css, unsafeCSS,
 } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 
 @customElement('kps-fade')
 export default class Fade extends LitElement {
@@ -16,6 +16,7 @@ export default class Fade extends LitElement {
 
   private container: HTMLElement | null = null;
 
+  @state()
   private fade: number = 0;
 
   static styles = css`
@@ -27,8 +28,7 @@ export default class Fade extends LitElement {
 
     .container {
       position: relative;
-      opacity: ${unsafeCSS(({ fade }: { fade: string }) => fade)};
-      transition: opacity 0.5s;
+      transition: opacity 0.1s;
     }
   `;
 
@@ -55,7 +55,7 @@ export default class Fade extends LitElement {
     this.clientHeight = document.documentElement.clientHeight;
     const containerTop = this.container.getBoundingClientRect().top;
 
-    this.fade = (containerTop / this.clientHeight) * 2;
+    this.fade = (containerTop / this.clientHeight);
 
     if (this.scrollTop + this.clientHeight >= this.scrollHeight) {
       this.fade = Math.max(this.fade, 1);
@@ -63,8 +63,7 @@ export default class Fade extends LitElement {
       this.fade = Math.min(this.fade, -1);
     }
 
-    console.log(this.fade);
-    this.requestUpdate();
+    this.container.style.opacity = `${1 - Math.abs(this.fade)}`;
   }
 
   render() {
