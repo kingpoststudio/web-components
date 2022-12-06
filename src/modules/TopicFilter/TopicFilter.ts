@@ -28,13 +28,13 @@ export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: String })
-    title = 'Topic Filters';
+  title = 'Topic Filters';
 
   @property({ type: Array })
-    topics: Array<Topic> = [];
+  topics: Array<Topic> = [];
 
   @property({ type: Boolean })
-    blog = false;
+  blog = false;
 
   firstUpdated() {
     this.setActiveTopicOptions();
@@ -71,8 +71,7 @@ export default class TopicFilter extends LitElement {
 
   selectTopicOption(e: Event) {
     const topicOption = (e.target as HTMLInputElement)?.value;
-    const topicId = topicOption.split('__')[0];
-    const optionId = topicOption.split('__')[1];
+    const [topicId, optionId] = topicOption.split('__');
 
     if (this.blog) {
       const activeTopic = getActiveBlogTopic();
