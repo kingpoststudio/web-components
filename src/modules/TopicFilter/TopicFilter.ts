@@ -14,8 +14,10 @@ interface Topic {
   options: TopicOption[];
 }
 
+const url = new URL(window.location.href);
+const firstPath = url.pathname.split('/')[1];
+
 function getActiveBlogTopic() {
-  const url = new URL(window.location.href);
   const pathArr = url.pathname.split('/');
   const tagIndex = pathArr.indexOf('tag') > -1 ? pathArr.indexOf('tag') : pathArr.indexOf('topic');
   return tagIndex > -1 && pathArr[tagIndex + 1];
@@ -26,21 +28,19 @@ export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: String })
-  title = 'Topic Filters';
+    title = 'Topic Filters';
 
   @property({ type: Array })
-  topics: Array<Topic> = [];
+    topics: Array<Topic> = [];
 
   @property({ type: Boolean })
-  blog = false;
+    blog = false;
 
   firstUpdated() {
     this.setActiveTopicOptions();
   }
 
   setActiveTopicOptions() {
-    const url = new URL(window.location.href);
-
     const setupTopicOption = (optionId: string, topicId: string) => {
       const clearEl = this.shadowRoot?.querySelector('.intro .clear');
       const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${topicId}"]`);
@@ -74,13 +74,14 @@ export default class TopicFilter extends LitElement {
     const topicId = topicOption.split('__')[0];
     const optionId = topicOption.split('__')[1];
 
-    if (topicId && optionId) {
+    if (this.blog) {
+      window.location.href = `${firstPath}/tag/${optionId}`;
+    } else if (topicId && optionId) {
       this.filterByTopicOption(topicId, optionId);
     }
   }
 
   filterByTopicOption(topicId: string, optionId: string) {
-    const url = new URL(window.location.href);
     const params = new URLSearchParams(url.search);
     const topic = this.topics.find((t) => t.id === topicId);
     const topicValues = params.get(topicId);
@@ -103,8 +104,6 @@ export default class TopicFilter extends LitElement {
   }
 
   clearTopicFilter(topicId?: string) {
-    const url = new URL(window.location.href);
-
     if (!this.blog) {
       const params = new URLSearchParams(url.search);
 
@@ -122,8 +121,7 @@ export default class TopicFilter extends LitElement {
         window.location.href = `${url.pathname}?${params.toString()}`;
       }
     } else {
-      const blogPath = url.pathname.split('/')[1];
-      window.location.href = `/${blogPath}`;
+      window.location.href = `/${firstPath}`;
     }
   }
 
@@ -159,6 +157,8 @@ export default class TopicFilter extends LitElement {
   }
 
   get renderedTopics() {
+    console.log(this.topics);
+
     const renderTopic = (topic: Topic) => {
       if (topic.type === 'multiselect') return this.renderMultiSelect(topic);
       if (topic.type === 'select') return this.renderSelect(topic);
