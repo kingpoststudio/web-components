@@ -1,6 +1,4 @@
-import {
-  html, LitElement, css, unsafeCSS,
-} from 'lit';
+import { css, html, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
 
 @customElement('kps-fade')
