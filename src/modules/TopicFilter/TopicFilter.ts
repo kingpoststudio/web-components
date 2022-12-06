@@ -19,13 +19,13 @@ export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: String })
-  title = 'Topic Filters';
+    title = 'Topic Filters';
 
   @property({ type: Array })
-  topics: Array<Topic> = [];
+    topics: Array<Topic> = [];
 
   @property({ type: Boolean })
-  blog = false;
+    blog = false;
 
   firstUpdated() {
     this.setActiveTopicOptions();
@@ -34,32 +34,33 @@ export default class TopicFilter extends LitElement {
   setActiveTopicOptions() {
     const url = new URL(window.location.href);
 
+    const setupTopicOption = (optionId: string, topicId: string) => {
+      const clearEl = this.shadowRoot?.querySelector('.intro .clear');
+      const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${topicId}"]`);
+      const childEl = parentEl?.querySelector(`[value="${topicId}__${optionId}"]`);
+      const type = parentEl?.getAttribute('data-type');
+
+      if (childEl) {
+        clearEl?.classList.remove('hidden');
+        parentEl?.querySelector('.clear')?.classList.remove('hidden');
+
+        if (type === 'checkbox') (childEl as HTMLInputElement).checked = true;
+        else if (type === 'select') (childEl as HTMLOptionElement).selected = true;
+      }
+    };
+
     if (!this.blog) {
       const params = new URLSearchParams(url.search);
 
       params.forEach((value, key) => {
         const valueArr = value.split(',');
-        valueArr.forEach((val) => {
-          const clearEl = this.shadowRoot?.querySelector('.intro .clear');
-          const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${key}"]`);
-          const childEl = parentEl?.querySelector(`[value="${key}__${val}"]`);
-          const type = parentEl?.getAttribute('data-type');
-
-          if (childEl) {
-            clearEl?.classList.remove('hidden');
-            parentEl?.querySelector('.clear')?.classList.remove('hidden');
-
-            if (type === 'checkbox') (childEl as HTMLInputElement).checked = true;
-            else if (type === 'select') (childEl as HTMLOptionElement).selected = true;
-          }
-        });
+        valueArr.forEach((val) => setupTopicOption(val, key));
       });
     } else {
-      // Check in the URL path for a "/tag" or "/topic" and set the active topic option
       const pathArr = url.pathname.split('/');
       const tagIndex = pathArr.indexOf('tag') > -1 ? pathArr.indexOf('tag') : pathArr.indexOf('topic');
-      const topicId = tagIndex > -1 && pathArr[tagIndex + 1];
-      console.log(topicId);
+      const optionId = tagIndex > -1 && pathArr[tagIndex + 1];
+      if (optionId) setupTopicOption(optionId, this.topics[0].id);
     }
   }
 
