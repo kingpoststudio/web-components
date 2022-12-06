@@ -14,18 +14,25 @@ interface Topic {
   options: TopicOption[];
 }
 
+function getActiveBlogTopic() {
+  const url = new URL(window.location.href);
+  const pathArr = url.pathname.split('/');
+  const tagIndex = pathArr.indexOf('tag') > -1 ? pathArr.indexOf('tag') : pathArr.indexOf('topic');
+  return tagIndex > -1 && pathArr[tagIndex + 1];
+}
+
 @customElement('kps-topic-filter')
 export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: String })
-    title = 'Topic Filters';
+  title = 'Topic Filters';
 
   @property({ type: Array })
-    topics: Array<Topic> = [];
+  topics: Array<Topic> = [];
 
   @property({ type: Boolean })
-    blog = false;
+  blog = false;
 
   firstUpdated() {
     this.setActiveTopicOptions();
@@ -57,9 +64,7 @@ export default class TopicFilter extends LitElement {
         valueArr.forEach((val) => setupTopicOption(val, key));
       });
     } else {
-      const pathArr = url.pathname.split('/');
-      const tagIndex = pathArr.indexOf('tag') > -1 ? pathArr.indexOf('tag') : pathArr.indexOf('topic');
-      const optionId = tagIndex > -1 && pathArr[tagIndex + 1];
+      const optionId = getActiveBlogTopic();
       if (optionId) setupTopicOption(optionId, this.topics[0].id);
     }
   }
@@ -99,31 +104,34 @@ export default class TopicFilter extends LitElement {
 
   clearTopicFilter(topicId?: string) {
     const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
 
-    if (topicId) {
-      const topic = this.topics.find((t) => t.id === topicId);
+    if (!this.blog) {
+      const params = new URLSearchParams(url.search);
 
-      if (topic) params.delete(topic.id);
-      params.delete('page');
+      if (topicId) {
+        const topic = this.topics.find((t) => t.id === topicId);
 
-      window.location.href = `${url.pathname}?${params.toString()}`;
+        if (topic) params.delete(topic.id);
+        params.delete('page');
+
+        window.location.href = `${url.pathname}?${params.toString()}`;
+      } else {
+        this.topics.forEach((topic) => params.delete(topic.id));
+        params.delete('page');
+
+        window.location.href = `${url.pathname}?${params.toString()}`;
+      }
     } else {
-      this.topics.forEach((topic) => params.delete(topic.id));
-      params.delete('page');
-
-      window.location.href = `${url.pathname}?${params.toString()}`;
+      const blogPath = url.pathname.split('/')[1];
+      window.location.href = `/${blogPath}`;
     }
   }
 
   renderSelect(topic: Topic) {
     return html`
-      <select @change=${this.selectTopicOption}>
-        <option value="" disabled selected>Select...</option>
-        ${topic.options.map((option) => html`
-            <option value="${topic.id}__${option.id}">${option.name}</option>
-          </div>
-        `)}
+      <select select @change=${this.selectTopicOption}>
+        <option value="" disabled selected > Select...</option>
+        ${topic.options.map((option) => html`<option value="${topic.id}__${option.id}">${option.name}</option>`)}
       </select>
     `;
   }
@@ -131,26 +139,23 @@ export default class TopicFilter extends LitElement {
   renderMultiSelect(topic: Topic) {
     return html`
       <select multiple @change=${this.selectTopicOption}>
-        <option value="" disabled selected>Select</option>
-        ${topic.options.map((option) => html`
-            <option value="${topic.id}__${option.id}">${option.name}</option>
-          </div>
-        `)}
-      </select>
+        <option value="" disabled selected >Select</option>
+          ${topic.options.map((option) => html`<option value="${topic.id}__${option.id}">${option.name}</option>`)}
+        </select>
     `;
   }
 
   renderCheckboxes(topic: Topic) {
     return html`
-    <div class="options">
-      ${topic.options.map((option: TopicOption) => html`
-        <div class="option">
-          <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
-          <label for="${topic.id}__${option.id}">${option.name}</label>
-        </div>
-      `)}
-    </div>
-  `;
+      <div class="options">
+        ${topic.options.map((option: TopicOption) => html`
+          <div class="option">
+            <input type="checkbox" id="${topic.id}__${option.id}" name="${option.name}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
+            <label for="${topic.id}__${option.id}">${option.name}</label>
+          </div>
+        `)}
+      </div>
+    `;
   }
 
   get renderedTopics() {
@@ -176,11 +181,10 @@ export default class TopicFilter extends LitElement {
   render() {
     return html`
       <div class="wrap">
-        <div class="intro">
+        <div class="intro" >
           <h4>${this.title}</h4>
           <a class="clear hidden" @click=${() => this.clearTopicFilter()}>Clear all</a>
         </div>
-
         <div class="topics">
           ${this.renderedTopics}
         </div>
