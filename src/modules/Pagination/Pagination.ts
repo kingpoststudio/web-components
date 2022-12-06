@@ -30,11 +30,10 @@ export default class Pagination extends LitElement {
     let newPath = null;
 
     if (this.blog) {
-      const pathArr = url.pathname.split('/');
-      newPath = `/${pathArr[1]}`;
+      newPath = `/${url.pathname.split('/')[1]}`;
 
-      const tagIndex = pathArr.indexOf('tag');
-      if (tagIndex > -1) newPath = `${newPath}/tag/${pathArr[tagIndex + 1]}`;
+      const tagIndex = url.pathname.indexOf('tag');
+      if (tagIndex > -1) newPath = `${newPath}/tag/${url.pathname.split('/')[tagIndex + 1]}`;
 
       newPath = `${newPath}/page/${page}`;
     } else {

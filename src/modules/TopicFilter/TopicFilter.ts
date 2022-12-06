@@ -181,7 +181,7 @@ export default class TopicFilter extends LitElement {
   render() {
     return html`
       <div class="wrap">
-        <div class="intro" >
+        <div class="intro">
           <h4>${this.title}</h4>
           <a class="clear hidden" @click=${() => this.clearTopicFilter()}>Clear all</a>
         </div>

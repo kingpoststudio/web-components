@@ -135,7 +135,7 @@ export default class Search extends LitElement {
     return html`
       <div class="wrap">
         <div class="intro">
-          <p>${this.title}</p>
+          <h4>${this.title}</h4>
           ${this.searchTerm ? html`<a class="clear" @click=${this.clearSearchTerm}>Clear</a>` : ''}
         </div>
 

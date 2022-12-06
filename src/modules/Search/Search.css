@@ -10,9 +10,13 @@
     justify-content: space-between;
     margin: 0 0 1rem;
 
-    > p {
-      font-size: var(--font-size-lg);
+    > h4, h5 {
+      font-weight: 500;
       margin: 0;
+    }
+
+    h4 {
+      font-size: var(--font-size-lg);
     }
 
     > a {
