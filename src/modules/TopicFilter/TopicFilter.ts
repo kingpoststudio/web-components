@@ -75,7 +75,7 @@ export default class TopicFilter extends LitElement {
     const optionId = topicOption.split('__')[1];
 
     if (this.blog) {
-      window.location.href = `${firstPath}/tag/${optionId}`;
+      window.location.href = `/${firstPath}/tag/${optionId}`;
     } else if (topicId && optionId) {
       this.filterByTopicOption(topicId, optionId);
     }
@@ -157,8 +157,6 @@ export default class TopicFilter extends LitElement {
   }
 
   get renderedTopics() {
-    console.log(this.topics);
-
     const renderTopic = (topic: Topic) => {
       if (topic.type === 'multiselect') return this.renderMultiSelect(topic);
       if (topic.type === 'select') return this.renderSelect(topic);
