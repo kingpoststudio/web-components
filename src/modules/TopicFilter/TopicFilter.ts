@@ -75,6 +75,19 @@ export default class TopicFilter extends LitElement {
     const optionId = topicOption.split('__')[1];
 
     if (this.blog) {
+      const activeTopic = getActiveBlogTopic();
+
+      if (activeTopic) {
+        if (activeTopic === optionId) {
+          window.location.href = `/${firstPath}`;
+          return;
+        }
+
+        const activeOption = `[value="${this.topics[0].id}__${activeTopic}"]`;
+        const activeInput = this.shadowRoot?.querySelector(activeOption) as HTMLInputElement;
+        if (activeInput?.checked) activeInput.checked = false;
+      }
+
       window.location.href = `/${firstPath}/tag/${optionId}`;
     } else if (topicId && optionId) {
       this.filterByTopicOption(topicId, optionId);
