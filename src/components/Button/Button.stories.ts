@@ -24,7 +24,3 @@ export const Icons = () => html`
     <kps-button size="icon" variant="outline"><kps-icon icon="instagram"></kps-icon></kps-button>
   </kps-button-group>
 `;
-
-export const GalaxyTheme = () => html`
-  <galaxy-button>Galaxy</galaxy-button>
-`;
