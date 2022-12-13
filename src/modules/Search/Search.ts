@@ -9,19 +9,6 @@ let timeout: ReturnType<typeof setTimeout>;
 export default class Search extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
-  constructor() {
-    super();
-    this.setActiveSearchTerm();
-
-    if (this.typeahead) {
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') this.clearMatchingTerms();
-      });
-    }
-  }
-
-  private searchTerm = '';
-
   @property({ type: String })
     title = 'Search';
 
@@ -35,6 +22,9 @@ export default class Search extends LitElement {
     settings = { columnId: '', tableId: '', portalId: '' };
 
   @state()
+    searchTerm: string = '';
+
+  @state()
     matchingTerms: string[] = [];
 
   @state()
@@ -43,6 +33,20 @@ export default class Search extends LitElement {
   inputRef: Ref<HTMLInputElement> = createRef();
 
   resultsRef: Ref<HTMLDivElement> = createRef();
+
+  constructor() {
+    super();
+
+    if (this.typeahead) {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') this.clearMatchingTerms();
+      });
+    }
+  }
+
+  firstUpdated() {
+    this.setActiveSearchTerm();
+  }
 
   clearMatchingTerms() {
     this.matchingTerms = [];
