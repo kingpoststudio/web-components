@@ -111,10 +111,9 @@ export default class Search extends LitElement {
   handleFormSubmit(e: Event): void {
     e.preventDefault();
 
-    const inputVal = ((e.target as HTMLFormElement)?.querySelector('input[name="term"]') as HTMLInputElement)?.value;
+    const inputVal = this.inputRef.value?.value;
     if (!inputVal) this.clearSearchTerm();
-
-    this.searchByTerm(inputVal);
+    else this.searchByTerm(inputVal);
   }
 
   handleBlur(e: Event): void {
@@ -135,7 +134,7 @@ export default class Search extends LitElement {
         <form @input=${this.findPartialTermMatches} @submit=${this.handleFormSubmit} autocomplete="off">
           <div class="search">
             <div class="input">
-              <input name="term" placeholder="Search..." @blur=${this.handleBlur} ${ref(this.inputRef)} />
+              <input name="${this.urlParam}" placeholder="Search..." @blur=${this.handleBlur} ${ref(this.inputRef)} />
               ${this.isLoading ? html`<kps-icon class="spinner" icon="spinner"></kps-icon>` : ''}
             </div>
 
@@ -148,7 +147,7 @@ export default class Search extends LitElement {
             </div>
             ` : ''}
           </div>
-          <kps-button type="submit">Search</kps-button>
+          <kps-button @click=${this.handleFormSubmit}>Search</kps-button>
         </form>
       </div>
     `;

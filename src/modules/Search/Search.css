@@ -119,7 +119,7 @@
     }
 
 
-    > *[type="submit"] {
+    > kps-button {
       flex: none;
       margin-top: 1rem;
     }
