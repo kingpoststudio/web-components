@@ -12,5 +12,5 @@ export default class ImageMap extends LitElement {
     firstUpdated(): void;
     toggleEmphasized(): void;
     repositionTags(): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

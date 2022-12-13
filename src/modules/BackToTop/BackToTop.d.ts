@@ -4,5 +4,5 @@ export default class BackToTop extends LitElement {
     shadow: boolean;
     static styles: import("lit").CSSResult;
     static scrollToTop(): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

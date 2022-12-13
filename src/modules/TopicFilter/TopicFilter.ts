@@ -28,13 +28,13 @@ export default class TopicFilter extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: String })
-  title = 'Topic Filters';
+    title = 'Topic Filters';
 
   @property({ type: Array })
-  topics: Array<Topic> = [];
+    topics: Array<Topic> = [];
 
   @property({ type: Boolean })
-  blog = false;
+    blog = false;
 
   firstUpdated() {
     this.setActiveTopicOptions();

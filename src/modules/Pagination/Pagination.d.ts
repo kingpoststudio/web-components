@@ -5,7 +5,8 @@ export default class Pagination extends LitElement {
     private currentPage;
     private pageCount;
     private urlParam;
+    private blog;
     goToPage(page: number): void;
-    generateButton(i: number): import("lit-html").TemplateResult<1> | null;
-    render(): import("lit-html").TemplateResult<1>;
+    generateButton(i: number): import("lit").TemplateResult<1> | null;
+    render(): import("lit").TemplateResult<1>;
 }

@@ -15,5 +15,5 @@ export default class Link extends LitElement {
     onSlotChange(e: {
         target: HTMLSlotElement;
     }): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

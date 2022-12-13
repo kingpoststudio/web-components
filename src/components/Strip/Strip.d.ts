@@ -4,5 +4,5 @@ export default class Strip extends LitElement {
     position: 'left' | 'right';
     color: 'primary' | 'secondary';
     theme: 'light' | 'dark';
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

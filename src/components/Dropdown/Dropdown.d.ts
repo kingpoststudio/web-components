@@ -4,5 +4,5 @@ export default class Dropdown extends LitElement {
     private isOpen;
     open: (e: Event) => void;
     close: (e: Event) => void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

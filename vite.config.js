@@ -28,5 +28,6 @@ export default defineConfig({
       formats: ['es', 'umd', 'cjs'],
       fileName: generateFileName,
     },
+    minify: true,
   },
 });

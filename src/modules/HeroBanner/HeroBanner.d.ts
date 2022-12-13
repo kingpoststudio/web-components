@@ -17,6 +17,6 @@ declare class HeroBanner extends LitElement {
     hideExtra: boolean;
     condensed: boolean;
     contained: boolean;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }
 export default HeroBanner;

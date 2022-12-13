@@ -178,7 +178,7 @@ export default class Icon extends LitElement {
   static styles = styles;
 
   @property({ type: String })
-  icon: string = '';
+    icon: string = '';
 
   get iconSvg() {
     return icons[this.icon as keyof typeof icons];

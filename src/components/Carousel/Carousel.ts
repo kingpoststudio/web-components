@@ -2,7 +2,7 @@ import Flickity from 'flickity';
 import {
   html, css, unsafeCSS, LitElement,
 } from 'lit';
-import { customElement, query } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import flickityStyles from 'flickity/css/flickity.css';
 
 const styles = css`
@@ -25,9 +25,6 @@ export default class Carousel extends LitElement {
 
   carousel: Flickity | null = null;
 
-  @query('#carousel')
-    target: Element | undefined;
-
   firstUpdated() {
     this.generateNewCarousel();
   }
@@ -41,8 +38,10 @@ export default class Carousel extends LitElement {
       friction: 1,
     };
 
-    if (this.target) {
-      this.carousel = new Flickity(this.target, options);
+    const targetEl = this.shadowRoot?.querySelector('#carousel');
+
+    if (targetEl) {
+      this.carousel = new Flickity(targetEl, options);
       this.carousel.resize();
     }
   }

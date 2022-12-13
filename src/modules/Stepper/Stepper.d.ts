@@ -21,12 +21,13 @@ export default class Stepper extends LitElement {
     activeImage: StepImage | undefined;
     visible: boolean;
     speed: 'slow' | 'normal' | 'fast';
+    fade: boolean;
     animationRef: import("lit-html/directives/ref").Ref<Element>;
     constructor();
     disconnectedCallback(): void;
     handleScroll: () => void;
-    getBlockContent(block: StepBlock): import("lit-html").TemplateResult<1>;
-    getImageContent(image: StepImage): import("lit-html").TemplateResult<1>;
-    render(): import("lit-html").TemplateResult<1>;
+    getBlockContent(block: StepBlock): import("lit").TemplateResult<1>;
+    getImageContent(image: StepImage): import("lit").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }
 export {};

@@ -15,10 +15,10 @@ export default class Card extends LitElement {
         target: string;
     };
     toggleZoom(): void;
-    get baseContent(): import("lit-html").TemplateResult<1>;
-    get quoteContent(): import("lit-html").TemplateResult<1>;
-    get postContent(): import("lit-html").TemplateResult<1>;
-    getContent(variant: CardVariant): import("lit-html").TemplateResult<1>;
-    render(): import("lit-html").TemplateResult<1>;
+    get baseContent(): import("lit").TemplateResult<1>;
+    get quoteContent(): import("lit").TemplateResult<1>;
+    get postContent(): import("lit").TemplateResult<1>;
+    getContent(variant: CardVariant): import("lit").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }
 export {};

@@ -9,5 +9,5 @@ export default class Select extends LitElement {
     connectedCallback(): void;
     disconnectedCallback(): void;
     onOptionClick(e: Event): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

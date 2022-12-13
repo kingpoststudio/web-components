@@ -4,6 +4,7 @@ import Container from './components/Container/Container';
 import DateTime from './components/DateTime/DateTime';
 import Dialog from './components/Dialog/Dialog';
 import Dropdown from './components/Dropdown/Dropdown';
+import Fade from './components/Fade/Fade';
 import Form from './components/Form/Form';
 import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
@@ -14,17 +15,19 @@ import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
 import BackToTop from './modules/BackToTop/BackToTop';
+import DateFilter from './modules/DateFilter/DateFilter';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
 import Pagination from './modules/Pagination/Pagination';
 import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
 import TopicFilter from './modules/TopicFilter/TopicFilter';
+import TopicNavigation from './modules/TopicNavigation/TopicNavigation';
+import WorldMap from './modules/WorldMap/WorldMap';
 import './styles/main.css';
 declare const lib: {
     Button: {
         Button: typeof import("./components/Button/Button").default;
-        GalaxyButton: typeof import("./components/Button/themes/Galaxy/Button").default;
     };
     ButtonGroup: typeof ButtonGroup;
     Card: typeof Card;
@@ -32,6 +35,7 @@ declare const lib: {
     DateTime: typeof DateTime;
     Dialog: typeof Dialog;
     Dropdown: typeof Dropdown;
+    Fade: typeof Fade;
     Form: typeof Form;
     Grid: typeof Grid;
     Icon: typeof Icon;
@@ -42,12 +46,15 @@ declare const lib: {
     Tab: typeof Tab;
     TabGroup: typeof TabGroup;
     BackToTop: typeof BackToTop;
+    DateFilter: typeof DateFilter;
     HeroBanner: typeof HeroBanner;
     Navigation: typeof Navigation;
     Pagination: typeof Pagination;
     Search: typeof Search;
     Stepper: typeof Stepper;
     TopicFilter: typeof TopicFilter;
+    TopicNavigation: typeof TopicNavigation;
+    WorldMap: typeof WorldMap;
     Utils: {
         elIntersectsCenter: typeof import("./utils").elIntersectsCenter;
         getScrollbarWidth: typeof import("./utils").getScrollbarWidth;

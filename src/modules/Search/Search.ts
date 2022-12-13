@@ -11,7 +11,13 @@ export default class Search extends LitElement {
 
   constructor() {
     super();
-    this.setSearchTermValue();
+    this.setActiveSearchTerm();
+
+    if (this.typeahead) {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') this.clearMatchingTerms();
+      });
+    }
   }
 
   private searchTerm = '';
@@ -38,14 +44,6 @@ export default class Search extends LitElement {
 
   resultsRef: Ref<HTMLDivElement> = createRef();
 
-  firstUpdated() {
-    this.setActiveSearchTerm();
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') this.clearMatchingTerms();
-    });
-  }
-
   clearMatchingTerms() {
     this.matchingTerms = [];
   }
@@ -61,17 +59,7 @@ export default class Search extends LitElement {
     }
   }
 
-  setSearchTermValue() {
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    const urlParamValue = params.get(this.urlParam);
-
-    if (urlParamValue) {
-      this.searchTerm = urlParamValue;
-    }
-  }
-
-  async findPartialtermMatches(e: Event): Promise<void> {
+  async findPartialTermMatches(e: Event): Promise<void> {
     if (!this.typeahead) return;
 
     const searchTerm = (e.target as HTMLInputElement).value;
@@ -121,6 +109,7 @@ export default class Search extends LitElement {
 
     const inputVal = ((e.target as HTMLFormElement)?.querySelector('input[name="term"]') as HTMLInputElement)?.value;
     if (!inputVal) this.clearSearchTerm();
+
     this.searchByTerm(inputVal);
   }
 
@@ -139,7 +128,7 @@ export default class Search extends LitElement {
           ${this.searchTerm ? html`<a class="clear" @click=${this.clearSearchTerm}>Clear</a>` : ''}
         </div>
 
-        <form @input=${this.findPartialtermMatches} @submit=${this.searchByTerm} autocomplete="off">
+        <form @input=${this.findPartialTermMatches} @submit=${this.handleFormSubmit} autocomplete="off">
           <div class="search">
             <div class="input">
               <input name="term" placeholder="Search..." @blur=${this.handleBlur} ${ref(this.inputRef)} />

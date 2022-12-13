@@ -4,5 +4,5 @@ export default class Container extends LitElement {
     paddingX: string;
     paddingY: string;
     fullWidth: boolean;
-    protected render(): import("lit-html").TemplateResult<1>;
+    protected render(): import("lit").TemplateResult<1>;
 }

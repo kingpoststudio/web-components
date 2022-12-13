@@ -6,18 +6,23 @@ interface TopicOption {
 interface Topic {
     name: string;
     id: string;
+    type: 'checkbox' | 'select' | 'multiselect';
     options: TopicOption[];
 }
 export default class TopicFilter extends LitElement {
     static styles: import("lit").CSSResult[];
-    isFilteringActive: boolean;
     title: string;
     topics: Array<Topic>;
+    blog: boolean;
     firstUpdated(): void;
     setActiveTopicOptions(): void;
     selectTopicOption(e: Event): void;
-    filterByTopicOption(topic: string, option: string): void;
-    clearTopicFilters(): void;
-    render(): import("lit-html").TemplateResult<1>;
+    filterByTopicOption(topicId: string, optionId: string): void;
+    clearTopicFilter(topicId?: string): void;
+    renderSelect(topic: Topic): import("lit").TemplateResult<1>;
+    renderMultiSelect(topic: Topic): import("lit").TemplateResult<1>;
+    renderCheckboxes(topic: Topic): import("lit").TemplateResult<1>;
+    get renderedTopics(): import("lit").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }
 export {};

@@ -12,5 +12,5 @@ export default class Form extends LitElement {
     static styles: import("lit").CSSResult;
     private initHsFormScript;
     firstUpdated(): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

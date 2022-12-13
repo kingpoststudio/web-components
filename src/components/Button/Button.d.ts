@@ -1,6 +1,6 @@
 import { LitElement, CSSResultGroup } from 'lit';
 export default class Button extends LitElement {
-    color: 'primary' | 'secondary' | 'tertiary' | 'gray' | 'success' | 'warning' | 'error' | 'transparent';
+    color: 'primary' | 'secondary' | 'tertiary' | 'gray' | 'white' | 'success' | 'warning' | 'error' | 'transparent';
     theme: 'base' | 'dark' | 'darker' | 'darkest' | 'light' | 'lighter' | 'lightest';
     variant: 'fill' | 'outline';
     size: 'sm' | 'md' | 'lg' | 'icon';
@@ -23,5 +23,5 @@ export default class Button extends LitElement {
     onSlotChange(e: {
         target: HTMLSlotElement;
     }): void;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }

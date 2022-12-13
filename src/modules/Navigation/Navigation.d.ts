@@ -4,6 +4,7 @@ export default class Navigation extends LitElement {
     private isMenuOpen;
     private isSubMenuOpen;
     private isMobileView;
+    private theme;
     private logoImg;
     constructor();
     private toggleMenu;
@@ -14,5 +15,5 @@ export default class Navigation extends LitElement {
     private manageMenuLinks;
     connectedCallback(): void;
     disconnectedCallback(): void;
-    protected render(): import("lit-html").TemplateResult<1>;
+    protected render(): import("lit").TemplateResult<1>;
 }
