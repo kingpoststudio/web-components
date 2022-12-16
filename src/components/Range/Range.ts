@@ -1,36 +1,39 @@
 import { html, LitElement } from 'lit';
+import { createRef, ref } from "lit/directives/ref.js";
 
 export default class Range extends LitElement {
+  id = 'range';
+
   min = 0;
 
-  max = 0;
+  minRef = createRef<HTMLInputElement>();
 
-  value = 0;
+  max = 10;
+
+  maxRef = createRef<HTMLInputElement>();
 
   step = 1;
 
-  range = {
-    id: 'range',
-    min: 0,
-    max: 100,
-    value: 0,
-    step: 1,
-  };
+  // onChange of min or max, ensure max is either null or >= min.
+  handleChange() {
+    const minVal = this.minRef.value;
+    const maxVal = this.maxRef.value;
+  }
 
   render() {
     return html`
     <div class="wrap">
       <form class="range">
         <div class="min">
-          <label for="${this.range.id}__min">Min</label>
-          <input id="${this.range.id}__min" type="number" min="${this.range.min}" max="${this.range.max}" placeholder="${this.range.min}">
+          <label for="${this.id}__min">Min</label>
+          <input id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" placeholder="${this.min}" required>
         </div>
         <div class="max">
-          <label for="${this.range.id}__max">Max</label>
-          <input id="${this.range.id}__max" type="number" min="${this.range.min}" max="${this.range.min}" placeholder="${this.range.max}">
+          <label for="${this.id}__max">Max</label>
+          <input id="${this.id}__max" type="number" min="${this.min}" max="${this.min}" placeholder="${this.max}" required>
         </div>
+        <input type="submit" value="Submit">
       </form>
-      <kps-button>Submit</kps-button>
     </div>
     `;
   }
