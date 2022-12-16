@@ -1,6 +1,8 @@
 import { html, LitElement } from 'lit';
-import { createRef, ref } from "lit/directives/ref.js";
+import { customElement } from 'lit/decorators.js';
+import { createRef, ref } from 'lit/directives/ref.js';
 
+@customElement('kps-range')
 export default class Range extends LitElement {
   id = 'range';
 
@@ -14,7 +16,6 @@ export default class Range extends LitElement {
 
   step = 1;
 
-  // onChange of min or max, ensure max is either null or >= min.
   handleChange() {
     const minVal = this.minRef.value;
     const maxVal = this.maxRef.value;
@@ -26,11 +27,11 @@ export default class Range extends LitElement {
       <form class="range">
         <div class="min">
           <label for="${this.id}__min">Min</label>
-          <input id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" placeholder="${this.min}" required>
+          <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" placeholder="${this.min}" required>
         </div>
         <div class="max">
           <label for="${this.id}__max">Max</label>
-          <input id="${this.id}__max" type="number" min="${this.min}" max="${this.min}" placeholder="${this.max}" required>
+          <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.min}" placeholder="${this.max}" required>
         </div>
         <input type="submit" value="Submit">
       </form>
