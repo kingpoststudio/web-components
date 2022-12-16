@@ -48,11 +48,11 @@ export default class Range extends LitElement {
       <div style="display:flex;gap:0.5rem;">
         <div class="min">
           <label for="${this.id}__min">Min</label>
-          <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" placeholder="${this.min}" required>
+          <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}" required>
         </div>
         <div class="max">
           <label for="${this.id}__max">Max</label>
-          <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" placeholder="${this.max}" required>
+          <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.max}" required>
         </div>
       </div>
       <input type="submit" value="Submit">
