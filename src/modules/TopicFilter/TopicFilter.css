@@ -83,6 +83,7 @@
         .min, .max {
           display: flex;
           flex-direction: column;
+          font-size: var(--font-size-sm);
 
           > input {
             padding: 0.5rem 1rem;
