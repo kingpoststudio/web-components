@@ -112,6 +112,9 @@ export default class TopicFilter extends LitElement {
 
       if (activeOptions.length > 0) params.set(topicId, activeOptions.join(','));
       else params.delete(topicId);
+    } else if (topic.type === 'range') {
+      const [min, max] = optionId.split('-');
+      params.set(topicId, `${min}-${max}`);
     } else if (topic.type === 'select' || !topicValues) {
       params.set(topicId, optionId);
     }
