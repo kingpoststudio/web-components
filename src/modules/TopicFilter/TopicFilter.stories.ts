@@ -67,6 +67,11 @@ const mockTopics = [
       },
     ],
   },
+  {
+    name: 'Topic 4',
+    id: 'topic-4',
+    type: 'range',
+  },
 ];
 
 export const Main = () => html`
