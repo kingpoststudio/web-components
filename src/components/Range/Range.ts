@@ -1,5 +1,5 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import styles from './Range.css';
 
@@ -7,17 +7,21 @@ import styles from './Range.css';
 export default class Range extends LitElement {
   static styles = [unsafeCSS(styles)];
 
-  id = 'range';
+  @property({ type: String })
+    id = 'range';
 
-  min = 0;
+  @property({ type: Number })
+    min = 0;
 
-  max = 10;
+  @property({ type: Number })
+    max = 10;
+
+  @property({ type: Number })
+    step = 1;
 
   minRef = createRef<HTMLInputElement>();
 
   maxRef = createRef<HTMLInputElement>();
-
-  step = 1;
 
   disabled = false;
 
