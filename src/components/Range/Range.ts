@@ -1,24 +1,33 @@
-import { html, LitElement } from 'lit';
+import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
+import styles from './Range.css';
 
 @customElement('kps-range')
 export default class Range extends LitElement {
+  static styles = [unsafeCSS(styles)];
+
   id = 'range';
 
   min = 0;
 
-  minRef = createRef<HTMLInputElement>();
-
   max = 10;
+
+  minRef = createRef<HTMLInputElement>();
 
   maxRef = createRef<HTMLInputElement>();
 
   step = 1;
 
-  handleChange() {
-    const minVal = this.minRef.value;
-    const maxVal = this.maxRef.value;
+  handleChange(e) {
+    e.preventDefault();
+    const detail = {
+      id: this.id,
+      min: this.minRef.value?.value,
+      max: this.maxRef.value?.value,
+    };
+
+    this.dispatchEvent(new CustomEvent('range-submit', { detail }));
   }
 
   render() {
@@ -33,8 +42,8 @@ export default class Range extends LitElement {
           <label for="${this.id}__max">Max</label>
           <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.min}" placeholder="${this.max}" required>
         </div>
-        <input type="submit" value="Submit">
       </form>
+      <kps-button @click=${this.handleChange}>Submit</kps-button>
     </div>
     `;
   }
