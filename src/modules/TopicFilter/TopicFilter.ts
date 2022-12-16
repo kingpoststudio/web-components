@@ -173,8 +173,15 @@ export default class TopicFilter extends LitElement {
   }
 
   renderRange(topic: Topic) {
+    const rangeSubmit = (e: any) => {
+      const { min, max } = e.detail;
+      this.filterByTopicOption(topic.id, `${min}-${max}`);
+    };
+
+    window.addEventListener(`${topic.id}RangeSubmit`, rangeSubmit);
+
     return html`
-      <kps-range></kps-range>
+      <kps-range id="${topic.id}" min=${topic.range?.min || 0} max=${topic.range?.max || 10}></kps-range>
     `;
   }
 

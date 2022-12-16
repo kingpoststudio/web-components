@@ -29,7 +29,12 @@ export default class Range extends LitElement {
       max: this.maxRef.value?.value,
     };
 
-    this.dispatchEvent(new CustomEvent('range-submit', { detail }));
+    this.dispatchEvent(new CustomEvent(`${this.id}RangeSubmit`, {
+      bubbles: true,
+      cancelable: false,
+      composed: true,
+      detail,
+    }));
   }
 
   render() {
