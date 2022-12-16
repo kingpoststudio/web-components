@@ -175,9 +175,16 @@ export default class TopicFilter extends LitElement {
   renderRange(topic: Topic) {
     return html`
       <div class="range">
-        <input id="${topic.id}__min" type="number" min="${topic.range?.min || 0}" max="${topic.range?.min || 100}" value="${topic.range?.min || 0}">
-        <input id="${topic.id}__max" type="number" min="${topic.range?.min || 0}" max="${topic.range?.min || 100}" value="${topic.range?.max || 100}">
+        <div class="min">
+          <label for="${topic.id}__min">Min</label>
+          <input id="${topic.id}__min" type="number" min="${topic.range?.min || 0}" max="${topic.range?.min || 100}" value="${topic.range?.min || 0}">
+        </div>
+        <div class="max">
+          <label for="${topic.id}__max">Max</label>
+          <input id="${topic.id}__max" type="number" min="${topic.range?.min || 0}" max="${topic.range?.min || 100}" value="${topic.range?.max || 100}">
+        </div>
       </div>
+      <kps-button>Submit</kps-button>
     `;
   }
 

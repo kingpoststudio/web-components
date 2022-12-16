@@ -40,7 +40,7 @@ export default class Button extends LitElement {
 
   static styles = css`
     :host {
-      display: inline-flex;
+      display: inline-block;
     }
 
     .wrap {
