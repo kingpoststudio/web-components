@@ -65,7 +65,7 @@ export default class Range extends LitElement {
     return html`
     <div class="wrap">
       <form class="range" @submit="${this.handleSubmit}">
-      <div style="display:flex;gap:0.5rem;">
+      <div class="inputs">
         <div class="min">
           <label for="${this.id}__min">Min ${this.suffix ? html`(${this.suffix})` : ''}</label>
           <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}" required>
@@ -75,7 +75,7 @@ export default class Range extends LitElement {
           <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.max}" required>
         </div>
       </div>
-      <input type="submit" value="Submit">
+      <input type="submit" value="Submit" disabled>
       </form>
     </div>
     `;
