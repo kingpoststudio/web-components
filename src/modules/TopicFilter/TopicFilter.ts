@@ -65,9 +65,14 @@ export default class TopicFilter extends LitElement {
     };
 
     const setupRangeOption = (min: string, max: string, topicId: string) => {
+      const clearEl = this.shadowRoot?.querySelector('.intro .clear');
       const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${topicId}"]`);
       const rangeEl = parentEl?.querySelector('kps-range');
+
       if (rangeEl) {
+        clearEl?.classList.remove('hidden');
+        parentEl?.querySelector('.clear')?.classList.remove('hidden');
+
         rangeEl.setAttribute('defaultmin', min);
         rangeEl.setAttribute('defaultmax', max);
       }
