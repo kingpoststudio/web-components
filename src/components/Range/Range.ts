@@ -34,6 +34,13 @@ export default class Range extends LitElement {
 
   disabled = false;
 
+  firstUpdated() {
+    const minVal = this.defaultMin;
+    const maxVal = this.defaultMax;
+    if (minVal && this.minRef.value) this.minRef.value.value = minVal;
+    if (maxVal && this.maxRef.value) this.maxRef.value.value = maxVal;
+  }
+
   handleSubmit(e: Event) {
     e.preventDefault();
     const detail = {
@@ -51,7 +58,6 @@ export default class Range extends LitElement {
   }
 
   render() {
-    console.log(this.min, this.max, this.defaultMin);
     return html`
     <div class="wrap">
       <form class="range" @submit="${this.handleSubmit}">
