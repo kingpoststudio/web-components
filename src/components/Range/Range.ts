@@ -48,6 +48,7 @@ export default class Range extends LitElement {
   validateMinMax() {
     const minEl = this.minRef.value;
     const maxEl = this.maxRef.value;
+
     if (minEl && maxEl) {
       const minVal = Number(minEl.value);
       const maxVal = Number(maxEl.value);

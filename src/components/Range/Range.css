@@ -6,6 +6,7 @@
       width:calc(100% - 0.5rem);
 
       .min, .max {
+        width: 50%;
         display: flex;
         flex-direction: column;
         font-size: var(--font-size-sm);
