@@ -1,5 +1,5 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import styles from './Range.css';
 
@@ -18,6 +18,12 @@ export default class Range extends LitElement {
 
   @property({ type: Number })
     step = 1;
+
+  @property({ type: Number })
+    defaultMin = undefined;
+
+  @property({ type: Number })
+    defaultMax = undefined;
 
   @property({ type: String })
     suffix: string = '';
@@ -45,6 +51,7 @@ export default class Range extends LitElement {
   }
 
   render() {
+    console.log(this.min, this.max, this.defaultMin);
     return html`
     <div class="wrap">
       <form class="range" @submit="${this.handleSubmit}">

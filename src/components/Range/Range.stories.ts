@@ -5,9 +5,12 @@ import '../../styles/fonts.css';
 export default {
   title: 'Range',
   component: 'kps-range',
+  parameters: {
+    layout: 'fullscreen',
+  },
 };
 
-export const Range = () => html`
-  <kps-range>
+export const Main = () => html`
+  <kps-range min="1" max="7" id="megarange" defaultmin="4">
   </kps-range>
 `;
