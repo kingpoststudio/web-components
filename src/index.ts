@@ -11,6 +11,7 @@ import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
 import ImageMap from './components/ImageMap/ImageMap';
 import Link from './components/Link/Link';
+import Range from './components/Range/Range';
 import Select from './components/Select/Select';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
@@ -45,6 +46,7 @@ const lib = {
   Icon,
   ImageMap,
   Link,
+  Range,
   Select,
   Strip,
   Tab,

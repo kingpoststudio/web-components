@@ -10,8 +10,12 @@ interface TopicOption {
 interface Topic {
   name: string;
   id: string;
-  type: 'checkbox' | 'select' | 'multiselect';
+  type: 'checkbox' | 'select' | 'multiselect' | 'range';
   options: TopicOption[];
+  range?: {
+    min: number;
+    max: number;
+  }
 }
 
 const url = new URL(window.location.href);
@@ -168,10 +172,24 @@ export default class TopicFilter extends LitElement {
     `;
   }
 
+  renderRange(topic: Topic) {
+    const rangeSubmit = (e: any) => {
+      const { min, max } = e.detail;
+      this.filterByTopicOption(topic.id, `${min}-${max}`);
+    };
+
+    window.addEventListener(`${topic.id}RangeSubmit`, rangeSubmit);
+
+    return html`
+      <kps-range id="${topic.id}" min=${topic.range?.min || 0} max=${topic.range?.max || 10}></kps-range>
+    `;
+  }
+
   get renderedTopics() {
     const renderTopic = (topic: Topic) => {
       if (topic.type === 'multiselect') return this.renderMultiSelect(topic);
       if (topic.type === 'select') return this.renderSelect(topic);
+      if (topic.type === 'range') return this.renderRange(topic);
       return this.renderCheckboxes(topic);
     };
 
