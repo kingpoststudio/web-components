@@ -3,7 +3,7 @@
     > .inputs {
       display:flex;
       gap:0.5rem;
-      width:calc(100%-0.5rem);
+      width:calc(100% - 0.5rem);
 
       .min, .max {
         display: flex;

@@ -10,6 +10,7 @@ import Grid from './components/Grid/Grid';
 import Icon from './components/Icon/Icon';
 import ImageMap from './components/ImageMap/ImageMap';
 import Link from './components/Link/Link';
+import Range from './components/Range/Range';
 import Select from './components/Select/Select';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
@@ -41,6 +42,7 @@ declare const lib: {
     Icon: typeof Icon;
     ImageMap: typeof ImageMap;
     Link: typeof Link;
+    Range: typeof Range;
     Select: typeof Select;
     Strip: typeof Strip;
     Tab: typeof Tab;

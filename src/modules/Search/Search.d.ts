@@ -2,7 +2,6 @@ import { LitElement } from 'lit';
 import { Ref } from 'lit/directives/ref.js';
 export default class Search extends LitElement {
     static styles: import("lit").CSSResult[];
-    private searchTerm;
     title: string;
     urlParam: string;
     typeahead: boolean;
@@ -11,6 +10,7 @@ export default class Search extends LitElement {
         tableId: string;
         portalId: string;
     };
+    searchTerm: string;
     matchingTerms: string[];
     isLoading: boolean;
     inputRef: Ref<HTMLInputElement>;

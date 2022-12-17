@@ -6,8 +6,15 @@ interface TopicOption {
 interface Topic {
     name: string;
     id: string;
-    type: 'checkbox' | 'select' | 'multiselect';
+    type: 'checkbox' | 'select' | 'multiselect' | 'range';
     options: TopicOption[];
+    range?: {
+        min: number;
+        max: number;
+        defaultmin?: number;
+        defaultmax?: number;
+        suffix?: string;
+    };
 }
 export default class TopicFilter extends LitElement {
     static styles: import("lit").CSSResult[];
@@ -22,6 +29,7 @@ export default class TopicFilter extends LitElement {
     renderSelect(topic: Topic): import("lit").TemplateResult<1>;
     renderMultiSelect(topic: Topic): import("lit").TemplateResult<1>;
     renderCheckboxes(topic: Topic): import("lit").TemplateResult<1>;
+    renderRange(topic: Topic): import("lit").TemplateResult<1>;
     get renderedTopics(): import("lit").TemplateResult<1>;
     render(): import("lit").TemplateResult<1>;
 }
