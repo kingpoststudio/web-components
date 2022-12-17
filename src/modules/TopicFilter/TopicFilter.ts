@@ -46,7 +46,7 @@ export default class TopicFilter extends LitElement {
   }
 
   setActiveTopicOptions() {
-    const setupTopicOption = (optionId: string, topicId: string) => {
+    const setupInputOption = (optionId: string, topicId: string) => {
       const clearEl = this.shadowRoot?.querySelector('.intro .clear');
       const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${topicId}"]`);
       const childEl = parentEl?.querySelector(`[value="${topicId}__${optionId}"]`);
@@ -61,16 +61,35 @@ export default class TopicFilter extends LitElement {
       }
     };
 
+    const setupRangeOption = (min: number, max: number, topicId: string) => {
+      const clearEl = this.shadowRoot?.querySelector('.intro .clear');
+      const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${topicId}"]`);
+      const rangeEl = parentEl?.querySelector('kps-range');
+
+      if (rangeEl) {
+        clearEl?.classList.remove('hidden');
+        parentEl?.querySelector('.clear')?.classList.remove('hidden');
+      }
+    };
+
     if (!this.blog) {
       const params = new URLSearchParams(url.search);
 
       params.forEach((value, key) => {
-        const valueArr = value.split(',');
-        valueArr.forEach((val) => setupTopicOption(val, key));
+        const isRange = /^min[0-9]+(\.[0-9]+)?-max[0-9]+(\.[0-9]+)?$/.test(value);
+        if (!isRange) {
+          const valueArr = value.split(',');
+          valueArr.forEach((val) => setupInputOption(val, key));
+        } else {
+          const [min, max] = value.split('-');
+          const minVal = Number(min.replace('min', ''));
+          const maxVal = Number(max.replace('max', ''));
+          setupRangeOption(minVal, maxVal, key);
+        }
       });
     } else {
       const optionId = getActiveBlogTopic();
-      if (optionId) setupTopicOption(optionId, this.topics[0].id);
+      if (optionId) setupInputOption(optionId, this.topics[0].id);
     }
   }
 
@@ -115,7 +134,7 @@ export default class TopicFilter extends LitElement {
       else params.delete(topicId);
     } else if (topic.type === 'range') {
       const [min, max] = optionId.split('-');
-      params.set(topicId, `${min}-${max}`);
+      params.set(topicId, `min${min}-max${max}`);
     } else if (topic.type === 'select' || !topicValues) {
       params.set(topicId, optionId);
     }
