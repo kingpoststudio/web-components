@@ -1,5 +1,5 @@
 import { html, unsafeCSS, LitElement } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import styles from './Range.css';
 
@@ -35,6 +35,10 @@ export default class Range extends LitElement {
   disabled = false;
 
   firstUpdated() {
+    this.setDefaults();
+  }
+
+  setDefaults() {
     const minVal = this.defaultMin;
     const maxVal = this.defaultMax;
     if (minVal && this.minRef.value) this.minRef.value.value = minVal;

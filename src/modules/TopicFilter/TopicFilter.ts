@@ -1,5 +1,6 @@
 import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import Styles from './TopicFilter.css';
 
 interface TopicOption {
@@ -15,7 +16,9 @@ interface Topic {
   range?: {
     min: number;
     max: number;
-    suffix: 'percent' | undefined;
+    defaultmin?: number;
+    defaultmax?: number;
+    suffix?: string;
   }
 }
 
@@ -61,14 +64,12 @@ export default class TopicFilter extends LitElement {
       }
     };
 
-    const setupRangeOption = (min: number, max: number, topicId: string) => {
-      const clearEl = this.shadowRoot?.querySelector('.intro .clear');
+    const setupRangeOption = (min: string, max: string, topicId: string) => {
       const parentEl = this.shadowRoot?.querySelector(`[data-topic-id="${topicId}"]`);
       const rangeEl = parentEl?.querySelector('kps-range');
-
       if (rangeEl) {
-        clearEl?.classList.remove('hidden');
-        parentEl?.querySelector('.clear')?.classList.remove('hidden');
+        rangeEl.setAttribute('defaultmin', min);
+        rangeEl.setAttribute('defaultmax', max);
       }
     };
 
@@ -81,10 +82,8 @@ export default class TopicFilter extends LitElement {
           const valueArr = value.split(',');
           valueArr.forEach((val) => setupInputOption(val, key));
         } else {
-          const [min, max] = value.split('-');
-          const minVal = Number(min.replace('min', ''));
-          const maxVal = Number(max.replace('max', ''));
-          setupRangeOption(minVal, maxVal, key);
+          const [min, max] = value.replace(/min|max/g, '').split('-');
+          setupRangeOption(min, max, key);
         }
       });
     } else {
@@ -197,14 +196,17 @@ export default class TopicFilter extends LitElement {
 
   renderRange(topic: Topic) {
     const suffix = topic.range?.suffix || '';
+    const {
+      min, defaultmin, max, defaultmax,
+    } = topic.range || { min: 0, max: 10 };
 
     window.addEventListener(`${topic.id}RangeSubmit`, (e: any) => {
-      const { min, max } = e.detail;
-      this.filterByTopicOption(topic.id, `${min}-${max}`);
+      const { min: minVal, max: maxVal } = e.detail;
+      this.filterByTopicOption(topic.id, `${minVal}-${maxVal}`);
     });
 
     return html`
-      <kps-range id="${topic.id}" min=${topic.range?.min || 0} max=${topic.range?.max || 10} suffix="${suffix}"></kps-range>
+      <kps-range id="${topic.id}" min=${min} max=${max} defaultmin=${ifDefined(defaultmin)} defaultmax=${ifDefined(defaultmax)} suffix="${suffix}"></kps-range>
     `;
   }
 
