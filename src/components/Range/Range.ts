@@ -45,6 +45,18 @@ export default class Range extends LitElement {
     if (maxVal && this.maxRef.value) this.maxRef.value.value = maxVal;
   }
 
+  validateMinMax() {
+    const minEl = this.minRef.value;
+    const maxEl = this.maxRef.value;
+    if (minEl && maxEl) {
+      const minVal = Number(minEl.value);
+      const maxVal = Number(maxEl.value);
+      if (minVal && maxVal && minVal > maxVal) {
+        maxEl.value = minVal.toString();
+      }
+    }
+  }
+
   handleSubmit(e: Event) {
     e.preventDefault();
     const detail = {
@@ -64,18 +76,18 @@ export default class Range extends LitElement {
   render() {
     return html`
     <div class="wrap">
-      <form class="range" @submit="${this.handleSubmit}">
-      <div class="inputs">
-        <div class="min">
-          <label for="${this.id}__min">Min ${this.suffix ? html`(${this.suffix})` : ''}</label>
-          <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}" required>
+      <form class="range" @change=${this.validateMinMax} @submit=${this.handleSubmit}>
+        <div class="inputs">
+          <div class="min">
+            <label for="${this.id}__min">Min ${this.suffix ? html`(${this.suffix})` : ''}</label>
+            <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}" required>
+          </div>
+          <div class="max">
+            <label for="${this.id}__max">Max ${this.suffix ? html`(${this.suffix})` : ''}</label>
+            <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.max}" required>
+          </div>
         </div>
-        <div class="max">
-          <label for="${this.id}__max">Max ${this.suffix ? html`(${this.suffix})` : ''}</label>
-          <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.max}" required>
-        </div>
-      </div>
-      <input type="submit" value="Submit" disabled>
+        <input type="submit" value="Submit">
       </form>
     </div>
     `;
