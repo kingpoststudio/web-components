@@ -1,7 +1,8 @@
 import { html, LitElement, unsafeCSS } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, state } from 'lit/decorators.js';
 import { createRef, ref } from 'lit/directives/ref.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { styleMap } from 'lit/directives/style-map.js';
 import styles from './Stepper.css?inline';
 
 interface StepImage {
@@ -14,6 +15,10 @@ interface StepBlock {
   position: {
     x: number;
     y: number;
+    mobile?: {
+      x: number;
+      y: number;
+    };
   };
   slides: {
     from: number;
@@ -43,6 +48,9 @@ export default class Stepper extends LitElement {
   @property({ type: Boolean })
     fade = false;
 
+  @state()
+    isMobile = false;
+
   animationRef = createRef();
 
   constructor() {
@@ -51,7 +59,7 @@ export default class Stepper extends LitElement {
     this.getImageContent = this.getImageContent.bind(this);
 
     window.addEventListener('scroll', this.handleScroll);
-    window.addEventListener('resize', this.handleScroll, { passive: true });
+    window.addEventListener('resize', this.handleResize, { passive: true });
 
     this.handleScroll();
   }
@@ -59,8 +67,14 @@ export default class Stepper extends LitElement {
   disconnectedCallback(): void {
     super.disconnectedCallback();
     window.removeEventListener('scroll', this.handleScroll);
-    window.removeEventListener('resize', this.handleScroll);
+    window.removeEventListener('resize', this.handleResize);
   }
+
+  handleResize = () => {
+    const { innerWidth } = window;
+    this.isMobile = innerWidth < 768;
+    this.handleScroll();
+  };
 
   handleScroll = () => {
     const animationEl = this.animationRef.value as HTMLElement;
@@ -110,7 +124,12 @@ export default class Stepper extends LitElement {
     const { x, y } = block.position;
     const activeIndex = this.activeImage ? this.images.indexOf(this.activeImage) : -1;
     const isVisible = block.slides.from <= activeIndex && activeIndex < block.slides.to;
-    return html`<div class="block ${isVisible ? 'visible' : ''}" style="left:${x}%;top:${y}%;">${unsafeHTML(block?.text)}</div>`;
+    const blockStyles = {
+      left: `${this.isMobile ? block.position.mobile?.x : x}%`,
+      top: `${this.isMobile ? block.position.mobile?.y : y}%`,
+    };
+
+    return html`<div class="block ${isVisible ? 'visible' : ''}" style="${styleMap(blockStyles)}">${unsafeHTML(block?.text)}</div>`;
   }
 
   getImageContent(image: StepImage) {
