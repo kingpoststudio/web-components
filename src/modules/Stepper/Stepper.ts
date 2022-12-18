@@ -49,7 +49,7 @@ export default class Stepper extends LitElement {
     fade = false;
 
   @state()
-    isMobile = false;
+    isMobile = window.innerWidth < 768;
 
   animationRef = createRef();
 
