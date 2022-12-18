@@ -10,6 +10,10 @@ export default class Range extends LitElement {
   @property({ type: String })
     id = 'range';
 
+  /* min/max or plus/minus */
+  @property({ type: String })
+    type: 'mm' | 'pm' = 'mm';
+
   @property({ type: Number })
     min = 0;
 
@@ -17,13 +21,16 @@ export default class Range extends LitElement {
     max = 10;
 
   @property({ type: Number })
-    step = 1;
-
-  @property({ type: Number })
     defaultMin = undefined;
 
   @property({ type: Number })
     defaultMax = undefined;
+
+  @property({ type: Number })
+    step = 1;
+
+  @property({ type: Number })
+    tolerance = 0;
 
   @property({ type: String })
     suffix: string = '';
@@ -31,6 +38,8 @@ export default class Range extends LitElement {
   minRef = createRef<HTMLInputElement>();
 
   maxRef = createRef<HTMLInputElement>();
+
+  pmRef = createRef<HTMLInputElement>();
 
   disabled = false;
 
@@ -79,6 +88,12 @@ export default class Range extends LitElement {
     <div class="wrap">
       <form class="range" @change=${this.validateMinMax} @submit=${this.handleSubmit}>
         <div class="inputs">
+        ${this.type === 'pm' ? html`
+          <div class="plus-minus">
+            <label for="${this.id}__pm">Value ${this.suffix ? html`(${this.suffix})` : ''}</label>
+            <input ${ref(this.pmRef)} id="${this.id}__pm" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}-${this.max}" required>
+          </div>
+        ` : html`
           <div class="min">
             <label for="${this.id}__min">Min ${this.suffix ? html`(${this.suffix})` : ''}</label>
             <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}" required>
@@ -87,6 +102,7 @@ export default class Range extends LitElement {
             <label for="${this.id}__max">Max ${this.suffix ? html`(${this.suffix})` : ''}</label>
             <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.max}" required>
           </div>
+        `}
         </div>
         <input type="submit" value="Submit">
       </form>
