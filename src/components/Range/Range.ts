@@ -41,8 +41,6 @@ export default class Range extends LitElement {
 
   pmRef = createRef<HTMLInputElement>();
 
-  disabled = false;
-
   firstUpdated() {
     this.setDefaults();
   }
@@ -50,8 +48,13 @@ export default class Range extends LitElement {
   setDefaults() {
     const minVal = this.defaultMin;
     const maxVal = this.defaultMax;
-    if (minVal && this.minRef.value) this.minRef.value.value = minVal;
-    if (maxVal && this.maxRef.value) this.maxRef.value.value = maxVal;
+
+    if (this.type === 'pm' && this.pmRef.value) {
+      this.pmRef.value.value = minVal ? (minVal + this.tolerance).toString() : '';
+    } else {
+      if (minVal && this.minRef.value) this.minRef.value.value = minVal;
+      if (maxVal && this.maxRef.value) this.maxRef.value.value = maxVal;
+    }
   }
 
   validateMinMax() {
@@ -69,11 +72,15 @@ export default class Range extends LitElement {
 
   handleSubmit(e: Event) {
     e.preventDefault();
-    const detail = {
-      id: this.id,
-      min: this.minRef.value?.value,
-      max: this.maxRef.value?.value,
-    };
+    const detail = { min: this.min, max: this.max };
+
+    if (this.type === 'pm') {
+      detail.min = Number(this.pmRef.value?.value) - this.tolerance;
+      detail.max = Number(this.pmRef.value?.value) + this.tolerance;
+    } else {
+      detail.min = Number(this.minRef.value?.value);
+      detail.max = Number(this.maxRef.value?.value);
+    }
 
     this.dispatchEvent(new CustomEvent(`${this.id}RangeSubmit`, {
       bubbles: true,

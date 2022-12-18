@@ -11,6 +11,7 @@ export default {
 };
 
 export const Main = () => html`
-  <kps-range min="1" max="7" id="megarange" defaultmin="4">
-  </kps-range>
+  <kps-range min="1" max="7" id="min-max" defaultmin="4"></kps-range>
+  <br/>
+  <kps-range type="pm" min="1" max="7" id="plus-minus" defaultmin="3" tolerance="2"></kps-range>
 `;
