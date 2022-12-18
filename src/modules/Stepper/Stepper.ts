@@ -121,12 +121,12 @@ export default class Stepper extends LitElement {
   };
 
   getBlockContent(block: StepBlock) {
-    const { x, y } = block.position;
+    const { x, y, mobile } = block.position;
     const activeIndex = this.activeImage ? this.images.indexOf(this.activeImage) : -1;
     const isVisible = block.slides.from <= activeIndex && activeIndex < block.slides.to;
     const blockStyles = {
-      left: `${this.isMobile ? block.position.mobile?.x : x}%`,
-      top: `${this.isMobile ? block.position.mobile?.y : y}%`,
+      left: `${this.isMobile && mobile?.x ? mobile.x : x}%`,
+      top: `${this.isMobile && mobile?.y ? mobile.y : y}%`,
     };
 
     return html`<div class="block ${isVisible ? 'visible' : ''}" style="${styleMap(blockStyles)}">${unsafeHTML(block?.text)}</div>`;
