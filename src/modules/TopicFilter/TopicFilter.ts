@@ -11,13 +11,14 @@ interface TopicOption {
 interface Topic {
   name: string;
   id: string;
-  type: 'checkbox' | 'select' | 'multiselect' | 'range';
+  type: 'checkbox' | 'select' | 'multiselect' | 'range-mm' | 'range-pm';
   options: TopicOption[];
   range?: {
     min: number;
     max: number;
     defaultmin?: number;
     defaultmax?: number;
+    tolerance?: number;
     suffix?: string;
   }
 }
@@ -136,7 +137,7 @@ export default class TopicFilter extends LitElement {
 
       if (activeOptions.length > 0) params.set(topicId, activeOptions.join(','));
       else params.delete(topicId);
-    } else if (topic.type === 'range') {
+    } else if (['range-mm', 'range-pm'].includes(topic.type)) {
       const [min, max] = optionId.split('-');
       params.set(topicId, `min${min}-max${max}`);
     } else if (topic.type === 'select' || !topicValues) {
@@ -200,9 +201,10 @@ export default class TopicFilter extends LitElement {
   }
 
   renderRange(topic: Topic) {
+    const type = topic.type.replace('range-', '');
     const suffix = topic.range?.suffix || '';
     const {
-      min, defaultmin, max, defaultmax,
+      min, defaultmin, max, defaultmax, tolerance,
     } = topic.range || { min: 0, max: 10 };
 
     window.addEventListener(`${topic.id}RangeSubmit`, (e: any) => {
@@ -211,7 +213,7 @@ export default class TopicFilter extends LitElement {
     });
 
     return html`
-      <kps-range id="${topic.id}" min=${min} max=${max} defaultmin=${ifDefined(defaultmin)} defaultmax=${ifDefined(defaultmax)} suffix="${suffix}"></kps-range>
+      <kps-range type="${type}" id="${topic.id}" min=${min} max=${max} defaultmin=${ifDefined(defaultmin)} defaultmax=${ifDefined(defaultmax)} tolerance=${ifDefined(tolerance)} suffix="${suffix}"></kps-range>
     `;
   }
 
@@ -219,7 +221,7 @@ export default class TopicFilter extends LitElement {
     const renderTopic = (topic: Topic) => {
       if (topic.type === 'multiselect') return this.renderMultiSelect(topic);
       if (topic.type === 'select') return this.renderSelect(topic);
-      if (topic.type === 'range') return this.renderRange(topic);
+      if (['range-mm', 'range-pm'].includes(topic.type)) return this.renderRange(topic);
       return this.renderCheckboxes(topic);
     };
 

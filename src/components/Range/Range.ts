@@ -72,14 +72,17 @@ export default class Range extends LitElement {
 
   handleSubmit(e: Event) {
     e.preventDefault();
-    const detail = { min: this.min, max: this.max };
+    const detail = { min: '', max: '' };
 
     if (this.type === 'pm') {
-      detail.min = Number(this.pmRef.value?.value) - this.tolerance;
-      detail.max = Number(this.pmRef.value?.value) + this.tolerance;
+      const dp = this.step.toString().split('.')[1]?.length || 0 ** 10;
+      const minVal = Number(this.pmRef.value?.value) - this.tolerance;
+      const maxVal = Number(this.pmRef.value?.value) + this.tolerance;
+      detail.min = minVal > this.min ? minVal.toFixed(dp) : this.min.toString();
+      detail.max = maxVal < this.max ? maxVal.toFixed(dp) : this.max.toString();
     } else {
-      detail.min = Number(this.minRef.value?.value);
-      detail.max = Number(this.maxRef.value?.value);
+      detail.min = this.minRef.value?.value || '';
+      detail.max = this.maxRef.value?.value || '';
     }
 
     this.dispatchEvent(new CustomEvent(`${this.id}RangeSubmit`, {
