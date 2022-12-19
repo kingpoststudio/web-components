@@ -6,13 +6,14 @@ interface TopicOption {
 interface Topic {
     name: string;
     id: string;
-    type: 'checkbox' | 'select' | 'multiselect' | 'range';
+    type: 'checkbox' | 'select' | 'multiselect' | 'range-mm' | 'range-pm';
     options: TopicOption[];
     range?: {
         min: number;
         max: number;
         defaultmin?: number;
         defaultmax?: number;
+        tolerance?: number;
         suffix?: string;
     };
 }
