@@ -61,13 +61,15 @@ export default class Navigation extends LitElement {
   private menuLinkClickHandler(link: Element, teardown?: Boolean) {
     const handleClick = (e: Event) => {
       e.preventDefault();
+      e.stopPropagation();
+
       if (link) this.toggleSubOpen(link);
     };
 
     if (teardown) {
       const newLink = link.cloneNode(true);
       link.parentNode?.replaceChild(newLink, link);
-    } else link.addEventListener('click', handleClick);
+    } else link.querySelector('a')?.addEventListener('click', handleClick);
   }
 
   private manageMenuLinks(teardown?: Boolean) {
