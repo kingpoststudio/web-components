@@ -1,5 +1,6 @@
 import { html, unsafeCSS, LitElement } from 'lit';
 import { customElement, property, state } from 'lit/decorators.js';
+import { ref, createRef } from 'lit/directives/ref.js';
 import Styles from './Navigation.css';
 
 @customElement('kps-nav')
@@ -20,6 +21,8 @@ export default class Navigation extends LitElement {
 
   @property({ type: Object })
   private logoImg = { src: '', alt: '' };
+
+  private smRef = createRef<HTMLSlotElement>();
 
   constructor() {
     super();
@@ -111,9 +114,8 @@ export default class Navigation extends LitElement {
             <slot name="main-menu" @slotchange=${() => this.manageMenuLinks()}></slot>
 
             <div class="social-media">
-              <span>Follow Us</span>
               <div class="social-icons">
-                <slot name="social-media"></slot>
+                <slot name="social-media" ${ref(this.smRef)}></slot>
               </div>
             </div>
           </div>
