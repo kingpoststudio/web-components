@@ -83,12 +83,12 @@ export default class TopicFilter extends LitElement {
       const params = new URLSearchParams(url.search);
 
       params.forEach((value, key) => {
-        const isRange = /^min[0-9]+(\.[0-9]+)?-max[0-9]+(\.[0-9]+)?$/.test(value);
+        const isRange = /^min[0-9]+(\.[0-9]+)?_max[0-9]+(\.[0-9]+)?$/.test(value);
         if (!isRange) {
           const valueArr = value.split(',');
           valueArr.forEach((val) => setupInputOption(val, key));
         } else {
-          const [min, max] = value.replace(/min|max/g, '').split('-');
+          const [min, max] = value.replace(/min|max/g, '').split('_');
           setupRangeOption(min, max, key);
         }
       });
