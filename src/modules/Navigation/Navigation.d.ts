@@ -6,6 +6,7 @@ export default class Navigation extends LitElement {
     private isMobileView;
     private theme;
     private logoImg;
+    private smRef;
     constructor();
     private toggleMenu;
     private toggleSubMenu;

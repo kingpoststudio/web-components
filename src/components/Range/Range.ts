@@ -50,7 +50,7 @@ export default class Range extends LitElement {
     const maxVal = this.defaultMax;
 
     if (this.type === 'pm' && this.pmRef.value) {
-      this.pmRef.value.value = minVal ? (minVal + this.tolerance).toString() : '';
+      if (minVal && maxVal) this.pmRef.value.value = ((minVal + maxVal) / 2).toString();
     } else {
       if (minVal && this.minRef.value) this.minRef.value.value = minVal;
       if (maxVal && this.maxRef.value) this.maxRef.value.value = maxVal;
@@ -75,11 +75,10 @@ export default class Range extends LitElement {
     const detail = { min: '', max: '' };
 
     if (this.type === 'pm') {
-      const dp = this.step.toString().split('.')[1]?.length || 0 ** 10;
       const minVal = Number(this.pmRef.value?.value) - this.tolerance;
       const maxVal = Number(this.pmRef.value?.value) + this.tolerance;
-      detail.min = minVal > this.min ? minVal.toFixed(dp) : this.min.toString();
-      detail.max = maxVal < this.max ? maxVal.toFixed(dp) : this.max.toString();
+      detail.min = minVal.toFixed(1);
+      detail.max = maxVal.toFixed(1);
     } else {
       detail.min = this.minRef.value?.value || '';
       detail.max = this.maxRef.value?.value || '';
