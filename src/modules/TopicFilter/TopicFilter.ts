@@ -138,8 +138,8 @@ export default class TopicFilter extends LitElement {
       if (activeOptions.length > 0) params.set(topicId, activeOptions.join(','));
       else params.delete(topicId);
     } else if (['range-mm', 'range-pm'].includes(topic.type)) {
-      const [min, max] = optionId.split('-');
-      params.set(topicId, `min${min}-max${max}`);
+      const [min, max] = optionId.split('_');
+      params.set(topicId, `min${min}_max${max}`);
     } else if (topic.type === 'select' || !topicValues) {
       params.set(topicId, optionId);
     }
@@ -209,7 +209,7 @@ export default class TopicFilter extends LitElement {
 
     window.addEventListener(`${topic.id}RangeSubmit`, (e: any) => {
       const { min: minVal, max: maxVal } = e.detail;
-      this.filterByTopicOption(topic.id, `${minVal}-${maxVal}`);
+      this.filterByTopicOption(topic.id, `${minVal}_${maxVal}`);
     });
 
     return html`
