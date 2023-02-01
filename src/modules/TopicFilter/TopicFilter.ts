@@ -213,7 +213,7 @@ export default class TopicFilter extends LitElement {
     });
 
     return html`
-      <kps-range type="${type}" id="${topic.id}" min=${min} max=${max} defaultmin=${ifDefined(defaultmin)} defaultmax=${ifDefined(defaultmax)} tolerance=${ifDefined(tolerance)} suffix="${suffix}"></kps-range>
+      <kps-range step="0.01" type="${type}" id="${topic.id}" min=${min} max=${max} defaultmin=${ifDefined(defaultmin)} defaultmax=${ifDefined(defaultmax)} tolerance=${ifDefined(tolerance)} suffix="${suffix}"></kps-range>
     `;
   }
 

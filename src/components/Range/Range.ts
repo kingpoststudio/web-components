@@ -100,16 +100,16 @@ export default class Range extends LitElement {
         ${this.type === 'pm' ? html`
           <div class="plus-minus">
             <label for="${this.id}__pm">Value ${this.suffix ? html`(${this.suffix})` : ''}</label>
-            <input ${ref(this.pmRef)} id="${this.id}__pm" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}-${this.max}" required>
+            <input ${ref(this.pmRef)} id="${this.id}__pm" type="number" min="${this.min}" max="${this.max}" step="${this.step}" placeholder="${this.min}-${this.max}" required>
           </div>
         ` : html`
           <div class="min">
             <label for="${this.id}__min">Min ${this.suffix ? html`(${this.suffix})` : ''}</label>
-            <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.min}" required>
+            <input ${ref(this.minRef)} id="${this.id}__min" type="number" min="${this.min}" max="${this.max}" step="${this.step}" placeholder="${this.min}" required>
           </div>
           <div class="max">
             <label for="${this.id}__max">Max ${this.suffix ? html`(${this.suffix})` : ''}</label>
-            <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" step="0.1" placeholder="${this.max}" required>
+            <input ${ref(this.maxRef)} id="${this.id}__max" type="number" min="${this.min}" max="${this.max}" step="${this.step}" placeholder="${this.max}" required>
           </div>
         `}
         </div>
