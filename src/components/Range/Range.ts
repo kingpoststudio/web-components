@@ -77,8 +77,8 @@ export default class Range extends LitElement {
     if (this.type === 'pm') {
       const minVal = Number(this.pmRef.value?.value) - this.tolerance;
       const maxVal = Number(this.pmRef.value?.value) + this.tolerance;
-      detail.min = minVal.toFixed(1);
-      detail.max = maxVal.toFixed(1);
+      detail.min = minVal.toFixed(2);
+      detail.max = maxVal.toFixed(2);
     } else {
       detail.min = this.minRef.value?.value || '';
       detail.max = this.maxRef.value?.value || '';
