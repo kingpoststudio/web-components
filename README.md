@@ -7,13 +7,13 @@ A collection of web components, created by King Post Studio, built with TypeScri
 Start by installing the package:
 
 ```bash
-yarn add @kingpoststudio/web-component-library
+yarn add @kingpoststudio/web-components
 ```
 
-The components are available as a module in the <code>@kingpoststudio/web-component-library</code> namespace. You can import them into your project using the following syntax:
+The components are available as a module in the <code>@kingpoststudio/web-components</code> namespace. You can import them into your project using the following syntax:
 
 ```typescript
-import { Button } from '@kingpoststudio/web-component-library';
+import { Button } from '@kingpoststudio/web-components';
 ```
 
 ## Development
@@ -35,7 +35,7 @@ Sometimes, you may want to develop these components directly in HubSpot, rather 
 cd web-components
 yarn link # Creates a consumable link to the library
 cd ../hubspot-theme
-yarn link @kingpoststudio/web-component-library # Links the library to the HubSpot project
+yarn link @kingpoststudio/web-components # Links the library to the HubSpot project
 yarn dev # Starts HubSpot development
 ```
 
