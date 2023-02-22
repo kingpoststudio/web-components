@@ -17,7 +17,7 @@ const mockTopics = [
     options: [
       {
         id: '1',
-        name: 'Option 1',
+        name: 'Option 1 is a rather long one if you look at it long enough.',
       },
       {
         id: '2',
@@ -66,11 +66,6 @@ const mockTopics = [
         name: 'Option 3',
       },
     ],
-  },
-  {
-    name: 'Topic 4',
-    id: 'topic-4',
-    type: 'range',
   },
 ];
 
