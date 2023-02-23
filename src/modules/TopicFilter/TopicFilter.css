@@ -77,6 +77,10 @@
           * {
             cursor: pointer;
           }
+
+          input[type="checkbox"] {
+            height: 1.25rem;
+          }
         }
       }
 
