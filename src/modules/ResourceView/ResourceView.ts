@@ -13,6 +13,9 @@ export default class ResourceView extends LitElement {
     backUrl = '';
 
   @property({ type: String })
+    downloadLabel = 'Download PDF';
+
+  @property({ type: String })
     formId: string | undefined;
 
   private downloadResource() {
@@ -49,7 +52,7 @@ export default class ResourceView extends LitElement {
 
     return html`
       <a class="link download" @click=${this.downloadResource}>
-        <span>Download PDF</span>
+        <span>${this.downloadLabel}</span>
         <kps-icon icon="download"></kps-icon>
       </a>
     `;
@@ -57,8 +60,10 @@ export default class ResourceView extends LitElement {
 
   render() {
     return html`
-      <a class="back" href="${this.backUrl}">All resources</a>
       <div class="wrapper">
+        <div class="image">
+          <slot name="image"></slot>
+        </div>
         <div class="resource">
           <slot name="type"></slot>
           <slot name="title"></slot>
@@ -66,9 +71,6 @@ export default class ResourceView extends LitElement {
           <hr /> 
           ${this.downloadButton}
           <slot name="description"></slot>
-        </div>
-        <div class="image">
-          <slot name="image"></slot>
         </div>
       </div>
     `;

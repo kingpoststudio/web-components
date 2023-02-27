@@ -25,7 +25,6 @@ a.back {
     }
 
     > slot[name="title"]::slotted(h1) {
-      color: var(--color-dark-blue);
       font-size: var(--font-size-2xl) !important;
     }
 
@@ -67,7 +66,7 @@ a.back {
       object-fit: contain;
 
       @media (min-width: 768px) {
-        max-width: 20rem;
+        max-width: 24rem;
       }
     }
   }
