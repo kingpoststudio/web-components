@@ -22,6 +22,7 @@ import DateFilter from './modules/DateFilter/DateFilter';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
 import Pagination from './modules/Pagination/Pagination';
+import ResourceView from './modules/ResourceView/ResourceView';
 import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
 import TopicFilter from './modules/TopicFilter/TopicFilter';
@@ -57,6 +58,7 @@ const lib = {
   HeroBanner,
   Navigation,
   Pagination,
+  ResourceView,
   Search,
   Stepper,
   TopicFilter,
