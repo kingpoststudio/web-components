@@ -14,7 +14,6 @@
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 100%;
     padding: var(--space-lg) var(--space-lg) var(--space-xl);
 
     @media screen and (min-width: 768px) {
