@@ -55,14 +55,13 @@ export default class ResourceView extends LitElement {
   render() {
     return html`
       <div class="wrapper">
-        <div class="image"></div>
+        <div class="image">
           <slot name="image"></slot>
         </div>
         <div class="resource">
           <slot name="type"></slot>
           <slot name="title"></slot>
           <slot name="subtitle"></slot>
-          <hr /> 
           ${this.downloadButton}
           <slot name="description"></slot>
         </div>
