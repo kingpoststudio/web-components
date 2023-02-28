@@ -54,6 +54,9 @@ export default class ResourceView extends LitElement {
 
   render() {
     return html`
+      <div class="back">
+        <slot name="back"></slot>
+      </div>
       <div class="wrapper">
         <div class="image">
           <slot name="image"></slot>
