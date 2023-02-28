@@ -1,6 +1,7 @@
 import Button from './components/Button';
 import ButtonGroup from './components/ButtonGroup/ButtonGroup';
 import Card from './components/Card/Card';
+import Carousel from './components/Carousel/Carousel';
 import Container from './components/Container/Container';
 import DateTime from './components/DateTime/DateTime';
 import Dialog from './components/Dialog/Dialog';
@@ -37,6 +38,7 @@ const lib = {
   Button,
   ButtonGroup,
   Card,
+  Carousel,
   Container,
   DateTime,
   Dialog,

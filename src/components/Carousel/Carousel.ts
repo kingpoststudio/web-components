@@ -1,37 +1,35 @@
 import Flickity from 'flickity';
-import {
-  html, css, unsafeCSS, LitElement,
-} from 'lit';
-import { customElement } from 'lit/decorators.js';
-import flickityStyles from 'flickity/css/flickity.css';
+import { html, css, unsafeCSS, LitElement, CSSResultGroup } from 'lit';
+import { customElement, property } from 'lit/decorators.js';
+import flickityStyles from 'flickity/css/flickity.css?inline';
 
 const styles = css`
-  :host {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
   .flickity-viewport {
-    height: 100%;
-  }
-  .flickity-slider {
     height: 100%;
   }
 `;
 
 @customElement('kps-carousel')
 export default class Carousel extends LitElement {
-  static styles = [css`${unsafeCSS(flickityStyles)}`, styles];
+  static styles = [unsafeCSS(flickityStyles), styles] as CSSResultGroup;
 
   carousel: Flickity | null = null;
 
-  firstUpdated() {
-    this.generateNewCarousel();
+  slides: Element[] = [];
+
+  @property({ type: Number })
+    autoplay: number = 6000;
+
+  private setSlides() {
+    const slides = Array.from(this.children).map((child) => child);
+    this.slides = slides || [];
   }
 
   private generateNewCarousel() {
+    this.setSlides();
+
     const options = {
-      autoPlay: 6000,
+      autoPlay: this.autoplay,
       contain: true,
       wrapAround: true,
       selectedAttraction: 0.25,
@@ -42,15 +40,27 @@ export default class Carousel extends LitElement {
 
     if (targetEl) {
       this.carousel = new Flickity(targetEl, options);
+      this.carousel.append(this.slides);
       this.carousel.resize();
     }
   }
 
+  constructor() {
+    super();
+    this.generateNewCarousel = this.generateNewCarousel.bind(this);
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    window.addEventListener('load', () => this.generateNewCarousel());
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    window.removeEventListener('load', () => this.generateNewCarousel());
+  }
+
   render() {
-    return html`
-      <div id="carousel">
-        <slot></slot>
-      </div>
-    `;
+    return html`<div id="carousel"></div>`;
   }
 }
