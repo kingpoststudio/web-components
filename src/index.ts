@@ -14,6 +14,7 @@ import ImageMap from './components/ImageMap/ImageMap';
 import Link from './components/Link/Link';
 import Range from './components/Range/Range';
 import Select from './components/Select/Select';
+import Slide from './components/Slide/Slide';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
@@ -51,6 +52,7 @@ const lib = {
   Link,
   Range,
   Select,
+  Slide,
   Strip,
   Tab,
   TabGroup,

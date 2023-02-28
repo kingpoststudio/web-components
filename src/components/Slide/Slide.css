@@ -1,0 +1,56 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 36rem;
+
+  > ::slotted(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  > .content {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: var(--space-lg) var(--space-lg) var(--space-xl);
+
+    @media screen and (min-width: 768px) {
+      padding: var(--space-2xl) var(--space-xl);
+    }
+
+    > .text {
+      color: var(--color-white);
+      margin-bottom: var(--space);
+
+      > ::slotted(p) {
+        @media (min-width: 768px) {
+          font-size: var(--font-size-lg);
+        }
+      }
+
+      > ::slotted(h1) {
+        font-family: var(--font-heading);
+        font-size: var(--font-size-3xl);
+      }
+    }
+
+    ::slotted(a),
+    ::slotted(span),
+    ::slotted(button) {
+      margin-top: var(--space-md) !important;
+    }
+  }
+
+  .overlay {
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(96,96,96,1) 0%, rgba(255,255,255,0) 100%);
+    mix-blend-mode: multiply;
+  }
+}

@@ -7,6 +7,38 @@ const styles = css`
   .flickity-viewport {
     height: 100%;
   }
+
+  .flickity-prev-next-button {
+    width: 2rem;
+    height: 100%;
+    border-radius: 0;
+    background: rgba(255,255,255,0.2);
+    transition: background 0.2s ease;
+  }
+
+  .flickity-prev-next-button:hover {
+    background: rgba(255,255,255,0.7);
+  }
+
+  .flickity-prev-next-button.previous {
+    left: 0;
+  }
+
+  .flickity-prev-next-button.next {
+    right: 0;
+  }
+
+  .flickity-page-dots {
+    bottom: 2rem;
+  }
+
+  .flickity-page-dot {
+    transition: background 0.2s ease;
+  }
+
+  .flickity-page-dot.is-selected {
+    background: #fff;
+  }
 `;
 
 @customElement('kps-carousel')
