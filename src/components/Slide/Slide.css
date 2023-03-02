@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 36rem;
+  height: 20rem;
 
   > ::slotted(img) {
     width: 100%;
@@ -49,7 +49,7 @@
     bottom: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(0deg, rgba(96,96,96,1) 0%, rgba(255,255,255,0) 100%);
+    background: var(--color-overlay);
     mix-blend-mode: multiply;
   }
 }

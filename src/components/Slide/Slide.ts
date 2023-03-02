@@ -1,5 +1,5 @@
 import { html, LitElement, unsafeCSS } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
 import slideStyles from './Slide.css?inline';
 
 @customElement('kps-slide')
