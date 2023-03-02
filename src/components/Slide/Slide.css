@@ -2,12 +2,17 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 20rem;
+  height: 24rem;
 
-  > ::slotted(img) {
+  .image {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+
+    ::slotted(img) {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   > .content {
@@ -17,6 +22,7 @@
     padding: var(--space-lg) var(--space-lg) var(--space-xl);
 
     @media screen and (min-width: 768px) {
+      width: 70%;
       padding: var(--space-2xl) var(--space-xl);
     }
 

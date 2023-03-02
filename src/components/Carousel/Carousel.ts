@@ -17,7 +17,7 @@ const styles = css`
   }
 
   .flickity-prev-next-button:hover {
-    background: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.4);
   }
 
   .flickity-prev-next-button.previous {

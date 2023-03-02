@@ -10,7 +10,6 @@ export default {
 export const Default = () => html`
   <kps-carousel>
     <kps-slide style="width:100%;">
-      <img slot="image" src="{{ slide.image.src }}" alt="{{ slide.image.alt }}">
       <h1 slot="title">{{ slide.title }}</h1>
       <p slot="description">{{ slide.description|truncate(140) }}</p>
       <kps-button color="secondary" slot="action" href="{{ content.absolute_url }}">
@@ -18,7 +17,6 @@ export const Default = () => html`
       </kps-button>
     </kps-slide>
     <kps-slide style="width:100%;">
-      <img slot="image" src="{{ slide.image.src }}" alt="{{ slide.image.alt }}">
       <h1 slot="title">{{ slide.title }}</h1>
       <p slot="description">{{ slide.description|truncate(140) }}</p>
       <kps-button color="secondary" slot="action" href="{{ content.absolute_url }}">
@@ -26,7 +24,6 @@ export const Default = () => html`
       </kps-button>
     </kps-slide>
     <kps-slide style="width:100%;">
-      <img slot="image" src="{{ slide.image.src }}" alt="{{ slide.image.alt }}">
       <h1 slot="title">{{ slide.title }}</h1>
       <p slot="description">{{ slide.description|truncate(140) }}</p>
       <kps-button color="secondary" slot="action" href="{{ content.absolute_url }}">
