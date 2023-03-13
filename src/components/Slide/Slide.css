@@ -2,9 +2,12 @@
   position: relative;
   display: flex;
   width: 100%;
-  height: 24rem;
+  height: 16rem;
 
   .image {
+    position: absolute;
+    left: 0;
+    top: 0;
     width: 100%;
     height: 100%;
 
@@ -16,18 +19,14 @@
   }
 
   > .content {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    padding: var(--space-lg) var(--space-lg) var(--space-xl);
+    position: relative;
+    padding: var(--space-lg) var(--space-xl) var(--space-xl);
 
     @media screen and (min-width: 768px) {
       width: 70%;
-      padding: var(--space-2xl) var(--space-xl);
     }
 
     > .text {
-      color: var(--color-white);
       margin-bottom: var(--space);
 
       > ::slotted(p) {
@@ -36,16 +35,19 @@
         }
       }
 
-      > ::slotted(h1) {
+      > ::slotted(h2) {
         font-family: var(--font-heading);
-        font-size: var(--font-size-2xl);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-semibold);
       }
     }
 
     ::slotted(a),
+    ::slotted(p),
+    ::slotted(h2),
     ::slotted(span),
     ::slotted(button) {
-      margin-top: var(--space-md) !important;
+      margin-top: 0 !important;
     }
   }
 

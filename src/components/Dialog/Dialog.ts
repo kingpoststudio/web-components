@@ -9,6 +9,7 @@ const styles = css`
     position: relative;
     display: inline-block;
     user-select: none;
+    overflow: hidden;
   }
 
   .trigger[variant="dropdown"] {
@@ -277,9 +278,7 @@ export default class Dialog extends LitElement {
         <slot name="trigger"></slot>
       </kps-button>
     ` : html`
-      <div @click="${this.handleClick}">
-        <slot name="trigger"></slot>
-      </div>
+      <slot @click="${this.handleClick}" name="trigger"></slot>
     `;
   }
 
