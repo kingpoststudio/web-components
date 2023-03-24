@@ -1,5 +1,6 @@
 import ButtonGroup from './components/ButtonGroup/ButtonGroup';
 import Card from './components/Card/Card';
+import Carousel from './components/Carousel/Carousel';
 import Container from './components/Container/Container';
 import DateTime from './components/DateTime/DateTime';
 import Dialog from './components/Dialog/Dialog';
@@ -12,6 +13,7 @@ import ImageMap from './components/ImageMap/ImageMap';
 import Link from './components/Link/Link';
 import Range from './components/Range/Range';
 import Select from './components/Select/Select';
+import Slide from './components/Slide/Slide';
 import Strip from './components/Strip/Strip';
 import Tab from './components/Tab/Tab';
 import TabGroup from './components/TabGroup/TabGroup';
@@ -20,6 +22,7 @@ import DateFilter from './modules/DateFilter/DateFilter';
 import HeroBanner from './modules/HeroBanner/HeroBanner';
 import Navigation from './modules/Navigation/Navigation';
 import Pagination from './modules/Pagination/Pagination';
+import ResourceView from './modules/ResourceView/ResourceView';
 import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
 import TopicFilter from './modules/TopicFilter/TopicFilter';
@@ -32,6 +35,7 @@ declare const lib: {
     };
     ButtonGroup: typeof ButtonGroup;
     Card: typeof Card;
+    Carousel: typeof Carousel;
     Container: typeof Container;
     DateTime: typeof DateTime;
     Dialog: typeof Dialog;
@@ -44,6 +48,7 @@ declare const lib: {
     Link: typeof Link;
     Range: typeof Range;
     Select: typeof Select;
+    Slide: typeof Slide;
     Strip: typeof Strip;
     Tab: typeof Tab;
     TabGroup: typeof TabGroup;
@@ -52,6 +57,7 @@ declare const lib: {
     HeroBanner: typeof HeroBanner;
     Navigation: typeof Navigation;
     Pagination: typeof Pagination;
+    ResourceView: typeof ResourceView;
     Search: typeof Search;
     Stepper: typeof Stepper;
     TopicFilter: typeof TopicFilter;

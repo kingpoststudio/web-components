@@ -1,5 +1,7 @@
 import Flickity from 'flickity';
-import { html, css, unsafeCSS, LitElement, CSSResultGroup } from 'lit';
+import {
+  html, css, unsafeCSS, LitElement, CSSResultGroup,
+} from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import flickityStyles from 'flickity/css/flickity.css?inline';
 

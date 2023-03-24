@@ -1,9 +1,14 @@
 import Flickity from 'flickity';
-import { LitElement } from 'lit';
+import { LitElement, CSSResultGroup } from 'lit';
 export default class Carousel extends LitElement {
-    static styles: import("lit").CSSResult[];
+    static styles: CSSResultGroup;
     carousel: Flickity | null;
-    firstUpdated(): void;
+    slides: Element[];
+    autoplay: number;
+    private setSlides;
     private generateNewCarousel;
+    constructor();
+    connectedCallback(): void;
+    disconnectedCallback(): void;
     render(): import("lit").TemplateResult<1>;
 }

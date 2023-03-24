@@ -11,7 +11,7 @@ interface TopicOption {
 interface Topic {
   name: string;
   id: string;
-  type: 'checkbox' | 'select' | 'multiselect' | 'range-mm' | 'range-pm';
+  type: 'checkbox' | 'radio' | 'select' | 'multiselect' | 'range-mm' | 'range-pm';
   options: TopicOption[];
   range?: {
     min: number;
@@ -61,6 +61,7 @@ export default class TopicFilter extends LitElement {
         parentEl?.querySelector('.clear')?.classList.remove('hidden');
 
         if (type === 'checkbox') (childEl as HTMLInputElement).checked = true;
+        else if (type === 'radio') (childEl as HTMLInputElement).checked = true;
         else if (type === 'select') (childEl as HTMLOptionElement).selected = true;
       }
     };
@@ -128,7 +129,9 @@ export default class TopicFilter extends LitElement {
     const topicValues = params.get(topicId);
     if (!topic) return;
 
-    if (topic.type === 'checkbox' && topicValues) {
+    if (topic.type === 'radio' && topicValues) {
+      params.set(topicId, optionId);
+    } else if (topic.type === 'checkbox' && topicValues) {
       const activeOptions = topicValues.split(',');
       const index = activeOptions.indexOf(optionId);
 
@@ -187,6 +190,19 @@ export default class TopicFilter extends LitElement {
     `;
   }
 
+  renderRadios(topic: Topic) {
+    return html`
+      <div class="options">
+        ${topic.options.map((option: TopicOption) => html`
+          <div class="option">
+            <input type="radio" id="${topic.id}__${option.id}" name="${topic.id}" value="${topic.id}__${option.id}" @click=${this.selectTopicOption}>
+            <label for="${topic.id}__${option.id}">${option.name}</label>
+          </div>
+        `)}
+      </div>
+    `;
+  }
+
   renderCheckboxes(topic: Topic) {
     return html`
       <div class="options">
@@ -222,6 +238,7 @@ export default class TopicFilter extends LitElement {
       if (topic.type === 'multiselect') return this.renderMultiSelect(topic);
       if (topic.type === 'select') return this.renderSelect(topic);
       if (['range-mm', 'range-pm'].includes(topic.type)) return this.renderRange(topic);
+      if (topic.type === 'radio') return this.renderRadios(topic);
       return this.renderCheckboxes(topic);
     };
 
