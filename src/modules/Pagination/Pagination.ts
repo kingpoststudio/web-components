@@ -20,6 +20,9 @@ export default class Pagination extends LitElement {
   @property({ type: String })
   private urlParam = 'page';
 
+  @property({ type: String, attribute: 'active-tag' })
+  private activeTag = '';
+
   @property({ type: Boolean })
   private blog = false;
 
@@ -31,10 +34,7 @@ export default class Pagination extends LitElement {
 
     if (this.blog) {
       newPath = `/${url.pathname.split('/')[1]}`;
-
-      const tagIndex = url.pathname.indexOf('tag');
-      if (tagIndex > -1) newPath = `${newPath}/tag/${url.pathname.split('/')[tagIndex + 1]}`;
-
+      if (this.activeTag) newPath = `${newPath}/tag/${this.activeTag}`;
       newPath = `${newPath}/page/${page}`;
     } else {
       const params = new URLSearchParams(url.search);
