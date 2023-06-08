@@ -100,7 +100,7 @@ const geoSections: GeoSection[] = [
 ];
 
 @customElement('kps-world-map')
-export default class WorldMap extends LitElement {
+class WorldMap extends LitElement {
   static styles = [unsafeCSS(Styles)];
 
   @property({ type: String })
@@ -166,3 +166,5 @@ export default class WorldMap extends LitElement {
     `;
   }
 }
+
+export default WorldMap;

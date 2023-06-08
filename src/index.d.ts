@@ -27,7 +27,6 @@ import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
 import TopicFilter from './modules/TopicFilter/TopicFilter';
 import TopicNavigation from './modules/TopicNavigation/TopicNavigation';
-import WorldMap from './modules/WorldMap/WorldMap';
 import './styles/main.css';
 declare const lib: {
     Button: {
@@ -62,7 +61,6 @@ declare const lib: {
     Stepper: typeof Stepper;
     TopicFilter: typeof TopicFilter;
     TopicNavigation: typeof TopicNavigation;
-    WorldMap: typeof WorldMap;
     Utils: {
         elIntersectsCenter: typeof import("./utils").elIntersectsCenter;
         getScrollbarWidth: typeof import("./utils").getScrollbarWidth;

@@ -20,7 +20,7 @@ export default class Pagination extends LitElement {
   @property({ type: String })
   private urlParam = 'page';
 
-  @property({ type: String, attribute: 'active-tag' })
+  @property({ type: String })
   private activeTag = '';
 
   @property({ type: Boolean })

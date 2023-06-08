@@ -8,7 +8,7 @@ interface GeoSection {
         y: number;
     };
 }
-export default class WorldMap extends LitElement {
+declare class WorldMap extends LitElement {
     static styles: import("lit").CSSResult[];
     private activeSectionId;
     constructor();
@@ -18,4 +18,4 @@ export default class WorldMap extends LitElement {
     renderSectionInfo(section: GeoSection): import("lit").TemplateResult<1>;
     render(): import("lit").TemplateResult<1>;
 }
-export {};
+export default WorldMap;

@@ -29,7 +29,6 @@ import Search from './modules/Search/Search';
 import Stepper from './modules/Stepper/Stepper';
 import TopicFilter from './modules/TopicFilter/TopicFilter';
 import TopicNavigation from './modules/TopicNavigation/TopicNavigation';
-import WorldMap from './modules/WorldMap/WorldMap';
 
 import Utils from './utils';
 
@@ -67,7 +66,6 @@ const lib = {
   Stepper,
   TopicFilter,
   TopicNavigation,
-  WorldMap,
 
   Utils,
 };
