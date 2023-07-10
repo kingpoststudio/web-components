@@ -75,7 +75,7 @@ export default class Search extends LitElement {
     const fetchResults = async () => {
       const { columnId, tableId, portalId } = this.settings;
       const url = 'https://kingpoststudio.com/api/v1/hubspot/hubdb/search/byTerm';
-      const query = `?term=${searchTerm}&columnId=${columnId}&tableId=${tableId}&portalId=${portalId}`;
+      const query = `?term=${encodeURIComponent(searchTerm)}&columnId=${columnId}&tableId=${tableId}&portalId=${portalId}`;
 
       this.isLoading = true;
 
